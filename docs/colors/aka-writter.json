@@ -1,0 +1,817 @@
+[
+  {
+    "name": "NEGRO",
+    "hex": "#000000",
+    "code": "AKA100"
+  },
+  {
+    "name": "BLANCO",
+    "hex": "#FFFFFF",
+    "code": "AKA101"
+  },
+  {
+    "name": "AMARILLO CARNOTITA",
+    "hex": "#FBFFC4",
+    "code": "AKA110"
+  },
+  {
+    "name": "AMARILLO SUAVE",
+    "hex": "#FFFA78",
+    "code": "AKA111"
+  },
+  {
+    "name": "AMARILLO PAELLA",
+    "hex": "#FFF970",
+    "code": "AKA112"
+  },
+  {
+    "name": "AMARILLO SULFUROSO",
+    "hex": "#F7EA48",
+    "code": "AKA113"
+  },
+  {
+    "name": "AMARILLO AZUFRE",
+    "hex": "#FFF034",
+    "code": "AKA114"
+  },
+  {
+    "name": "AMARILLO TUBASA",
+    "hex": "#FDDA64",
+    "code": "AKA127"
+  },
+  {
+    "name": "AMARILLO MEDIO",
+    "hex": "#FFD040",
+    "code": "AKA128"
+  },
+  {
+    "name": "AMARILLO SALVATORE",
+    "hex": "#EBA900",
+    "code": "AKA 129"
+  },
+  {
+    "name": "VERDE ESPERANZA",
+    "hex": "#C2E189",
+    "code": "AKA120"
+  },
+  {
+    "name": "VERDE CÉSPED",
+    "hex": "#B7DD79",
+    "code": "AKA121"
+  },
+  {
+    "name": "VERDE VENUS",
+    "hex": "#A4D65E",
+    "code": "AKA122"
+  },
+  {
+    "name": "VERDE PRIMAVERA",
+    "hex": "#78BE20",
+    "code": "AKA123"
+  },
+  {
+    "name": "VERDE ESMERALDA",
+    "hex": "#43B02A",
+    "code": "AKA124"
+  },
+  {
+    "name": "VERDE IMPERIAL",
+    "hex": "#509E2F",
+    "code": "AKA125"
+  },
+  {
+    "name": "VERDE OLIVA",
+    "hex": "#009639",
+    "code": "AKA126"
+  },
+  {
+    "name": "VERDE TURMALINA",
+    "hex": "#A7E6D7",
+    "code": "AKA130"
+  },
+  {
+    "name": "VERDE JADE",
+    "hex": "#8CE2D0",
+    "code": "AKA131"
+  },
+  {
+    "name": "VERDE SELVA",
+    "hex": "#6ECEB2",
+    "code": "AKA132"
+  },
+  {
+    "name": "VERDE GROENLANDIA",
+    "hex": "#00CB96",
+    "code": "AKA133"
+  },
+  {
+    "name": "VERDE BRÓCOLI",
+    "hex": "#00B388",
+    "code": "AKA134"
+  },
+  {
+    "name": "VERDE CLOROFILA",
+    "hex": "#00965E",
+    "code": "AKA135"
+  },
+  {
+    "name": "VERDE MALAQUITA",
+    "hex": "#00834C",
+    "code": "AKA136"
+  },
+  {
+    "name": "VERDE INTENSO",
+    "hex": "#007749",
+    "code": "AKA137"
+  },
+  {
+    "name": "VERDE VALENCIA",
+    "hex": "#00664F",
+    "code": "AKA139"
+  },
+  {
+    "name": "VERDE NAVARRO",
+    "hex": "#004438",
+    "code": "AKA138"
+  },
+  {
+    "name": "NARANJA SUAVE",
+    "hex": "#FFD4B4",
+    "code": "AKA140"
+  },
+  {
+    "name": "NARANJA MANDARINA",
+    "hex": "#FFAB74",
+    "code": "AKA142"
+  },
+  {
+    "name": "NARANJA FUEGO",
+    "hex": "#FF9254",
+    "code": "AKA143"
+  },
+  {
+    "name": "NARANJA KER",
+    "hex": "#FF7014",
+    "code": "AKA144"
+  },
+  {
+    "name": "NARANJA CORNALINA",
+    "hex": "#FF6C00",
+    "code": "AKA145"
+  },
+  {
+    "name": "NARANJA PURO",
+    "hex": "#EF5600",
+    "code": "AKA146"
+  },
+  {
+    "name": "ROJO PASTEL",
+    "hex": "#FFA3B5",
+    "code": "AKA151"
+  },
+  {
+    "name": "ROJO FUEGO",
+    "hex": "#FF585D",
+    "code": "AKA153"
+  },
+  {
+    "name": "ROJO KIMURA",
+    "hex": "#F65275",
+    "code": "AKA154"
+  },
+  {
+    "name": "ROJO DIRECTO",
+    "hex": "#E4002B",
+    "code": "AKA155"
+  },
+  {
+    "name": "ROSA CUARZO",
+    "hex": "#EABEDB",
+    "code": "AKA160"
+  },
+  {
+    "name": "ROSA CHICLE",
+    "hex": "#F4A6D7",
+    "code": "AKA161"
+  },
+  {
+    "name": "ROJO FRAMBUESA",
+    "hex": "#EB6FBD",
+    "code": "AKA163"
+  },
+  {
+    "name": "ROJO ESTIVAL",
+    "hex": "#E31C79",
+    "code": "AKA164"
+  },
+  {
+    "name": "ROJO GORE",
+    "hex": "#CE0F69",
+    "code": "AKA165"
+  },
+  {
+    "name": "ROJO GRANATE",
+    "hex": "#BF0027",
+    "code": "AKA166"
+  },
+  {
+    "name": "ROJO ESPECTRO",
+    "hex": "#FFCCD7",
+    "code": "AKA170"
+  },
+  {
+    "name": "ROJO SUERTE",
+    "hex": "#FF8DA1",
+    "code": "AKA171"
+  },
+  {
+    "name": "ROJO VAN GOGH",
+    "hex": "#BE3A34",
+    "code": "AKA172"
+  },
+  {
+    "name": "ROJO ARCILLA",
+    "hex": "#CB001D",
+    "code": "AKA174"
+  },
+  {
+    "name": "ROJO MARTE",
+    "hex": "#A7000D",
+    "code": "AKA176"
+  },
+  {
+    "name": "AZUL MEDITERRÁNEO",
+    "hex": "#99D6EA",
+    "code": "AKA181"
+  },
+  {
+    "name": "AZUL CLARO",
+    "hex": "#71C5E8",
+    "code": "AKA182"
+  },
+  {
+    "name": "AZUL TURIA",
+    "hex": "#41B6E6",
+    "code": "AKA183"
+  },
+  {
+    "name": "AZUL NITRILO",
+    "hex": "#00A9E0",
+    "code": "AKA184"
+  },
+  {
+    "name": "AZUL COBALTO",
+    "hex": "#0077C8",
+    "code": "AKA185"
+  },
+  {
+    "name": "AZUL CuSO4",
+    "hex": "#005EB8",
+    "code": "AKA186"
+  },
+  {
+    "name": "AZUL ULTRAMAR",
+    "hex": "#004B87",
+    "code": "AKA187"
+  },
+  {
+    "name": "AZUL PROFUNDO",
+    "hex": "#002F6C",
+    "code": "AKA188"
+  },
+  {
+    "name": "GRIS CLARO",
+    "hex": "#DEE4DF",
+    "code": "AKA190"
+  },
+  {
+    "name": "GRIS CEMENTO",
+    "hex": "#BAC2BC",
+    "code": "AKA191"
+  },
+  {
+    "name": "GRIS MARCASITA",
+    "hex": "#959C97",
+    "code": "AKA192"
+  },
+  {
+    "name": "GRIS GALENA",
+    "hex": "#737B74",
+    "code": "AKA193"
+  },
+  {
+    "name": "GRIS PIRITA",
+    "hex": "#5F6560",
+    "code": "AKA194"
+  },
+  {
+    "name": "GUN METAL",
+    "hex": "#4B524C",
+    "code": "AKA195"
+  },
+  {
+    "name": "GRIS ANTRACITA",
+    "hex": "#454A45",
+    "code": "AKA196"
+  },
+  {
+    "name": "GRIS INVERNAL",
+    "hex": "#3B403C",
+    "code": "AKA197"
+  },
+  {
+    "name": "GRIS ETERNO",
+    "hex": "#2A2D2A",
+    "code": "AKA199"
+  },
+  {
+    "name": "MORADO CLARO",
+    "hex": "#D1D0DF",
+    "code": "AKA200"
+  },
+  {
+    "name": "MORADO PLATI(ADN)",
+    "hex": "#A99CD8",
+    "code": "AKA202"
+  },
+  {
+    "name": "MORADO REPÚBLICA",
+    "hex": "#7E75B8",
+    "code": "AKA203"
+  },
+  {
+    "name": "MORADO AMATISTA",
+    "hex": "#5D54A4",
+    "code": "AKA204"
+  },
+  {
+    "name": "VIOLETA LIGERO",
+    "hex": "#B291B2",
+    "code": "AKA210"
+  },
+  {
+    "name": "VIOLETA SIGMA",
+    "hex": "#8B678C",
+    "code": "AKA212"
+  },
+  {
+    "name": "VIOLETA TRIUNFO",
+    "hex": "#835C83",
+    "code": "AKA213"
+  },
+  {
+    "name": "VIOLETA OSCURO",
+    "hex": "#6B3D69",
+    "code": "AKA215"
+  },
+  {
+    "name": "MARRÓN OXIDADO",
+    "hex": "#504629",
+    "code": "AKA226"
+  },
+  {
+    "name": "MARRÓN GOLDMINE",
+    "hex": "#182317",
+    "code": "AKA228"
+  },
+  {
+    "name": "MARRÓN ROJIZO",
+    "hex": "#420604",
+    "code": "AKA230"
+  },
+  {
+    "name": "MARRÓN ÉBANO",
+    "hex": "#2E1400",
+    "code": "AKA231"
+  },
+  {
+    "name": "MARRÓN OSCURO",
+    "hex": "#1E0100",
+    "code": "AKA232"
+  },
+  {
+    "name": "MARRÓN CARTÓN",
+    "hex": "#A26904",
+    "code": "AKA225"
+  },
+  {
+    "name": "MARRÓN SÁHARA",
+    "hex": "#BF8A3D",
+    "code": "AKA224"
+  },
+  {
+    "name": "MARRÓN CASTILLA",
+    "hex": "#CEA356",
+    "code": "AKA223"
+  },
+  {
+    "name": "MARRÓN ARENISCA",
+    "hex": "#DBB87A",
+    "code": "AKA222"
+  },
+  {
+    "name": "MARRÓN CLARO",
+    "hex": "#F0E2C3",
+    "code": "AKA220"
+  },
+  {
+    "name": "AZUL TURQUESA",
+    "hex": "#01B1B7",
+    "code": "AKA240"
+  },
+  {
+    "name": "AZUL NGS",
+    "hex": "#018B90",
+    "code": "AKA242"
+  },
+  {
+    "name": "AZUL HYDRO",
+    "hex": "#006A68",
+    "code": "AKA244"
+  },
+  {
+    "name": "MORADO CLERIGO 250",
+    "hex": "#A0BAFF",
+    "code": ""
+  },
+  {
+    "name": "MORADO KLEI 251",
+    "hex": "#788FFF",
+    "code": ""
+  },
+  {
+    "name": "MORADO RAKE43 253",
+    "hex": "#4D28FF",
+    "code": ""
+  },
+  {
+    "name": "MORADO ARANDANO 255",
+    "hex": "#000C93",
+    "code": ""
+  },
+  {
+    "name": "MARRÓN HERVÁS 260",
+    "hex": "#BB4F00",
+    "code": ""
+  },
+  {
+    "name": "MARRÓN MALAMADRE 261",
+    "hex": "#AB4E00",
+    "code": ""
+  },
+  {
+    "name": "MARRÓN REC 263",
+    "hex": "#682900",
+    "code": ""
+  },
+  {
+    "name": "MARRÓN IGOR 264",
+    "hex": "#501500",
+    "code": ""
+  },
+  {
+    "name": "MARRÓN MOFI 265",
+    "hex": "#380F00",
+    "code": ""
+  },
+  {
+    "name": "AMARILLO ORO",
+    "hex": "#E7E400",
+    "code": "AKA115"
+  },
+  {
+    "name": "AMARILLO MOSTAZA",
+    "hex": "#D7C700",
+    "code": "AKA116"
+  },
+  {
+    "name": "AMARILLO VERDOSO",
+    "hex": "#827A04",
+    "code": "AKA117"
+  },
+  {
+    "name": "VERDE CAMUFLAJE",
+    "hex": "#546223",
+    "code": "AKA119"
+  },
+  {
+    "name": "AZUL BIFRÖST",
+    "hex": "#D8FFF7",
+    "code": "AKA270"
+  },
+  {
+    "name": "AZUL PASARELA",
+    "hex": "#C4FFFB",
+    "code": "AKA271"
+  },
+  {
+    "name": "AZUL DIMONI",
+    "hex": "#88DEFF",
+    "code": "AKA239"
+  },
+  {
+    "name": "AZUL TERES",
+    "hex": "#00CBDB",
+    "code": "AKA272"
+  },
+  {
+    "name": "AZUL WARE",
+    "hex": "#0089AB",
+    "code": "AKA274"
+  },
+  {
+    "name": "AZUL JOVI",
+    "hex": "#007187",
+    "code": "AKA276"
+  },
+  {
+    "name": "AZUL JÖTNAR",
+    "hex": "#003D4C",
+    "code": "AKA278"
+  },
+  {
+    "name": "VIOLETA ASTRAL",
+    "hex": "#FADCFF",
+    "code": "AKA280"
+  },
+  {
+    "name": "VIOLETA DAYRE",
+    "hex": "#DDACFF",
+    "code": "AKA282"
+  },
+  {
+    "name": "VIOLETA ALCORISA",
+    "hex": "#9400DB",
+    "code": "AKA284"
+  },
+  {
+    "name": "VIOLETA TAONE",
+    "hex": "#9500E7",
+    "code": "AKA285"
+  },
+  {
+    "name": "VIOLETA KOSA",
+    "hex": "#7400C7",
+    "code": "AKA286"
+  },
+  {
+    "name": "VIOLETA LEVI",
+    "hex": "#53007C",
+    "code": "AKA287"
+  },
+  {
+    "name": "VIOLETA INMORTAL",
+    "hex": "#3E0058",
+    "code": "AKA288"
+  },
+  {
+    "name": "ROSA FURIA",
+    "hex": "#FFB8E6",
+    "code": "AKA291"
+  },
+  {
+    "name": "ROSA RODERICK",
+    "hex": "#FF88C6",
+    "code": "AKA293"
+  },
+  {
+    "name": "ROSA SAKURA",
+    "hex": "#FF5CA6",
+    "code": "AKA294"
+  },
+  {
+    "name": "MAGENTA",
+    "hex": "#F30076",
+    "code": "AKA295"
+  },
+  {
+    "name": "ROSA RACHEL",
+    "hex": "#CF0072",
+    "code": "AKA296"
+  },
+  {
+    "name": "ROJO DUKE103",
+    "hex": "#D70054",
+    "code": "AKA298"
+  },
+  {
+    "name": "ROJO MERCURIAL",
+    "hex": "#7C002D",
+    "code": "AKA300"
+  },
+  {
+    "name": "SKIN NUDE",
+    "hex": "#FFDBD0",
+    "code": "AKA422"
+  },
+  {
+    "name": "SKIN BEIGE MEDIO",
+    "hex": "#FFAA90",
+    "code": "AKA424"
+  },
+  {
+    "name": "SKIN BRONCE",
+    "hex": "#FFA088",
+    "code": "AKA425"
+  },
+  {
+    "name": "SKIN VELVET",
+    "hex": "#FF8660",
+    "code": "AKA426"
+  },
+  {
+    "name": "SKIN CHOCOLATE",
+    "hex": "#9B4700",
+    "code": "AKA428"
+  },
+  {
+    "name": "SKIN TOFFEE",
+    "hex": "#783300",
+    "code": "AKA 429"
+  },
+  {
+    "name": "MORADO POSY",
+    "hex": "#F6ECFF",
+    "code": "AKA440"
+  },
+  {
+    "name": "MORADO CRISTAL",
+    "hex": "#ECDCFF",
+    "code": "AKA 441"
+  },
+  {
+    "name": "MORADO SHORE",
+    "hex": "#C6A0FF",
+    "code": "AKA443"
+  },
+  {
+    "name": "MORADO SOEZ",
+    "hex": "#A868FF",
+    "code": "AKA445"
+  },
+  {
+    "name": "MORADO XTASY",
+    "hex": "#9A60FF",
+    "code": "AKA446"
+  },
+  {
+    "name": "MORADO LIBERTAD",
+    "hex": "#7D00E3",
+    "code": "AKA447"
+  },
+  {
+    "name": "MORADO SKIFE",
+    "hex": "#7800DB",
+    "code": "AKA448"
+  },
+  {
+    "name": "MORADO SMILE16",
+    "hex": "#5D0097",
+    "code": "AKA449"
+  },
+  {
+    "name": "MORADAO KANS",
+    "hex": "#4C007C",
+    "code": "AKA450"
+  },
+  {
+    "name": "AZUL UNIVERSO",
+    "hex": "#007A80",
+    "code": "AKA246"
+  },
+  {
+    "name": "AZUL OCEANO",
+    "hex": "#00676C",
+    "code": "AKA247"
+  },
+  {
+    "name": "AZUL NOVA",
+    "hex": "#004550",
+    "code": "AKA248"
+  },
+  {
+    "name": "ROSA CIMA",
+    "hex": "#FFE8EB",
+    "code": "AKA460"
+  },
+  {
+    "name": "ROSA ANTARES",
+    "hex": "#FFC7C0",
+    "code": "AKA461"
+  },
+  {
+    "name": "ROSA TRIBUTO",
+    "hex": "#FFA8A9",
+    "code": "AKA462"
+  },
+  {
+    "name": "ROSA PALIDO",
+    "hex": "#FF9CA1",
+    "code": "AKA463"
+  },
+  {
+    "name": "ROJO ARIZONA",
+    "hex": "#FF7476",
+    "code": "AKA465"
+  },
+  {
+    "name": "ROJO RUDIART",
+    "hex": "#BF0009",
+    "code": "AKA467"
+  },
+  {
+    "name": "ROJO HANEM",
+    "hex": "#9B0002",
+    "code": "AKA468"
+  },
+  {
+    "name": "ROJO FEEVER",
+    "hex": "#6C0008",
+    "code": "AKA470"
+  },
+  {
+    "name": "VERDE URAN",
+    "hex": "#C8FFD3",
+    "code": "AKA483"
+  },
+  {
+    "name": "VERDE WALK",
+    "hex": "#ACFFCD",
+    "code": "AKA485"
+  },
+  {
+    "name": "VERDE ROCHE",
+    "hex": "#00D388",
+    "code": "AKA487"
+  },
+  {
+    "name": "VERDE UGLIES",
+    "hex": "#009B55",
+    "code": "AKA489"
+  },
+  {
+    "name": "VERDE SAKAR",
+    "hex": "#008B4D",
+    "code": "AKA490"
+  },
+  {
+    "name": "VERDE CRITICAL",
+    "hex": "#007431",
+    "code": "AKA491"
+  },
+  {
+    "name": "VERDE BILBO",
+    "hex": "#00542B",
+    "code": "AKA492"
+  },
+  {
+    "name": "AZUL ABISAL",
+    "hex": "#003A44",
+    "code": "AKA279"
+  },
+  {
+    "name": "NARANJA BARCELONA",
+    "hex": "#FFE4CC",
+    "code": "AKA521"
+  },
+  {
+    "name": "NARANJA MELOCOTÓN",
+    "hex": "#FFBF90",
+    "code": "AKA523"
+  },
+  {
+    "name": "NARANJA VANER",
+    "hex": "#FFAE80",
+    "code": "AKA524"
+  },
+  {
+    "name": "NARANJA DINAMO",
+    "hex": "#FF9F70",
+    "code": "AKA525"
+  },
+  {
+    "name": "NARANJA CALABAZA",
+    "hex": "#FF8754",
+    "code": "AKA526"
+  },
+  {
+    "name": "NARANJA BLIKIZ",
+    "hex": "#FF7340",
+    "code": "AKA527"
+  },
+  {
+    "name": "NARANJA 1982",
+    "hex": "#EF6500",
+    "code": "AKA528"
+  },
+  {
+    "name": "NARANJA DUZLO",
+    "hex": "#D35900",
+    "code": "AKA529"
+  },
+  {
+    "name": "MARRÓN ANARANJADO",
+    "hex": "#B75300",
+    "code": "AKA530"
+  }
+]
