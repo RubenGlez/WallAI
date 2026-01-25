@@ -1,0 +1,14 @@
+[
+  {
+    "id": "aka-writter",
+    "name": "AKA Writter",
+    "brandId": "aka",
+    "description": "AKA Writter paint series"
+  },
+  {
+    "id": "flame-orange",
+    "name": "FLAME Orange",
+    "brandId": "flame",
+    "description": "FLAME Orange paint series"
+  }
+]

@@ -1,0 +1,1778 @@
+[
+  {
+    "id": "aka-writter-aka100",
+    "seriesId": "aka-writter",
+    "hex": "#000000",
+    "code": "AKA100"
+  },
+  {
+    "id": "aka-writter-aka101",
+    "seriesId": "aka-writter",
+    "hex": "#FFFFFF",
+    "code": "AKA101"
+  },
+  {
+    "id": "aka-writter-aka110",
+    "seriesId": "aka-writter",
+    "hex": "#FBFFC4",
+    "code": "AKA110"
+  },
+  {
+    "id": "aka-writter-aka111",
+    "seriesId": "aka-writter",
+    "hex": "#FFFA78",
+    "code": "AKA111"
+  },
+  {
+    "id": "aka-writter-aka112",
+    "seriesId": "aka-writter",
+    "hex": "#FFF970",
+    "code": "AKA112"
+  },
+  {
+    "id": "aka-writter-aka113",
+    "seriesId": "aka-writter",
+    "hex": "#F7EA48",
+    "code": "AKA113"
+  },
+  {
+    "id": "aka-writter-aka114",
+    "seriesId": "aka-writter",
+    "hex": "#FFF034",
+    "code": "AKA114"
+  },
+  {
+    "id": "aka-writter-aka127",
+    "seriesId": "aka-writter",
+    "hex": "#FDDA64",
+    "code": "AKA127"
+  },
+  {
+    "id": "aka-writter-aka128",
+    "seriesId": "aka-writter",
+    "hex": "#FFD040",
+    "code": "AKA128"
+  },
+  {
+    "id": "aka-writter-aka 129",
+    "seriesId": "aka-writter",
+    "hex": "#EBA900",
+    "code": "AKA 129"
+  },
+  {
+    "id": "aka-writter-aka120",
+    "seriesId": "aka-writter",
+    "hex": "#C2E189",
+    "code": "AKA120"
+  },
+  {
+    "id": "aka-writter-aka121",
+    "seriesId": "aka-writter",
+    "hex": "#B7DD79",
+    "code": "AKA121"
+  },
+  {
+    "id": "aka-writter-aka122",
+    "seriesId": "aka-writter",
+    "hex": "#A4D65E",
+    "code": "AKA122"
+  },
+  {
+    "id": "aka-writter-aka123",
+    "seriesId": "aka-writter",
+    "hex": "#78BE20",
+    "code": "AKA123"
+  },
+  {
+    "id": "aka-writter-aka124",
+    "seriesId": "aka-writter",
+    "hex": "#43B02A",
+    "code": "AKA124"
+  },
+  {
+    "id": "aka-writter-aka125",
+    "seriesId": "aka-writter",
+    "hex": "#509E2F",
+    "code": "AKA125"
+  },
+  {
+    "id": "aka-writter-aka126",
+    "seriesId": "aka-writter",
+    "hex": "#009639",
+    "code": "AKA126"
+  },
+  {
+    "id": "aka-writter-aka130",
+    "seriesId": "aka-writter",
+    "hex": "#A7E6D7",
+    "code": "AKA130"
+  },
+  {
+    "id": "aka-writter-aka131",
+    "seriesId": "aka-writter",
+    "hex": "#8CE2D0",
+    "code": "AKA131"
+  },
+  {
+    "id": "aka-writter-aka132",
+    "seriesId": "aka-writter",
+    "hex": "#6ECEB2",
+    "code": "AKA132"
+  },
+  {
+    "id": "aka-writter-aka133",
+    "seriesId": "aka-writter",
+    "hex": "#00CB96",
+    "code": "AKA133"
+  },
+  {
+    "id": "aka-writter-aka134",
+    "seriesId": "aka-writter",
+    "hex": "#00B388",
+    "code": "AKA134"
+  },
+  {
+    "id": "aka-writter-aka135",
+    "seriesId": "aka-writter",
+    "hex": "#00965E",
+    "code": "AKA135"
+  },
+  {
+    "id": "aka-writter-aka136",
+    "seriesId": "aka-writter",
+    "hex": "#00834C",
+    "code": "AKA136"
+  },
+  {
+    "id": "aka-writter-aka137",
+    "seriesId": "aka-writter",
+    "hex": "#007749",
+    "code": "AKA137"
+  },
+  {
+    "id": "aka-writter-aka139",
+    "seriesId": "aka-writter",
+    "hex": "#00664F",
+    "code": "AKA139"
+  },
+  {
+    "id": "aka-writter-aka138",
+    "seriesId": "aka-writter",
+    "hex": "#004438",
+    "code": "AKA138"
+  },
+  {
+    "id": "aka-writter-aka140",
+    "seriesId": "aka-writter",
+    "hex": "#FFD4B4",
+    "code": "AKA140"
+  },
+  {
+    "id": "aka-writter-aka142",
+    "seriesId": "aka-writter",
+    "hex": "#FFAB74",
+    "code": "AKA142"
+  },
+  {
+    "id": "aka-writter-aka143",
+    "seriesId": "aka-writter",
+    "hex": "#FF9254",
+    "code": "AKA143"
+  },
+  {
+    "id": "aka-writter-aka144",
+    "seriesId": "aka-writter",
+    "hex": "#FF7014",
+    "code": "AKA144"
+  },
+  {
+    "id": "aka-writter-aka145",
+    "seriesId": "aka-writter",
+    "hex": "#FF6C00",
+    "code": "AKA145"
+  },
+  {
+    "id": "aka-writter-aka146",
+    "seriesId": "aka-writter",
+    "hex": "#EF5600",
+    "code": "AKA146"
+  },
+  {
+    "id": "aka-writter-aka151",
+    "seriesId": "aka-writter",
+    "hex": "#FFA3B5",
+    "code": "AKA151"
+  },
+  {
+    "id": "aka-writter-aka153",
+    "seriesId": "aka-writter",
+    "hex": "#FF585D",
+    "code": "AKA153"
+  },
+  {
+    "id": "aka-writter-aka154",
+    "seriesId": "aka-writter",
+    "hex": "#F65275",
+    "code": "AKA154"
+  },
+  {
+    "id": "aka-writter-aka155",
+    "seriesId": "aka-writter",
+    "hex": "#E4002B",
+    "code": "AKA155"
+  },
+  {
+    "id": "aka-writter-aka160",
+    "seriesId": "aka-writter",
+    "hex": "#EABEDB",
+    "code": "AKA160"
+  },
+  {
+    "id": "aka-writter-aka161",
+    "seriesId": "aka-writter",
+    "hex": "#F4A6D7",
+    "code": "AKA161"
+  },
+  {
+    "id": "aka-writter-aka163",
+    "seriesId": "aka-writter",
+    "hex": "#EB6FBD",
+    "code": "AKA163"
+  },
+  {
+    "id": "aka-writter-aka164",
+    "seriesId": "aka-writter",
+    "hex": "#E31C79",
+    "code": "AKA164"
+  },
+  {
+    "id": "aka-writter-aka165",
+    "seriesId": "aka-writter",
+    "hex": "#CE0F69",
+    "code": "AKA165"
+  },
+  {
+    "id": "aka-writter-aka166",
+    "seriesId": "aka-writter",
+    "hex": "#BF0027",
+    "code": "AKA166"
+  },
+  {
+    "id": "aka-writter-aka170",
+    "seriesId": "aka-writter",
+    "hex": "#FFCCD7",
+    "code": "AKA170"
+  },
+  {
+    "id": "aka-writter-aka171",
+    "seriesId": "aka-writter",
+    "hex": "#FF8DA1",
+    "code": "AKA171"
+  },
+  {
+    "id": "aka-writter-aka172",
+    "seriesId": "aka-writter",
+    "hex": "#BE3A34",
+    "code": "AKA172"
+  },
+  {
+    "id": "aka-writter-aka174",
+    "seriesId": "aka-writter",
+    "hex": "#CB001D",
+    "code": "AKA174"
+  },
+  {
+    "id": "aka-writter-aka176",
+    "seriesId": "aka-writter",
+    "hex": "#A7000D",
+    "code": "AKA176"
+  },
+  {
+    "id": "aka-writter-aka181",
+    "seriesId": "aka-writter",
+    "hex": "#99D6EA",
+    "code": "AKA181"
+  },
+  {
+    "id": "aka-writter-aka182",
+    "seriesId": "aka-writter",
+    "hex": "#71C5E8",
+    "code": "AKA182"
+  },
+  {
+    "id": "aka-writter-aka183",
+    "seriesId": "aka-writter",
+    "hex": "#41B6E6",
+    "code": "AKA183"
+  },
+  {
+    "id": "aka-writter-aka184",
+    "seriesId": "aka-writter",
+    "hex": "#00A9E0",
+    "code": "AKA184"
+  },
+  {
+    "id": "aka-writter-aka185",
+    "seriesId": "aka-writter",
+    "hex": "#0077C8",
+    "code": "AKA185"
+  },
+  {
+    "id": "aka-writter-aka186",
+    "seriesId": "aka-writter",
+    "hex": "#005EB8",
+    "code": "AKA186"
+  },
+  {
+    "id": "aka-writter-aka187",
+    "seriesId": "aka-writter",
+    "hex": "#004B87",
+    "code": "AKA187"
+  },
+  {
+    "id": "aka-writter-aka188",
+    "seriesId": "aka-writter",
+    "hex": "#002F6C",
+    "code": "AKA188"
+  },
+  {
+    "id": "aka-writter-aka190",
+    "seriesId": "aka-writter",
+    "hex": "#DEE4DF",
+    "code": "AKA190"
+  },
+  {
+    "id": "aka-writter-aka191",
+    "seriesId": "aka-writter",
+    "hex": "#BAC2BC",
+    "code": "AKA191"
+  },
+  {
+    "id": "aka-writter-aka192",
+    "seriesId": "aka-writter",
+    "hex": "#959C97",
+    "code": "AKA192"
+  },
+  {
+    "id": "aka-writter-aka193",
+    "seriesId": "aka-writter",
+    "hex": "#737B74",
+    "code": "AKA193"
+  },
+  {
+    "id": "aka-writter-aka194",
+    "seriesId": "aka-writter",
+    "hex": "#5F6560",
+    "code": "AKA194"
+  },
+  {
+    "id": "aka-writter-aka195",
+    "seriesId": "aka-writter",
+    "hex": "#4B524C",
+    "code": "AKA195"
+  },
+  {
+    "id": "aka-writter-aka196",
+    "seriesId": "aka-writter",
+    "hex": "#454A45",
+    "code": "AKA196"
+  },
+  {
+    "id": "aka-writter-aka197",
+    "seriesId": "aka-writter",
+    "hex": "#3B403C",
+    "code": "AKA197"
+  },
+  {
+    "id": "aka-writter-aka199",
+    "seriesId": "aka-writter",
+    "hex": "#2A2D2A",
+    "code": "AKA199"
+  },
+  {
+    "id": "aka-writter-aka200",
+    "seriesId": "aka-writter",
+    "hex": "#D1D0DF",
+    "code": "AKA200"
+  },
+  {
+    "id": "aka-writter-aka202",
+    "seriesId": "aka-writter",
+    "hex": "#A99CD8",
+    "code": "AKA202"
+  },
+  {
+    "id": "aka-writter-aka203",
+    "seriesId": "aka-writter",
+    "hex": "#7E75B8",
+    "code": "AKA203"
+  },
+  {
+    "id": "aka-writter-aka204",
+    "seriesId": "aka-writter",
+    "hex": "#5D54A4",
+    "code": "AKA204"
+  },
+  {
+    "id": "aka-writter-aka210",
+    "seriesId": "aka-writter",
+    "hex": "#B291B2",
+    "code": "AKA210"
+  },
+  {
+    "id": "aka-writter-aka212",
+    "seriesId": "aka-writter",
+    "hex": "#8B678C",
+    "code": "AKA212"
+  },
+  {
+    "id": "aka-writter-aka213",
+    "seriesId": "aka-writter",
+    "hex": "#835C83",
+    "code": "AKA213"
+  },
+  {
+    "id": "aka-writter-aka215",
+    "seriesId": "aka-writter",
+    "hex": "#6B3D69",
+    "code": "AKA215"
+  },
+  {
+    "id": "aka-writter-aka226",
+    "seriesId": "aka-writter",
+    "hex": "#504629",
+    "code": "AKA226"
+  },
+  {
+    "id": "aka-writter-aka228",
+    "seriesId": "aka-writter",
+    "hex": "#182317",
+    "code": "AKA228"
+  },
+  {
+    "id": "aka-writter-aka230",
+    "seriesId": "aka-writter",
+    "hex": "#420604",
+    "code": "AKA230"
+  },
+  {
+    "id": "aka-writter-aka231",
+    "seriesId": "aka-writter",
+    "hex": "#2E1400",
+    "code": "AKA231"
+  },
+  {
+    "id": "aka-writter-aka232",
+    "seriesId": "aka-writter",
+    "hex": "#1E0100",
+    "code": "AKA232"
+  },
+  {
+    "id": "aka-writter-aka225",
+    "seriesId": "aka-writter",
+    "hex": "#A26904",
+    "code": "AKA225"
+  },
+  {
+    "id": "aka-writter-aka224",
+    "seriesId": "aka-writter",
+    "hex": "#BF8A3D",
+    "code": "AKA224"
+  },
+  {
+    "id": "aka-writter-aka223",
+    "seriesId": "aka-writter",
+    "hex": "#CEA356",
+    "code": "AKA223"
+  },
+  {
+    "id": "aka-writter-aka222",
+    "seriesId": "aka-writter",
+    "hex": "#DBB87A",
+    "code": "AKA222"
+  },
+  {
+    "id": "aka-writter-aka220",
+    "seriesId": "aka-writter",
+    "hex": "#F0E2C3",
+    "code": "AKA220"
+  },
+  {
+    "id": "aka-writter-aka240",
+    "seriesId": "aka-writter",
+    "hex": "#01B1B7",
+    "code": "AKA240"
+  },
+  {
+    "id": "aka-writter-aka242",
+    "seriesId": "aka-writter",
+    "hex": "#018B90",
+    "code": "AKA242"
+  },
+  {
+    "id": "aka-writter-aka244",
+    "seriesId": "aka-writter",
+    "hex": "#006A68",
+    "code": "AKA244"
+  },
+  {
+    "id": "aka-writter-",
+    "seriesId": "aka-writter",
+    "hex": "#A0BAFF",
+    "code": ""
+  },
+  {
+    "id": "aka-writter-",
+    "seriesId": "aka-writter",
+    "hex": "#788FFF",
+    "code": ""
+  },
+  {
+    "id": "aka-writter-",
+    "seriesId": "aka-writter",
+    "hex": "#4D28FF",
+    "code": ""
+  },
+  {
+    "id": "aka-writter-",
+    "seriesId": "aka-writter",
+    "hex": "#000C93",
+    "code": ""
+  },
+  {
+    "id": "aka-writter-",
+    "seriesId": "aka-writter",
+    "hex": "#BB4F00",
+    "code": ""
+  },
+  {
+    "id": "aka-writter-",
+    "seriesId": "aka-writter",
+    "hex": "#AB4E00",
+    "code": ""
+  },
+  {
+    "id": "aka-writter-",
+    "seriesId": "aka-writter",
+    "hex": "#682900",
+    "code": ""
+  },
+  {
+    "id": "aka-writter-",
+    "seriesId": "aka-writter",
+    "hex": "#501500",
+    "code": ""
+  },
+  {
+    "id": "aka-writter-",
+    "seriesId": "aka-writter",
+    "hex": "#380F00",
+    "code": ""
+  },
+  {
+    "id": "aka-writter-aka115",
+    "seriesId": "aka-writter",
+    "hex": "#E7E400",
+    "code": "AKA115"
+  },
+  {
+    "id": "aka-writter-aka116",
+    "seriesId": "aka-writter",
+    "hex": "#D7C700",
+    "code": "AKA116"
+  },
+  {
+    "id": "aka-writter-aka117",
+    "seriesId": "aka-writter",
+    "hex": "#827A04",
+    "code": "AKA117"
+  },
+  {
+    "id": "aka-writter-aka119",
+    "seriesId": "aka-writter",
+    "hex": "#546223",
+    "code": "AKA119"
+  },
+  {
+    "id": "aka-writter-aka270",
+    "seriesId": "aka-writter",
+    "hex": "#D8FFF7",
+    "code": "AKA270"
+  },
+  {
+    "id": "aka-writter-aka271",
+    "seriesId": "aka-writter",
+    "hex": "#C4FFFB",
+    "code": "AKA271"
+  },
+  {
+    "id": "aka-writter-aka239",
+    "seriesId": "aka-writter",
+    "hex": "#88DEFF",
+    "code": "AKA239"
+  },
+  {
+    "id": "aka-writter-aka272",
+    "seriesId": "aka-writter",
+    "hex": "#00CBDB",
+    "code": "AKA272"
+  },
+  {
+    "id": "aka-writter-aka274",
+    "seriesId": "aka-writter",
+    "hex": "#0089AB",
+    "code": "AKA274"
+  },
+  {
+    "id": "aka-writter-aka276",
+    "seriesId": "aka-writter",
+    "hex": "#007187",
+    "code": "AKA276"
+  },
+  {
+    "id": "aka-writter-aka278",
+    "seriesId": "aka-writter",
+    "hex": "#003D4C",
+    "code": "AKA278"
+  },
+  {
+    "id": "aka-writter-aka280",
+    "seriesId": "aka-writter",
+    "hex": "#FADCFF",
+    "code": "AKA280"
+  },
+  {
+    "id": "aka-writter-aka282",
+    "seriesId": "aka-writter",
+    "hex": "#DDACFF",
+    "code": "AKA282"
+  },
+  {
+    "id": "aka-writter-aka284",
+    "seriesId": "aka-writter",
+    "hex": "#9400DB",
+    "code": "AKA284"
+  },
+  {
+    "id": "aka-writter-aka285",
+    "seriesId": "aka-writter",
+    "hex": "#9500E7",
+    "code": "AKA285"
+  },
+  {
+    "id": "aka-writter-aka286",
+    "seriesId": "aka-writter",
+    "hex": "#7400C7",
+    "code": "AKA286"
+  },
+  {
+    "id": "aka-writter-aka287",
+    "seriesId": "aka-writter",
+    "hex": "#53007C",
+    "code": "AKA287"
+  },
+  {
+    "id": "aka-writter-aka288",
+    "seriesId": "aka-writter",
+    "hex": "#3E0058",
+    "code": "AKA288"
+  },
+  {
+    "id": "aka-writter-aka291",
+    "seriesId": "aka-writter",
+    "hex": "#FFB8E6",
+    "code": "AKA291"
+  },
+  {
+    "id": "aka-writter-aka293",
+    "seriesId": "aka-writter",
+    "hex": "#FF88C6",
+    "code": "AKA293"
+  },
+  {
+    "id": "aka-writter-aka294",
+    "seriesId": "aka-writter",
+    "hex": "#FF5CA6",
+    "code": "AKA294"
+  },
+  {
+    "id": "aka-writter-aka295",
+    "seriesId": "aka-writter",
+    "hex": "#F30076",
+    "code": "AKA295"
+  },
+  {
+    "id": "aka-writter-aka296",
+    "seriesId": "aka-writter",
+    "hex": "#CF0072",
+    "code": "AKA296"
+  },
+  {
+    "id": "aka-writter-aka298",
+    "seriesId": "aka-writter",
+    "hex": "#D70054",
+    "code": "AKA298"
+  },
+  {
+    "id": "aka-writter-aka300",
+    "seriesId": "aka-writter",
+    "hex": "#7C002D",
+    "code": "AKA300"
+  },
+  {
+    "id": "aka-writter-aka422",
+    "seriesId": "aka-writter",
+    "hex": "#FFDBD0",
+    "code": "AKA422"
+  },
+  {
+    "id": "aka-writter-aka424",
+    "seriesId": "aka-writter",
+    "hex": "#FFAA90",
+    "code": "AKA424"
+  },
+  {
+    "id": "aka-writter-aka425",
+    "seriesId": "aka-writter",
+    "hex": "#FFA088",
+    "code": "AKA425"
+  },
+  {
+    "id": "aka-writter-aka426",
+    "seriesId": "aka-writter",
+    "hex": "#FF8660",
+    "code": "AKA426"
+  },
+  {
+    "id": "aka-writter-aka428",
+    "seriesId": "aka-writter",
+    "hex": "#9B4700",
+    "code": "AKA428"
+  },
+  {
+    "id": "aka-writter-aka 429",
+    "seriesId": "aka-writter",
+    "hex": "#783300",
+    "code": "AKA 429"
+  },
+  {
+    "id": "aka-writter-aka440",
+    "seriesId": "aka-writter",
+    "hex": "#F6ECFF",
+    "code": "AKA440"
+  },
+  {
+    "id": "aka-writter-aka 441",
+    "seriesId": "aka-writter",
+    "hex": "#ECDCFF",
+    "code": "AKA 441"
+  },
+  {
+    "id": "aka-writter-aka443",
+    "seriesId": "aka-writter",
+    "hex": "#C6A0FF",
+    "code": "AKA443"
+  },
+  {
+    "id": "aka-writter-aka445",
+    "seriesId": "aka-writter",
+    "hex": "#A868FF",
+    "code": "AKA445"
+  },
+  {
+    "id": "aka-writter-aka446",
+    "seriesId": "aka-writter",
+    "hex": "#9A60FF",
+    "code": "AKA446"
+  },
+  {
+    "id": "aka-writter-aka447",
+    "seriesId": "aka-writter",
+    "hex": "#7D00E3",
+    "code": "AKA447"
+  },
+  {
+    "id": "aka-writter-aka448",
+    "seriesId": "aka-writter",
+    "hex": "#7800DB",
+    "code": "AKA448"
+  },
+  {
+    "id": "aka-writter-aka449",
+    "seriesId": "aka-writter",
+    "hex": "#5D0097",
+    "code": "AKA449"
+  },
+  {
+    "id": "aka-writter-aka450",
+    "seriesId": "aka-writter",
+    "hex": "#4C007C",
+    "code": "AKA450"
+  },
+  {
+    "id": "aka-writter-aka246",
+    "seriesId": "aka-writter",
+    "hex": "#007A80",
+    "code": "AKA246"
+  },
+  {
+    "id": "aka-writter-aka247",
+    "seriesId": "aka-writter",
+    "hex": "#00676C",
+    "code": "AKA247"
+  },
+  {
+    "id": "aka-writter-aka248",
+    "seriesId": "aka-writter",
+    "hex": "#004550",
+    "code": "AKA248"
+  },
+  {
+    "id": "aka-writter-aka460",
+    "seriesId": "aka-writter",
+    "hex": "#FFE8EB",
+    "code": "AKA460"
+  },
+  {
+    "id": "aka-writter-aka461",
+    "seriesId": "aka-writter",
+    "hex": "#FFC7C0",
+    "code": "AKA461"
+  },
+  {
+    "id": "aka-writter-aka462",
+    "seriesId": "aka-writter",
+    "hex": "#FFA8A9",
+    "code": "AKA462"
+  },
+  {
+    "id": "aka-writter-aka463",
+    "seriesId": "aka-writter",
+    "hex": "#FF9CA1",
+    "code": "AKA463"
+  },
+  {
+    "id": "aka-writter-aka465",
+    "seriesId": "aka-writter",
+    "hex": "#FF7476",
+    "code": "AKA465"
+  },
+  {
+    "id": "aka-writter-aka467",
+    "seriesId": "aka-writter",
+    "hex": "#BF0009",
+    "code": "AKA467"
+  },
+  {
+    "id": "aka-writter-aka468",
+    "seriesId": "aka-writter",
+    "hex": "#9B0002",
+    "code": "AKA468"
+  },
+  {
+    "id": "aka-writter-aka470",
+    "seriesId": "aka-writter",
+    "hex": "#6C0008",
+    "code": "AKA470"
+  },
+  {
+    "id": "aka-writter-aka483",
+    "seriesId": "aka-writter",
+    "hex": "#C8FFD3",
+    "code": "AKA483"
+  },
+  {
+    "id": "aka-writter-aka485",
+    "seriesId": "aka-writter",
+    "hex": "#ACFFCD",
+    "code": "AKA485"
+  },
+  {
+    "id": "aka-writter-aka487",
+    "seriesId": "aka-writter",
+    "hex": "#00D388",
+    "code": "AKA487"
+  },
+  {
+    "id": "aka-writter-aka489",
+    "seriesId": "aka-writter",
+    "hex": "#009B55",
+    "code": "AKA489"
+  },
+  {
+    "id": "aka-writter-aka490",
+    "seriesId": "aka-writter",
+    "hex": "#008B4D",
+    "code": "AKA490"
+  },
+  {
+    "id": "aka-writter-aka491",
+    "seriesId": "aka-writter",
+    "hex": "#007431",
+    "code": "AKA491"
+  },
+  {
+    "id": "aka-writter-aka492",
+    "seriesId": "aka-writter",
+    "hex": "#00542B",
+    "code": "AKA492"
+  },
+  {
+    "id": "aka-writter-aka279",
+    "seriesId": "aka-writter",
+    "hex": "#003A44",
+    "code": "AKA279"
+  },
+  {
+    "id": "aka-writter-aka521",
+    "seriesId": "aka-writter",
+    "hex": "#FFE4CC",
+    "code": "AKA521"
+  },
+  {
+    "id": "aka-writter-aka523",
+    "seriesId": "aka-writter",
+    "hex": "#FFBF90",
+    "code": "AKA523"
+  },
+  {
+    "id": "aka-writter-aka524",
+    "seriesId": "aka-writter",
+    "hex": "#FFAE80",
+    "code": "AKA524"
+  },
+  {
+    "id": "aka-writter-aka525",
+    "seriesId": "aka-writter",
+    "hex": "#FF9F70",
+    "code": "AKA525"
+  },
+  {
+    "id": "aka-writter-aka526",
+    "seriesId": "aka-writter",
+    "hex": "#FF8754",
+    "code": "AKA526"
+  },
+  {
+    "id": "aka-writter-aka527",
+    "seriesId": "aka-writter",
+    "hex": "#FF7340",
+    "code": "AKA527"
+  },
+  {
+    "id": "aka-writter-aka528",
+    "seriesId": "aka-writter",
+    "hex": "#EF6500",
+    "code": "AKA528"
+  },
+  {
+    "id": "aka-writter-aka529",
+    "seriesId": "aka-writter",
+    "hex": "#D35900",
+    "code": "AKA529"
+  },
+  {
+    "id": "aka-writter-aka530",
+    "seriesId": "aka-writter",
+    "hex": "#B75300",
+    "code": "AKA530"
+  },
+  {
+    "id": "flame-orange-fo-100",
+    "seriesId": "flame-orange",
+    "hex": "#F0DF82",
+    "code": "FO-100"
+  },
+  {
+    "id": "flame-orange-fo-102",
+    "seriesId": "flame-orange",
+    "hex": "#FEDD3B",
+    "code": "FO-102"
+  },
+  {
+    "id": "flame-orange-fo-104",
+    "seriesId": "flame-orange",
+    "hex": "#FAD920",
+    "code": "FO-104"
+  },
+  {
+    "id": "flame-orange-fo-106",
+    "seriesId": "flame-orange",
+    "hex": "#F5CD04",
+    "code": "FO-106"
+  },
+  {
+    "id": "flame-orange-fo-110",
+    "seriesId": "flame-orange",
+    "hex": "#F6BD00",
+    "code": "FO-110"
+  },
+  {
+    "id": "flame-orange-fo-107",
+    "seriesId": "flame-orange",
+    "hex": "#F9B60C",
+    "code": "FO-107"
+  },
+  {
+    "id": "flame-orange-fo-111",
+    "seriesId": "flame-orange",
+    "hex": "#F7AD00",
+    "code": "FO-111"
+  },
+  {
+    "id": "flame-orange-fo-113",
+    "seriesId": "flame-orange",
+    "hex": "#F69C15",
+    "code": "FO-113"
+  },
+  {
+    "id": "flame-orange-fo-202",
+    "seriesId": "flame-orange",
+    "hex": "#FA9127",
+    "code": "FO-202"
+  },
+  {
+    "id": "flame-orange-fo-210",
+    "seriesId": "flame-orange",
+    "hex": "#F28749",
+    "code": "FO-210"
+  },
+  {
+    "id": "flame-orange-fo-204",
+    "seriesId": "flame-orange",
+    "hex": "#E97500",
+    "code": "FO-204"
+  },
+  {
+    "id": "flame-orange-fo-212",
+    "seriesId": "flame-orange",
+    "hex": "#D65527",
+    "code": "FO-212"
+  },
+  {
+    "id": "flame-orange-fo-214",
+    "seriesId": "flame-orange",
+    "hex": "#D3451E",
+    "code": "FO-214"
+  },
+  {
+    "id": "flame-orange-fo-304",
+    "seriesId": "flame-orange",
+    "hex": "#D83431",
+    "code": "FO-304"
+  },
+  {
+    "id": "flame-orange-fo-303",
+    "seriesId": "flame-orange",
+    "hex": "#E73C41",
+    "code": "FO-303"
+  },
+  {
+    "id": "flame-orange-fo-312",
+    "seriesId": "flame-orange",
+    "hex": "#C03331",
+    "code": "FO-312"
+  },
+  {
+    "id": "flame-orange-fo-306",
+    "seriesId": "flame-orange",
+    "hex": "#C40A35",
+    "code": "FO-306"
+  },
+  {
+    "id": "flame-orange-fo-320",
+    "seriesId": "flame-orange",
+    "hex": "#AA0028",
+    "code": "FO-320"
+  },
+  {
+    "id": "flame-orange-fo-322",
+    "seriesId": "flame-orange",
+    "hex": "#471F35",
+    "code": "FO-322"
+  },
+  {
+    "id": "flame-orange-fo-323",
+    "seriesId": "flame-orange",
+    "hex": "#2D2927",
+    "code": "FO-323"
+  },
+  {
+    "id": "flame-orange-fo-208",
+    "seriesId": "flame-orange",
+    "hex": "#F1D6B6",
+    "code": "FO-208"
+  },
+  {
+    "id": "flame-orange-fo-198",
+    "seriesId": "flame-orange",
+    "hex": "#FFC093",
+    "code": "FO-198"
+  },
+  {
+    "id": "flame-orange-fo-200",
+    "seriesId": "flame-orange",
+    "hex": "#FCB476",
+    "code": "FO-200"
+  },
+  {
+    "id": "flame-orange-fo-307",
+    "seriesId": "flame-orange",
+    "hex": "#E76966",
+    "code": "FO-307"
+  },
+  {
+    "id": "flame-orange-fo-305",
+    "seriesId": "flame-orange",
+    "hex": "#E04D3D",
+    "code": "FO-305"
+  },
+  {
+    "id": "flame-orange-fo-308",
+    "seriesId": "flame-orange",
+    "hex": "#ED9CAE",
+    "code": "FO-308"
+  },
+  {
+    "id": "flame-orange-fo-309",
+    "seriesId": "flame-orange",
+    "hex": "#E3647D",
+    "code": "FO-309"
+  },
+  {
+    "id": "flame-orange-fo-310",
+    "seriesId": "flame-orange",
+    "hex": "#E64461",
+    "code": "FO-310"
+  },
+  {
+    "id": "flame-orange-fo-314",
+    "seriesId": "flame-orange",
+    "hex": "#C40A35",
+    "code": "FO-314"
+  },
+  {
+    "id": "flame-orange-fo-311",
+    "seriesId": "flame-orange",
+    "hex": "#BB2037",
+    "code": "FO-311"
+  },
+  {
+    "id": "flame-orange-fo-313",
+    "seriesId": "flame-orange",
+    "hex": "#9C052D",
+    "code": "FO-313"
+  },
+  {
+    "id": "flame-orange-fo-396",
+    "seriesId": "flame-orange",
+    "hex": "#9F5D9C",
+    "code": "FO-396"
+  },
+  {
+    "id": "flame-orange-fo-397",
+    "seriesId": "flame-orange",
+    "hex": "#81487C",
+    "code": "FO-397"
+  },
+  {
+    "id": "flame-orange-fo-398",
+    "seriesId": "flame-orange",
+    "hex": "#684679",
+    "code": "FO-398"
+  },
+  {
+    "id": "flame-orange-fo-403",
+    "seriesId": "flame-orange",
+    "hex": "#4A284E",
+    "code": "FO-403"
+  },
+  {
+    "id": "flame-orange-fo-401",
+    "seriesId": "flame-orange",
+    "hex": "#E1BDCC",
+    "code": "FO-401"
+  },
+  {
+    "id": "flame-orange-fo-405",
+    "seriesId": "flame-orange",
+    "hex": "#CA94AC",
+    "code": "FO-405"
+  },
+  {
+    "id": "flame-orange-fo-409",
+    "seriesId": "flame-orange",
+    "hex": "#DFACC2",
+    "code": "FO-409"
+  },
+  {
+    "id": "flame-orange-fo-399",
+    "seriesId": "flame-orange",
+    "hex": "#DCA7C8",
+    "code": "FO-399"
+  },
+  {
+    "id": "flame-orange-fo-407",
+    "seriesId": "flame-orange",
+    "hex": "#BE628F",
+    "code": "FO-407"
+  },
+  {
+    "id": "flame-orange-fo-400",
+    "seriesId": "flame-orange",
+    "hex": "#DD6A9C",
+    "code": "FO-400"
+  },
+  {
+    "id": "flame-orange-fo-402",
+    "seriesId": "flame-orange",
+    "hex": "#D8326C",
+    "code": "FO-402"
+  },
+  {
+    "id": "flame-orange-fo-404",
+    "seriesId": "flame-orange",
+    "hex": "#8A1478",
+    "code": "FO-404"
+  },
+  {
+    "id": "flame-orange-fo-318",
+    "seriesId": "flame-orange",
+    "hex": "#47233C",
+    "code": "FO-318"
+  },
+  {
+    "id": "flame-orange-fo-408",
+    "seriesId": "flame-orange",
+    "hex": "#9466A2",
+    "code": "FO-408"
+  },
+  {
+    "id": "flame-orange-fo-410",
+    "seriesId": "flame-orange",
+    "hex": "#6C427C",
+    "code": "FO-410"
+  },
+  {
+    "id": "flame-orange-fo-412",
+    "seriesId": "flame-orange",
+    "hex": "#4F3159",
+    "code": "FO-412"
+  },
+  {
+    "id": "flame-orange-fo-415",
+    "seriesId": "flame-orange",
+    "hex": "#B4A5DC",
+    "code": "FO-415"
+  },
+  {
+    "id": "flame-orange-fo-416",
+    "seriesId": "flame-orange",
+    "hex": "#B9B6E9",
+    "code": "FO-416"
+  },
+  {
+    "id": "flame-orange-fo-418",
+    "seriesId": "flame-orange",
+    "hex": "#6167A2",
+    "code": "FO-418"
+  },
+  {
+    "id": "flame-orange-fo-420",
+    "seriesId": "flame-orange",
+    "hex": "#243B81",
+    "code": "FO-420"
+  },
+  {
+    "id": "flame-orange-fo-422",
+    "seriesId": "flame-orange",
+    "hex": "#9DA8DE",
+    "code": "FO-422"
+  },
+  {
+    "id": "flame-orange-fo-424",
+    "seriesId": "flame-orange",
+    "hex": "#6F7ACF",
+    "code": "FO-424"
+  },
+  {
+    "id": "flame-orange-fo-426",
+    "seriesId": "flame-orange",
+    "hex": "#374A9C",
+    "code": "FO-426"
+  },
+  {
+    "id": "flame-orange-fo-428",
+    "seriesId": "flame-orange",
+    "hex": "#001E60",
+    "code": "FO-428"
+  },
+  {
+    "id": "flame-orange-fo-502",
+    "seriesId": "flame-orange",
+    "hex": "#70C7E7",
+    "code": "FO-502"
+  },
+  {
+    "id": "flame-orange-fo-504",
+    "seriesId": "flame-orange",
+    "hex": "#92C4E4",
+    "code": "FO-504"
+  },
+  {
+    "id": "flame-orange-fo-508",
+    "seriesId": "flame-orange",
+    "hex": "#4496D1",
+    "code": "FO-508"
+  },
+  {
+    "id": "flame-orange-fo-510",
+    "seriesId": "flame-orange",
+    "hex": "#006BB3",
+    "code": "FO-510"
+  },
+  {
+    "id": "flame-orange-fo-511",
+    "seriesId": "flame-orange",
+    "hex": "#0089BF",
+    "code": "FO-511"
+  },
+  {
+    "id": "flame-orange-fo-512",
+    "seriesId": "flame-orange",
+    "hex": "#075095",
+    "code": "FO-512"
+  },
+  {
+    "id": "flame-orange-fo-514",
+    "seriesId": "flame-orange",
+    "hex": "#1B4988",
+    "code": "FO-514"
+  },
+  {
+    "id": "flame-orange-fo-515",
+    "seriesId": "flame-orange",
+    "hex": "#002C5C",
+    "code": "FO-515"
+  },
+  {
+    "id": "flame-orange-fo-522",
+    "seriesId": "flame-orange",
+    "hex": "#0B2C59",
+    "code": "FO-522"
+  },
+  {
+    "id": "flame-orange-fo-523",
+    "seriesId": "flame-orange",
+    "hex": "#232A3C",
+    "code": "FO-523"
+  },
+  {
+    "id": "flame-orange-fo-531",
+    "seriesId": "flame-orange",
+    "hex": "#8CB9B7",
+    "code": "FO-531"
+  },
+  {
+    "id": "flame-orange-fo-532",
+    "seriesId": "flame-orange",
+    "hex": "#7CA6A5",
+    "code": "FO-532"
+  },
+  {
+    "id": "flame-orange-fo-533",
+    "seriesId": "flame-orange",
+    "hex": "#668E8E",
+    "code": "FO-533"
+  },
+  {
+    "id": "flame-orange-fo-516",
+    "seriesId": "flame-orange",
+    "hex": "#7FA8C5",
+    "code": "FO-516"
+  },
+  {
+    "id": "flame-orange-fo-518",
+    "seriesId": "flame-orange",
+    "hex": "#2086C5",
+    "code": "FO-518"
+  },
+  {
+    "id": "flame-orange-fo-520",
+    "seriesId": "flame-orange",
+    "hex": "#075A8E",
+    "code": "FO-520"
+  },
+  {
+    "id": "flame-orange-fo-613",
+    "seriesId": "flame-orange",
+    "hex": "#B7E8DE",
+    "code": "FO-613"
+  },
+  {
+    "id": "flame-orange-fo-615",
+    "seriesId": "flame-orange",
+    "hex": "#0BB5CB",
+    "code": "FO-615"
+  },
+  {
+    "id": "flame-orange-fo-614",
+    "seriesId": "flame-orange",
+    "hex": "#8DDECC",
+    "code": "FO-614"
+  },
+  {
+    "id": "flame-orange-fo-616",
+    "seriesId": "flame-orange",
+    "hex": "#3397B6",
+    "code": "FO-616"
+  },
+  {
+    "id": "flame-orange-fo-618",
+    "seriesId": "flame-orange",
+    "hex": "#004E5A",
+    "code": "FO-618"
+  },
+  {
+    "id": "flame-orange-fo-602",
+    "seriesId": "flame-orange",
+    "hex": "#5CC9BA",
+    "code": "FO-602"
+  },
+  {
+    "id": "flame-orange-fo-601",
+    "seriesId": "flame-orange",
+    "hex": "#48B79D",
+    "code": "FO-601"
+  },
+  {
+    "id": "flame-orange-fo-604",
+    "seriesId": "flame-orange",
+    "hex": "#00A390",
+    "code": "FO-604"
+  },
+  {
+    "id": "flame-orange-fo-605",
+    "seriesId": "flame-orange",
+    "hex": "#009C8F",
+    "code": "FO-605"
+  },
+  {
+    "id": "flame-orange-fo-606",
+    "seriesId": "flame-orange",
+    "hex": "#007375",
+    "code": "FO-606"
+  },
+  {
+    "id": "flame-orange-fo-608",
+    "seriesId": "flame-orange",
+    "hex": "#98ACA1",
+    "code": "FO-608"
+  },
+  {
+    "id": "flame-orange-fo-609",
+    "seriesId": "flame-orange",
+    "hex": "#7DA48F",
+    "code": "FO-609"
+  },
+  {
+    "id": "flame-orange-fo-610",
+    "seriesId": "flame-orange",
+    "hex": "#517765",
+    "code": "FO-610"
+  },
+  {
+    "id": "flame-orange-fo-664",
+    "seriesId": "flame-orange",
+    "hex": "#8BE1B2",
+    "code": "FO-664"
+  },
+  {
+    "id": "flame-orange-fo-666",
+    "seriesId": "flame-orange",
+    "hex": "#6DCB99",
+    "code": "FO-666"
+  },
+  {
+    "id": "flame-orange-fo-663",
+    "seriesId": "flame-orange",
+    "hex": "#97DDA8",
+    "code": "FO-663"
+  },
+  {
+    "id": "flame-orange-fo-667",
+    "seriesId": "flame-orange",
+    "hex": "#6BB66C",
+    "code": "FO-667"
+  },
+  {
+    "id": "flame-orange-fo-670",
+    "seriesId": "flame-orange",
+    "hex": "#23A37D",
+    "code": "FO-670"
+  },
+  {
+    "id": "flame-orange-fo-672",
+    "seriesId": "flame-orange",
+    "hex": "#008B5A",
+    "code": "FO-672"
+  },
+  {
+    "id": "flame-orange-fo-675",
+    "seriesId": "flame-orange",
+    "hex": "#005F3C",
+    "code": "FO-675"
+  },
+  {
+    "id": "flame-orange-fo-622",
+    "seriesId": "flame-orange",
+    "hex": "#F0BC01",
+    "code": "FO-622"
+  },
+  {
+    "id": "flame-orange-fo-621",
+    "seriesId": "flame-orange",
+    "hex": "#EABB00",
+    "code": "FO-621"
+  },
+  {
+    "id": "flame-orange-fo-625",
+    "seriesId": "flame-orange",
+    "hex": "#C7A322",
+    "code": "FO-625"
+  },
+  {
+    "id": "flame-orange-fo-631",
+    "seriesId": "flame-orange",
+    "hex": "#A37F13",
+    "code": "FO-631"
+  },
+  {
+    "id": "flame-orange-fo-633",
+    "seriesId": "flame-orange",
+    "hex": "#836829",
+    "code": "FO-633"
+  },
+  {
+    "id": "flame-orange-fo-637",
+    "seriesId": "flame-orange",
+    "hex": "#C0A927",
+    "code": "FO-637"
+  },
+  {
+    "id": "flame-orange-fo-639",
+    "seriesId": "flame-orange",
+    "hex": "#9F8C13",
+    "code": "FO-639"
+  },
+  {
+    "id": "flame-orange-fo-641",
+    "seriesId": "flame-orange",
+    "hex": "#786522",
+    "code": "FO-641"
+  },
+  {
+    "id": "flame-orange-fo-623",
+    "seriesId": "flame-orange",
+    "hex": "#DEDE2E",
+    "code": "FO-623"
+  },
+  {
+    "id": "flame-orange-fo-624",
+    "seriesId": "flame-orange",
+    "hex": "#D7D43F",
+    "code": "FO-624"
+  },
+  {
+    "id": "flame-orange-fo-627",
+    "seriesId": "flame-orange",
+    "hex": "#96B922",
+    "code": "FO-627"
+  },
+  {
+    "id": "flame-orange-fo-628",
+    "seriesId": "flame-orange",
+    "hex": "#89A945",
+    "code": "FO-628"
+  },
+  {
+    "id": "flame-orange-fo-629",
+    "seriesId": "flame-orange",
+    "hex": "#008834",
+    "code": "FO-629"
+  },
+  {
+    "id": "flame-orange-fo-632",
+    "seriesId": "flame-orange",
+    "hex": "#4D8746",
+    "code": "FO-632"
+  },
+  {
+    "id": "flame-orange-fo-636",
+    "seriesId": "flame-orange",
+    "hex": "#245C4E",
+    "code": "FO-636"
+  },
+  {
+    "id": "flame-orange-fo-640",
+    "seriesId": "flame-orange",
+    "hex": "#B7D048",
+    "code": "FO-640"
+  },
+  {
+    "id": "flame-orange-fo-642",
+    "seriesId": "flame-orange",
+    "hex": "#7BBD2A",
+    "code": "FO-642"
+  },
+  {
+    "id": "flame-orange-fo-644",
+    "seriesId": "flame-orange",
+    "hex": "#649116",
+    "code": "FO-644"
+  },
+  {
+    "id": "flame-orange-fo-697",
+    "seriesId": "flame-orange",
+    "hex": "#D17F79",
+    "code": "FO-697"
+  },
+  {
+    "id": "flame-orange-fo-698",
+    "seriesId": "flame-orange",
+    "hex": "#9D514B",
+    "code": "FO-698"
+  },
+  {
+    "id": "flame-orange-fo-699",
+    "seriesId": "flame-orange",
+    "hex": "#882626",
+    "code": "FO-699"
+  },
+  {
+    "id": "flame-orange-fo-702",
+    "seriesId": "flame-orange",
+    "hex": "#EDDFB6",
+    "code": "FO-702"
+  },
+  {
+    "id": "flame-orange-fo-703",
+    "seriesId": "flame-orange",
+    "hex": "#D7B38A",
+    "code": "FO-703"
+  },
+  {
+    "id": "flame-orange-fo-704",
+    "seriesId": "flame-orange",
+    "hex": "#BF9B5C",
+    "code": "FO-704"
+  },
+  {
+    "id": "flame-orange-fo-706",
+    "seriesId": "flame-orange",
+    "hex": "#9D682F",
+    "code": "FO-706"
+  },
+  {
+    "id": "flame-orange-fo-708",
+    "seriesId": "flame-orange",
+    "hex": "#4C2900",
+    "code": "FO-708"
+  },
+  {
+    "id": "flame-orange-fo-710",
+    "seriesId": "flame-orange",
+    "hex": "#2B1104",
+    "code": "FO-710"
+  },
+  {
+    "id": "flame-orange-fo-732",
+    "seriesId": "flame-orange",
+    "hex": "#B4A485",
+    "code": "FO-732"
+  },
+  {
+    "id": "flame-orange-fo-734",
+    "seriesId": "flame-orange",
+    "hex": "#A18B62",
+    "code": "FO-734"
+  },
+  {
+    "id": "flame-orange-fo-736",
+    "seriesId": "flame-orange",
+    "hex": "#6F5B39",
+    "code": "FO-736"
+  },
+  {
+    "id": "flame-orange-fo-830",
+    "seriesId": "flame-orange",
+    "hex": "#C8C8B5",
+    "code": "FO-830"
+  },
+  {
+    "id": "flame-orange-fo-831",
+    "seriesId": "flame-orange",
+    "hex": "#989887",
+    "code": "FO-831"
+  },
+  {
+    "id": "flame-orange-fo-832",
+    "seriesId": "flame-orange",
+    "hex": "#737165",
+    "code": "FO-832"
+  },
+  {
+    "id": "flame-orange-fo-833",
+    "seriesId": "flame-orange",
+    "hex": "#403E35",
+    "code": "FO-833"
+  },
+  {
+    "id": "flame-orange-fo-834",
+    "seriesId": "flame-orange",
+    "hex": "#DAD3CC",
+    "code": "FO-834"
+  },
+  {
+    "id": "flame-orange-fo-836",
+    "seriesId": "flame-orange",
+    "hex": "#B0ADAC",
+    "code": "FO-836"
+  },
+  {
+    "id": "flame-orange-fo-840",
+    "seriesId": "flame-orange",
+    "hex": "#84807F",
+    "code": "FO-840"
+  },
+  {
+    "id": "flame-orange-fo-844",
+    "seriesId": "flame-orange",
+    "hex": "#4C4C4F",
+    "code": "FO-844"
+  },
+  {
+    "id": "flame-orange-fo-904",
+    "seriesId": "flame-orange",
+    "hex": "#000000",
+    "code": "FO-904"
+  },
+  {
+    "id": "flame-orange-fo-901",
+    "seriesId": "flame-orange",
+    "hex": "#000000",
+    "code": "FO-901"
+  },
+  {
+    "id": "flame-orange-fo-901",
+    "seriesId": "flame-orange",
+    "hex": "#000000",
+    "code": "FO-901"
+  },
+  {
+    "id": "flame-orange-fo-900",
+    "seriesId": "flame-orange",
+    "hex": "#FFFFFF",
+    "code": "FO-900"
+  }
+]

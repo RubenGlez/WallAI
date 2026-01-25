@@ -1,0 +1,2364 @@
+[
+  {
+    "id": "flame-orange-fo-100",
+    "translations": {
+      "en": "vanilla",
+      "de": "vanille"
+    }
+  },
+  {
+    "id": "flame-orange-fo-102",
+    "translations": {
+      "en": "zinc yellow",
+      "de": "zinkgelb"
+    }
+  },
+  {
+    "id": "flame-orange-fo-104",
+    "translations": {
+      "en": "cadmium yellow",
+      "de": "kadmiumgelb"
+    }
+  },
+  {
+    "id": "flame-orange-fo-106",
+    "translations": {
+      "en": "signal yellow",
+      "de": "signalgelb"
+    }
+  },
+  {
+    "id": "flame-orange-fo-110",
+    "translations": {
+      "en": "melon yellow",
+      "de": "melonengelb"
+    }
+  },
+  {
+    "id": "flame-orange-fo-107",
+    "translations": {
+      "en": "melon light",
+      "de": "melongelb hell"
+    }
+  },
+  {
+    "id": "flame-orange-fo-111",
+    "translations": {
+      "en": "melon dark",
+      "de": "melone dunkel"
+    }
+  },
+  {
+    "id": "flame-orange-fo-113",
+    "translations": {
+      "en": "curry",
+      "de": "curry"
+    }
+  },
+  {
+    "id": "flame-orange-fo-202",
+    "translations": {
+      "en": "pastel orange",
+      "de": "pastellorange"
+    }
+  },
+  {
+    "id": "flame-orange-fo-210",
+    "translations": {
+      "en": "apricot",
+      "de": "aprikose"
+    }
+  },
+  {
+    "id": "flame-orange-fo-204",
+    "translations": {
+      "en": "light orange",
+      "de": "hellorange"
+    }
+  },
+  {
+    "id": "flame-orange-fo-212",
+    "translations": {
+      "en": "orange",
+      "de": "orange"
+    }
+  },
+  {
+    "id": "flame-orange-fo-214",
+    "translations": {
+      "en": "red orange",
+      "de": "rotorange"
+    }
+  },
+  {
+    "id": "flame-orange-fo-304",
+    "translations": {
+      "en": "signal red",
+      "de": "signalrot"
+    }
+  },
+  {
+    "id": "flame-orange-fo-303",
+    "translations": {
+      "en": "red pastel",
+      "de": "pastellrot"
+    }
+  },
+  {
+    "id": "flame-orange-fo-312",
+    "translations": {
+      "en": "fire red",
+      "de": "feuerrot"
+    }
+  },
+  {
+    "id": "flame-orange-fo-306",
+    "translations": {
+      "en": "ruby red",
+      "de": "rubinrot"
+    }
+  },
+  {
+    "id": "flame-orange-fo-320",
+    "translations": {
+      "en": "burgundy",
+      "de": "burgundrot"
+    }
+  },
+  {
+    "id": "flame-orange-fo-322",
+    "translations": {
+      "en": "aubergine",
+      "de": "aubergine"
+    }
+  },
+  {
+    "id": "flame-orange-fo-323",
+    "translations": {
+      "en": "aubergine dark",
+      "de": "aubergine dunkel"
+    }
+  },
+  {
+    "id": "flame-orange-fo-208",
+    "translations": {
+      "en": "cold peach",
+      "de": "pfirsich kalt"
+    }
+  },
+  {
+    "id": "flame-orange-fo-198",
+    "translations": {
+      "en": "peach middle",
+      "de": "pfirsich mittel"
+    }
+  },
+  {
+    "id": "flame-orange-fo-200",
+    "translations": {
+      "en": "peach",
+      "de": "pfirsich"
+    }
+  },
+  {
+    "id": "flame-orange-fo-307",
+    "translations": {
+      "en": "coral",
+      "de": "koralle"
+    }
+  },
+  {
+    "id": "flame-orange-fo-305",
+    "translations": {
+      "en": "coral red",
+      "de": "koralle rot"
+    }
+  },
+  {
+    "id": "flame-orange-fo-308",
+    "translations": {
+      "en": "piglet pink light",
+      "de": "schweinchenrosa hell"
+    }
+  },
+  {
+    "id": "flame-orange-fo-309",
+    "translations": {
+      "en": "piglet pink middle",
+      "de": "schweinchenrosa mittel"
+    }
+  },
+  {
+    "id": "flame-orange-fo-310",
+    "translations": {
+      "en": "piglet pink",
+      "de": "schweinchenrosa"
+    }
+  },
+  {
+    "id": "flame-orange-fo-314",
+    "translations": {
+      "en": "piglet pink dark",
+      "de": "schweinchenrosa dunkel"
+    }
+  },
+  {
+    "id": "flame-orange-fo-311",
+    "translations": {
+      "en": "crazy cherry",
+      "de": "crazy cherry"
+    }
+  },
+  {
+    "id": "flame-orange-fo-313",
+    "translations": {
+      "en": "cherry dark",
+      "de": "kirsch dunkel"
+    }
+  },
+  {
+    "id": "flame-orange-fo-396",
+    "translations": {
+      "en": "violet",
+      "de": "violett"
+    }
+  },
+  {
+    "id": "flame-orange-fo-397",
+    "translations": {
+      "en": "crazy violet",
+      "de": "crazy violett"
+    }
+  },
+  {
+    "id": "flame-orange-fo-398",
+    "translations": {
+      "en": "deep violet",
+      "de": "tief violett"
+    }
+  },
+  {
+    "id": "flame-orange-fo-403",
+    "translations": {
+      "en": "deep violet dark",
+      "de": "tief violett dunkel"
+    }
+  },
+  {
+    "id": "flame-orange-fo-401",
+    "translations": {
+      "en": "erica pastel",
+      "de": "erika pastell"
+    }
+  },
+  {
+    "id": "flame-orange-fo-405",
+    "translations": {
+      "en": "erica pastel middle",
+      "de": "erika pastell mittel"
+    }
+  },
+  {
+    "id": "flame-orange-fo-409",
+    "translations": {
+      "en": "erica pink",
+      "de": "erikapink"
+    }
+  },
+  {
+    "id": "flame-orange-fo-399",
+    "translations": {
+      "en": "erica violet light",
+      "de": "erikaviolett hell"
+    }
+  },
+  {
+    "id": "flame-orange-fo-407",
+    "translations": {
+      "en": "erica violet middle",
+      "de": "erikaviolett mittel"
+    }
+  },
+  {
+    "id": "flame-orange-fo-400",
+    "translations": {
+      "en": "erica violet",
+      "de": "erikaviolett"
+    }
+  },
+  {
+    "id": "flame-orange-fo-402",
+    "translations": {
+      "en": "telemagenta",
+      "de": "telemagenta"
+    }
+  },
+  {
+    "id": "flame-orange-fo-404",
+    "translations": {
+      "en": "traffic purple",
+      "de": "verkehrsviolett"
+    }
+  },
+  {
+    "id": "flame-orange-fo-318",
+    "translations": {
+      "en": "traffic purple dark",
+      "de": "verkehrsviolett dunkel"
+    }
+  },
+  {
+    "id": "flame-orange-fo-408",
+    "translations": {
+      "en": "grape",
+      "de": "weintraube"
+    }
+  },
+  {
+    "id": "flame-orange-fo-410",
+    "translations": {
+      "en": "blackberry",
+      "de": "brombeere"
+    }
+  },
+  {
+    "id": "flame-orange-fo-412",
+    "translations": {
+      "en": "currant",
+      "de": "johannisbeere"
+    }
+  },
+  {
+    "id": "flame-orange-fo-415",
+    "translations": {
+      "en": "crocus",
+      "de": "krocus"
+    }
+  },
+  {
+    "id": "flame-orange-fo-416",
+    "translations": {
+      "en": "viola light",
+      "de": "veilchen hell"
+    }
+  },
+  {
+    "id": "flame-orange-fo-418",
+    "translations": {
+      "en": "viola",
+      "de": "veilchen"
+    }
+  },
+  {
+    "id": "flame-orange-fo-420",
+    "translations": {
+      "en": "viola dark",
+      "de": "veilchen dunkel"
+    }
+  },
+  {
+    "id": "flame-orange-fo-422",
+    "translations": {
+      "en": "cosmos blue pastel",
+      "de": "kosmosblau pastell"
+    }
+  },
+  {
+    "id": "flame-orange-fo-424",
+    "translations": {
+      "en": "cosmos blue light",
+      "de": "kosmosblau hell"
+    }
+  },
+  {
+    "id": "flame-orange-fo-426",
+    "translations": {
+      "en": "cosmos blue",
+      "de": "kosmosblau"
+    }
+  },
+  {
+    "id": "flame-orange-fo-428",
+    "translations": {
+      "en": "cosmos blue dark",
+      "de": "kosmosblau dunkel"
+    }
+  },
+  {
+    "id": "flame-orange-fo-502",
+    "translations": {
+      "en": "lightning blue",
+      "de": "lightning blau"
+    }
+  },
+  {
+    "id": "flame-orange-fo-504",
+    "translations": {
+      "en": "light blue light",
+      "de": "lichtblau hell"
+    }
+  },
+  {
+    "id": "flame-orange-fo-508",
+    "translations": {
+      "en": "light blue",
+      "de": "lichtblau"
+    }
+  },
+  {
+    "id": "flame-orange-fo-510",
+    "translations": {
+      "en": "sky blue",
+      "de": "himmelblau"
+    }
+  },
+  {
+    "id": "flame-orange-fo-511",
+    "translations": {
+      "en": "crazy blue",
+      "de": "crazy blue"
+    }
+  },
+  {
+    "id": "flame-orange-fo-512",
+    "translations": {
+      "en": "signal blue",
+      "de": "signalblau"
+    }
+  },
+  {
+    "id": "flame-orange-fo-514",
+    "translations": {
+      "en": "true blue",
+      "de": "echtblau"
+    }
+  },
+  {
+    "id": "flame-orange-fo-515",
+    "translations": {
+      "en": "ultramarine blue",
+      "de": "ultramarineblau"
+    }
+  },
+  {
+    "id": "flame-orange-fo-522",
+    "translations": {
+      "en": "sapphire blue",
+      "de": "saphirblau"
+    }
+  },
+  {
+    "id": "flame-orange-fo-523",
+    "translations": {
+      "en": "sapphire blue dark",
+      "de": "saphirblau dunkel"
+    }
+  },
+  {
+    "id": "flame-orange-fo-531",
+    "translations": {
+      "en": "verdigris light",
+      "de": "grünspan hell"
+    }
+  },
+  {
+    "id": "flame-orange-fo-532",
+    "translations": {
+      "en": "verdigris middle",
+      "de": "grünspan mittel"
+    }
+  },
+  {
+    "id": "flame-orange-fo-533",
+    "translations": {
+      "en": "verdigris",
+      "de": "grünspan"
+    }
+  },
+  {
+    "id": "flame-orange-fo-516",
+    "translations": {
+      "en": "cream blue light",
+      "de": "cremeblau hell"
+    }
+  },
+  {
+    "id": "flame-orange-fo-518",
+    "translations": {
+      "en": "cream blue",
+      "de": "cremeblau"
+    }
+  },
+  {
+    "id": "flame-orange-fo-520",
+    "translations": {
+      "en": "cream blue dark",
+      "de": "cremeblau dunkel"
+    }
+  },
+  {
+    "id": "flame-orange-fo-613",
+    "translations": {
+      "en": "aqua pastel light",
+      "de": "aqua pastell hell"
+    }
+  },
+  {
+    "id": "flame-orange-fo-615",
+    "translations": {
+      "en": "crazy aqua",
+      "de": "crazy aqua"
+    }
+  },
+  {
+    "id": "flame-orange-fo-614",
+    "translations": {
+      "en": "aqua pastel",
+      "de": "aqua pastell"
+    }
+  },
+  {
+    "id": "flame-orange-fo-616",
+    "translations": {
+      "en": "aqua light",
+      "de": "aqua hell"
+    }
+  },
+  {
+    "id": "flame-orange-fo-618",
+    "translations": {
+      "en": "aqua",
+      "de": "aqua"
+    }
+  },
+  {
+    "id": "flame-orange-fo-602",
+    "translations": {
+      "en": "riviera",
+      "de": "riviera"
+    }
+  },
+  {
+    "id": "flame-orange-fo-601",
+    "translations": {
+      "en": "crazy riviera",
+      "de": "crazy riviera"
+    }
+  },
+  {
+    "id": "flame-orange-fo-604",
+    "translations": {
+      "en": "lagoon blue",
+      "de": "lagunenblau"
+    }
+  },
+  {
+    "id": "flame-orange-fo-605",
+    "translations": {
+      "en": "lagoon blue dark",
+      "de": "lagunenblau dunkel"
+    }
+  },
+  {
+    "id": "flame-orange-fo-606",
+    "translations": {
+      "en": "ocean blue",
+      "de": "ozeanblau"
+    }
+  },
+  {
+    "id": "flame-orange-fo-608",
+    "translations": {
+      "en": "sage middle",
+      "de": "salbei mittel"
+    }
+  },
+  {
+    "id": "flame-orange-fo-609",
+    "translations": {
+      "en": "sage",
+      "de": "salbei"
+    }
+  },
+  {
+    "id": "flame-orange-fo-610",
+    "translations": {
+      "en": "sage dark",
+      "de": "salbei dunkel"
+    }
+  },
+  {
+    "id": "flame-orange-fo-664",
+    "translations": {
+      "en": "menthol light",
+      "de": "menthol hell"
+    }
+  },
+  {
+    "id": "flame-orange-fo-666",
+    "translations": {
+      "en": "menthol",
+      "de": "menthol"
+    }
+  },
+  {
+    "id": "flame-orange-fo-663",
+    "translations": {
+      "en": "mint",
+      "de": "minze"
+    }
+  },
+  {
+    "id": "flame-orange-fo-667",
+    "translations": {
+      "en": "crazy menthol",
+      "de": "crazy menthol"
+    }
+  },
+  {
+    "id": "flame-orange-fo-670",
+    "translations": {
+      "en": "turquoise light",
+      "de": "türkis hell"
+    }
+  },
+  {
+    "id": "flame-orange-fo-672",
+    "translations": {
+      "en": "turquoise",
+      "de": "türkis"
+    }
+  },
+  {
+    "id": "flame-orange-fo-675",
+    "translations": {
+      "en": "emerald green",
+      "de": "smaragd grün"
+    }
+  },
+  {
+    "id": "flame-orange-fo-622",
+    "translations": {
+      "en": "mustard light",
+      "de": "Senf hell"
+    }
+  },
+  {
+    "id": "flame-orange-fo-621",
+    "translations": {
+      "en": "mustard middle",
+      "de": "senf mittel"
+    }
+  },
+  {
+    "id": "flame-orange-fo-625",
+    "translations": {
+      "en": "mustard",
+      "de": "Senf"
+    }
+  },
+  {
+    "id": "flame-orange-fo-631",
+    "translations": {
+      "en": "mustard dark",
+      "de": "Senf dunkel"
+    }
+  },
+  {
+    "id": "flame-orange-fo-633",
+    "translations": {
+      "en": "khaki green",
+      "de": "khakigrün"
+    }
+  },
+  {
+    "id": "flame-orange-fo-637",
+    "translations": {
+      "en": "pear light",
+      "de": "birne hell"
+    }
+  },
+  {
+    "id": "flame-orange-fo-639",
+    "translations": {
+      "en": "pear",
+      "de": "birne"
+    }
+  },
+  {
+    "id": "flame-orange-fo-641",
+    "translations": {
+      "en": "pear dark",
+      "de": "birne dunkel"
+    }
+  },
+  {
+    "id": "flame-orange-fo-623",
+    "translations": {
+      "en": "crazy green",
+      "de": "crazy green"
+    }
+  },
+  {
+    "id": "flame-orange-fo-624",
+    "translations": {
+      "en": "pistachio light",
+      "de": "pistazie hell"
+    }
+  },
+  {
+    "id": "flame-orange-fo-627",
+    "translations": {
+      "en": "crazy grass",
+      "de": "crazy grass"
+    }
+  },
+  {
+    "id": "flame-orange-fo-628",
+    "translations": {
+      "en": "grass green",
+      "de": "grasgrün"
+    }
+  },
+  {
+    "id": "flame-orange-fo-629",
+    "translations": {
+      "en": "juice green",
+      "de": "saftgrün"
+    }
+  },
+  {
+    "id": "flame-orange-fo-632",
+    "translations": {
+      "en": "leaf green",
+      "de": "laubgrün"
+    }
+  },
+  {
+    "id": "flame-orange-fo-636",
+    "translations": {
+      "en": "fir green",
+      "de": "tannengrün"
+    }
+  },
+  {
+    "id": "flame-orange-fo-640",
+    "translations": {
+      "en": "kiwi light",
+      "de": "kiwi hell"
+    }
+  },
+  {
+    "id": "flame-orange-fo-642",
+    "translations": {
+      "en": "kiwi",
+      "de": "kiwi"
+    }
+  },
+  {
+    "id": "flame-orange-fo-644",
+    "translations": {
+      "en": "kiwi dark",
+      "de": "kiwi dunkel"
+    }
+  },
+  {
+    "id": "flame-orange-fo-697",
+    "translations": {
+      "en": "cocoa light",
+      "de": "kakao hell"
+    }
+  },
+  {
+    "id": "flame-orange-fo-698",
+    "translations": {
+      "en": "cocoa",
+      "de": "kakao"
+    }
+  },
+  {
+    "id": "flame-orange-fo-699",
+    "translations": {
+      "en": "brown red",
+      "de": "braunrot"
+    }
+  },
+  {
+    "id": "flame-orange-fo-702",
+    "translations": {
+      "en": "ivory light",
+      "de": "elfenbein hell"
+    }
+  },
+  {
+    "id": "flame-orange-fo-703",
+    "translations": {
+      "en": "milk coffee",
+      "de": "milchkaffee"
+    }
+  },
+  {
+    "id": "flame-orange-fo-704",
+    "translations": {
+      "en": "beige brown",
+      "de": "beigebraun"
+    }
+  },
+  {
+    "id": "flame-orange-fo-706",
+    "translations": {
+      "en": "ocher",
+      "de": "ocker"
+    }
+  },
+  {
+    "id": "flame-orange-fo-708",
+    "translations": {
+      "en": "nut",
+      "de": "nuss"
+    }
+  },
+  {
+    "id": "flame-orange-fo-710",
+    "translations": {
+      "en": "chocolate",
+      "de": "schokolade"
+    }
+  },
+  {
+    "id": "flame-orange-fo-732",
+    "translations": {
+      "en": "grey beige light",
+      "de": "graubeige hell"
+    }
+  },
+  {
+    "id": "flame-orange-fo-734",
+    "translations": {
+      "en": "grey beige",
+      "de": "graubeige"
+    }
+  },
+  {
+    "id": "flame-orange-fo-736",
+    "translations": {
+      "en": "khaki grey",
+      "de": "khakigrau"
+    }
+  },
+  {
+    "id": "flame-orange-fo-830",
+    "translations": {
+      "en": "Stone grey light",
+      "de": "steingrau hell"
+    }
+  },
+  {
+    "id": "flame-orange-fo-831",
+    "translations": {
+      "en": "Stone grey middle",
+      "de": "steingrau mittel"
+    }
+  },
+  {
+    "id": "flame-orange-fo-832",
+    "translations": {
+      "en": "Stone grey",
+      "de": "steingrau"
+    }
+  },
+  {
+    "id": "flame-orange-fo-833",
+    "translations": {
+      "en": "Stone grey dark",
+      "de": "steingrau dunkel"
+    }
+  },
+  {
+    "id": "flame-orange-fo-834",
+    "translations": {
+      "en": "light grey neutral",
+      "de": "hellgrau neutral"
+    }
+  },
+  {
+    "id": "flame-orange-fo-836",
+    "translations": {
+      "en": "middle grey neutral",
+      "de": "mittelgrau neutral"
+    }
+  },
+  {
+    "id": "flame-orange-fo-840",
+    "translations": {
+      "en": "dark grey neutral",
+      "de": "dunkelgrau neutral"
+    }
+  },
+  {
+    "id": "flame-orange-fo-844",
+    "translations": {
+      "en": "anthracite grey",
+      "de": "anthrazitgrau"
+    }
+  },
+  {
+    "id": "flame-orange-fo-904",
+    "translations": {
+      "en": "deep black",
+      "de": "tiefschwarz"
+    }
+  },
+  {
+    "id": "flame-orange-fo-901",
+    "translations": {
+      "en": "thick black (500 ml)",
+      "de": "thick black (500 ml)"
+    }
+  },
+  {
+    "id": "flame-orange-fo-901",
+    "translations": {
+      "en": "thick black",
+      "de": "thick black (500 ml)"
+    }
+  },
+  {
+    "id": "flame-orange-fo-900",
+    "translations": {
+      "en": "pure white",
+      "de": "reinweiß"
+    }
+  },
+  {
+    "id": "aka-writter-aka100",
+    "translations": {
+      "es": "NEGRO",
+      "de": "SCHWARZ",
+      "fr": "NOIR",
+      "pt": "PRETO"
+    }
+  },
+  {
+    "id": "aka-writter-aka101",
+    "translations": {
+      "es": "BLANCO",
+      "de": "WEISS",
+      "fr": "BLANC",
+      "pt": "BRANCO"
+    }
+  },
+  {
+    "id": "aka-writter-aka110",
+    "translations": {
+      "es": "AMARILLO CARNOTITA",
+      "de": "GELB CARNOTITA",
+      "fr": "JAUNE CARNOTITE",
+      "pt": "AMARELO CARNOTITA"
+    }
+  },
+  {
+    "id": "aka-writter-aka111",
+    "translations": {
+      "es": "AMARILLO SUAVE",
+      "de": "GELB SUAVE",
+      "fr": "JAUNE DOUX",
+      "pt": "AMARELO SUAVE"
+    }
+  },
+  {
+    "id": "aka-writter-aka112",
+    "translations": {
+      "es": "AMARILLO PAELLA",
+      "de": "GELB PAELLA",
+      "fr": "JAUNE PAELLA",
+      "pt": "AMARELO PAELLA"
+    }
+  },
+  {
+    "id": "aka-writter-aka113",
+    "translations": {
+      "es": "AMARILLO SULFUROSO",
+      "de": "GELB SULFUROSO",
+      "fr": "JAUNE SULFUREUX",
+      "pt": "AMARELO SULFUROSO"
+    }
+  },
+  {
+    "id": "aka-writter-aka114",
+    "translations": {
+      "es": "AMARILLO AZUFRE",
+      "de": "GELB SCHWEFEL",
+      "fr": "JAUNE SOUFRE",
+      "pt": "AMARELO ENXOFRE"
+    }
+  },
+  {
+    "id": "aka-writter-aka127",
+    "translations": {
+      "es": "AMARILLO TUBASA",
+      "de": "GELB TUBASA",
+      "fr": "JAUNE TUBASA",
+      "pt": "AMARELO TUBASA"
+    }
+  },
+  {
+    "id": "aka-writter-aka128",
+    "translations": {
+      "es": "AMARILLO MEDIO",
+      "de": "GELB MITTE",
+      "fr": "JAUNE MOYEN",
+      "pt": "AMARELO MÉDIO"
+    }
+  },
+  {
+    "id": "aka-writter-aka 129",
+    "translations": {
+      "es": "AMARILLO SALVATORE"
+    }
+  },
+  {
+    "id": "aka-writter-aka120",
+    "translations": {
+      "es": "VERDE ESPERANZA",
+      "de": "GRÜN HOFFNUNG",
+      "fr": "VERT ESPÉRANCE",
+      "pt": "VERDE ESPERANÇA"
+    }
+  },
+  {
+    "id": "aka-writter-aka121",
+    "translations": {
+      "es": "VERDE CÉSPED",
+      "de": "GRÜN RASEN",
+      "fr": "VERT GAZON",
+      "pt": "VERDE CÉSPED"
+    }
+  },
+  {
+    "id": "aka-writter-aka122",
+    "translations": {
+      "es": "VERDE VENUS",
+      "de": "GRÜN VENUS",
+      "fr": "VERT VÉNUS",
+      "pt": "VERDE VÊNUS"
+    }
+  },
+  {
+    "id": "aka-writter-aka123",
+    "translations": {
+      "es": "VERDE PRIMAVERA",
+      "de": "GRÜN FRÜHLING",
+      "fr": "VERT PRINTEMPS",
+      "pt": "VERDE PRIMAVERA"
+    }
+  },
+  {
+    "id": "aka-writter-aka124",
+    "translations": {
+      "es": "VERDE ESMERALDA",
+      "de": "GRÜN ESMERALDA",
+      "fr": "VERT ESMERALDA",
+      "pt": "VERDE ESMERALDA"
+    }
+  },
+  {
+    "id": "aka-writter-aka125",
+    "translations": {
+      "es": "VERDE IMPERIAL",
+      "de": "GRÜN IMPERIAL",
+      "fr": "VERT IMPERIAL",
+      "pt": "VERDE IMPERIAL"
+    }
+  },
+  {
+    "id": "aka-writter-aka126",
+    "translations": {
+      "es": "VERDE OLIVA",
+      "de": "GRÜN OLIVE",
+      "fr": "VERT OLIVE",
+      "pt": "VERDE OLIVA"
+    }
+  },
+  {
+    "id": "aka-writter-aka130",
+    "translations": {
+      "es": "VERDE TURMALINA",
+      "de": "GRÜN TURMALINA",
+      "fr": "VERT TURMALINE",
+      "pt": "VERDE TURMALINA"
+    }
+  },
+  {
+    "id": "aka-writter-aka131",
+    "translations": {
+      "es": "VERDE JADE",
+      "de": "GRÜN JADE",
+      "fr": "VERT JADE",
+      "pt": "VERDE JADE"
+    }
+  },
+  {
+    "id": "aka-writter-aka132",
+    "translations": {
+      "es": "VERDE SELVA",
+      "de": "GRÜN Dschungel",
+      "fr": "VERT SELVA",
+      "pt": "VERDE SELVA"
+    }
+  },
+  {
+    "id": "aka-writter-aka133",
+    "translations": {
+      "es": "VERDE GROENLANDIA",
+      "de": "GRÜN GRÖNLAND",
+      "fr": "VERT GROENLANDIA",
+      "pt": "VERDE GROENLÂNDIA"
+    }
+  },
+  {
+    "id": "aka-writter-aka134",
+    "translations": {
+      "es": "VERDE BRÓCOLI",
+      "de": "GRÜN BROKKOLI",
+      "fr": "VERT BROCOLI",
+      "pt": "VERDE BRÓCOLI"
+    }
+  },
+  {
+    "id": "aka-writter-aka135",
+    "translations": {
+      "es": "VERDE CLOROFILA",
+      "de": "GRÜN CHLOROPHYLL",
+      "fr": "VERT CLOROPHYL",
+      "pt": "VERDE CLOROFILA"
+    }
+  },
+  {
+    "id": "aka-writter-aka136",
+    "translations": {
+      "es": "VERDE MALAQUITA",
+      "de": "GRÜN MALAQUITA",
+      "fr": "VERT MALAQUITA",
+      "pt": "VERDE MALAQUITA"
+    }
+  },
+  {
+    "id": "aka-writter-aka137",
+    "translations": {
+      "es": "VERDE INTENSO",
+      "de": "GRÜN INTENSO",
+      "fr": "VERT INTENSO",
+      "pt": "VERDE INTENSO"
+    }
+  },
+  {
+    "id": "aka-writter-aka139",
+    "translations": {
+      "es": "VERDE VALENCIA",
+      "de": "GRÜN VALENCIA",
+      "fr": "VERT VALENCIA",
+      "pt": "VERDE VALÊNCIA"
+    }
+  },
+  {
+    "id": "aka-writter-aka138",
+    "translations": {
+      "es": "VERDE NAVARRO",
+      "de": "GRÜN NAVARRO",
+      "fr": "VERT NAVARRO",
+      "pt": "VERDE NAVARRO"
+    }
+  },
+  {
+    "id": "aka-writter-aka140",
+    "translations": {
+      "es": "NARANJA SUAVE",
+      "de": "ORANGE SUAVE",
+      "fr": "ORANGE DOUCE",
+      "pt": "LARANJA SUAVE"
+    }
+  },
+  {
+    "id": "aka-writter-aka142",
+    "translations": {
+      "es": "NARANJA MANDARINA",
+      "de": "ORANGE MANDARINA",
+      "fr": "ORANGE MANDARINE",
+      "pt": "LARANJA MANDARINA"
+    }
+  },
+  {
+    "id": "aka-writter-aka143",
+    "translations": {
+      "es": "NARANJA FUEGO",
+      "de": "ORANGE FEUER",
+      "fr": "ORANGE FEU",
+      "pt": "LARANJA FOGO"
+    }
+  },
+  {
+    "id": "aka-writter-aka144",
+    "translations": {
+      "es": "NARANJA KER",
+      "de": "ORANGE KER",
+      "fr": "ORANGE KER",
+      "pt": "LARANJA KER"
+    }
+  },
+  {
+    "id": "aka-writter-aka145",
+    "translations": {
+      "es": "NARANJA CORNALINA",
+      "de": "ORANGE CORNALINA",
+      "fr": "ORANGE CORNALINA",
+      "pt": "LARANJA CORNALINA"
+    }
+  },
+  {
+    "id": "aka-writter-aka146",
+    "translations": {
+      "es": "NARANJA PURO",
+      "de": "ORANGE PUR",
+      "fr": "ORANGE PUR",
+      "pt": "LARANJA PURO"
+    }
+  },
+  {
+    "id": "aka-writter-aka151",
+    "translations": {
+      "es": "ROJO PASTEL",
+      "de": "ROT PASTELL",
+      "fr": "ROUGE PASTEL",
+      "pt": "VERMELHO PASTEL"
+    }
+  },
+  {
+    "id": "aka-writter-aka153",
+    "translations": {
+      "es": "ROJO FUEGO",
+      "de": "ROT FEUER",
+      "fr": "ROUGE FEU",
+      "pt": "VERMELHO FOGO"
+    }
+  },
+  {
+    "id": "aka-writter-aka154",
+    "translations": {
+      "es": "ROJO KIMURA",
+      "de": "ROT KIMURA",
+      "fr": "ROUGE KIMURA",
+      "pt": "VERMELHO KIMURA"
+    }
+  },
+  {
+    "id": "aka-writter-aka155",
+    "translations": {
+      "es": "ROJO DIRECTO",
+      "de": "ROT DIREKT",
+      "fr": "ROUGE DIRECTO",
+      "pt": "VERMELHO DIRETO"
+    }
+  },
+  {
+    "id": "aka-writter-aka160",
+    "translations": {
+      "es": "ROSA CUARZO",
+      "de": "ROSA QUARZ",
+      "fr": "ROSE QUARTZ",
+      "pt": "ROSA QUARTZO"
+    }
+  },
+  {
+    "id": "aka-writter-aka161",
+    "translations": {
+      "es": "ROSA CHICLE",
+      "de": "ROSA KAUFGUMMI",
+      "fr": "ROSE CHICLE",
+      "pt": "ROSA CHICLE"
+    }
+  },
+  {
+    "id": "aka-writter-aka163",
+    "translations": {
+      "es": "ROJO FRAMBUESA",
+      "de": "ROT HIMBEERE",
+      "fr": "ROUGE FRAMBOISE",
+      "pt": "VERMELHO FRAMBOESA"
+    }
+  },
+  {
+    "id": "aka-writter-aka164",
+    "translations": {
+      "es": "ROJO ESTIVAL",
+      "de": "ROT ESTIVAL",
+      "fr": "ROUGE ESTIVAL",
+      "pt": "VERMELHO ESTIVAL"
+    }
+  },
+  {
+    "id": "aka-writter-aka165",
+    "translations": {
+      "es": "ROJO GORE",
+      "de": "ROT GORE",
+      "fr": "ROUGE GORE",
+      "pt": "VERMELHO GORE"
+    }
+  },
+  {
+    "id": "aka-writter-aka166",
+    "translations": {
+      "es": "ROJO GRANATE",
+      "de": "ROT GRANAT",
+      "fr": "ROUGE GRANAT",
+      "pt": "VERMELHO GRANADA"
+    }
+  },
+  {
+    "id": "aka-writter-aka170",
+    "translations": {
+      "es": "ROJO ESPECTRO",
+      "de": "ROT SPECTRUM",
+      "fr": "ROUGE SPECTRE",
+      "pt": "VERMELHO ESPECTRO"
+    }
+  },
+  {
+    "id": "aka-writter-aka171",
+    "translations": {
+      "es": "ROJO SUERTE",
+      "de": "ROT GLÜCK",
+      "fr": "ROUGE CHANCE",
+      "pt": "VERMELHO SORTE"
+    }
+  },
+  {
+    "id": "aka-writter-aka172",
+    "translations": {
+      "es": "ROJO VAN GOGH",
+      "de": "ROT VAN GOGH",
+      "fr": "ROUGE VAN GOGH",
+      "pt": "VERMELHO VAN GOGH"
+    }
+  },
+  {
+    "id": "aka-writter-aka174",
+    "translations": {
+      "es": "ROJO ARCILLA",
+      "de": "ROT ARCILLA",
+      "fr": "ROUGE ARCILLA",
+      "pt": "VERMELHO ARCILA"
+    }
+  },
+  {
+    "id": "aka-writter-aka176",
+    "translations": {
+      "es": "ROJO MARTE",
+      "de": "ROT MARTE",
+      "fr": "ROUGE MARS",
+      "pt": "VERMELHO MARTE"
+    }
+  },
+  {
+    "id": "aka-writter-aka181",
+    "translations": {
+      "es": "AZUL MEDITERRÁNEO",
+      "de": "BLAU MEDITERRANEA",
+      "fr": "BLEU MEDITERRANÉEN",
+      "pt": "AZUL MEDITERRÂNEO"
+    }
+  },
+  {
+    "id": "aka-writter-aka182",
+    "translations": {
+      "es": "AZUL CLARO",
+      "de": "BLAU KLAR",
+      "fr": "BLEU CLAIR",
+      "pt": "AZUL CLARO"
+    }
+  },
+  {
+    "id": "aka-writter-aka183",
+    "translations": {
+      "es": "AZUL TURIA",
+      "de": "BLAU TURIA",
+      "fr": "BLEU TURIA",
+      "pt": "AZUL TURIA"
+    }
+  },
+  {
+    "id": "aka-writter-aka184",
+    "translations": {
+      "es": "AZUL NITRILO",
+      "de": "BLAU NITRILO",
+      "fr": "BLEU NITRILE",
+      "pt": "AZUL NITRILO"
+    }
+  },
+  {
+    "id": "aka-writter-aka185",
+    "translations": {
+      "es": "AZUL COBALTO",
+      "de": "BLAU COBALTO",
+      "fr": "BLEU COBALTO",
+      "pt": "AZUL COBALTO"
+    }
+  },
+  {
+    "id": "aka-writter-aka186",
+    "translations": {
+      "es": "AZUL CuSO4",
+      "de": "BLAU CuSO4",
+      "fr": "BLEU CuSO4",
+      "pt": "AZUL CuSO4"
+    }
+  },
+  {
+    "id": "aka-writter-aka187",
+    "translations": {
+      "es": "AZUL ULTRAMAR",
+      "de": "BLAU ULTRAMAR",
+      "fr": "BLEU ULTRAMAR",
+      "pt": "AZUL ULTRAMAR"
+    }
+  },
+  {
+    "id": "aka-writter-aka188",
+    "translations": {
+      "es": "AZUL PROFUNDO",
+      "de": "BLAU PROFUNDO",
+      "fr": "BLEU PROFOND",
+      "pt": "AZUL PROFUNDO"
+    }
+  },
+  {
+    "id": "aka-writter-aka190",
+    "translations": {
+      "es": "GRIS CLARO",
+      "de": "GRAU KLAR",
+      "fr": "GRIS CLAIR",
+      "pt": "CINZA CLARO"
+    }
+  },
+  {
+    "id": "aka-writter-aka191",
+    "translations": {
+      "es": "GRIS CEMENTO",
+      "de": "GRAU ZEMENT",
+      "fr": "GRIS CIMENT",
+      "pt": "CINZA CIMENTO"
+    }
+  },
+  {
+    "id": "aka-writter-aka192",
+    "translations": {
+      "es": "GRIS MARCASITA",
+      "de": "GRAU MARCASITA",
+      "fr": "GRIS MARCASITA",
+      "pt": "CINZA MARCASITA"
+    }
+  },
+  {
+    "id": "aka-writter-aka193",
+    "translations": {
+      "es": "GRIS GALENA",
+      "de": "GRAU GALENA",
+      "fr": "GRIS GALÈNE",
+      "pt": "CINZA GALENA"
+    }
+  },
+  {
+    "id": "aka-writter-aka194",
+    "translations": {
+      "es": "GRIS PIRITA",
+      "de": "GRAU PIRITA",
+      "fr": "GRIS PIRITA",
+      "pt": "CINZA PIRITA"
+    }
+  },
+  {
+    "id": "aka-writter-aka195",
+    "translations": {
+      "es": "GUN METAL",
+      "de": "GUN METAL",
+      "fr": "GUN METAL",
+      "pt": "GUN METAL"
+    }
+  },
+  {
+    "id": "aka-writter-aka196",
+    "translations": {
+      "es": "GRIS ANTRACITA",
+      "de": "GRAU ANTHRAZIT",
+      "fr": "GRIS ANTHRACITE",
+      "pt": "CINZA ANTRACITE"
+    }
+  },
+  {
+    "id": "aka-writter-aka197",
+    "translations": {
+      "es": "GRIS INVERNAL",
+      "de": "GRAU WINTER",
+      "fr": "GRIS HIVERNAL",
+      "pt": "CINZA INVERNAL"
+    }
+  },
+  {
+    "id": "aka-writter-aka199",
+    "translations": {
+      "es": "GRIS ETERNO",
+      "de": "GRAU ETERNO",
+      "fr": "GRIS ÉTERNEL",
+      "pt": "CINZA ETERNO"
+    }
+  },
+  {
+    "id": "aka-writter-aka200",
+    "translations": {
+      "es": "MORADO CLARO",
+      "de": "LILA KLAR",
+      "fr": "VIOLET CLAIR",
+      "pt": "ROXO CLARO"
+    }
+  },
+  {
+    "id": "aka-writter-aka202",
+    "translations": {
+      "es": "MORADO PLATI(ADN)",
+      "de": "LILA PLATI(ADN)",
+      "fr": "VIOLET PLATI(ADN)",
+      "pt": "ROXO PLATI(ADN)"
+    }
+  },
+  {
+    "id": "aka-writter-aka203",
+    "translations": {
+      "es": "MORADO REPÚBLICA",
+      "de": "LILA REPUBLIK",
+      "fr": "VIOLET RÉPUBLIQUE",
+      "pt": "ROXO REPÚBLICA"
+    }
+  },
+  {
+    "id": "aka-writter-aka204",
+    "translations": {
+      "es": "MORADO AMATISTA",
+      "de": "LILA AMATISTE",
+      "fr": "VIOLET AMÉTHYSTE",
+      "pt": "ROXO AMATISTA"
+    }
+  },
+  {
+    "id": "aka-writter-aka210",
+    "translations": {
+      "es": "VIOLETA LIGERO",
+      "de": "VIOLETT LEICHT",
+      "fr": "VIOLET LÉGER",
+      "pt": "VIOLETA LIGEIRO"
+    }
+  },
+  {
+    "id": "aka-writter-aka212",
+    "translations": {
+      "es": "VIOLETA SIGMA",
+      "de": "VIOLETT SIGMA",
+      "fr": "VIOLET SIGMA",
+      "pt": "VIOLETA SIGMA"
+    }
+  },
+  {
+    "id": "aka-writter-aka213",
+    "translations": {
+      "es": "VIOLETA TRIUNFO",
+      "de": "VIOLETT TRIUNFO",
+      "fr": "VIOLET TRIOMPHE",
+      "pt": "VIOLETA TRIUNFO"
+    }
+  },
+  {
+    "id": "aka-writter-aka215",
+    "translations": {
+      "es": "VIOLETA OSCURO",
+      "de": "VIOLETT DUNKEL",
+      "fr": "VIOLET SOMBRE",
+      "pt": "VIOLETA ESCURO"
+    }
+  },
+  {
+    "id": "aka-writter-aka226",
+    "translations": {
+      "es": "MARRÓN OXIDADO",
+      "de": "BRAUN OXIDIERTER",
+      "fr": "BRUN OXIDÉ",
+      "pt": "MARROM OXIDADO"
+    }
+  },
+  {
+    "id": "aka-writter-aka228",
+    "translations": {
+      "es": "MARRÓN GOLDMINE",
+      "de": "BRAUN GOLDMINE",
+      "fr": "BRUN GOLDMINE",
+      "pt": "MARROM GOLDMINE"
+    }
+  },
+  {
+    "id": "aka-writter-aka230",
+    "translations": {
+      "es": "MARRÓN ROJIZO",
+      "de": "BRAUN RÖTLICH",
+      "fr": "BRUN ROUGE",
+      "pt": "MARROM AVERMELHADO"
+    }
+  },
+  {
+    "id": "aka-writter-aka231",
+    "translations": {
+      "es": "MARRÓN ÉBANO",
+      "de": "BRAUN EBENHOLZ",
+      "fr": "BRUN ÉBANO",
+      "pt": "MARROM ÉBANO"
+    }
+  },
+  {
+    "id": "aka-writter-aka232",
+    "translations": {
+      "es": "MARRÓN OSCURO",
+      "de": "BRAUN DUNKEL",
+      "fr": "BRUN FONCÉ",
+      "pt": "MARROM ESCURO"
+    }
+  },
+  {
+    "id": "aka-writter-aka225",
+    "translations": {
+      "es": "MARRÓN CARTÓN",
+      "de": "BRAUN PAPIER",
+      "fr": "BRUN CARTON",
+      "pt": "MARROM CARTÃO"
+    }
+  },
+  {
+    "id": "aka-writter-aka224",
+    "translations": {
+      "es": "MARRÓN SÁHARA",
+      "de": "BRAUN SÁHARA",
+      "fr": "BRUN SÁHARA",
+      "pt": "MARROM SÁHARA"
+    }
+  },
+  {
+    "id": "aka-writter-aka223",
+    "translations": {
+      "es": "MARRÓN CASTILLA",
+      "de": "BRAUN CASTILLA",
+      "fr": "BRUN CASTILLE",
+      "pt": "MARROM CASTILLA"
+    }
+  },
+  {
+    "id": "aka-writter-aka222",
+    "translations": {
+      "es": "MARRÓN ARENISCA",
+      "de": "BRAUN SANDSTEIN",
+      "fr": "BRUN SABLE",
+      "pt": "MARROM ARENISCA"
+    }
+  },
+  {
+    "id": "aka-writter-aka220",
+    "translations": {
+      "es": "MARRÓN CLARO",
+      "de": "BRAUN KLAR",
+      "fr": "BRUN CLAIR",
+      "pt": "MARROM CLARO"
+    }
+  },
+  {
+    "id": "aka-writter-aka240",
+    "translations": {
+      "es": "AZUL TURQUESA",
+      "de": "BLAU TÜRKIS",
+      "fr": "BLEU TURQUOISE",
+      "pt": "AZUL TURQUESA"
+    }
+  },
+  {
+    "id": "aka-writter-aka242",
+    "translations": {
+      "es": "AZUL NGS",
+      "de": "BLAU NGS",
+      "fr": "BLEU NGS",
+      "pt": "AZUL NGS"
+    }
+  },
+  {
+    "id": "aka-writter-aka244",
+    "translations": {
+      "es": "AZUL HYDRO",
+      "de": "BLAU HYDRO",
+      "fr": "BLEU HYDRO",
+      "pt": "AZUL HYDRO"
+    }
+  },
+  {
+    "id": "aka-writter-",
+    "translations": {
+      "es": "MORADO CLERIGO 250"
+    }
+  },
+  {
+    "id": "aka-writter-",
+    "translations": {
+      "es": "MORADO KLEI 251"
+    }
+  },
+  {
+    "id": "aka-writter-",
+    "translations": {
+      "es": "MORADO RAKE43 253"
+    }
+  },
+  {
+    "id": "aka-writter-",
+    "translations": {
+      "es": "MORADO ARANDANO 255"
+    }
+  },
+  {
+    "id": "aka-writter-",
+    "translations": {
+      "es": "MARRÓN HERVÁS 260"
+    }
+  },
+  {
+    "id": "aka-writter-",
+    "translations": {
+      "es": "MARRÓN MALAMADRE 261"
+    }
+  },
+  {
+    "id": "aka-writter-",
+    "translations": {
+      "es": "MARRÓN REC 263"
+    }
+  },
+  {
+    "id": "aka-writter-",
+    "translations": {
+      "es": "MARRÓN IGOR 264"
+    }
+  },
+  {
+    "id": "aka-writter-",
+    "translations": {
+      "es": "MARRÓN MOFI 265"
+    }
+  },
+  {
+    "id": "aka-writter-aka115",
+    "translations": {
+      "es": "AMARILLO ORO",
+      "de": "GELB GOLD",
+      "fr": "JAUNE OR ORO",
+      "pt": "AMARELO OURO"
+    }
+  },
+  {
+    "id": "aka-writter-aka116",
+    "translations": {
+      "es": "AMARILLO MOSTAZA",
+      "de": "GELB SENF",
+      "fr": "JAUNE MOUTARDE",
+      "pt": "AMARELO MOSTAZA"
+    }
+  },
+  {
+    "id": "aka-writter-aka117",
+    "translations": {
+      "es": "AMARILLO VERDOSO",
+      "de": "GELB GRÜNLICH",
+      "fr": "JAUNE VERDOYANT",
+      "pt": "AMARELO VERDOSO"
+    }
+  },
+  {
+    "id": "aka-writter-aka119",
+    "translations": {
+      "es": "VERDE CAMUFLAJE",
+      "de": "GRÜN CAMUFLAGE",
+      "fr": "VERT CAMOUFLAGE",
+      "pt": "VERDE CAMUFLAGEM"
+    }
+  },
+  {
+    "id": "aka-writter-aka270",
+    "translations": {
+      "es": "AZUL BIFRÖST",
+      "de": "BLAU BIFRÖST",
+      "fr": "BLEU BIFRÖST",
+      "pt": "AZUL BIFRÖST"
+    }
+  },
+  {
+    "id": "aka-writter-aka271",
+    "translations": {
+      "es": "AZUL PASARELA",
+      "de": "BLAU PASARELA",
+      "fr": "BLEU PASARELA",
+      "pt": "AZUL PASARELA"
+    }
+  },
+  {
+    "id": "aka-writter-aka239",
+    "translations": {
+      "es": "AZUL DIMONI",
+      "de": "BLAU DIMONI",
+      "fr": "BLEU DIMONI",
+      "pt": "AZUL DIMONI"
+    }
+  },
+  {
+    "id": "aka-writter-aka272",
+    "translations": {
+      "es": "AZUL TERES",
+      "de": "BLAU TERES",
+      "fr": "BLEU TERES",
+      "pt": "AZUL TERES"
+    }
+  },
+  {
+    "id": "aka-writter-aka274",
+    "translations": {
+      "es": "AZUL WARE",
+      "de": "BLAU WARE",
+      "fr": "BLEU WARE",
+      "pt": "AZUL WARE"
+    }
+  },
+  {
+    "id": "aka-writter-aka276",
+    "translations": {
+      "es": "AZUL JOVI",
+      "de": "BLAU JOVI",
+      "fr": "BLEU JOVI",
+      "pt": "AZUL JOVI"
+    }
+  },
+  {
+    "id": "aka-writter-aka278",
+    "translations": {
+      "es": "AZUL JÖTNAR",
+      "de": "BLAU JÖTNAR",
+      "fr": "BLEU JÖTNAR",
+      "pt": "AZUL JÖTNAR"
+    }
+  },
+  {
+    "id": "aka-writter-aka280",
+    "translations": {
+      "es": "VIOLETA ASTRAL",
+      "de": "VIOLETT ASTRAL",
+      "fr": "VIOLET ASTRAL",
+      "pt": "VIOLETA ASTRAL"
+    }
+  },
+  {
+    "id": "aka-writter-aka282",
+    "translations": {
+      "es": "VIOLETA DAYRE",
+      "de": "VIOLETT TAG DAYRE",
+      "fr": "VIOLET DAYRE",
+      "pt": "VIOLETA DAYRE"
+    }
+  },
+  {
+    "id": "aka-writter-aka284",
+    "translations": {
+      "es": "VIOLETA ALCORISA",
+      "de": "VIOLETT ALCORISA",
+      "fr": "VIOLET ALCORISA",
+      "pt": "VIOLETA ALCORISA"
+    }
+  },
+  {
+    "id": "aka-writter-aka285",
+    "translations": {
+      "es": "VIOLETA TAONE",
+      "de": "VIOLETT TAONE",
+      "fr": "VIOLET TAONE",
+      "pt": "VIOLETA TAONE"
+    }
+  },
+  {
+    "id": "aka-writter-aka286",
+    "translations": {
+      "es": "VIOLETA KOSA",
+      "de": "VIOLETT KOSA",
+      "fr": "VIOLET KOSA",
+      "pt": "VIOLETA KOSA"
+    }
+  },
+  {
+    "id": "aka-writter-aka287",
+    "translations": {
+      "es": "VIOLETA LEVI",
+      "de": "VIOLETT LEVI",
+      "fr": "VIOLET LEVI",
+      "pt": "VIOLETA LEVI"
+    }
+  },
+  {
+    "id": "aka-writter-aka288",
+    "translations": {
+      "es": "VIOLETA INMORTAL",
+      "de": "VIOLETT UNSTERBLICH",
+      "fr": "VIOLET INMORTAL",
+      "pt": "VIOLETA IMORTAL"
+    }
+  },
+  {
+    "id": "aka-writter-aka291",
+    "translations": {
+      "es": "ROSA FURIA",
+      "de": "ROSA FURIA",
+      "fr": "ROSE FURIA",
+      "pt": "ROSA FÚRIA"
+    }
+  },
+  {
+    "id": "aka-writter-aka293",
+    "translations": {
+      "es": "ROSA RODERICK",
+      "de": "ROSA RODERICK",
+      "fr": "ROSE RODERICK",
+      "pt": "ROSA RODERICK"
+    }
+  },
+  {
+    "id": "aka-writter-aka294",
+    "translations": {
+      "es": "ROSA SAKURA",
+      "de": "ROSA SAKURA",
+      "fr": "ROSE SAKURA",
+      "pt": "ROSA SAKURA"
+    }
+  },
+  {
+    "id": "aka-writter-aka295",
+    "translations": {
+      "es": "MAGENTA",
+      "de": "MAGENTA",
+      "fr": "MAGENTA",
+      "pt": "MAGENTA"
+    }
+  },
+  {
+    "id": "aka-writter-aka296",
+    "translations": {
+      "es": "ROSA RACHEL",
+      "de": "ROSA RACHEL",
+      "fr": "ROSE RACHEL",
+      "pt": "ROSA RACHEL"
+    }
+  },
+  {
+    "id": "aka-writter-aka298",
+    "translations": {
+      "es": "ROJO DUKE103",
+      "de": "ROT DUKE103",
+      "fr": "ROUGE DUKE103",
+      "pt": "VERMELHO DUKE103"
+    }
+  },
+  {
+    "id": "aka-writter-aka300",
+    "translations": {
+      "es": "ROJO MERCURIAL",
+      "de": "ROT MERCURIAL",
+      "fr": "ROUGE MERCURIAL",
+      "pt": "VERMELHO MERCURIAL"
+    }
+  },
+  {
+    "id": "aka-writter-aka422",
+    "translations": {
+      "es": "SKIN NUDE",
+      "de": "HAUT NUDE",
+      "fr": "PEAU NUDE",
+      "pt": "PELE NUDE"
+    }
+  },
+  {
+    "id": "aka-writter-aka424",
+    "translations": {
+      "es": "SKIN BEIGE MEDIO",
+      "de": "HAUT BEIGE MITTEL",
+      "fr": "PEAU BEIGE MOYEN",
+      "pt": "PELE BEGE MÉDIO"
+    }
+  },
+  {
+    "id": "aka-writter-aka425",
+    "translations": {
+      "es": "SKIN BRONCE",
+      "de": "HAUT BRONZE",
+      "fr": "PEAU BRONZE",
+      "pt": "PELE BRONZE"
+    }
+  },
+  {
+    "id": "aka-writter-aka426",
+    "translations": {
+      "es": "SKIN VELVET",
+      "de": "HAUT VELVET",
+      "fr": "PEAU VELVET",
+      "pt": "PELE VELVET"
+    }
+  },
+  {
+    "id": "aka-writter-aka428",
+    "translations": {
+      "es": "SKIN CHOCOLATE",
+      "de": "HAUT SCHOKOLADE",
+      "fr": "PEAU CHOCOLAT",
+      "pt": "PELE CHOCOLATE"
+    }
+  },
+  {
+    "id": "aka-writter-aka 429",
+    "translations": {
+      "es": "SKIN TOFFEE"
+    }
+  },
+  {
+    "id": "aka-writter-aka440",
+    "translations": {
+      "es": "MORADO POSY",
+      "de": "LILA POSY",
+      "fr": "VIOLET POSY",
+      "pt": "ROXO POSY"
+    }
+  },
+  {
+    "id": "aka-writter-aka 441",
+    "translations": {
+      "es": "MORADO CRISTAL"
+    }
+  },
+  {
+    "id": "aka-writter-aka443",
+    "translations": {
+      "es": "MORADO SHORE",
+      "de": "LILA SHORE",
+      "fr": "VIOLET SHORE",
+      "pt": "ROXO SHORE"
+    }
+  },
+  {
+    "id": "aka-writter-aka445",
+    "translations": {
+      "es": "MORADO SOEZ",
+      "de": "LILA SOEZ",
+      "fr": "VIOLET SOEZ",
+      "pt": "ROXO SOEZ"
+    }
+  },
+  {
+    "id": "aka-writter-aka446",
+    "translations": {
+      "es": "MORADO XTASY",
+      "de": "LILA XTASY",
+      "fr": "VIOLET XTASY",
+      "pt": "ROXO XTASY"
+    }
+  },
+  {
+    "id": "aka-writter-aka447",
+    "translations": {
+      "es": "MORADO LIBERTAD",
+      "de": "LILA FREIHEIT",
+      "fr": "VIOLET LIBERTÉ",
+      "pt": "ROXO LIBERDADE"
+    }
+  },
+  {
+    "id": "aka-writter-aka448",
+    "translations": {
+      "es": "MORADO SKIFE",
+      "de": "LILA SKIFE",
+      "fr": "VIOLET SKIFE",
+      "pt": "ROXO SKIFE"
+    }
+  },
+  {
+    "id": "aka-writter-aka449",
+    "translations": {
+      "es": "MORADO SMILE16",
+      "de": "LILA SMILE16",
+      "fr": "VIOLET SMILE16",
+      "pt": "ROXO SMILE16"
+    }
+  },
+  {
+    "id": "aka-writter-aka450",
+    "translations": {
+      "es": "MORADAO KANS",
+      "de": "MORADAO KANS",
+      "fr": "MORADAO KANS",
+      "pt": "MORADAO KANS"
+    }
+  },
+  {
+    "id": "aka-writter-aka246",
+    "translations": {
+      "es": "AZUL UNIVERSO",
+      "de": "BLAU UNIVERSE",
+      "fr": "BLEU UNIVERSE",
+      "pt": "AZUL UNIVERSO"
+    }
+  },
+  {
+    "id": "aka-writter-aka247",
+    "translations": {
+      "es": "AZUL OCEANO",
+      "de": "BLAU OZEAN",
+      "fr": "BLEU OCÉAN",
+      "pt": "AZUL OCEANO"
+    }
+  },
+  {
+    "id": "aka-writter-aka248",
+    "translations": {
+      "es": "AZUL NOVA",
+      "de": "BLAU NOVA",
+      "fr": "BLEU NOVA",
+      "pt": "AZUL NOVA"
+    }
+  },
+  {
+    "id": "aka-writter-aka460",
+    "translations": {
+      "es": "ROSA CIMA",
+      "de": "ROSA CIMA",
+      "fr": "ROSE CIMA",
+      "pt": "ROSA CIMA"
+    }
+  },
+  {
+    "id": "aka-writter-aka461",
+    "translations": {
+      "es": "ROSA ANTARES",
+      "de": "ROSA ANTARES",
+      "fr": "ROSE ANTARES",
+      "pt": "ROSA ANTARES"
+    }
+  },
+  {
+    "id": "aka-writter-aka462",
+    "translations": {
+      "es": "ROSA TRIBUTO",
+      "de": "ROSA TRIBUT",
+      "fr": "ROSE TRIBUTO",
+      "pt": "ROSA TRIBUTO"
+    }
+  },
+  {
+    "id": "aka-writter-aka463",
+    "translations": {
+      "es": "ROSA PALIDO",
+      "de": "ROSA PALIDOR",
+      "fr": "ROSE PÂLE",
+      "pt": "ROSA PÁLIDO"
+    }
+  },
+  {
+    "id": "aka-writter-aka465",
+    "translations": {
+      "es": "ROJO ARIZONA",
+      "de": "ROT ARIZONA",
+      "fr": "ROUGE ARIZONA",
+      "pt": "VERMELHO ARIZONA"
+    }
+  },
+  {
+    "id": "aka-writter-aka467",
+    "translations": {
+      "es": "ROJO RUDIART",
+      "de": "ROT RUDIART",
+      "fr": "ROUGE RUDIART",
+      "pt": "VERMELHO RUDIART"
+    }
+  },
+  {
+    "id": "aka-writter-aka468",
+    "translations": {
+      "es": "ROJO HANEM",
+      "de": "ROT HANEM",
+      "fr": "ROUGE HANEM",
+      "pt": "VERMELHO HANEM"
+    }
+  },
+  {
+    "id": "aka-writter-aka470",
+    "translations": {
+      "es": "ROJO FEEVER",
+      "de": "ROT FEEVER",
+      "fr": "ROUGE FEEVER",
+      "pt": "VERMELHO FEEVER"
+    }
+  },
+  {
+    "id": "aka-writter-aka483",
+    "translations": {
+      "es": "VERDE URAN",
+      "de": "GRÜN URAN",
+      "fr": "VERT URAN",
+      "pt": "VERDE URAN"
+    }
+  },
+  {
+    "id": "aka-writter-aka485",
+    "translations": {
+      "es": "VERDE WALK",
+      "de": "GRÜN WALK",
+      "fr": "VERT MARCHER",
+      "pt": "VERDE CAMINHO"
+    }
+  },
+  {
+    "id": "aka-writter-aka487",
+    "translations": {
+      "es": "VERDE ROCHE",
+      "de": "GRÜN GESTEIN",
+      "fr": "VERT ROCHE",
+      "pt": "VERDE ROCHE"
+    }
+  },
+  {
+    "id": "aka-writter-aka489",
+    "translations": {
+      "es": "VERDE UGLIES",
+      "de": "GRÜN UGLIES",
+      "fr": "VERT UGLIES",
+      "pt": "VERDE UGLIES"
+    }
+  },
+  {
+    "id": "aka-writter-aka490",
+    "translations": {
+      "es": "VERDE SAKAR",
+      "de": "GRÜN SAKAR",
+      "fr": "VERT SAKAR",
+      "pt": "VERDE SAKAR"
+    }
+  },
+  {
+    "id": "aka-writter-aka491",
+    "translations": {
+      "es": "VERDE CRITICAL",
+      "de": "GRÜN KRIITISCH",
+      "fr": "VERT CRITICAL",
+      "pt": "VERDE CRÍTICO"
+    }
+  },
+  {
+    "id": "aka-writter-aka492",
+    "translations": {
+      "es": "VERDE BILBO",
+      "de": "GRÜN BILBO",
+      "fr": "VERT BILBO",
+      "pt": "VERDE BILBAO"
+    }
+  },
+  {
+    "id": "aka-writter-aka279",
+    "translations": {
+      "es": "AZUL ABISAL",
+      "de": "BLAU ABISAL",
+      "fr": "BLEU ABISAL",
+      "pt": "AZUL ABISAL"
+    }
+  },
+  {
+    "id": "aka-writter-aka521",
+    "translations": {
+      "es": "NARANJA BARCELONA",
+      "de": "ORANGE BARCELONA",
+      "fr": "ORANGE BARCELONA",
+      "pt": "LARANJA BARCELONA"
+    }
+  },
+  {
+    "id": "aka-writter-aka523",
+    "translations": {
+      "es": "NARANJA MELOCOTÓN",
+      "de": "ORANGE Pfirsich",
+      "fr": "ORANGE MELOCOTÓN",
+      "pt": "LARANJA MELOCOTÃO"
+    }
+  },
+  {
+    "id": "aka-writter-aka524",
+    "translations": {
+      "es": "NARANJA VANER",
+      "de": "ORANGE VANER",
+      "fr": "ORANGE VANER",
+      "pt": "LARANJA VANER"
+    }
+  },
+  {
+    "id": "aka-writter-aka525",
+    "translations": {
+      "es": "NARANJA DINAMO",
+      "de": "ORANGE DINAMO",
+      "fr": "ORANGE DINAMO",
+      "pt": "LARANJA DINAMO"
+    }
+  },
+  {
+    "id": "aka-writter-aka526",
+    "translations": {
+      "es": "NARANJA CALABAZA",
+      "de": "ORANGE KÜRBIS",
+      "fr": "ORANGE CALABAZE",
+      "pt": "LARANJA ABÓBORA"
+    }
+  },
+  {
+    "id": "aka-writter-aka527",
+    "translations": {
+      "es": "NARANJA BLIKIZ",
+      "de": "ORANGE BLIKIZ",
+      "fr": "ORANGE BLIKIZ",
+      "pt": "LARANJA BLIKIZ"
+    }
+  },
+  {
+    "id": "aka-writter-aka528",
+    "translations": {
+      "es": "NARANJA 1982",
+      "de": "ORANGE 1982",
+      "fr": "ORANGE 1982",
+      "pt": "LARANJA 1982"
+    }
+  },
+  {
+    "id": "aka-writter-aka529",
+    "translations": {
+      "es": "NARANJA DUZLO",
+      "de": "ORANGE DUZLO",
+      "fr": "ORANGE DUZLO",
+      "pt": "LARANJA DUZLO"
+    }
+  },
+  {
+    "id": "aka-writter-aka530",
+    "translations": {
+      "es": "MARRÓN ANARANJADO",
+      "de": "BRAUN ORANGE",
+      "fr": "BRUN ORANGE",
+      "pt": "MARROM LARANJA"
+    }
+  }
+]
