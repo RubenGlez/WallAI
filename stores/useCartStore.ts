@@ -1,9 +1,9 @@
 import { create } from 'zustand';
-import { SprayColor } from '@/types';
+import { ColorWithTranslations } from '@/types';
 
 interface CartState {
-  colors: SprayColor[];
-  addColor: (color: SprayColor) => void;
+  colors: ColorWithTranslations[];
+  addColor: (color: ColorWithTranslations) => void;
   removeColor: (id: string) => void;
   clearCart: () => void;
 }
