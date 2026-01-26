@@ -17,6 +17,8 @@ interface ColorsState {
   getColorsBySeriesId: (seriesId: string) => ColorWithTranslations[];
   getSeriesById: (id: string) => Series | undefined;
   getBrandById: (id: string) => Brand | undefined;
+  getSeriesByBrandId: (brandId: string) => Series[];
+  getColorsByBrandId: (brandId: string) => ColorWithTranslations[];
 }
 
 // Helper function to combine color with translations
@@ -111,5 +113,18 @@ export const useColorsStore = create<ColorsState>((set, get) => ({
 
   getBrandById: (id: string) => {
     return get().brands.find((b) => b.id === id);
+  },
+
+  getSeriesByBrandId: (brandId: string) => {
+    return get().series.filter((s) => s.brandId === brandId);
+  },
+
+  getColorsByBrandId: (brandId: string) => {
+    const { colors, translations, series } = get();
+    const brandSeries = series.filter((s) => s.brandId === brandId);
+    const seriesIds = brandSeries.map((s) => s.id);
+    return colors
+      .filter((c) => seriesIds.includes(c.seriesId))
+      .map((color) => combineColorWithTranslations(color, translations));
   },
 }));

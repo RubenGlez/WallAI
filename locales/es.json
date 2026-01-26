@@ -1,0 +1,64 @@
+{
+  "common": {
+    "loading": "Cargando...",
+    "error": "Error",
+    "close": "Cerrar",
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "add": "Agregar",
+    "remove": "Quitar",
+    "clear": "Limpiar",
+    "all": "Todos",
+    "unknown": "Desconocido"
+  },
+  "tabs": {
+    "home": "Inicio",
+    "colors": "Colores",
+    "scan": "Escanear",
+    "wall": "Muro",
+    "projects": "Proyectos"
+  },
+  "home": {
+    "title": "WallAI",
+    "tagline": "Del boceto al muro, guiado por IA",
+    "subtitle": "Planifica tus piezas de graffiti con colores de spray reales y superposiciones precisas de muro"
+  },
+  "colors": {
+    "title": "Colores",
+    "subtitle_one": "{{count}} color disponible",
+    "subtitle_other": "{{count}} colores disponibles",
+    "loading": "Cargando colores...",
+    "empty": "No se encontraron colores",
+    "code": "Código",
+    "hex": "Hex",
+    "series": "Serie",
+    "brand": "Marca",
+    "addToPalette": "Agregar a Paleta",
+    "removeFromPalette": "Quitar de Paleta"
+  },
+  "filters": {
+    "title": "Filtros",
+    "brand": "Marca",
+    "series": "Serie",
+    "allBrands": "Todas las Marcas",
+    "allSeries": "Todas las Series",
+    "clearAll": "Limpiar Todos los Filtros"
+  },
+  "scan": {
+    "title": "Escanear",
+    "subtitle": "Captura tu boceto y combina colores con pinturas en spray"
+  },
+  "wall": {
+    "title": "Muro",
+    "subtitle": "Superpone tu boceto en una foto de muro para un posicionamiento preciso"
+  },
+  "projects": {
+    "title": "Proyectos",
+    "subtitle": "Administra tus proyectos de graffiti y paletas de colores"
+  },
+  "modal": {
+    "title": "Modal"
+  }
+}

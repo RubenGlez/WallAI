@@ -1,0 +1,64 @@
+{
+  "common": {
+    "loading": "Carregando...",
+    "error": "Erro",
+    "close": "Fechar",
+    "cancel": "Cancelar",
+    "save": "Salvar",
+    "delete": "Excluir",
+    "edit": "Editar",
+    "add": "Adicionar",
+    "remove": "Remover",
+    "clear": "Limpar",
+    "all": "Todos",
+    "unknown": "Desconhecido"
+  },
+  "tabs": {
+    "home": "Início",
+    "colors": "Cores",
+    "scan": "Escanear",
+    "wall": "Parede",
+    "projects": "Projetos"
+  },
+  "home": {
+    "title": "WallAI",
+    "tagline": "Do esboço à parede, guiado por IA",
+    "subtitle": "Planeje suas peças de graffiti com cores de spray reais e sobreposições precisas de parede"
+  },
+  "colors": {
+    "title": "Cores",
+    "subtitle_one": "{{count}} cor disponível",
+    "subtitle_other": "{{count}} cores disponíveis",
+    "loading": "Carregando cores...",
+    "empty": "Nenhuma cor encontrada",
+    "code": "Código",
+    "hex": "Hex",
+    "series": "Série",
+    "brand": "Marca",
+    "addToPalette": "Adicionar à Paleta",
+    "removeFromPalette": "Remover da Paleta"
+  },
+  "filters": {
+    "title": "Filtros",
+    "brand": "Marca",
+    "series": "Série",
+    "allBrands": "Todas as Marcas",
+    "allSeries": "Todas as Séries",
+    "clearAll": "Limpar Todos os Filtros"
+  },
+  "scan": {
+    "title": "Escanear",
+    "subtitle": "Capture seu esboço e combine cores com tintas em spray"
+  },
+  "wall": {
+    "title": "Parede",
+    "subtitle": "Sobreponha seu esboço em uma foto de parede para posicionamento preciso"
+  },
+  "projects": {
+    "title": "Projetos",
+    "subtitle": "Gerencie seus projetos de graffiti e paletas de cores"
+  },
+  "modal": {
+    "title": "Modal"
+  }
+}

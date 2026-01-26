@@ -1,0 +1,64 @@
+{
+  "common": {
+    "loading": "Laden...",
+    "error": "Fehler",
+    "close": "Schließen",
+    "cancel": "Abbrechen",
+    "save": "Speichern",
+    "delete": "Löschen",
+    "edit": "Bearbeiten",
+    "add": "Hinzufügen",
+    "remove": "Entfernen",
+    "clear": "Löschen",
+    "all": "Alle",
+    "unknown": "Unbekannt"
+  },
+  "tabs": {
+    "home": "Startseite",
+    "colors": "Farben",
+    "scan": "Scannen",
+    "wall": "Wand",
+    "projects": "Projekte"
+  },
+  "home": {
+    "title": "WallAI",
+    "tagline": "Von der Skizze zur Wand, geleitet von KI",
+    "subtitle": "Planen Sie Ihre Graffiti-Stücke mit echten Sprühfarben und präzisen Wandüberlagerungen"
+  },
+  "colors": {
+    "title": "Farben",
+    "subtitle_one": "{{count}} Farbe verfügbar",
+    "subtitle_other": "{{count}} Farben verfügbar",
+    "loading": "Farben werden geladen...",
+    "empty": "Keine Farben gefunden",
+    "code": "Code",
+    "hex": "Hex",
+    "series": "Serie",
+    "brand": "Marke",
+    "addToPalette": "Zur Palette hinzufügen",
+    "removeFromPalette": "Aus Palette entfernen"
+  },
+  "filters": {
+    "title": "Filter",
+    "brand": "Marke",
+    "series": "Serie",
+    "allBrands": "Alle Marken",
+    "allSeries": "Alle Serien",
+    "clearAll": "Alle Filter löschen"
+  },
+  "scan": {
+    "title": "Scannen",
+    "subtitle": "Erfassen Sie Ihre Skizze und passen Sie Farben zu Sprühfarben an"
+  },
+  "wall": {
+    "title": "Wand",
+    "subtitle": "Überlagern Sie Ihre Skizze auf einem Wandfoto für präzise Positionierung"
+  },
+  "projects": {
+    "title": "Projekte",
+    "subtitle": "Verwalten Sie Ihre Graffiti-Projekte und Farbpaletten"
+  },
+  "modal": {
+    "title": "Modal"
+  }
+}

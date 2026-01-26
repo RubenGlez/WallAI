@@ -1,184 +1,201 @@
-import React from 'react';
-import {
-  Modal,
-  StyleSheet,
-  View,
-  TouchableOpacity,
-  ScrollView,
-  Pressable,
-} from 'react-native';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { ColorWithTranslations } from '@/types';
-import { useCartStore } from '@/stores/useCartStore';
-import { useColorsStore } from '@/stores/useColorsStore';
-import { Colors, Spacing, BorderRadius, Typography } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
+import { ThemedText } from "@/components/themed-text";
+import { IconSymbol } from "@/components/ui/icon-symbol";
+import { BorderRadius, Colors, Spacing, Typography } from "@/constants/theme";
+import { useColorScheme } from "@/hooks/use-color-scheme";
+import { usePaletteStore } from "@/stores/usePaletteStore";
+import { useColorsStore } from "@/stores/useColorsStore";
+import { ColorWithTranslations } from "@/types";
+import BottomSheet, {
+  BottomSheetScrollView,
+  BottomSheetView,
+} from "@gorhom/bottom-sheet";
+import React, { useCallback, useMemo } from "react";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useTranslation } from "react-i18next";
 
 interface ColorDetailModalProps {
-  visible: boolean;
+  bottomSheetRef: React.RefObject<BottomSheet | null>;
   color: ColorWithTranslations | null;
   onClose: () => void;
 }
 
 export function ColorDetailModal({
-  visible,
+  bottomSheetRef,
   color,
   onClose,
 }: ColorDetailModalProps) {
-  const colorScheme = useColorScheme() ?? 'light';
-  const { addColor, removeColor, isInCart } = useCartStore();
+  const { t } = useTranslation();
+  const colorScheme = useColorScheme() ?? "light";
+  const { addColor, removeColor, isInPalette } = usePaletteStore();
   const { getSeriesById, getBrandById } = useColorsStore();
 
-  if (!color) return null;
+  const series = useMemo(() => {
+    return color ? getSeriesById(color.seriesId) : undefined;
+  }, [color, getSeriesById]);
 
-  const series = getSeriesById(color.seriesId);
-  const brand = series ? getBrandById(series.brandId) : undefined;
-  const inCart = isInCart(color.id);
+  const brand = useMemo(() => {
+    return series ? getBrandById(series.brandId) : undefined;
+  }, [series, getBrandById]);
 
-  const handleToggleCart = () => {
-    if (inCart) {
+  const inPalette = useMemo(() => {
+    return color ? isInPalette(color.id) : false;
+  }, [color, isInPalette]);
+
+  const handleTogglePalette = useCallback(() => {
+    if (!color) return;
+    if (inPalette) {
       removeColor(color.id);
     } else {
       addColor(color);
     }
-  };
+  }, [color, inPalette, addColor, removeColor]);
 
   const theme = Colors[colorScheme];
-  const name = color.translations?.en || color.code || 'Unknown Color';
+  const name = color?.translations?.en || color?.code || t('common.unknown');
+  const insets = useSafeAreaInsets();
+
+  const handleSheetChanges = useCallback(
+    (index: number) => {
+      if (index === -1) {
+        onClose();
+      }
+    },
+    [onClose],
+  );
 
   return (
-    <Modal
-      visible={visible}
-      animationType="slide"
-      transparent={true}
-      onRequestClose={onClose}
+    <BottomSheet
+      ref={bottomSheetRef}
+      onChange={handleSheetChanges}
+      enablePanDownToClose
+      backgroundStyle={{ backgroundColor: theme.background }}
+      handleIndicatorStyle={{ backgroundColor: theme.border }}
     >
-      <Pressable style={styles.overlay} onPress={onClose}>
-        <Pressable onPress={(e) => e.stopPropagation()}>
-          <ThemedView style={styles.modalContent}>
-            <ScrollView showsVerticalScrollIndicator={false}>
-              {/* Color Swatch */}
+      {color && (
+        <BottomSheetView style={styles.content}>
+          {/* Header with Name and Close Button */}
+          <View style={styles.header}>
+            <ThemedText type="title" style={styles.colorName}>
+              {name}
+            </ThemedText>
+            <TouchableOpacity
+              style={styles.closeButton}
+              onPress={() => bottomSheetRef.current?.close()}
+            >
+              <IconSymbol
+                name="xmark.circle.fill"
+                size={24}
+                color={theme.text}
+              />
+            </TouchableOpacity>
+          </View>
+
+          <BottomSheetScrollView
+            style={styles.scrollView}
+            contentContainerStyle={styles.scrollContent}
+            showsVerticalScrollIndicator={false}
+          >
+            {/* Color Swatch */}
+            <View
+              style={[
+                styles.colorSwatch,
+                { backgroundColor: color.hex },
+                styles.colorSwatchLarge,
+              ]}
+            >
               <View
                 style={[
-                  styles.colorSwatch,
-                  { backgroundColor: color.hex },
-                  styles.colorSwatchLarge,
+                  styles.colorSwatchBorder,
+                  { borderColor: theme.border },
                 ]}
-              >
-                <View
-                  style={[
-                    styles.colorSwatchBorder,
-                    { borderColor: theme.border },
-                  ]}
-                />
-              </View>
+              />
+            </View>
 
-              {/* Color Info */}
-              <View style={styles.infoSection}>
-                <ThemedText type="title" style={styles.colorName}>
-                  {name}
-                </ThemedText>
-                <ThemedText style={styles.colorCode}>Code: {color.code}</ThemedText>
-                <ThemedText style={styles.colorHex}>Hex: {color.hex}</ThemedText>
+            {/* Color Info */}
+            <View style={styles.infoSection}>
+              <ThemedText style={styles.colorCode}>
+                {t('colors.code')}: {color.code}
+              </ThemedText>
+              <ThemedText style={styles.colorHex}>{t('colors.hex')}: {color.hex}</ThemedText>
 
-                {series && (
-                  <View style={styles.metaSection}>
-                    <ThemedText style={styles.metaLabel}>Series:</ThemedText>
-                    <ThemedText style={styles.metaValue}>{series.name}</ThemedText>
-                  </View>
-                )}
+              {series && (
+                <View style={styles.metaSection}>
+                  <ThemedText style={styles.metaLabel}>{t('colors.series')}:</ThemedText>
+                  <ThemedText style={styles.metaValue}>
+                    {series.name}
+                  </ThemedText>
+                </View>
+              )}
 
-                {brand && (
-                  <View style={styles.metaSection}>
-                    <ThemedText style={styles.metaLabel}>Brand:</ThemedText>
-                    <ThemedText style={styles.metaValue}>{brand.name}</ThemedText>
-                  </View>
-                )}
+              {brand && (
+                <View style={styles.metaSection}>
+                  <ThemedText style={styles.metaLabel}>{t('colors.brand')}:</ThemedText>
+                  <ThemedText style={styles.metaValue}>{brand.name}</ThemedText>
+                </View>
+              )}
+            </View>
 
-                {/* Translations */}
-                {color.translations && Object.keys(color.translations).length > 0 && (
-                  <View
-                    style={[
-                      styles.translationsSection,
-                      { borderTopColor: theme.border },
-                    ]}
-                  >
-                    <ThemedText style={styles.sectionTitle}>Translations:</ThemedText>
-                    {Object.entries(color.translations).map(([lang, translation]) => (
-                      <View key={lang} style={styles.translationRow}>
-                        <ThemedText style={styles.translationLang}>
-                          {lang.toUpperCase()}:
-                        </ThemedText>
-                        <ThemedText style={styles.translationText}>
-                          {translation}
-                        </ThemedText>
-                      </View>
-                    ))}
-                  </View>
-                )}
-              </View>
-
-              {/* Action Button */}
+            {/* Action Button - Inside ScrollView */}
+            <View
+              style={[
+                styles.buttonContainer,
+                { paddingBottom: insets.bottom + Spacing.xxl + 50 }, // 50 for tab bar height
+              ]}
+            >
               <TouchableOpacity
                 style={[
                   styles.actionButton,
                   {
-                    backgroundColor: inCart ? theme.error : theme.success,
+                    backgroundColor: inPalette ? theme.error : theme.success,
                   },
                 ]}
-                onPress={handleToggleCart}
+                onPress={handleTogglePalette}
               >
                 <ThemedText
-                  style={[
-                    styles.actionButtonText,
-                    { color: '#FFFFFF' },
-                  ]}
+                  style={[styles.actionButtonText, { color: "#FFFFFF" }]}
                 >
-                  {inCart ? 'Remove from Cart' : 'Add to Cart'}
+                  {inPalette ? t('colors.removeFromPalette') : t('colors.addToPalette')}
                 </ThemedText>
               </TouchableOpacity>
-            </ScrollView>
-
-            {/* Close Button */}
-            <TouchableOpacity
-              style={styles.closeButton}
-              onPress={onClose}
-            >
-              <ThemedText style={styles.closeButtonText}>Close</ThemedText>
-            </TouchableOpacity>
-          </ThemedView>
-        </Pressable>
-      </Pressable>
-    </Modal>
+            </View>
+          </BottomSheetScrollView>
+        </BottomSheetView>
+      )}
+    </BottomSheet>
   );
 }
 
 const styles = StyleSheet.create({
-  overlay: {
+  content: {
     flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    justifyContent: 'flex-end',
-  },
-  modalContent: {
-    borderTopLeftRadius: BorderRadius.xl,
-    borderTopRightRadius: BorderRadius.xl,
     padding: Spacing.lg,
-    maxHeight: '90%',
+  },
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: Spacing.md,
+  },
+  scrollView: {
+    flex: 1,
+  },
+  scrollContent: {
+    flexGrow: 1,
   },
   colorSwatch: {
-    width: '100%',
+    width: "100%",
     height: 200,
     borderRadius: BorderRadius.lg,
     marginBottom: Spacing.lg,
-    position: 'relative',
-    overflow: 'hidden',
+    position: "relative",
+    overflow: "hidden",
   },
   colorSwatchLarge: {
     marginVertical: Spacing.md,
   },
   colorSwatchBorder: {
-    position: 'absolute',
+    position: "absolute",
     top: 0,
     left: 0,
     right: 0,
@@ -190,8 +207,9 @@ const styles = StyleSheet.create({
     marginBottom: Spacing.lg,
   },
   colorName: {
-    fontSize: Typography.fontSize.xxl,
-    marginBottom: Spacing.sm,
+    fontSize: Typography.fontSize.xl,
+    flex: 1,
+    marginRight: Spacing.md,
   },
   colorCode: {
     fontSize: Typography.fontSize.md,
@@ -204,7 +222,7 @@ const styles = StyleSheet.create({
     opacity: 0.7,
   },
   metaSection: {
-    flexDirection: 'row',
+    flexDirection: "row",
     marginBottom: Spacing.sm,
   },
   metaLabel: {
@@ -215,49 +233,21 @@ const styles = StyleSheet.create({
   metaValue: {
     fontSize: Typography.fontSize.md,
   },
-  translationsSection: {
-    marginTop: Spacing.md,
+  buttonContainer: {
     paddingTop: Spacing.md,
-    borderTopWidth: 1,
-  },
-  sectionTitle: {
-    fontSize: Typography.fontSize.lg,
-    fontWeight: Typography.fontWeight.semibold,
-    marginBottom: Spacing.sm,
-  },
-  translationRow: {
-    flexDirection: 'row',
-    marginBottom: Spacing.xs,
-  },
-  translationLang: {
-    fontSize: Typography.fontSize.sm,
-    fontWeight: Typography.fontWeight.medium,
-    marginRight: Spacing.sm,
-    minWidth: 40,
-  },
-  translationText: {
-    fontSize: Typography.fontSize.sm,
-    flex: 1,
+    paddingBottom: Spacing.md,
   },
   actionButton: {
     paddingVertical: Spacing.md,
     paddingHorizontal: Spacing.lg,
     borderRadius: BorderRadius.md,
-    alignItems: 'center',
-    marginTop: Spacing.md,
-    marginBottom: Spacing.sm,
+    alignItems: "center",
   },
   actionButtonText: {
     fontSize: Typography.fontSize.lg,
     fontWeight: Typography.fontWeight.semibold,
   },
   closeButton: {
-    paddingVertical: Spacing.md,
-    alignItems: 'center',
-    marginTop: Spacing.sm,
-  },
-  closeButtonText: {
-    fontSize: Typography.fontSize.md,
-    opacity: 0.7,
+    padding: Spacing.xs,
   },
 });

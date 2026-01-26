@@ -1,19 +1,22 @@
 import { StyleSheet, View } from 'react-native';
+import { useTranslation } from 'react-i18next';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 
 export default function HomeScreen() {
+  const { t } = useTranslation();
+  
   return (
-    <ThemedView style={styles.container}>
+    <ThemedView style={styles.container} safeArea="top">
       <View style={styles.content}>
         <ThemedText type="title" style={styles.title}>
-          WallAI
+          {t('home.title')}
         </ThemedText>
         <ThemedText style={styles.tagline}>
-          From sketch to wall, guided by AI
+          {t('home.tagline')}
         </ThemedText>
         <ThemedText style={styles.subtitle}>
-          Plan your graffiti pieces with real spray colors and precise wall overlays
+          {t('home.subtitle')}
         </ThemedText>
       </View>
     </ThemedView>

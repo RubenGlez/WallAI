@@ -22,6 +22,10 @@ const MAPPING = {
   'camera.fill': 'camera',
   'square.stack.3d.up.fill': 'layers',
   'folder.fill': 'folder',
+  'line.3.horizontal.decrease.circle.fill': 'tune',
+  'xmark.circle.fill': 'cancel',
+  'checkmark.circle.fill': 'check-circle',
+  'circle': 'radio-button-unchecked',
 } as IconMapping;
 
 /**

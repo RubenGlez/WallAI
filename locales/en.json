@@ -1,0 +1,64 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "close": "Close",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "add": "Add",
+    "remove": "Remove",
+    "clear": "Clear",
+    "all": "All",
+    "unknown": "Unknown"
+  },
+  "tabs": {
+    "home": "Home",
+    "colors": "Colors",
+    "scan": "Scan",
+    "wall": "Wall",
+    "projects": "Projects"
+  },
+  "home": {
+    "title": "WallAI",
+    "tagline": "From sketch to wall, guided by AI",
+    "subtitle": "Plan your graffiti pieces with real spray colors and precise wall overlays"
+  },
+  "colors": {
+    "title": "Colors",
+    "subtitle_one": "{{count}} color available",
+    "subtitle_other": "{{count}} colors available",
+    "loading": "Loading colors...",
+    "empty": "No colors found",
+    "code": "Code",
+    "hex": "Hex",
+    "series": "Series",
+    "brand": "Brand",
+    "addToPalette": "Add to Palette",
+    "removeFromPalette": "Remove from Palette"
+  },
+  "filters": {
+    "title": "Filters",
+    "brand": "Brand",
+    "series": "Series",
+    "allBrands": "All Brands",
+    "allSeries": "All Series",
+    "clearAll": "Clear All Filters"
+  },
+  "scan": {
+    "title": "Scan",
+    "subtitle": "Capture your sketch and match colors to spray paints"
+  },
+  "wall": {
+    "title": "Wall",
+    "subtitle": "Overlay your sketch on a wall photo for precise positioning"
+  },
+  "projects": {
+    "title": "Projects",
+    "subtitle": "Manage your graffiti projects and color palettes"
+  },
+  "modal": {
+    "title": "Modal"
+  }
+}

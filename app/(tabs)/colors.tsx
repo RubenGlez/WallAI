@@ -1,19 +1,23 @@
 import { ColorDetailModal } from "@/components/color-detail-modal";
+import { FilterDropdown } from "@/components/filter-dropdown";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
+import { IconSymbol } from "@/components/ui/icon-symbol";
 import { BorderRadius, Colors, Spacing, Typography } from "@/constants/theme";
 import { useColorScheme } from "@/hooks/use-color-scheme";
-import { useCartStore } from "@/stores/useCartStore";
 import { useColorsStore } from "@/stores/useColorsStore";
+import { usePaletteStore } from "@/stores/usePaletteStore";
 import { ColorWithTranslations } from "@/types";
-import React, { useEffect, useState } from "react";
+import BottomSheet from "@gorhom/bottom-sheet";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
-    ActivityIndicator,
-    Dimensions,
-    FlatList,
-    StyleSheet,
-    TouchableOpacity,
-    View,
+  ActivityIndicator,
+  Dimensions,
+  FlatList,
+  StyleSheet,
+  TouchableOpacity,
+  View,
 } from "react-native";
 
 const { width } = Dimensions.get("window");
@@ -28,10 +32,8 @@ interface ColorItemProps {
 }
 
 function ColorItem({ color, onPress }: ColorItemProps) {
-  const { isInCart } = useCartStore();
-  const colorScheme = useColorScheme() ?? "light";
-  const theme = Colors[colorScheme];
-  const inCart = isInCart(color.id);
+  const { isInPalette } = usePaletteStore();
+  const inPalette = isInPalette(color.id);
 
   return (
     <TouchableOpacity
@@ -49,12 +51,12 @@ function ColorItem({ color, onPress }: ColorItemProps) {
         style={[
           styles.colorSwatch,
           { backgroundColor: color.hex },
-          inCart && styles.colorSwatchInCart,
+          inPalette && styles.colorSwatchInPalette,
         ]}
       >
-        {inCart && (
-          <View style={styles.cartBadge}>
-            <ThemedText style={styles.cartBadgeText}>✓</ThemedText>
+        {inPalette && (
+          <View style={styles.paletteBadge}>
+            <ThemedText style={styles.paletteBadgeText}>✓</ThemedText>
           </View>
         )}
       </View>
@@ -68,74 +70,151 @@ function ColorItem({ color, onPress }: ColorItemProps) {
 }
 
 export default function ColorsScreen() {
+  const { t } = useTranslation();
   const colorScheme = useColorScheme() ?? "light";
   const theme = Colors[colorScheme];
-  const { colorsWithTranslations, isLoading, loadColors } = useColorsStore();
+  const {
+    colorsWithTranslations,
+    isLoading,
+    loadColors,
+    getColorsByBrandId,
+    getColorsBySeriesId,
+  } = useColorsStore();
   const [selectedColor, setSelectedColor] =
     useState<ColorWithTranslations | null>(null);
-  const [modalVisible, setModalVisible] = useState(false);
+  const bottomSheetRef = useRef<BottomSheet>(null);
+  const [filterDrawerOpen, setFilterDrawerOpen] = useState(false);
+  const [selectedBrandId, setSelectedBrandId] = useState<string | null>(null);
+  const [selectedSeriesId, setSelectedSeriesId] = useState<string | null>(null);
 
   useEffect(() => {
     if (colorsWithTranslations.length === 0) {
       loadColors();
     }
-  }, []);
+  }, [colorsWithTranslations.length, loadColors]);
+
+  // Filter colors based on selected brand and series
+  const filteredColors = useMemo(() => {
+    let filtered = colorsWithTranslations;
+
+    if (selectedSeriesId) {
+      filtered = getColorsBySeriesId(selectedSeriesId);
+    } else if (selectedBrandId) {
+      filtered = getColorsByBrandId(selectedBrandId);
+    }
+
+    return filtered;
+  }, [
+    colorsWithTranslations,
+    selectedBrandId,
+    selectedSeriesId,
+    getColorsByBrandId,
+    getColorsBySeriesId,
+  ]);
 
   const handleColorPress = (color: ColorWithTranslations) => {
     setSelectedColor(color);
-    setModalVisible(true);
+    bottomSheetRef.current?.expand();
   };
 
   const handleCloseModal = () => {
-    setModalVisible(false);
+    bottomSheetRef.current?.close();
     setSelectedColor(null);
+  };
+
+  const handleBrandPress = (brandId: string | null) => {
+    setSelectedBrandId(brandId);
+    setSelectedSeriesId(null); // Reset series when brand changes
+  };
+
+  const handleSeriesPress = (seriesId: string | null) => {
+    setSelectedSeriesId(seriesId);
+  };
+
+  const clearFilters = () => {
+    setSelectedBrandId(null);
+    setSelectedSeriesId(null);
   };
 
   if (isLoading && colorsWithTranslations.length === 0) {
     return (
-      <ThemedView style={styles.container}>
+      <ThemedView style={styles.container} safeArea="top">
         <View style={styles.loadingContainer}>
           <ActivityIndicator size="large" color={theme.tint} />
-          <ThemedText style={styles.loadingText}>Loading colors...</ThemedText>
+          <ThemedText style={styles.loadingText}>
+            {t("colors.loading")}
+          </ThemedText>
         </View>
       </ThemedView>
     );
   }
 
-  return (
-    <ThemedView style={styles.container}>
-      <View style={styles.header}>
-        <ThemedText type="title" style={styles.title}>
-          Colors
-        </ThemedText>
-        <ThemedText style={styles.subtitle}>
-          {colorsWithTranslations.length} colors available
-        </ThemedText>
-      </View>
+  const hasActiveFilters =
+    selectedBrandId !== null || selectedSeriesId !== null;
 
-      <FlatList
-        data={colorsWithTranslations}
-        renderItem={({ item }) => (
-          <ColorItem color={item} onPress={() => handleColorPress(item)} />
-        )}
-        keyExtractor={(item) => item.id}
-        numColumns={NUM_COLUMNS}
-        contentContainerStyle={styles.listContent}
-        columnWrapperStyle={styles.row}
-        showsVerticalScrollIndicator={false}
-        ListEmptyComponent={
-          <View style={styles.emptyContainer}>
-            <ThemedText style={styles.emptyText}>No colors found</ThemedText>
+  return (
+    <>
+      <FilterDropdown
+        open={filterDrawerOpen}
+        onOpen={() => setFilterDrawerOpen(true)}
+        onClose={() => setFilterDrawerOpen(false)}
+        selectedBrandId={selectedBrandId}
+        selectedSeriesId={selectedSeriesId}
+        onBrandSelect={handleBrandPress}
+        onSeriesSelect={handleSeriesPress}
+        onClearFilters={clearFilters}
+      >
+        <ThemedView style={styles.container} safeArea="top">
+          <View style={styles.header}>
+            <View style={styles.headerContent}>
+              <View style={styles.headerText}>
+                <ThemedText type="title" style={styles.title}>
+                  {t("colors.title")}
+                </ThemedText>
+                <ThemedText style={styles.subtitle}>
+                  {t("colors.subtitle", { count: filteredColors.length })}
+                </ThemedText>
+              </View>
+              <TouchableOpacity
+                style={styles.filterButton}
+                onPress={() => setFilterDrawerOpen(true)}
+              >
+                <IconSymbol
+                  name="line.3.horizontal.decrease.circle.fill"
+                  size={24}
+                  color={hasActiveFilters ? theme.tint : theme.text}
+                />
+              </TouchableOpacity>
+            </View>
           </View>
-        }
-      />
+
+          <FlatList
+            data={filteredColors}
+            renderItem={({ item }) => (
+              <ColorItem color={item} onPress={() => handleColorPress(item)} />
+            )}
+            keyExtractor={(item) => item.id}
+            numColumns={NUM_COLUMNS}
+            contentContainerStyle={styles.listContent}
+            columnWrapperStyle={styles.row}
+            showsVerticalScrollIndicator={false}
+            ListEmptyComponent={
+              <View style={styles.emptyContainer}>
+                <ThemedText style={styles.emptyText}>
+                  {t("colors.empty")}
+                </ThemedText>
+              </View>
+            }
+          />
+        </ThemedView>
+      </FilterDropdown>
 
       <ColorDetailModal
-        visible={modalVisible}
+        bottomSheetRef={bottomSheetRef}
         color={selectedColor}
         onClose={handleCloseModal}
       />
-    </ThemedView>
+    </>
   );
 }
 
@@ -147,12 +226,23 @@ const styles = StyleSheet.create({
     padding: Spacing.md,
     paddingBottom: Spacing.sm,
   },
+  headerContent: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+  },
+  headerText: {
+    flex: 1,
+  },
   title: {
     marginBottom: Spacing.xs,
   },
   subtitle: {
     fontSize: Typography.fontSize.sm,
     opacity: 0.7,
+  },
+  filterButton: {
+    padding: Spacing.xs,
   },
   listContent: {
     padding: Spacing.md,
@@ -173,11 +263,11 @@ const styles = StyleSheet.create({
     position: "relative",
     overflow: "hidden",
   },
-  colorSwatchInCart: {
+  colorSwatchInPalette: {
     borderWidth: 2,
     borderColor: Colors.light.success,
   },
-  cartBadge: {
+  paletteBadge: {
     position: "absolute",
     top: Spacing.xs,
     right: Spacing.xs,
@@ -188,7 +278,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  cartBadgeText: {
+  paletteBadgeText: {
     color: "#FFFFFF",
     fontSize: Typography.fontSize.sm,
     fontWeight: Typography.fontWeight.bold,
