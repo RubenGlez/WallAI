@@ -93,7 +93,7 @@ export const PaletteCreator = React.forwardRef<
           ]}
           showsVerticalScrollIndicator={false}
         >
-          <View style={[styles.createForm, { borderColor: theme.border }]}>
+          <View>
             <TextInput
               style={[
                 styles.nameInput,
@@ -156,6 +156,7 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     padding: Spacing.lg,
+    paddingTop: 0,
   },
   scrollView: {
     flex: 1,
@@ -167,20 +168,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    padding: Spacing.md,
-    borderBottomWidth: 1,
+    marginBottom: Spacing.md,
   },
   headerTitle: {
     fontSize: Typography.fontSize.lg,
   },
   closeButton: {
     padding: Spacing.xs,
-  },
-  createForm: {
-    margin: Spacing.md,
-    padding: Spacing.md,
-    borderWidth: 1,
-    borderRadius: BorderRadius.md,
   },
   nameInput: {
     fontSize: Typography.fontSize.md,
@@ -214,4 +208,3 @@ const styles = StyleSheet.create({
     fontWeight: Typography.fontWeight.semibold,
   },
 });
-

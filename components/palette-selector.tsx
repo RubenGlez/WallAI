@@ -200,7 +200,7 @@ export const PaletteSelector = React.forwardRef<
     >
       <BottomSheetView style={styles.content}>
         {/* Header */}
-        <View style={[styles.header, { borderBottomColor: theme.border }]}>
+        <View style={styles.header}>
           <ThemedText type="title" style={styles.headerTitle}>
             {t("palettes.selectOrCreate")}
           </ThemedText>
@@ -244,6 +244,7 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     padding: Spacing.lg,
+    paddingTop: 0,
   },
   scrollView: {
     flex: 1,
@@ -255,8 +256,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    padding: Spacing.md,
-    borderBottomWidth: 1,
+    marginBottom: Spacing.md,
   },
   headerTitle: {
     fontSize: Typography.fontSize.lg,
@@ -271,8 +271,6 @@ const styles = StyleSheet.create({
     borderRadius: BorderRadius.full,
     paddingHorizontal: Spacing.md,
     paddingVertical: Spacing.sm,
-    marginHorizontal: Spacing.md,
-    marginTop: Spacing.md,
     marginBottom: Spacing.lg,
   },
   searchIcon: {
