@@ -50,7 +50,19 @@
   },
   "scan": {
     "title": "Scannen",
-    "subtitle": "Erfassen Sie Ihre Skizze und passen Sie Farben zu Sprühfarben an"
+    "imagePlaceholder": "Machen Sie ein Foto oder wählen Sie ein Bild, um dessen Farben zu analysieren.",
+    "takePhoto": "Foto aufnehmen",
+    "pickImage": "Bild auswählen",
+    "processing": "Farben werden analysiert…",
+    "permissionsDenied": "Kamera- und Fotoberechtigungen sind zum Scannen von Bildern erforderlich.",
+    "noColorsFound": "In diesem Bild konnten keine dominanten Farben erkannt werden.",
+    "errorProcessing": "Beim Verarbeiten des Bildes ist ein Fehler aufgetreten.",
+    "suggestionsTitle": "Vorgeschlagene Sprühfarben",
+    "suggestionsCount": "{{count}} vorgeschlagene Farbe",
+    "suggestionsCount_other": "{{count}} vorgeschlagene Farben",
+    "suggestionsEmpty": "Scannen Sie ein Bild, um passende Sprühfarben zu sehen.",
+    "matchedFrom": "Abgeglichen mit {{hex}}",
+    "createPalette": "Palette Erstellen"
   },
   "wall": {
     "title": "Wand",

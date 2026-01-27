@@ -50,7 +50,19 @@
   },
   "scan": {
     "title": "Scan",
-    "subtitle": "Capture your sketch and match colors to spray paints"
+    "imagePlaceholder": "Take a photo or pick an image to analyze its colors.",
+    "takePhoto": "Take photo",
+    "pickImage": "Pick image",
+    "processing": "Analyzing colors…",
+    "permissionsDenied": "Camera and photo permissions are required to scan images.",
+    "noColorsFound": "Could not detect prominent colors in this image.",
+    "errorProcessing": "Something went wrong while processing the image.",
+    "suggestionsTitle": "Suggested spray colors",
+    "suggestionsCount": "{{count}} suggested color",
+    "suggestionsCount_other": "{{count}} suggested colors",
+    "suggestionsEmpty": "Scan an image to see matching spray colors.",
+    "matchedFrom": "Matched from {{hex}}",
+    "createPalette": "Create Palette"
   },
   "wall": {
     "title": "Wall",

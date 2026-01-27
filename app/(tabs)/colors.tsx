@@ -92,13 +92,7 @@ function ColorItem({ color, onPress }: ColorItemProps) {
       onPress={onPress}
       activeOpacity={0.7}
     >
-      <View
-        style={[
-          styles.colorSwatch,
-          { backgroundColor: color.hex },
-          inPalette && styles.colorSwatchInPalette,
-        ]}
-      >
+      <View style={[styles.colorSwatch, { backgroundColor: color.hex }]}>
         {hasActivePalette && (
           <TouchableOpacity
             style={[
@@ -489,10 +483,6 @@ const styles = StyleSheet.create({
     marginBottom: Spacing.xs,
     position: "relative",
     overflow: "hidden",
-  },
-  colorSwatchInPalette: {
-    borderWidth: 2,
-    borderColor: Colors.light.success,
   },
   paletteBadge: {
     position: "absolute",

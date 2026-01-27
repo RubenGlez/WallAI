@@ -50,7 +50,19 @@
   },
   "scan": {
     "title": "Scanner",
-    "subtitle": "Capturez votre esquisse et associez les couleurs aux peintures en spray"
+    "imagePlaceholder": "Prenez une photo ou choisissez une image pour analyser ses couleurs.",
+    "takePhoto": "Prendre une photo",
+    "pickImage": "Choisir une image",
+    "processing": "Analyse des couleurs…",
+    "permissionsDenied": "Les autorisations appareil photo et photos sont requises pour scanner des images.",
+    "noColorsFound": "Impossible de détecter des couleurs dominantes dans cette image.",
+    "errorProcessing": "Une erreur est survenue lors du traitement de l'image.",
+    "suggestionsTitle": "Couleurs de spray suggérées",
+    "suggestionsCount": "{{count}} couleur suggérée",
+    "suggestionsCount_other": "{{count}} couleurs suggérées",
+    "suggestionsEmpty": "Scannez une image pour voir les couleurs de spray correspondantes.",
+    "matchedFrom": "Correspond à {{hex}}",
+    "createPalette": "Créer une Palette"
   },
   "wall": {
     "title": "Mur",

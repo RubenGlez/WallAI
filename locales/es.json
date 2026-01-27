@@ -50,7 +50,19 @@
   },
   "scan": {
     "title": "Escanear",
-    "subtitle": "Captura tu boceto y combina colores con pinturas en spray"
+    "imagePlaceholder": "Toma una foto o elige una imagen para analizar sus colores.",
+    "takePhoto": "Tomar foto",
+    "pickImage": "Elegir imagen",
+    "processing": "Analizando colores…",
+    "permissionsDenied": "Se requieren permisos de cámara y fotos para escanear imágenes.",
+    "noColorsFound": "No se pudieron detectar colores destacados en esta imagen.",
+    "errorProcessing": "Algo salió mal al procesar la imagen.",
+    "suggestionsTitle": "Colores de spray sugeridos",
+    "suggestionsCount": "{{count}} color sugerido",
+    "suggestionsCount_other": "{{count}} colores sugeridos",
+    "suggestionsEmpty": "Escanea una imagen para ver colores de spray coincidentes.",
+    "matchedFrom": "Coincide con {{hex}}",
+    "createPalette": "Crear Paleta"
   },
   "wall": {
     "title": "Muro",

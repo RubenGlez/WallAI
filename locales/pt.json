@@ -50,7 +50,19 @@
   },
   "scan": {
     "title": "Escanear",
-    "subtitle": "Capture seu esboço e combine cores com tintas em spray"
+    "imagePlaceholder": "Tire uma foto ou escolha uma imagem para analisar suas cores.",
+    "takePhoto": "Tirar foto",
+    "pickImage": "Escolher imagem",
+    "processing": "Analisando cores…",
+    "permissionsDenied": "Permissões de câmera e fotos são necessárias para escanear imagens.",
+    "noColorsFound": "Não foi possível detectar cores dominantes nesta imagem.",
+    "errorProcessing": "Algo deu errado ao processar a imagem.",
+    "suggestionsTitle": "Cores de spray sugeridas",
+    "suggestionsCount": "{{count}} cor sugerida",
+    "suggestionsCount_other": "{{count}} cores sugeridas",
+    "suggestionsEmpty": "Escaneie uma imagem para ver cores de spray correspondentes.",
+    "matchedFrom": "Correspondente a {{hex}}",
+    "createPalette": "Criar Paleta"
   },
   "wall": {
     "title": "Parede",
