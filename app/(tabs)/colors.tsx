@@ -1,16 +1,19 @@
 import { ColorDetailModal } from "@/components/color-detail-modal";
 import { FilterDropdown } from "@/components/filter-dropdown";
 import {
-  PaletteSelector,
-  PaletteSelectorRef,
-  PaletteCreator,
-  PaletteCreatorRef,
+    PaletteSelector,
+    PaletteSelectorRef,
 } from "@/components/palette-selector";
+import {
+    PaletteCreator,
+    PaletteCreatorRef,
+} from "@/components/palette-creator";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { BorderRadius, Colors, Spacing, Typography } from "@/constants/theme";
 import { useColorScheme } from "@/hooks/use-color-scheme";
+import i18n from "@/i18n";
 import { useColorsStore } from "@/stores/useColorsStore";
 import { usePaletteStore } from "@/stores/usePaletteStore";
 import { ColorWithTranslations } from "@/types";
@@ -18,13 +21,13 @@ import BottomSheet from "@gorhom/bottom-sheet";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
-  ActivityIndicator,
-  Dimensions,
-  FlatList,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-  View,
+    ActivityIndicator,
+    Dimensions,
+    FlatList,
+    StyleSheet,
+    TextInput,
+    TouchableOpacity,
+    View,
 } from "react-native";
 
 const { width } = Dimensions.get("window");
@@ -39,18 +42,37 @@ interface ColorItemProps {
 }
 
 function ColorItem({ color, onPress }: ColorItemProps) {
+  const { t } = useTranslation();
   const colorScheme = useColorScheme() ?? "light";
   const theme = Colors[colorScheme];
   // Subscribe to palette changes to trigger re-renders
   const activePalette = usePaletteStore((state) => state.getActivePalette());
   const addColor = usePaletteStore((state) => state.addColor);
   const removeColor = usePaletteStore((state) => state.removeColor);
-  const inPalette = activePalette?.colors.some((c) => c.id === color.id) ?? false;
+  const inPalette =
+    activePalette?.colors.some((c) => c.id === color.id) ?? false;
   const hasActivePalette = activePalette !== null;
+
+  // Get color name in current language, fallback to English, then code, then unknown
+  const displayName = (() => {
+    const currentLang = i18n.language as "en" | "es" | "de" | "fr" | "pt";
+    const translations = color.translations;
+
+    if (translations?.[currentLang]) {
+      return translations[currentLang];
+    }
+    if (translations?.en) {
+      return translations.en;
+    }
+    if (color.code) {
+      return color.code;
+    }
+    return t("common.unknown");
+  })().toUpperCase();
 
   const handleBadgePress = () => {
     if (!hasActivePalette) return;
-    
+
     if (inPalette) {
       removeColor(color.id);
     } else {
@@ -83,7 +105,11 @@ function ColorItem({ color, onPress }: ColorItemProps) {
               styles.paletteBadge,
               inPalette
                 ? { backgroundColor: Colors.light.success }
-                : { backgroundColor: theme.background, borderWidth: 2, borderColor: theme.border },
+                : {
+                    backgroundColor: theme.background,
+                    borderWidth: 2,
+                    borderColor: theme.border,
+                  },
             ]}
             onPress={handleBadgePress}
             activeOpacity={0.8}
@@ -91,18 +117,14 @@ function ColorItem({ color, onPress }: ColorItemProps) {
             {inPalette ? (
               <ThemedText style={styles.paletteBadgeText}>✓</ThemedText>
             ) : (
-              <IconSymbol
-                name="plus"
-                size={16}
-                color={theme.text}
-              />
+              <IconSymbol name="plus" size={16} color={theme.text} />
             )}
           </TouchableOpacity>
         )}
       </View>
       <View style={styles.colorInfo}>
         <ThemedText style={styles.colorCode} numberOfLines={1}>
-          {color.code}
+          {displayName}
         </ThemedText>
       </View>
     </TouchableOpacity>
@@ -121,7 +143,9 @@ export default function ColorsScreen() {
     getColorsBySeriesId,
   } = useColorsStore();
   const activePalette = usePaletteStore((state) => state.getActivePalette());
-  const clearActivePalette = usePaletteStore((state) => state.clearActivePalette);
+  const clearActivePalette = usePaletteStore(
+    (state) => state.clearActivePalette,
+  );
   const [selectedColor, setSelectedColor] =
     useState<ColorWithTranslations | null>(null);
   const bottomSheetRef = useRef<BottomSheet>(null);
@@ -157,15 +181,15 @@ export default function ColorsScreen() {
         if (color.code.toLowerCase().includes(query)) {
           return true;
         }
-        
+
         // Search by name in all available languages
         const translations = color.translations;
         if (translations) {
           return Object.values(translations).some((name) =>
-            name?.toLowerCase().includes(query)
+            name?.toLowerCase().includes(query),
           );
         }
-        
+
         return false;
       });
     }
@@ -244,11 +268,7 @@ export default function ColorsScreen() {
                 style={styles.paletteButton}
                 onPress={() => paletteSelectorRef.current?.open()}
               >
-                <IconSymbol
-                  name="swatchpalette"
-                  size={24}
-                  color={theme.tint}
-                />
+                <IconSymbol name="swatchpalette" size={24} color={theme.tint} />
               </TouchableOpacity>
             </View>
 
@@ -302,10 +322,15 @@ export default function ColorsScreen() {
 
             {/* Search Box with Filter Button */}
             <View style={styles.searchRow}>
-              <View style={[styles.searchContainer, { 
-                borderColor: theme.border,
-                backgroundColor: theme.backgroundSecondary,
-              }]}>
+              <View
+                style={[
+                  styles.searchContainer,
+                  {
+                    borderColor: theme.border,
+                    backgroundColor: theme.backgroundSecondary,
+                  },
+                ]}
+              >
                 <IconSymbol
                   name="magnifyingglass"
                   size={20}
