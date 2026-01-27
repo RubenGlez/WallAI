@@ -11,6 +11,8 @@ import {
 import { SearchBar } from "@/components/search-bar";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
+import { FilterButton } from "@/components/filter-button";
+import { FloatingActionButton } from "@/components/floating-action-button";
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { BorderRadius, Colors, Spacing, Typography } from "@/constants/theme";
 import { useColorScheme } from "@/hooks/use-color-scheme";
@@ -321,16 +323,10 @@ export default function ColorsScreen() {
                 onChangeText={setSearchQuery}
                 placeholder={t("colors.searchPlaceholder")}
               />
-              <TouchableOpacity
-                style={styles.filterButton}
+              <FilterButton
                 onPress={() => setFilterDrawerOpen(true)}
-              >
-                <IconSymbol
-                  name="line.3.horizontal.decrease.circle.fill"
-                  size={24}
-                  color={hasActiveFilters ? theme.tint : theme.text}
-                />
-              </TouchableOpacity>
+                hasActiveFilters={hasActiveFilters}
+              />
             </View>
           </View>
 
@@ -356,18 +352,15 @@ export default function ColorsScreen() {
       </FilterDropdown>
 
       {/* Floating button to open palette bottom sheet */}
-      <TouchableOpacity
-        style={[
-          styles.fab,
+      <FloatingActionButton
+        items={[
           {
-            backgroundColor: theme.tint,
+            icon: "plus",
+            onPress: () => paletteCreatorRef.current?.open(),
+            size: "large",
           },
         ]}
-        onPress={() => paletteCreatorRef.current?.open()}
-        activeOpacity={0.8}
-      >
-        <IconSymbol name="plus" size={28} color={theme.background} />
-      </TouchableOpacity>
+      />
 
       <ColorDetailModal
         bottomSheetRef={bottomSheetRef}
@@ -462,9 +455,6 @@ const styles = StyleSheet.create({
     borderRadius: BorderRadius.full,
     marginRight: -4,
   },
-  filterButton: {
-    padding: Spacing.xs,
-  },
   listContent: {
     padding: Spacing.md,
     paddingTop: Spacing.sm,
@@ -524,20 +514,5 @@ const styles = StyleSheet.create({
   },
   emptyText: {
     opacity: 0.7,
-  },
-  fab: {
-    position: "absolute",
-    right: Spacing.lg,
-    bottom: Spacing.lg,
-    width: 56,
-    height: 56,
-    borderRadius: BorderRadius.full,
-    justifyContent: "center",
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.2,
-    shadowRadius: 6,
-    elevation: 4,
   },
 });

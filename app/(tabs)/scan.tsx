@@ -6,6 +6,9 @@ import {
 } from "@/components/palette-creator";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
+import { FilterButton } from "@/components/filter-button";
+import { FloatingActionButton } from "@/components/floating-action-button";
+import { Button } from "@/components/button";
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { BorderRadius, Colors, Spacing, Typography } from "@/constants/theme";
 import { useColorScheme } from "@/hooks/use-color-scheme";
@@ -296,6 +299,12 @@ export default function ScanScreen() {
     // If user cancels, nothing happens
   };
 
+  const handleRemoveImage = () => {
+    setImageUri(null);
+    setSuggestedColors([]);
+    setError(null);
+  };
+
   const renderSuggestedItem = ({ item }: { item: SuggestedColor }) => {
     const inPalette =
       activePalette?.colors.some((c) => c.id === item.color.id) ?? false;
@@ -380,11 +389,27 @@ export default function ScanScreen() {
           {/* Image Preview & Actions */}
           <View style={styles.imageSection}>
             {imageUri ? (
-              <Image
-                source={{ uri: imageUri }}
-                style={styles.imagePreview}
-                contentFit="cover"
-              />
+              <View style={styles.imagePreviewContainer}>
+                <Image
+                  source={{ uri: imageUri }}
+                  style={styles.imagePreview}
+                  contentFit="cover"
+                />
+                <TouchableOpacity
+                  style={[
+                    styles.removeImageButton,
+                    { backgroundColor: theme.error },
+                  ]}
+                  onPress={handleRemoveImage}
+                  activeOpacity={0.8}
+                >
+                  <IconSymbol
+                    name="xmark"
+                    size={18}
+                    color={theme.background}
+                  />
+                </TouchableOpacity>
+              </View>
             ) : (
               <View
                 style={[styles.imagePlaceholder, { borderColor: theme.border }]}
@@ -412,28 +437,13 @@ export default function ScanScreen() {
             {error && <ThemedText style={styles.errorText}>{error}</ThemedText>}
 
             {imageUri && suggestedColors.length > 0 && (
-              <TouchableOpacity
-                style={[
-                  styles.createPaletteButton,
-                  { backgroundColor: theme.tint },
-                ]}
-                activeOpacity={0.85}
+              <Button
                 onPress={() => paletteCreatorRef.current?.open()}
-              >
-                <IconSymbol
-                  name="swatchpalette"
-                  size={20}
-                  color={theme.background}
-                />
-                <ThemedText
-                  style={[
-                    styles.createPaletteButtonText,
-                    { color: theme.background },
-                  ]}
-                >
-                  {t("scan.createPalette")}
-                </ThemedText>
-              </TouchableOpacity>
+                label={t("scan.createPalette")}
+                icon="swatchpalette"
+                variant="primary"
+                size="medium"
+              />
             )}
           </View>
 
@@ -445,16 +455,10 @@ export default function ScanScreen() {
                   count: suggestedColors.length,
                 })}
               </ThemedText>
-              <TouchableOpacity
-                style={styles.filterButton}
+              <FilterButton
                 onPress={() => setFilterDrawerOpen(true)}
-              >
-                <IconSymbol
-                  name="line.3.horizontal.decrease.circle.fill"
-                  size={24}
-                  color={hasActiveFilters ? theme.tint : theme.text}
-                />
-              </TouchableOpacity>
+                hasActiveFilters={hasActiveFilters}
+              />
             </View>
           )}
           <FlatList
@@ -466,41 +470,20 @@ export default function ScanScreen() {
           />
 
           {/* Floating Action Buttons */}
-          <View style={styles.floatingButtonsContainer}>
-            <TouchableOpacity
-              style={[
-                styles.floatingButtonLarge,
-                { backgroundColor: theme.tint },
-              ]}
-              activeOpacity={0.85}
-              onPress={() => handlePickImage(true)}
-            >
-              <IconSymbol
-                name="camera.fill"
-                size={28}
-                color={theme.background}
-              />
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={[
-                styles.floatingButtonSmall,
-                {
-                  backgroundColor: theme.backgroundSecondary,
-                  borderWidth: 1,
-                  borderColor: theme.border,
-                },
-              ]}
-              activeOpacity={0.85}
-              onPress={() => handlePickImage(false)}
-            >
-              <IconSymbol
-                name="photo.fill.on.rectangle.fill"
-                size={18}
-                color={theme.text}
-              />
-            </TouchableOpacity>
-          </View>
+          <FloatingActionButton
+            items={[
+              {
+                icon: "camera.fill",
+                onPress: () => handlePickImage(true),
+                size: "large",
+              },
+              {
+                icon: "photo.fill.on.rectangle.fill",
+                onPress: () => handlePickImage(false),
+                size: "small",
+              },
+            ]}
+          />
         </ThemedView>
       </FilterDropdown>
 
@@ -537,18 +520,36 @@ const styles = StyleSheet.create({
   title: {
     marginBottom: Spacing.xs,
   },
-  filterButton: {
-    padding: Spacing.xs,
-  },
   imageSection: {
     paddingHorizontal: Spacing.md,
     paddingBottom: Spacing.md,
+  },
+  imagePreviewContainer: {
+    position: "relative",
+    marginBottom: Spacing.md,
   },
   imagePreview: {
     width: "100%",
     height: 220,
     borderRadius: BorderRadius.lg,
-    marginBottom: Spacing.md,
+  },
+  removeImageButton: {
+    position: "absolute",
+    top: Spacing.sm,
+    right: Spacing.sm,
+    width: 32,
+    height: 32,
+    borderRadius: BorderRadius.full,
+    justifyContent: "center",
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   imagePlaceholder: {
     width: "100%",
@@ -566,47 +567,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     paddingHorizontal: Spacing.md,
   },
-  floatingButtonsContainer: {
-    position: "absolute",
-    bottom: Spacing.lg,
-    right: Spacing.lg,
-    alignItems: "center",
-    justifyContent: "center",
-    zIndex: 10,
-  },
-  floatingButtonLarge: {
-    width: 56,
-    height: 56,
-    borderRadius: BorderRadius.full,
-    alignItems: "center",
-    justifyContent: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 6,
-    elevation: 4,
-  },
-  floatingButtonSmall: {
-    position: "absolute",
-    top: -52, // Position above large button: -36 (button height) - 16 (spacing)
-    right: 10, // Center horizontally: (56 - 36) / 2 = 10
-    width: 36,
-    height: 36,
-    borderRadius: BorderRadius.full,
-    alignItems: "center",
-    justifyContent: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.22,
-    shadowRadius: 2.22,
-    elevation: 3,
-  },
   processingRow: {
     flexDirection: "row",
     alignItems: "center",
@@ -622,27 +582,6 @@ const styles = StyleSheet.create({
     color: "#FF3B30",
     fontSize: Typography.fontSize.sm,
   },
-  createPaletteButton: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: Spacing.sm,
-    paddingVertical: Spacing.md,
-    paddingHorizontal: Spacing.lg,
-    borderRadius: BorderRadius.md,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
-  },
-  createPaletteButtonText: {
-    fontSize: Typography.fontSize.md,
-    fontWeight: Typography.fontWeight.semibold,
-  },
   suggestionsHeader: {
     flexDirection: "row",
     alignItems: "center",
@@ -655,11 +594,6 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: Typography.fontSize.md,
     fontWeight: Typography.fontWeight.semibold,
-  },
-  suggestionsSubtitle: {
-    fontSize: Typography.fontSize.xs,
-    opacity: 0.7,
-    marginTop: 2,
   },
   suggestionsList: {
     paddingHorizontal: Spacing.md,

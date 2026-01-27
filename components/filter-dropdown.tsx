@@ -5,10 +5,10 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import { Drawer } from 'react-native-drawer-layout';
 import { useTranslation } from 'react-i18next';
 import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
+import { Drawer } from '@/components/drawer';
+import { Button } from '@/components/button';
 import { Colors, Spacing, BorderRadius, Typography } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { useColorsStore } from '@/stores/useColorsStore';
@@ -51,38 +51,12 @@ export function FilterDropdown({
 
   const hasActiveFilters = selectedBrandId !== null || selectedSeriesId !== null;
 
-  return (
-    <Drawer
-      open={open}
-      onOpen={onOpen}
-      onClose={onClose}
-      drawerPosition="right"
-      drawerStyle={styles.drawerStyle}
-      renderDrawerContent={() => {
-        return (
-        <ThemedView style={[styles.drawer, { width: '100%' }]} safeArea="top">
-          {/* Header */}
-          <View style={[styles.header, { borderBottomColor: theme.border }]}>
-            <ThemedText type="title" style={styles.headerTitle}>
-              {t('filters.title')}
-            </ThemedText>
-            <TouchableOpacity
-              onPress={onClose}
-              style={styles.closeIconButton}
-            >
-              <IconSymbol
-                name="xmark.circle.fill"
-                size={24}
-                color={theme.text}
-              />
-            </TouchableOpacity>
-          </View>
-
-          <ScrollView
-            style={styles.content}
-            contentContainerStyle={styles.contentContainer}
-            showsVerticalScrollIndicator={false}
-          >
+  const drawerContent = (
+    <ScrollView
+      style={styles.content}
+      contentContainerStyle={styles.contentContainer}
+      showsVerticalScrollIndicator={false}
+    >
             {/* Brand Filter */}
             <View style={styles.filterSection}>
               <ThemedText style={styles.filterSectionTitle}>{t('filters.brand')}</ThemedText>
@@ -245,26 +219,30 @@ export function FilterDropdown({
               </View>
             )}
 
-            {/* Clear Filters Button */}
-            {hasActiveFilters && (
-              <TouchableOpacity
-                style={[
-                  styles.clearButton,
-                  { backgroundColor: theme.error },
-                ]}
-                onPress={onClearFilters}
-              >
-                <ThemedText
-                  style={[styles.clearButtonText, { color: theme.background }]}
-                >
-                  {t('filters.clearAll')}
-                </ThemedText>
-              </TouchableOpacity>
-            )}
-          </ScrollView>
-        </ThemedView>
-        );
-      }}
+      {/* Clear Filters Button */}
+      {hasActiveFilters && (
+        <View style={styles.clearButtonContainer}>
+          <Button
+            onPress={onClearFilters}
+            label={t('filters.clearAll')}
+            variant="primary"
+            backgroundColor={theme.error}
+            textColor={theme.background}
+            style={styles.clearButton}
+          />
+        </View>
+      )}
+    </ScrollView>
+  );
+
+  return (
+    <Drawer
+      open={open}
+      onOpen={onOpen}
+      onClose={onClose}
+      title={t('filters.title')}
+      drawerContent={drawerContent}
+      drawerPosition="right"
     >
       {children}
     </Drawer>
@@ -272,28 +250,6 @@ export function FilterDropdown({
 }
 
 const styles = StyleSheet.create({
-  drawer: {
-    flex: 1,
-    width: '100%',
-  },
-  drawerStyle: {
-    width: '85%',
-    maxWidth: 400,
-    backgroundColor: 'transparent',
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: Spacing.md,
-    borderBottomWidth: 1,
-  },
-  headerTitle: {
-    fontSize: Typography.fontSize.lg,
-  },
-  closeIconButton: {
-    padding: Spacing.xs,
-  },
   content: {
     flex: 1,
   },
@@ -332,15 +288,10 @@ const styles = StyleSheet.create({
   filterItemTextSelected: {
     fontWeight: Typography.fontWeight.semibold,
   },
-  clearButton: {
+  clearButtonContainer: {
     margin: Spacing.md,
-    paddingVertical: Spacing.md,
-    paddingHorizontal: Spacing.lg,
-    borderRadius: BorderRadius.md,
-    alignItems: 'center',
   },
-  clearButtonText: {
-    fontSize: Typography.fontSize.md,
-    fontWeight: Typography.fontWeight.semibold,
+  clearButton: {
+    width: '100%',
   },
 });
