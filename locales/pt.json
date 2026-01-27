@@ -11,7 +11,8 @@
     "remove": "Remover",
     "clear": "Limpar",
     "all": "Todos",
-    "unknown": "Desconhecido"
+    "unknown": "Desconhecido",
+    "create": "Criar"
   },
   "tabs": {
     "home": "Início",
@@ -31,6 +32,7 @@
     "subtitle_other": "{{count}} cores disponíveis",
     "loading": "Carregando cores...",
     "empty": "Nenhuma cor encontrada",
+    "searchPlaceholder": "Pesquisar por código ou nome...",
     "code": "Código",
     "hex": "Hex",
     "series": "Série",
@@ -60,5 +62,13 @@
   },
   "modal": {
     "title": "Modal"
+  },
+  "palettes": {
+    "selectOrCreate": "Selecionar ou Criar Paleta",
+    "createNew": "Criar Nova Paleta",
+    "paletteName": "Nome da paleta",
+    "noPalettes": "Nenhuma paleta. Crie uma nova para começar.",
+    "color": "cor",
+    "colors": "cores"
   }
 }

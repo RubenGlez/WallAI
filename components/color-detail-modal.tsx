@@ -13,6 +13,7 @@ import React, { useCallback, useMemo } from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTranslation } from "react-i18next";
+import i18n from "@/i18n";
 
 interface ColorDetailModalProps {
   bottomSheetRef: React.RefObject<BottomSheet | null>;
@@ -27,7 +28,10 @@ export function ColorDetailModal({
 }: ColorDetailModalProps) {
   const { t } = useTranslation();
   const colorScheme = useColorScheme() ?? "light";
-  const { addColor, removeColor, isInPalette } = usePaletteStore();
+  // Subscribe to palette changes to trigger re-renders
+  const activePalette = usePaletteStore((state) => state.getActivePalette());
+  const addColor = usePaletteStore((state) => state.addColor);
+  const removeColor = usePaletteStore((state) => state.removeColor);
   const { getSeriesById, getBrandById } = useColorsStore();
 
   const series = useMemo(() => {
@@ -38,21 +42,51 @@ export function ColorDetailModal({
     return series ? getBrandById(series.brandId) : undefined;
   }, [series, getBrandById]);
 
+  const hasActivePalette = activePalette !== null;
+
   const inPalette = useMemo(() => {
-    return color ? isInPalette(color.id) : false;
-  }, [color, isInPalette]);
+    if (!color || !activePalette) return false;
+    return activePalette.colors.some((c) => c.id === color.id);
+  }, [color, activePalette]);
 
   const handleTogglePalette = useCallback(() => {
-    if (!color) return;
+    if (!color || !hasActivePalette) return;
     if (inPalette) {
       removeColor(color.id);
     } else {
       addColor(color);
     }
-  }, [color, inPalette, addColor, removeColor]);
+  }, [color, inPalette, hasActivePalette, addColor, removeColor]);
 
   const theme = Colors[colorScheme];
-  const name = color?.translations?.en || color?.code || t('common.unknown');
+  
+  // Get color name in current language, fallback to English, then code, then unknown
+  const getColorName = useCallback(() => {
+    if (!color) return t('common.unknown');
+    
+    const currentLang = i18n.language as "en" | "es" | "de" | "fr" | "pt";
+    const translations = color.translations;
+    
+    // Try current language first
+    if (translations?.[currentLang]) {
+      return translations[currentLang];
+    }
+    
+    // Fallback to English
+    if (translations?.en) {
+      return translations.en;
+    }
+    
+    // Fallback to code
+    if (color.code) {
+      return color.code;
+    }
+    
+    // Last resort
+    return t('common.unknown');
+  }, [color, t]);
+  
+  const name = useMemo(() => getColorName(), [getColorName]);
   const insets = useSafeAreaInsets();
 
   const handleSheetChanges = useCallback(
@@ -65,104 +99,113 @@ export function ColorDetailModal({
   );
 
   return (
-    <BottomSheet
-      ref={bottomSheetRef}
-      onChange={handleSheetChanges}
-      enablePanDownToClose
-      backgroundStyle={{ backgroundColor: theme.background }}
-      handleIndicatorStyle={{ backgroundColor: theme.border }}
-    >
-      {color && (
-        <BottomSheetView style={styles.content}>
-          {/* Header with Name and Close Button */}
-          <View style={styles.header}>
-            <ThemedText type="title" style={styles.colorName}>
-              {name}
-            </ThemedText>
-            <TouchableOpacity
-              style={styles.closeButton}
-              onPress={() => bottomSheetRef.current?.close()}
-            >
-              <IconSymbol
-                name="xmark.circle.fill"
-                size={24}
-                color={theme.text}
-              />
-            </TouchableOpacity>
-          </View>
+    <>
+      <BottomSheet
+        ref={bottomSheetRef}
+        onChange={handleSheetChanges}
+        enablePanDownToClose
+        backgroundStyle={{ backgroundColor: theme.background }}
+        handleIndicatorStyle={{ backgroundColor: theme.border }}
+      >
+        {color && (
+          <BottomSheetView style={styles.content}>
+            {/* Header with Name and Close Button */}
+            <View style={styles.header}>
+              <ThemedText type="title" style={styles.colorName}>
+                {name}
+              </ThemedText>
+              <TouchableOpacity
+                style={styles.closeButton}
+                onPress={() => bottomSheetRef.current?.close()}
+              >
+                <IconSymbol
+                  name="xmark.circle.fill"
+                  size={24}
+                  color={theme.text}
+                />
+              </TouchableOpacity>
+            </View>
 
-          <BottomSheetScrollView
-            style={styles.scrollView}
-            contentContainerStyle={styles.scrollContent}
-            showsVerticalScrollIndicator={false}
-          >
-            {/* Color Swatch */}
-            <View
-              style={[
-                styles.colorSwatch,
-                { backgroundColor: color.hex },
-                styles.colorSwatchLarge,
-              ]}
+            <BottomSheetScrollView
+              style={styles.scrollView}
+              contentContainerStyle={styles.scrollContent}
+              showsVerticalScrollIndicator={false}
             >
+              {/* Color Swatch */}
               <View
                 style={[
-                  styles.colorSwatchBorder,
-                  { borderColor: theme.border },
+                  styles.colorSwatch,
+                  { backgroundColor: color.hex },
+                  styles.colorSwatchLarge,
                 ]}
-              />
-            </View>
+              >
+                <View
+                  style={[
+                    styles.colorSwatchBorder,
+                    { borderColor: theme.border },
+                  ]}
+                />
+              </View>
 
-            {/* Color Info */}
-            <View style={styles.infoSection}>
-              <ThemedText style={styles.colorCode}>
-                {t('colors.code')}: {color.code}
-              </ThemedText>
-              <ThemedText style={styles.colorHex}>{t('colors.hex')}: {color.hex}</ThemedText>
+              {/* Color Info */}
+              <View style={styles.infoSection}>
+                <ThemedText style={styles.colorCode}>
+                  {t('colors.code')}: {color.code}
+                </ThemedText>
 
-              {series && (
-                <View style={styles.metaSection}>
-                  <ThemedText style={styles.metaLabel}>{t('colors.series')}:</ThemedText>
-                  <ThemedText style={styles.metaValue}>
-                    {series.name}
-                  </ThemedText>
-                </View>
-              )}
+                {series && (
+                  <View style={styles.metaSection}>
+                    <ThemedText style={styles.metaLabel}>{t('colors.series')}:</ThemedText>
+                    <ThemedText style={styles.metaValue}>
+                      {series.name}
+                    </ThemedText>
+                  </View>
+                )}
 
-              {brand && (
-                <View style={styles.metaSection}>
-                  <ThemedText style={styles.metaLabel}>{t('colors.brand')}:</ThemedText>
-                  <ThemedText style={styles.metaValue}>{brand.name}</ThemedText>
-                </View>
-              )}
-            </View>
+                {brand && (
+                  <View style={styles.metaSection}>
+                    <ThemedText style={styles.metaLabel}>{t('colors.brand')}:</ThemedText>
+                    <ThemedText style={styles.metaValue}>{brand.name}</ThemedText>
+                  </View>
+                )}
+              </View>
 
-            {/* Action Button - Inside ScrollView */}
-            <View
-              style={[
-                styles.buttonContainer,
-                { paddingBottom: insets.bottom + Spacing.xxl + 50 }, // 50 for tab bar height
-              ]}
-            >
+              {/* Action Button - Inside ScrollView */}
+              <View
+                style={[
+                  styles.buttonContainer,
+                  { paddingBottom: insets.bottom + Spacing.xxl + 50 }, // 50 for tab bar height
+                ]}
+              >
               <TouchableOpacity
                 style={[
                   styles.actionButton,
                   {
-                    backgroundColor: inPalette ? theme.error : theme.success,
+                    backgroundColor: inPalette
+                      ? theme.error
+                      : hasActivePalette
+                      ? theme.success
+                      : theme.border,
+                    opacity: hasActivePalette ? 1 : 0.5,
                   },
                 ]}
                 onPress={handleTogglePalette}
+                disabled={!hasActivePalette}
               >
                 <ThemedText
                   style={[styles.actionButtonText, { color: "#FFFFFF" }]}
                 >
-                  {inPalette ? t('colors.removeFromPalette') : t('colors.addToPalette')}
+                  {inPalette
+                    ? t('colors.removeFromPalette')
+                    : t('colors.addToPalette')}
                 </ThemedText>
               </TouchableOpacity>
-            </View>
-          </BottomSheetScrollView>
-        </BottomSheetView>
-      )}
-    </BottomSheet>
+              </View>
+            </BottomSheetScrollView>
+          </BottomSheetView>
+        )}
+      </BottomSheet>
+    </>
   );
 }
 
@@ -212,11 +255,6 @@ const styles = StyleSheet.create({
     marginRight: Spacing.md,
   },
   colorCode: {
-    fontSize: Typography.fontSize.md,
-    marginBottom: Spacing.xs,
-    opacity: 0.7,
-  },
-  colorHex: {
     fontSize: Typography.fontSize.md,
     marginBottom: Spacing.md,
     opacity: 0.7,

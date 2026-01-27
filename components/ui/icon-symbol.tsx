@@ -26,6 +26,10 @@ const MAPPING = {
   'xmark.circle.fill': 'cancel',
   'checkmark.circle.fill': 'check-circle',
   'circle': 'radio-button-unchecked',
+  'square.grid.2x2.fill': 'apps',
+  'magnifyingglass': 'search',
+  'plus.circle.fill': 'add-circle',
+  'plus': 'add',
 } as IconMapping;
 
 /**
