@@ -1,4 +1,5 @@
 import { ThemedText } from "@/components/themed-text";
+import { SearchBar } from "@/components/search-bar";
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { BorderRadius, Colors, Spacing, Typography } from "@/constants/theme";
 import { useColorScheme } from "@/hooks/use-color-scheme";
@@ -15,7 +16,7 @@ import React, {
   useState,
 } from "react";
 import { useTranslation } from "react-i18next";
-import { StyleSheet, TextInput, TouchableOpacity, View } from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export interface PaletteSelectorRef {
@@ -27,60 +28,6 @@ interface PaletteSelectorProps {
   onSelect?: (paletteId: string) => void;
   colorId?: string;
 }
-
-interface PaletteSearchBarProps {
-  theme: (typeof Colors)["light"];
-  searchQuery: string;
-  onChangeSearchQuery: (text: string) => void;
-  placeholder: string;
-}
-
-const PaletteSearchBar: React.FC<PaletteSearchBarProps> = ({
-  theme,
-  searchQuery,
-  onChangeSearchQuery,
-  placeholder,
-}) => {
-  return (
-    <View
-      style={[
-        styles.searchContainer,
-        {
-          borderColor: theme.border,
-          backgroundColor: theme.backgroundSecondary,
-        },
-      ]}
-    >
-      <IconSymbol
-        name="magnifyingglass"
-        size={18}
-        color={theme.textSecondary}
-        style={styles.searchIcon}
-      />
-      <TextInput
-        style={[styles.searchInput, { color: theme.text }]}
-        placeholder={placeholder}
-        placeholderTextColor={theme.textSecondary}
-        value={searchQuery}
-        onChangeText={onChangeSearchQuery}
-        autoCapitalize="none"
-        autoCorrect={false}
-      />
-      {searchQuery.length > 0 && (
-        <TouchableOpacity
-          onPress={() => onChangeSearchQuery("")}
-          style={styles.clearButton}
-        >
-          <IconSymbol
-            name="xmark.circle.fill"
-            size={18}
-            color={theme.textSecondary}
-          />
-        </TouchableOpacity>
-      )}
-    </View>
-  );
-};
 
 interface PaletteListProps {
   palettes: Palette[];
@@ -220,11 +167,11 @@ export const PaletteSelector = React.forwardRef<
           ]}
           showsVerticalScrollIndicator={false}
         >
-          <PaletteSearchBar
-            theme={theme}
-            searchQuery={searchQuery}
-            onChangeSearchQuery={setSearchQuery}
+          <SearchBar
+            value={searchQuery}
+            onChangeText={setSearchQuery}
             placeholder={t("palettes.searchPlaceholder")}
+            containerStyle={styles.searchBar}
           />
 
           <PaletteList
@@ -264,26 +211,8 @@ const styles = StyleSheet.create({
   closeButton: {
     padding: Spacing.xs,
   },
-  searchContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    borderWidth: 1,
-    borderRadius: BorderRadius.full,
-    paddingHorizontal: Spacing.md,
-    paddingVertical: Spacing.sm,
+  searchBar: {
     marginBottom: Spacing.lg,
-  },
-  searchIcon: {
-    marginRight: Spacing.sm,
-  },
-  searchInput: {
-    flex: 1,
-    fontSize: Typography.fontSize.md,
-    padding: 0,
-  },
-  clearButton: {
-    marginLeft: Spacing.sm,
-    padding: Spacing.xs,
   },
   paletteItem: {
     borderWidth: 1,

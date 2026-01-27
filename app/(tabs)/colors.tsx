@@ -8,6 +8,7 @@ import {
   PaletteSelector,
   PaletteSelectorRef,
 } from "@/components/palette-selector";
+import { SearchBar } from "@/components/search-bar";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { IconSymbol } from "@/components/ui/icon-symbol";
@@ -25,7 +26,6 @@ import {
   Dimensions,
   FlatList,
   StyleSheet,
-  TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
@@ -322,43 +322,11 @@ export default function ColorsScreen() {
 
             {/* Search Box with Filter Button */}
             <View style={styles.searchRow}>
-              <View
-                style={[
-                  styles.searchContainer,
-                  {
-                    borderColor: theme.border,
-                    backgroundColor: theme.backgroundSecondary,
-                  },
-                ]}
-              >
-                <IconSymbol
-                  name="magnifyingglass"
-                  size={20}
-                  color={theme.textSecondary}
-                  style={styles.searchIcon}
-                />
-                <TextInput
-                  style={[styles.searchInput, { color: theme.text }]}
-                  placeholder={t("colors.searchPlaceholder")}
-                  placeholderTextColor={theme.textSecondary}
-                  value={searchQuery}
-                  onChangeText={setSearchQuery}
-                  autoCapitalize="none"
-                  autoCorrect={false}
-                />
-                {searchQuery.length > 0 && (
-                  <TouchableOpacity
-                    onPress={() => setSearchQuery("")}
-                    style={styles.clearButton}
-                  >
-                    <IconSymbol
-                      name="xmark.circle.fill"
-                      size={20}
-                      color={theme.textSecondary}
-                    />
-                  </TouchableOpacity>
-                )}
-              </View>
+              <SearchBar
+                value={searchQuery}
+                onChangeText={setSearchQuery}
+                placeholder={t("colors.searchPlaceholder")}
+              />
               <TouchableOpacity
                 style={styles.filterButton}
                 onPress={() => setFilterDrawerOpen(true)}
@@ -433,10 +401,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: Spacing.xs,
   },
-  headerText: {
-    flex: 1,
-    marginRight: Spacing.sm,
-  },
   headerTitleRow: {
     flexDirection: "row",
     alignItems: "baseline",
@@ -453,10 +417,6 @@ const styles = StyleSheet.create({
   title: {
     marginBottom: 0,
   },
-  subtitle: {
-    fontSize: Typography.fontSize.sm,
-    opacity: 0.7,
-  },
   searchRow: {
     flexDirection: "row",
     alignItems: "center",
@@ -465,25 +425,6 @@ const styles = StyleSheet.create({
   },
   searchContainer: {
     flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    borderWidth: 1,
-    borderRadius: BorderRadius.full,
-    paddingHorizontal: Spacing.md,
-    paddingVertical: Spacing.sm,
-    backgroundColor: "transparent",
-  },
-  searchIcon: {
-    marginRight: Spacing.sm,
-  },
-  searchInput: {
-    flex: 1,
-    fontSize: Typography.fontSize.md,
-    padding: 0,
-  },
-  clearButton: {
-    marginLeft: Spacing.sm,
-    padding: Spacing.xs,
   },
   paletteSummary: {
     marginTop: Spacing.xs,
