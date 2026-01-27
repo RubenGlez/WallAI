@@ -1,5 +1,5 @@
 import { ColorDetailModal } from "@/components/color-detail-modal";
-import { FilterDropdown } from "@/components/filter-dropdown";
+import { FilterDrawer } from "@/components/filter-drawer";
 import {
   PaletteCreator,
   PaletteCreatorRef,
@@ -367,7 +367,7 @@ export default function ScanScreen() {
 
   return (
     <>
-      <FilterDropdown
+      <FilterDrawer
         open={filterDrawerOpen}
         onOpen={() => setFilterDrawerOpen(true)}
         onClose={() => setFilterDrawerOpen(false)}
@@ -485,7 +485,7 @@ export default function ScanScreen() {
             ]}
           />
         </ThemedView>
-      </FilterDropdown>
+      </FilterDrawer>
 
       <ColorDetailModal
         bottomSheetRef={bottomSheetRef}

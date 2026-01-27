@@ -14,7 +14,7 @@ import { useColorScheme } from '@/hooks/use-color-scheme';
 import { useColorsStore } from '@/stores/useColorsStore';
 import { IconSymbol } from '@/components/ui/icon-symbol';
 
-interface FilterDropdownProps {
+interface FilterDrawerProps {
   open: boolean;
   onOpen: () => void;
   onClose: () => void;
@@ -26,7 +26,7 @@ interface FilterDropdownProps {
   children: React.ReactNode;
 }
 
-export function FilterDropdown({
+export function FilterDrawer({
   open,
   onOpen,
   onClose,
@@ -36,7 +36,7 @@ export function FilterDropdown({
   onSeriesSelect,
   onClearFilters,
   children,
-}: FilterDropdownProps) {
+}: FilterDrawerProps) {
   const { t } = useTranslation();
   const colorScheme = useColorScheme() ?? 'light';
   const theme = Colors[colorScheme];
