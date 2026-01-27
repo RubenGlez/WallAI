@@ -272,7 +272,7 @@ export default function ColorsScreen() {
               </TouchableOpacity>
             </View>
 
-            {activePalette && activePalette.colors.length > 0 && (
+            {activePalette && (
               <View
                 style={[
                   styles.paletteSummary,
@@ -307,7 +307,7 @@ export default function ColorsScreen() {
                   </View>
                 </View>
                 <View style={styles.paletteColorsRow}>
-                  {activePalette.colors.slice(0, 12).map((c) => (
+                  {activePalette.colors.map((c) => (
                     <View
                       key={c.id}
                       style={[
@@ -460,6 +460,7 @@ const styles = StyleSheet.create({
   paletteColorsRow: {
     flexDirection: "row",
     alignItems: "center",
+    flexWrap: "wrap",
   },
   paletteColorSwatch: {
     width: 22,
