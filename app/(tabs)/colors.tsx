@@ -1,6 +1,11 @@
 import { ColorDetailModal } from "@/components/color-detail-modal";
 import { FilterDropdown } from "@/components/filter-dropdown";
-import { PaletteSelector, PaletteSelectorRef } from "@/components/palette-selector";
+import {
+  PaletteSelector,
+  PaletteSelectorRef,
+  PaletteCreator,
+  PaletteCreatorRef,
+} from "@/components/palette-selector";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { IconSymbol } from "@/components/ui/icon-symbol";
@@ -115,10 +120,13 @@ export default function ColorsScreen() {
     getColorsByBrandId,
     getColorsBySeriesId,
   } = useColorsStore();
+  const activePalette = usePaletteStore((state) => state.getActivePalette());
+  const clearActivePalette = usePaletteStore((state) => state.clearActivePalette);
   const [selectedColor, setSelectedColor] =
     useState<ColorWithTranslations | null>(null);
   const bottomSheetRef = useRef<BottomSheet>(null);
   const paletteSelectorRef = useRef<PaletteSelectorRef>(null);
+  const paletteCreatorRef = useRef<PaletteCreatorRef>(null);
   const [filterDrawerOpen, setFilterDrawerOpen] = useState(false);
   const [selectedBrandId, setSelectedBrandId] = useState<string | null>(null);
   const [selectedSeriesId, setSelectedSeriesId] = useState<string | null>(null);
@@ -227,12 +235,9 @@ export default function ColorsScreen() {
         <ThemedView style={styles.container} safeArea="top">
           <View style={styles.header}>
             <View style={styles.headerContent}>
-              <View style={styles.headerText}>
+              <View style={styles.headerTitleRow}>
                 <ThemedText type="title" style={styles.title}>
                   {t("colors.title")}
-                </ThemedText>
-                <ThemedText style={styles.subtitle}>
-                  {t("colors.subtitle", { count: filteredColors.length })}
                 </ThemedText>
               </View>
               <TouchableOpacity
@@ -240,12 +245,61 @@ export default function ColorsScreen() {
                 onPress={() => paletteSelectorRef.current?.open()}
               >
                 <IconSymbol
-                  name="square.grid.2x2.fill"
+                  name="swatchpalette"
                   size={24}
                   color={theme.tint}
                 />
               </TouchableOpacity>
             </View>
+
+            {activePalette && activePalette.colors.length > 0 && (
+              <View
+                style={[
+                  styles.paletteSummary,
+                  {
+                    borderColor: theme.border,
+                    backgroundColor: theme.backgroundSecondary,
+                  },
+                ]}
+              >
+                <View style={styles.paletteSummaryHeader}>
+                  <ThemedText
+                    style={styles.paletteSummaryName}
+                    numberOfLines={1}
+                  >
+                    {activePalette.name}
+                  </ThemedText>
+                  <View style={styles.paletteSummaryRight}>
+                    <ThemedText style={styles.paletteSummaryCount}>
+                      {activePalette.colors.length}
+                    </ThemedText>
+                    <TouchableOpacity
+                      onPress={clearActivePalette}
+                      style={styles.paletteSummaryClearButton}
+                      hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
+                    >
+                      <IconSymbol
+                        name="xmark.circle.fill"
+                        size={16}
+                        color={theme.textSecondary}
+                      />
+                    </TouchableOpacity>
+                  </View>
+                </View>
+                <View style={styles.paletteColorsRow}>
+                  {activePalette.colors.slice(0, 12).map((c) => (
+                    <View
+                      key={c.id}
+                      style={[
+                        styles.paletteColorSwatch,
+                        { backgroundColor: c.hex },
+                      ]}
+                    />
+                  ))}
+                </View>
+              </View>
+            )}
+
             {/* Search Box with Filter Button */}
             <View style={styles.searchRow}>
               <View style={[styles.searchContainer, { 
@@ -314,6 +368,20 @@ export default function ColorsScreen() {
         </ThemedView>
       </FilterDropdown>
 
+      {/* Floating button to open palette bottom sheet */}
+      <TouchableOpacity
+        style={[
+          styles.fab,
+          {
+            backgroundColor: theme.tint,
+          },
+        ]}
+        onPress={() => paletteCreatorRef.current?.open()}
+        activeOpacity={0.8}
+      >
+        <IconSymbol name="plus" size={28} color={theme.background} />
+      </TouchableOpacity>
+
       <ColorDetailModal
         bottomSheetRef={bottomSheetRef}
         color={selectedColor}
@@ -321,6 +389,7 @@ export default function ColorsScreen() {
       />
 
       <PaletteSelector ref={paletteSelectorRef} />
+      <PaletteCreator ref={paletteCreatorRef} />
     </>
   );
 }
@@ -336,12 +405,18 @@ const styles = StyleSheet.create({
   headerContent: {
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "flex-start",
-    marginBottom: Spacing.md,
+    alignItems: "center",
+    marginBottom: Spacing.xs,
   },
   headerText: {
     flex: 1,
     marginRight: Spacing.sm,
+  },
+  headerTitleRow: {
+    flexDirection: "row",
+    alignItems: "baseline",
+    gap: Spacing.sm,
+    flexShrink: 1,
   },
   paletteButton: {
     padding: Spacing.xs,
@@ -351,7 +426,7 @@ const styles = StyleSheet.create({
     minHeight: 40,
   },
   title: {
-    marginBottom: Spacing.xs,
+    marginBottom: 0,
   },
   subtitle: {
     fontSize: Typography.fontSize.sm,
@@ -361,6 +436,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: Spacing.sm,
+    marginTop: Spacing.md,
   },
   searchContainer: {
     flex: 1,
@@ -383,6 +459,47 @@ const styles = StyleSheet.create({
   clearButton: {
     marginLeft: Spacing.sm,
     padding: Spacing.xs,
+  },
+  paletteSummary: {
+    marginTop: Spacing.xs,
+    paddingHorizontal: Spacing.md,
+    paddingVertical: Spacing.sm,
+    borderWidth: 1,
+    borderRadius: BorderRadius.lg,
+  },
+  paletteSummaryHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: Spacing.xs,
+  },
+  paletteSummaryName: {
+    fontSize: Typography.fontSize.sm,
+    fontWeight: Typography.fontWeight.semibold,
+    flex: 1,
+    marginRight: Spacing.sm,
+  },
+  paletteSummaryRight: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  paletteSummaryCount: {
+    fontSize: Typography.fontSize.xs,
+    opacity: 0.7,
+  },
+  paletteSummaryClearButton: {
+    marginLeft: Spacing.xs,
+    padding: Spacing.xs,
+  },
+  paletteColorsRow: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  paletteColorSwatch: {
+    width: 18,
+    height: 18,
+    borderRadius: BorderRadius.full,
+    marginRight: -4,
   },
   filterButton: {
     padding: Spacing.xs,
@@ -450,5 +567,20 @@ const styles = StyleSheet.create({
   },
   emptyText: {
     opacity: 0.7,
+  },
+  fab: {
+    position: "absolute",
+    right: Spacing.lg,
+    bottom: Spacing.lg,
+    width: 56,
+    height: 56,
+    borderRadius: BorderRadius.full,
+    justifyContent: "center",
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 6,
+    elevation: 4,
   },
 });

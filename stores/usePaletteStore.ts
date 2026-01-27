@@ -18,6 +18,7 @@ interface PaletteState {
   createPalette: (name: string) => string;
   deletePalette: (id: string) => void;
   setActivePalette: (id: string) => void;
+  clearActivePalette: () => void;
   updatePaletteName: (id: string, name: string) => void;
   // Color management (operates on active palette)
   addColor: (color: ColorWithTranslations) => void;
@@ -93,6 +94,10 @@ export const usePaletteStore = create<PaletteState>()(
 
       setActivePalette: (id: string) => {
         set({ activePaletteId: id });
+      },
+
+      clearActivePalette: () => {
+        set({ activePaletteId: null });
       },
 
       updatePaletteName: (id: string, name: string) => {

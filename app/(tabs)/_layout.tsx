@@ -22,35 +22,65 @@ export default function TabLayout() {
         name="index"
         options={{
           title: t('tabs.home'),
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+          tabBarIcon: ({ color, focused }) => (
+            <IconSymbol
+              size={28}
+              name={focused ? 'house.fill' : 'house'}
+              color={color}
+            />
+          ),
         }}
       />
       <Tabs.Screen
         name="colors"
         options={{
           title: t('tabs.colors'),
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paintbrush.fill" color={color} />,
+          tabBarIcon: ({ color, focused }) => (
+            <IconSymbol
+              size={28}
+              name={focused ? 'paintbrush.fill' : 'paintbrush'}
+              color={color}
+            />
+          ),
         }}
       />
       <Tabs.Screen
         name="scan"
         options={{
           title: t('tabs.scan'),
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="camera.fill" color={color} />,
+          tabBarIcon: ({ color, focused }) => (
+            <IconSymbol
+              size={28}
+              name={focused ? 'camera.fill' : 'camera'}
+              color={color}
+            />
+          ),
         }}
       />
       <Tabs.Screen
         name="wall"
         options={{
           title: t('tabs.wall'),
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="square.stack.3d.up.fill" color={color} />,
+          tabBarIcon: ({ color, focused }) => (
+            <IconSymbol
+              size={28}
+              name={focused ? 'square.stack.3d.up.fill' : 'square.stack.3d.up'}
+              color={color}
+            />
+          ),
         }}
       />
       <Tabs.Screen
         name="projects"
         options={{
           title: t('tabs.projects'),
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="folder.fill" color={color} />,
+          tabBarIcon: ({ color, focused }) => (
+            <IconSymbol
+              size={28}
+              name={focused ? 'folder.fill' : 'folder'}
+              color={color}
+            />
+          ),
         }}
       />
     </Tabs>

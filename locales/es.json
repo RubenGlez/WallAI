@@ -69,6 +69,7 @@
     "paletteName": "Nombre de la paleta",
     "noPalettes": "No hay paletas. Crea una nueva para comenzar.",
     "color": "color",
-    "colors": "colores"
+    "colors": "colores",
+    "searchPlaceholder": "Buscar paletas..."
   }
 }

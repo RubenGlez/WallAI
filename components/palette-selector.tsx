@@ -8,18 +8,28 @@ import BottomSheet, {
   BottomSheetScrollView,
   BottomSheetView,
 } from "@gorhom/bottom-sheet";
-import React, { useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
   View,
-  FlatList,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTranslation } from "react-i18next";
 
 export interface PaletteSelectorRef {
+  open: () => void;
+  close: () => void;
+}
+
+export interface PaletteCreatorRef {
   open: () => void;
   close: () => void;
 }
@@ -36,15 +46,8 @@ export const PaletteSelector = React.forwardRef<PaletteSelectorRef, PaletteSelec
     const theme = Colors[colorScheme];
     const insets = useSafeAreaInsets();
     const bottomSheetRef = useRef<BottomSheet>(null);
-    const {
-      palettes,
-      activePaletteId,
-      createPalette,
-      setActivePalette,
-      getPalette,
-    } = usePaletteStore();
-    const [isCreating, setIsCreating] = useState(false);
-    const [newPaletteName, setNewPaletteName] = useState("");
+    const { palettes, activePaletteId, setActivePalette } = usePaletteStore();
+    const [searchQuery, setSearchQuery] = useState("");
 
     useImperativeHandle(ref, () => ({
       open: () => bottomSheetRef.current?.expand(),
@@ -53,8 +56,7 @@ export const PaletteSelector = React.forwardRef<PaletteSelectorRef, PaletteSelec
 
     const handleSheetChanges = useCallback((index: number) => {
       if (index === -1) {
-        setIsCreating(false);
-        setNewPaletteName("");
+        setSearchQuery("");
       }
     }, []);
 
@@ -64,19 +66,6 @@ export const PaletteSelector = React.forwardRef<PaletteSelectorRef, PaletteSelec
         onSelect(paletteId);
       }
       bottomSheetRef.current?.close();
-    };
-
-    const handleCreatePalette = () => {
-      if (newPaletteName.trim()) {
-        const newId = createPalette(newPaletteName.trim());
-        setActivePalette(newId);
-        if (onSelect) {
-          onSelect(newId);
-        }
-        setNewPaletteName("");
-        setIsCreating(false);
-        bottomSheetRef.current?.close();
-      }
     };
 
     const isColorInPalette = (palette: Palette) => {
@@ -118,6 +107,14 @@ export const PaletteSelector = React.forwardRef<PaletteSelectorRef, PaletteSelec
       );
     };
 
+    const filteredPalettes = useMemo(() => {
+      const query = searchQuery.trim().toLowerCase();
+      if (!query) return palettes;
+      return palettes.filter((p) =>
+        p.name.toLowerCase().includes(query)
+      );
+    }, [palettes, searchQuery]);
+
     return (
       <BottomSheet
         ref={bottomSheetRef}
@@ -150,74 +147,48 @@ export const PaletteSelector = React.forwardRef<PaletteSelectorRef, PaletteSelec
             ]}
             showsVerticalScrollIndicator={false}
           >
-            {/* Create New Palette Section */}
-            {!isCreating ? (
-              <TouchableOpacity
-                style={[
-                  styles.createButton,
-                  { backgroundColor: theme.backgroundSecondary },
-                ]}
-                onPress={() => setIsCreating(true)}
-              >
-                <IconSymbol
-                  name="plus.circle.fill"
-                  size={24}
-                  color={theme.tint}
-                />
-                <ThemedText style={[styles.createButtonText, { color: theme.tint }]}>
-                  {t("palettes.createNew")}
-                </ThemedText>
-              </TouchableOpacity>
-            ) : (
-              <View style={[styles.createForm, { borderColor: theme.border }]}>
-                <TextInput
-                  style={[styles.nameInput, { color: theme.text, borderColor: theme.border }]}
-                  placeholder={t("palettes.paletteName")}
-                  placeholderTextColor={theme.textSecondary}
-                  value={newPaletteName}
-                  onChangeText={setNewPaletteName}
-                  autoFocus
-                />
-                <View style={styles.createFormActions}>
-                  <TouchableOpacity
-                    style={[styles.cancelButton, { borderColor: theme.border }]}
-                    onPress={() => {
-                      setIsCreating(false);
-                      setNewPaletteName("");
-                    }}
-                  >
-                    <ThemedText style={styles.cancelButtonText}>
-                      {t("common.cancel")}
-                    </ThemedText>
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    style={[
-                      styles.createConfirmButton,
-                      {
-                        backgroundColor: newPaletteName.trim()
-                          ? theme.tint
-                          : theme.border,
-                      },
-                    ]}
-                    onPress={handleCreatePalette}
-                    disabled={!newPaletteName.trim()}
-                  >
-                    <ThemedText
-                      style={[
-                        styles.createConfirmButtonText,
-                        { color: newPaletteName.trim() ? "#FFFFFF" : theme.textSecondary },
-                      ]}
-                    >
-                      {t("common.create")}
-                    </ThemedText>
-                  </TouchableOpacity>
-                </View>
-              </View>
-            )}
+            {/* Search box */}
+            <View
+              style={[
+                styles.searchContainer,
+                {
+                  borderColor: theme.border,
+                  backgroundColor: theme.backgroundSecondary,
+                },
+              ]}
+            >
+              <IconSymbol
+                name="magnifyingglass"
+                size={18}
+                color={theme.textSecondary}
+                style={styles.searchIcon}
+              />
+              <TextInput
+                style={[styles.searchInput, { color: theme.text }]}
+                placeholder={t("palettes.searchPlaceholder")}
+                placeholderTextColor={theme.textSecondary}
+                value={searchQuery}
+                onChangeText={setSearchQuery}
+                autoCapitalize="none"
+                autoCorrect={false}
+              />
+              {searchQuery.length > 0 && (
+                <TouchableOpacity
+                  onPress={() => setSearchQuery("")}
+                  style={styles.clearButton}
+                >
+                  <IconSymbol
+                    name="xmark.circle.fill"
+                    size={18}
+                    color={theme.textSecondary}
+                  />
+                </TouchableOpacity>
+              )}
+            </View>
 
             {/* Palettes List */}
-            {palettes.length > 0 ? (
-              palettes.map((item) => (
+            {filteredPalettes.length > 0 ? (
+              filteredPalettes.map((item) => (
                 <View key={item.id}>
                   {renderPaletteItem({ item })}
                 </View>
@@ -237,6 +208,134 @@ export const PaletteSelector = React.forwardRef<PaletteSelectorRef, PaletteSelec
 );
 
 PaletteSelector.displayName = "PaletteSelector";
+
+interface PaletteCreatorProps {
+  onCreated?: (paletteId: string) => void;
+}
+
+export const PaletteCreator = React.forwardRef<PaletteCreatorRef, PaletteCreatorProps>(
+  ({ onCreated }, ref) => {
+    const { t } = useTranslation();
+    const colorScheme = useColorScheme() ?? "light";
+    const theme = Colors[colorScheme];
+    const insets = useSafeAreaInsets();
+    const bottomSheetRef = useRef<BottomSheet>(null);
+    const { createPalette, setActivePalette } = usePaletteStore();
+    const [newPaletteName, setNewPaletteName] = useState("");
+
+    useImperativeHandle(ref, () => ({
+      open: () => bottomSheetRef.current?.expand(),
+      close: () => bottomSheetRef.current?.close(),
+    }));
+
+    const handleSheetChanges = useCallback((index: number) => {
+      if (index === -1) {
+        setNewPaletteName("");
+      }
+    }, []);
+
+    const handleCreatePalette = () => {
+      if (!newPaletteName.trim()) return;
+      const name = newPaletteName.trim();
+      const newId = createPalette(name);
+      setActivePalette(newId);
+      if (onCreated) {
+        onCreated(newId);
+      }
+      setNewPaletteName("");
+      bottomSheetRef.current?.close();
+    };
+
+    return (
+      <BottomSheet
+        ref={bottomSheetRef}
+        onChange={handleSheetChanges}
+        enablePanDownToClose
+        backgroundStyle={{ backgroundColor: theme.background }}
+        handleIndicatorStyle={{ backgroundColor: theme.border }}
+        snapPoints={useMemo(() => ["40%"], [])}
+        index={-1}
+      >
+        <BottomSheetView style={styles.content}>
+          <View style={[styles.header, { borderBottomColor: theme.border }]}>
+            <ThemedText type="title" style={styles.headerTitle}>
+              {t("palettes.createNew")}
+            </ThemedText>
+            <TouchableOpacity
+              onPress={() => bottomSheetRef.current?.close()}
+              style={styles.closeButton}
+            >
+              <IconSymbol name="xmark.circle.fill" size={24} color={theme.text} />
+            </TouchableOpacity>
+          </View>
+
+          <BottomSheetScrollView
+            style={styles.scrollView}
+            contentContainerStyle={[
+              styles.scrollContent,
+              { paddingBottom: insets.bottom + Spacing.lg },
+            ]}
+            showsVerticalScrollIndicator={false}
+          >
+            <View style={[styles.createForm, { borderColor: theme.border }]}>
+              <TextInput
+                style={[
+                  styles.nameInput,
+                  { color: theme.text, borderColor: theme.border },
+                ]}
+                placeholder={t("palettes.paletteName")}
+                placeholderTextColor={theme.textSecondary}
+                value={newPaletteName}
+                onChangeText={setNewPaletteName}
+                autoFocus
+              />
+              <View style={styles.createFormActions}>
+                <TouchableOpacity
+                  style={[styles.cancelButton, { borderColor: theme.border }]}
+                  onPress={() => {
+                    setNewPaletteName("");
+                    bottomSheetRef.current?.close();
+                  }}
+                >
+                  <ThemedText style={styles.cancelButtonText}>
+                    {t("common.cancel")}
+                  </ThemedText>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={[
+                    styles.createConfirmButton,
+                    {
+                      backgroundColor: newPaletteName.trim()
+                        ? theme.tint
+                        : theme.border,
+                    },
+                  ]}
+                  onPress={handleCreatePalette}
+                  disabled={!newPaletteName.trim()}
+                >
+                  <ThemedText
+                    style={[
+                      styles.createConfirmButtonText,
+                      {
+                        color: newPaletteName.trim()
+                          ? "#FFFFFF"
+                          : theme.textSecondary,
+                      },
+                    ]}
+                  >
+                    {t("common.create")}
+                  </ThemedText>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </BottomSheetScrollView>
+        </BottomSheetView>
+      </BottomSheet>
+    );
+  }
+);
+
+PaletteCreator.displayName = "PaletteCreator";
 
 const styles = StyleSheet.create({
   content: {
@@ -310,6 +409,29 @@ const styles = StyleSheet.create({
   createConfirmButtonText: {
     fontSize: Typography.fontSize.md,
     fontWeight: Typography.fontWeight.semibold,
+  },
+  searchContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    borderWidth: 1,
+    borderRadius: BorderRadius.full,
+    paddingHorizontal: Spacing.md,
+    paddingVertical: Spacing.sm,
+    marginHorizontal: Spacing.md,
+    marginTop: Spacing.md,
+    marginBottom: Spacing.lg,
+  },
+  searchIcon: {
+    marginRight: Spacing.sm,
+  },
+  searchInput: {
+    flex: 1,
+    fontSize: Typography.fontSize.md,
+    padding: 0,
+  },
+  clearButton: {
+    marginLeft: Spacing.sm,
+    padding: Spacing.xs,
   },
   paletteItem: {
     borderWidth: 1,
