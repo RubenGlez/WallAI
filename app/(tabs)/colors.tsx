@@ -1,13 +1,13 @@
 import { ColorDetailModal } from "@/components/color-detail-modal";
 import { FilterDropdown } from "@/components/filter-dropdown";
 import {
-    PaletteSelector,
-    PaletteSelectorRef,
-} from "@/components/palette-selector";
-import {
-    PaletteCreator,
-    PaletteCreatorRef,
+  PaletteCreator,
+  PaletteCreatorRef,
 } from "@/components/palette-creator";
+import {
+  PaletteSelector,
+  PaletteSelectorRef,
+} from "@/components/palette-selector";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { IconSymbol } from "@/components/ui/icon-symbol";
@@ -21,13 +21,13 @@ import BottomSheet from "@gorhom/bottom-sheet";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
-    ActivityIndicator,
-    Dimensions,
-    FlatList,
-    StyleSheet,
-    TextInput,
-    TouchableOpacity,
-    View,
+  ActivityIndicator,
+  Dimensions,
+  FlatList,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+  View,
 } from "react-native";
 
 const { width } = Dimensions.get("window");
@@ -521,8 +521,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   paletteColorSwatch: {
-    width: 18,
-    height: 18,
+    width: 22,
+    height: 22,
     borderRadius: BorderRadius.full,
     marginRight: -4,
   },
