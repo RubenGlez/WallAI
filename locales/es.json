@@ -66,7 +66,17 @@
   },
   "wall": {
     "title": "Muro",
-    "subtitle": "Superpone tu boceto en una foto de muro para un posicionamiento preciso"
+    "subtitle": "Superpone tu boceto en una foto de muro para un posicionamiento preciso",
+    "loadingPermissions": "Comprobando permiso de cámara…",
+    "cameraPermissionMessage": "WallAI necesita acceso a la cámara para mostrar la vista en vivo y superponer tu boceto en el muro.",
+    "grantPermission": "Dar acceso a la cámara",
+    "noSketchTitle": "Añade un boceto primero",
+    "noSketchSubtitle": "Elige una imagen de la galería como boceto y luego apunta la cámara al muro para superponerlo.",
+    "pickSketch": "Elegir boceto de la galería",
+    "defaultProjectName": "Proyecto de muro",
+    "gestureHint": "Arrastra, pellizca o rota el boceto para alinearlo con el muro",
+    "cameraUnavailableTitle": "Cámara no disponible",
+    "cameraUnavailableMessage": "La cámara solo está disponible en un dispositivo físico. Ejecuta la app con un development build: npx expo run:ios o npx expo run:android."
   },
   "projects": {
     "title": "Proyectos",

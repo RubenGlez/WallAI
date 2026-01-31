@@ -1,11 +1,13 @@
-import React from "react";
+import React, { ComponentProps } from "react";
 import { StyleSheet, TouchableOpacity, View, ViewStyle } from "react-native";
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { BorderRadius, Colors, Spacing } from "@/constants/theme";
 import { useColorScheme } from "@/hooks/use-color-scheme";
 
+export type IconSymbolName = ComponentProps<typeof IconSymbol>["name"];
+
 export interface FloatingActionButtonItem {
-  icon: string;
+  icon: IconSymbolName;
   onPress: () => void;
   size?: "small" | "large";
   backgroundColor?: string;

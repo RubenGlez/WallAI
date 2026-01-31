@@ -66,7 +66,17 @@
   },
   "wall": {
     "title": "Wall",
-    "subtitle": "Overlay your sketch on a wall photo for precise positioning"
+    "subtitle": "Overlay your sketch on a wall photo for precise positioning",
+    "loadingPermissions": "Checking camera permission…",
+    "cameraPermissionMessage": "WallAI needs camera access to show the live view and overlay your sketch on the wall.",
+    "grantPermission": "Grant camera access",
+    "noSketchTitle": "Add a sketch first",
+    "noSketchSubtitle": "Pick an image from your gallery to use as your sketch, then point the camera at the wall to overlay it.",
+    "pickSketch": "Pick sketch from gallery",
+    "defaultProjectName": "Wall project",
+    "gestureHint": "Drag, pinch, or rotate the sketch to align it with the wall",
+    "cameraUnavailableTitle": "Camera not available",
+    "cameraUnavailableMessage": "The camera module is only available on a physical device. Run the app with a development build: npx expo run:ios or npx expo run:android."
   },
   "projects": {
     "title": "Projects",

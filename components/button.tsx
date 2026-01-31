@@ -1,14 +1,16 @@
-import React from "react";
+import React, { ComponentProps } from "react";
 import { StyleSheet, TouchableOpacity, ViewStyle, TextStyle } from "react-native";
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { ThemedText } from "@/components/themed-text";
 import { BorderRadius, Colors, Spacing, Typography } from "@/constants/theme";
 import { useColorScheme } from "@/hooks/use-color-scheme";
 
+export type IconSymbolName = ComponentProps<typeof IconSymbol>["name"];
+
 interface ButtonProps {
   onPress: () => void;
   label?: string;
-  icon?: string;
+  icon?: IconSymbolName;
   iconPosition?: "left" | "right";
   variant?: "primary" | "secondary" | "outline" | "ghost";
   size?: "small" | "medium" | "large";

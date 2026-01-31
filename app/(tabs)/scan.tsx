@@ -48,7 +48,6 @@ export default function ScanScreen() {
   const activePalette = usePaletteStore((state) => state.getActivePalette());
   const addColor = usePaletteStore((state) => state.addColor);
   const removeColor = usePaletteStore((state) => state.removeColor);
-  const createPalette = usePaletteStore((state) => state.createPalette);
   const setActivePalette = usePaletteStore((state) => state.setActivePalette);
 
   const [filterDrawerOpen, setFilterDrawerOpen] = useState(false);

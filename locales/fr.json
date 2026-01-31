@@ -66,7 +66,17 @@
   },
   "wall": {
     "title": "Mur",
-    "subtitle": "Superposez votre esquisse sur une photo de mur pour un positionnement précis"
+    "subtitle": "Superposez votre esquisse sur une photo de mur pour un positionnement précis",
+    "loadingPermissions": "Vérification de l'autorisation caméra…",
+    "cameraPermissionMessage": "WallAI a besoin d'accéder à la caméra pour afficher la vue en direct et superposer votre esquisse sur le mur.",
+    "grantPermission": "Autoriser l'accès à la caméra",
+    "noSketchTitle": "Ajoutez d'abord une esquisse",
+    "noSketchSubtitle": "Choisissez une image de la galerie comme esquisse, puis visez le mur avec la caméra pour la superposer.",
+    "pickSketch": "Choisir une esquisse dans la galerie",
+    "defaultProjectName": "Projet mur",
+    "gestureHint": "Glissez, pincez ou faites pivoter l'esquisse pour l'aligner sur le mur",
+    "cameraUnavailableTitle": "Caméra indisponible",
+    "cameraUnavailableMessage": "La caméra n'est disponible que sur un appareil physique. Lancez l'app avec un development build : npx expo run:ios ou npx expo run:android."
   },
   "projects": {
     "title": "Projets",

@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next';
 import { ThemedText } from '@/components/themed-text';
 import { Drawer } from '@/components/drawer';
 import { Button } from '@/components/button';
-import { Colors, Spacing, BorderRadius, Typography } from '@/constants/theme';
+import { Colors, Spacing, Typography } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { useColorsStore } from '@/stores/useColorsStore';
 import { IconSymbol } from '@/components/ui/icon-symbol';

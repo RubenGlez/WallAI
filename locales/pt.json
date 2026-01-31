@@ -66,7 +66,17 @@
   },
   "wall": {
     "title": "Parede",
-    "subtitle": "Sobreponha seu esboço em uma foto de parede para posicionamento preciso"
+    "subtitle": "Sobreponha seu esboço em uma foto de parede para posicionamento preciso",
+    "loadingPermissions": "Verificando permissão da câmera…",
+    "cameraPermissionMessage": "O WallAI precisa de acesso à câmera para mostrar a vista ao vivo e sobrepor seu esboço na parede.",
+    "grantPermission": "Conceder acesso à câmera",
+    "noSketchTitle": "Adicione um esboço primeiro",
+    "noSketchSubtitle": "Escolha uma imagem da galeria como esboço e aponte a câmera para a parede para sobrepor.",
+    "pickSketch": "Escolher esboço da galeria",
+    "defaultProjectName": "Projeto de parede",
+    "gestureHint": "Arraste, belisque ou gire o esboço para alinhá-lo à parede",
+    "cameraUnavailableTitle": "Câmera não disponível",
+    "cameraUnavailableMessage": "A câmera só está disponível em um dispositivo físico. Execute o app com um development build: npx expo run:ios ou npx expo run:android."
   },
   "projects": {
     "title": "Projetos",
