@@ -1,4 +1,1 @@
-// Central export for all stores
-export * from './usePaletteStore';
-export * from './useColorsStore';
-export * from './useProjectsStore';
+// Central export for all stores — add new stores here as they are created

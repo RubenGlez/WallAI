@@ -15,11 +15,10 @@
     "create": "Erstellen"
   },
   "tabs": {
-    "home": "Startseite",
     "colors": "Farben",
-    "scan": "Scannen",
-    "wall": "Wand",
-    "projects": "Projekte"
+    "palettes": "Paletten",
+    "doodles": "Doodles",
+    "profile": "Profil"
   },
   "home": {
     "title": "WallAI",
@@ -38,7 +37,14 @@
     "series": "Serie",
     "brand": "Marke",
     "addToPalette": "Zur Palette hinzufügen",
-    "removeFromPalette": "Aus Palette entfernen"
+    "removeFromPalette": "Aus Palette entfernen",
+    "placeholder": "Spray-Explorer — demnächst."
+  },
+  "doodles": {
+    "placeholder": "Wandstück-Simulator — demnächst."
+  },
+  "profile": {
+    "placeholder": "Einstellungen und Favoriten — demnächst."
   },
   "filters": {
     "title": "Filter",
@@ -123,6 +129,7 @@
     "title": "Modal"
   },
   "palettes": {
+    "placeholder": "Meine Paletten — demnächst.",
     "selectOrCreate": "Palette Auswählen oder Erstellen",
     "createNew": "Neue Palette Erstellen",
     "paletteName": "Palettenname",

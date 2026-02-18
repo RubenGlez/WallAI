@@ -1,224 +1,327 @@
-# 📄 PRD – WallAI 
+# 🧱 1️⃣ Estructura General de la App
 
-## 1. Product Overview
+## 🔻 Navegación principal (Bottom Tab)
 
-**Product Name:** WallAI
-**Tagline:** From sketch to wall, guided by AI
+Te recomiendo 4 tabs principales:
 
-**Description:**
-WallAI is a mobile AI assistant for graffiti artists that helps plan graffiti pieces in real-world conditions by combining:
+1. 🎨 **Colores**
+2. 🧪 **Paletas**
+3. 🧩 **Doodles**
+4. 👤 **Perfil / Ajustes**
 
-* Real spray color palettes
-* AI-assisted color matching from sketches
-* Wall overlay tools to accurately place, scale, and trace designs on real walls
-
----
-
-## 2. Product Pillars (MVP)
-
-### Pillar 1 – Color System (Palettes + Cart)
-
-**Single unified system**, two views:
-
-* **Palette View** → browse colors
-* **Cart View** → build combinations
+Es una app muy funcional, así que mejor **bottom tabs claras y directas**.
 
 ---
 
-## 3. Core Features
+# 🎨 1. TAB: COLORES (Explorador de sprays)
+
+## Objetivo
+
+Explorar marcas → series → colores → detalles técnicos.
 
 ---
 
-## 3.1 🎨 Color System (Spray Palettes + Color Cart)
+## 🖥 Pantalla 1: Selección de marca
 
-### Description
+Contenido:
 
-A unified color system that lets users browse real spray colors and collect them into a “cart” to experiment with combinations.
+* Grid de marcas (logos grandes):
 
-This is a **creative planning tool**, not a store.
+  * Montana Colors
+  * MTN 94
+  * MTN Hardcore
+  * Loop
+  * Molotow
+  * Ironlak
+  * etc.
 
----
+Cada card:
 
-### Functional Scope
+* Logo
+* Nº total de colores
+* Tipo de spray (low pressure, high pressure…)
 
-#### Palette View
+Acciones:
 
-* Browse spray brands
-* Visual grid of colors
-* Search by name / code
-* Filter by brand
-* Tap color → details
-* Add color to cart
-
-#### Cart View
-
-* Selected colors across brands
-* Drag to reorder
-* Remove colors
-* Visual palette preview
-* Save palette to project
+* Tap → Ir a series de esa marca
+* Filtro rápido (solo low pressure / solo matte…)
 
 ---
 
-### Core Use Cases
+## 🖥 Pantalla 2: Series de la marca
 
-* Build a color combo before painting
-* Compare similar colors across brands
-* Prepare a final spray list
-* Use palette inside wall overlay mode
+Ejemplo: Montana → 94 / Hardcore / Water Based…
 
----
+Contenido:
 
-### Data Model (Simplified)
+* Cards con:
 
-```json
-{
-  "id": "color_001",
-  "brand": "Montana Black",
-  "name": "Power Pink",
-  "code": "BLK3120",
-  "hex": "#E63C8F"
-}
-```
+  * Nombre de serie
+  * Tipo acabado (mate, brillo, metalizado…)
+  * Nº de colores
+
+Tap → Grid de colores
 
 ---
 
-## 3.2 🧠 Sketch → Spray Color Matching
+## 🖥 Pantalla 3: Grid de colores
 
-### Description
+Aquí es donde el artista va a pasar tiempo.
 
-Analyze a photo of a sketch and map its dominant colors to real spray colors.
+Contenido:
 
----
+* Grid visual tipo Pinterest (cuadrados grandes de color)
+* Filtros:
 
-### User Flow
+  * Familia (rojos, azules, pieles, verdes…)
+  * Luminosidad
+  * Saturación
+  * Opacidad
+* Buscador por nombre o código
 
-1. Take photo of sketch
-2. App extracts dominant colors
-3. User selects preferred brand(s)
-4. App suggests closest spray matches
-5. User confirms / edits
-6. Colors are added to **Color Cart**
+Cada color:
 
----
+* Código (ej: RV-102)
+* Nombre
+* Swatch grande
+* Icono para:
 
-### Functional Requirements
-
-* Extract 5–12 dominant colors
-* Color distance matching (RGB / LAB)
-* Manual override
-* One-tap “Add all to cart”
-
----
-
-## 3.3 🧱 Wall Overlay & Measurement (CORE FEATURE)
-
-### Description
-
-Allows users to take a photo of a wall and overlay their sketch on top to guide **positioning, scale, and proportions** before and during painting.
-
-This is a **key differentiator** of WallAI.
+  * ⭐ Añadir a favoritos
+  * ➕ Añadir a paleta
 
 ---
 
-### User Flow
+## 🖥 Pantalla 4: Detalle de color
 
-1. User enters **Wall Mode**
-2. Takes photo of wall (or uses live camera)
-3. Selects sketch (photo or project sketch)
-4. Sketch appears as semi-transparent overlay
-5. User adjusts overlay
-6. User locks overlay and uses it as a guide
-
----
-
-### Overlay Controls
-
-* Opacity slider
-* Scale (pinch)
-* Rotate
-* Drag to move
-* Flip (optional)
+* Swatch enorme
+* Código + nombre
+* Marca + serie
+* Familia
+* Similares dentro de la marca
+* Similares en otras marcas (esto es muy potente)
+* Botón: “Añadir a paleta”
 
 ---
 
-### Measurement & Planning Tools
+# 🧪 2. TAB: PALETAS
 
-* Reference points (tap-to-measure)
-* Aspect ratio lock
-* Grid overlay
-* Estimated dimensions (based on reference input)
-
-  * e.g. “This door is 2m high”
-
-> User provides **one real-world reference** to scale the entire sketch.
+Aquí es donde empieza lo interesante.
 
 ---
 
-### Functional Requirements
+## 🖥 Pantalla 1: Mis paletas
 
-* Image overlay rendering
-* Gesture-based transformations
-* Save reference image
-* Attach overlay setup to project
+Grid de paletas guardadas:
 
----
+Cada paleta:
 
-### Nice-to-have (Post-MVP)
+* Nombre
+* Miniatura visual con 4-6 colores
+* Marca principal
+* Fecha creación
 
-* AR anchoring
-* Perspective correction
-* Symmetry guides
-* Outline-only mode
+Botones:
 
----
-
-## 3.4 📁 Projects
-
-### Description
-
-Local project container tying everything together.
+* Crear nueva
+* Importar desde imagen
 
 ---
 
-### Each Project Includes
+## 🖥 Crear paleta (2 caminos)
 
-* Name
-* Sketch image
-* Color Cart (palette)
-* Wall photo
-* Overlay configuration
-* Notes
+### Opción A — Manual
 
----
+1. Seleccionas marca o mezcla de marcas
+2. Abres explorador
+3. Añades colores
+4. Ves preview en tiempo real
 
-## 4. Navigation Structure
+Extras muy potentes:
 
-Bottom Tabs:
-
-* **Home**
-* **Colors** (Palette + Cart)
-* **Scan**
-* **Wall**
-* **Projects**
-
-Color Cart is accessible globally.
+* Mostrar contraste entre colores
+* Mostrar cómo quedarían outline/fill/3D/brillo
+* Reordenar colores
 
 ---
 
-## 5. UX Principles
+### Opción B — Desde foto
 
-* Designed for outdoor use
-* High contrast
-* One-hand interaction
-* Minimal text
-* Fast access to camera
+Flujo:
+
+1. Subes foto (muro, naturaleza, otra pieza…)
+2. Detectas colores dominantes
+3. La app:
+
+   * Extrae 5-8 colores principales
+   * Busca el color más cercano en la marca seleccionada
+4. Te muestra:
+
+   * Color original
+   * Spray equivalente
+   * Nivel de similitud %
+
+Pantalla final:
+
+* Guardar paleta
+* Editar manualmente
 
 ---
 
-## 6. Non-Goals (MVP)
+# 🧩 3. TAB: DOODLES (Simulador de pieza en muro)
 
-* No social network
-* No accounts
-* No buying sprays
-* No tutorials
+Esto es la feature diferencial 💣
+
+---
+
+## 🖥 Pantalla 1: Mis Doodles
+
+* Lista de proyectos
+* Miniatura combinada
+* Nombre del spot
+* Fecha
+
+Botón: Nuevo doodle
+
+---
+
+## 🖥 Crear Doodle — Paso 1
+
+Seleccionar:
+
+* 📷 Imagen del muro
+* 🖼 Imagen del boceto
+
+---
+
+## 🖥 Paso 2: Editor
+
+Aquí necesitas algo potente pero simple.
+
+Pantalla dividida en:
+
+Fondo: muro
+Capa superior: boceto
+
+Controles:
+
+### Transformaciones
+
+* Escala
+* Rotación
+* Flip
+* Perspectiva (muy importante)
+* Ajuste libre por puntos
+
+### Ajustes visuales
+
+* Opacidad
+* Modo de fusión (multiply, overlay…)
+* Contraste
+* Desaturar muro
+
+### Guías
+
+* Grid
+* Líneas de fuga
+* Centro
+* Proporciones
+
+---
+
+## 🖥 Paso 3: Export
+
+* Guardar imagen
+* Exportar PNG
+* Compartir
+* Guardar como proyecto editable
+
+---
+
+# 👤 4. PERFIL / AJUSTES
+
+Contenido:
+
+* Mis favoritos
+* Historial de colores usados
+* Marcas preferidas
+* Sistema de unidades
+* Modo oscuro (muy importante para artistas)
+* Backup en la nube
+
+---
+
+# 🧠 Arquitectura interna recomendada
+
+Te lo organizo a nivel conceptual:
+
+## Entidades principales
+
+### Brand
+
+* id
+* name
+* logo
+* pressureType
+
+### Series
+
+* id
+* brandId
+* finishType
+* colors[]
+
+### Color
+
+* id
+* brandId
+* seriesId
+* hex
+* rgb
+* lab (importantísimo para similitud)
+* family
+* opacityLevel
+
+### Palette
+
+* id
+* name
+* colors[]
+* createdAt
+
+### Doodle
+
+* id
+* wallImage
+* sketchImage
+* transformData
+* exportImage
+
+---
+
+# 🚀 Flujo típico de uso real
+
+Un writer podría:
+
+1. Crear paleta desde foto de referencia.
+2. Ajustarla manualmente.
+3. Guardarla.
+4. Crear doodle en el muro real.
+5. Ir a pintar con:
+
+   * Lista de sprays exactos.
+   * Referencia visual.
+
+Eso es valor real en calle.
+
+---
+
+# 🔥 Features futuras (muy potentes)
+
+Te dejo ideas premium:
+
+* 📍 Guardar spots geolocalizados
+* 🧾 Lista automática de compra
+* 🧮 Calculadora de sprays necesarios por m²
+* 🧠 AI que sugiere combinaciones “estilo old school / chrome / pastel / horrorcore”
+* 🎨 Simulador 3D rápido
+* 🔄 Comparador de equivalencias entre marcas

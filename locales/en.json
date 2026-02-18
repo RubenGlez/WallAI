@@ -15,11 +15,10 @@
     "create": "Create"
   },
   "tabs": {
-    "home": "Home",
     "colors": "Colors",
-    "scan": "Scan",
-    "wall": "Wall",
-    "projects": "Projects"
+    "palettes": "Palettes",
+    "doodles": "Doodles",
+    "profile": "Profile"
   },
   "home": {
     "title": "WallAI",
@@ -38,7 +37,14 @@
     "series": "Series",
     "brand": "Brand",
     "addToPalette": "Add to Palette",
-    "removeFromPalette": "Remove from Palette"
+    "removeFromPalette": "Remove from Palette",
+    "placeholder": "Spray explorer — coming soon."
+  },
+  "doodles": {
+    "placeholder": "Wall piece simulator — coming soon."
+  },
+  "profile": {
+    "placeholder": "Settings and favorites — coming soon."
   },
   "filters": {
     "title": "Filters",
@@ -123,6 +129,7 @@
     "title": "Modal"
   },
   "palettes": {
+    "placeholder": "My palettes — coming soon.",
     "selectOrCreate": "Select or Create Palette",
     "createNew": "Create New Palette",
     "paletteName": "Palette name",

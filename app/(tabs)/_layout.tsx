@@ -21,14 +21,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: t('tabs.home'),
-          tabBarIcon: ({ color, focused }) => (
-            <IconSymbol
-              size={28}
-              name={focused ? 'house.fill' : 'house'}
-              color={color}
-            />
-          ),
+          href: null,
         }}
       />
       <Tabs.Screen
@@ -45,22 +38,22 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="scan"
+        name="palettes"
         options={{
-          title: t('tabs.scan'),
+          title: t('tabs.palettes'),
           tabBarIcon: ({ color, focused }) => (
             <IconSymbol
               size={28}
-              name={focused ? 'camera.fill' : 'camera'}
+              name={focused ? 'paintpalette.fill' : 'paintpalette'}
               color={color}
             />
           ),
         }}
       />
       <Tabs.Screen
-        name="wall"
+        name="doodles"
         options={{
-          title: t('tabs.wall'),
+          title: t('tabs.doodles'),
           tabBarIcon: ({ color, focused }) => (
             <IconSymbol
               size={28}
@@ -71,13 +64,13 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="projects"
+        name="profile"
         options={{
-          title: t('tabs.projects'),
+          title: t('tabs.profile'),
           tabBarIcon: ({ color, focused }) => (
             <IconSymbol
               size={28}
-              name={focused ? 'folder.fill' : 'folder'}
+              name={focused ? 'person.fill' : 'person'}
               color={color}
             />
           ),

@@ -46,6 +46,11 @@ const MAPPING = {
   'photo.fill': 'photo-camera',
   'eye': 'visibility',
   'eye.fill': 'visibility',
+  'swatchpalette.fill': 'palette',
+  'paintpalette': 'palette',
+  'paintpalette.fill': 'palette',
+  'person': 'person',
+  'person.fill': 'person',
 } as IconMapping;
 
 /**

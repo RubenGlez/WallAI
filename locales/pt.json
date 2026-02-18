@@ -15,11 +15,10 @@
     "create": "Criar"
   },
   "tabs": {
-    "home": "Início",
     "colors": "Cores",
-    "scan": "Escanear",
-    "wall": "Parede",
-    "projects": "Projetos"
+    "palettes": "Paletas",
+    "doodles": "Doodles",
+    "profile": "Perfil"
   },
   "home": {
     "title": "WallAI",
@@ -38,7 +37,14 @@
     "series": "Série",
     "brand": "Marca",
     "addToPalette": "Adicionar à Paleta",
-    "removeFromPalette": "Remover da Paleta"
+    "removeFromPalette": "Remover da Paleta",
+    "placeholder": "Explorador de sprays — em breve."
+  },
+  "doodles": {
+    "placeholder": "Simulador de peça na parede — em breve."
+  },
+  "profile": {
+    "placeholder": "Configurações e favoritos — em breve."
   },
   "filters": {
     "title": "Filtros",
@@ -123,6 +129,7 @@
     "title": "Modal"
   },
   "palettes": {
+    "placeholder": "Minhas paletas — em breve.",
     "selectOrCreate": "Selecionar ou Criar Paleta",
     "createNew": "Criar Nova Paleta",
     "paletteName": "Nome da paleta",
