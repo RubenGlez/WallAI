@@ -12,9 +12,11 @@ import {
 
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
+import { IconSymbol } from '@/components/ui/icon-symbol';
 import { BorderRadius, Colors, Spacing, Typography } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { useBrandsWithCount } from '@/stores/useCatalogStore';
+import { useFavoritesStore } from '@/stores/useFavoritesStore';
 import type { BrandWithCount } from '@/types';
 
 const { width } = Dimensions.get('window');
@@ -26,10 +28,14 @@ const LOGO_SIZE = CARD_WIDTH - CARD_PADDING * 2;
 
 function BrandCard({
   brand,
+  isFavorite,
   onPress,
+  onFavorite,
 }: {
   brand: BrandWithCount;
+  isFavorite: boolean;
   onPress: () => void;
+  onFavorite: () => void;
 }) {
   const { t } = useTranslation();
   const colorScheme = useColorScheme() ?? 'light';
@@ -41,6 +47,20 @@ function BrandCard({
       onPress={onPress}
       activeOpacity={0.7}
     >
+      <View style={styles.cardTopRow}>
+        <View style={styles.cardTopSpacer} />
+        <TouchableOpacity
+          style={styles.favoriteBtn}
+          onPress={onFavorite}
+          accessibilityLabel={isFavorite ? t('colors.removeFromFavorites') : t('colors.addToFavorites')}
+        >
+          <IconSymbol
+            name={isFavorite ? 'star.fill' : 'star'}
+            size={22}
+            color={isFavorite ? theme.warning : theme.icon}
+          />
+        </TouchableOpacity>
+      </View>
       <View style={[styles.logoWrap, { backgroundColor: theme.backgroundSecondary }]}>
         {brand.logo ? (
           <Image
@@ -68,6 +88,8 @@ export default function BrandSelectionScreen() {
   const { t } = useTranslation();
   const router = useRouter();
   const brands = useBrandsWithCount();
+  const favoriteBrandIds = useFavoritesStore((s) => s.favoriteBrandIds);
+  const toggleFavoriteBrand = useFavoritesStore((s) => s.toggleFavoriteBrand);
 
   const handleBrandPress = useCallback(
     (brandId: string) => {
@@ -78,9 +100,14 @@ export default function BrandSelectionScreen() {
 
   const renderItem = useCallback(
     ({ item }: { item: BrandWithCount }) => (
-      <BrandCard brand={item} onPress={() => handleBrandPress(item.id)} />
+      <BrandCard
+        brand={item}
+        isFavorite={favoriteBrandIds.includes(item.id)}
+        onPress={() => handleBrandPress(item.id)}
+        onFavorite={() => toggleFavoriteBrand(item.id)}
+      />
     ),
-    [handleBrandPress]
+    [handleBrandPress, favoriteBrandIds, toggleFavoriteBrand]
   );
 
   return (
@@ -129,6 +156,17 @@ const styles = StyleSheet.create({
     padding: CARD_PADDING,
     borderRadius: BorderRadius.lg,
     borderWidth: 1,
+  },
+  cardTopRow: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    marginBottom: Spacing.xs,
+  },
+  cardTopSpacer: {
+    flex: 1,
+  },
+  favoriteBtn: {
+    padding: Spacing.xs,
   },
   logoWrap: {
     width: LOGO_SIZE,

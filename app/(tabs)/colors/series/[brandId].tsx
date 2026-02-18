@@ -5,17 +5,23 @@ import { FlatList, StyleSheet, TouchableOpacity, View } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
+import { IconSymbol } from '@/components/ui/icon-symbol';
 import { BorderRadius, Colors, Spacing, Typography } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { getBrandById, getSeriesWithCountByBrandId } from '@/stores/useCatalogStore';
+import { useFavoritesStore } from '@/stores/useFavoritesStore';
 import type { SeriesWithCount } from '@/types';
 
 function SeriesCard({
   series,
+  isFavorite,
   onPress,
+  onFavorite,
 }: {
   series: SeriesWithCount;
+  isFavorite: boolean;
   onPress: () => void;
+  onFavorite: () => void;
 }) {
   const { t } = useTranslation();
   const colorScheme = useColorScheme() ?? 'light';
@@ -34,7 +40,22 @@ function SeriesCard({
       onPress={onPress}
       activeOpacity={0.7}
     >
-      <ThemedText style={styles.seriesName}>{series.name}</ThemedText>
+      <View style={styles.cardTopRow}>
+        <ThemedText style={styles.seriesName} numberOfLines={1}>
+          {series.name}
+        </ThemedText>
+        <TouchableOpacity
+          style={styles.favoriteBtn}
+          onPress={onFavorite}
+          accessibilityLabel={isFavorite ? t('colors.removeFromFavorites') : t('colors.addToFavorites')}
+        >
+          <IconSymbol
+            name={isFavorite ? 'star.fill' : 'star'}
+            size={22}
+            color={isFavorite ? theme.warning : theme.icon}
+          />
+        </TouchableOpacity>
+      </View>
       <View style={styles.metaRow}>
         <ThemedText style={[styles.meta, { color: theme.textSecondary }]}>
           {t('colors.finishLabel')}: {finishLabel}
@@ -61,6 +82,8 @@ export default function SeriesScreen() {
 
   const brand = brandId ? getBrandById(brandId) : undefined;
   const series = brandId ? getSeriesWithCountByBrandId(brandId) : [];
+  const favoriteSeriesIds = useFavoritesStore((s) => s.favoriteSeriesIds);
+  const toggleFavoriteSeries = useFavoritesStore((s) => s.toggleFavoriteSeries);
 
   useEffect(() => {
     if (brand) {
@@ -89,7 +112,9 @@ export default function SeriesScreen() {
           renderItem={({ item }) => (
             <SeriesCard
               series={item}
+              isFavorite={favoriteSeriesIds.includes(item.id)}
               onPress={() => handleSeriesPress(item.id)}
+              onFavorite={() => toggleFavoriteSeries(item.id)}
             />
           )}
           contentContainerStyle={styles.listContent}
@@ -118,10 +143,20 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: Spacing.sm,
   },
+  cardTopRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: Spacing.xs,
+  },
   seriesName: {
+    flex: 1,
     fontSize: Typography.fontSize.lg,
     fontWeight: Typography.fontWeight.semibold,
-    marginBottom: Spacing.xs,
+  },
+  favoriteBtn: {
+    padding: Spacing.xs,
+    marginLeft: Spacing.sm,
   },
   metaRow: {
     marginBottom: 2,
