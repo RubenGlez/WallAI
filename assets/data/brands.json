@@ -1,12 +1,7 @@
 [
-  {
-    "id": "aka",
-    "name": "AKA",
-    "description": "AKA is a brand of spray colors"
-  },
-  {
-    "id": "flame",
-    "name": "FLAME",
-    "description": "FLAME is a brand of spray colors"
-  }
+  {"id": "montana", "name": "Montana Colors", "logo": null, "description": "Montana Colors spray paint"},
+  {"id": "loop", "name": "Loop", "logo": null, "description": "Loop Colors"},
+  {"id": "molotow", "name": "Molotow", "logo": null, "description": "Molotow Premium Spray"},
+  {"id": "aka", "name": "AKA", "logo": null, "description": "AKA is a brand of spray colors"},
+  {"id": "flame", "name": "FLAME", "logo": null, "description": "FLAME is a brand of spray colors"}
 ]

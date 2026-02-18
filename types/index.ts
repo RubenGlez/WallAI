@@ -3,27 +3,52 @@
 // Language codes for translations
 export type LanguageCode = "en" | "es" | "de" | "fr" | "pt";
 
-// Brand entity from brands.json
+// --- PRD entities ---
+
+/** Brand entity — Pantalla 1: Selección de marca */
 export interface Brand {
   id: string;
   name: string;
-  description: string;
+  /** Asset path or require() for logo image */
+  logo?: string | number | null;
+  description?: string;
 }
 
-// Series entity from series.json
+/** Spray pressure type (per series) */
+export type PressureType = "low" | "high" | "mixed";
+
+/** Finish type (matte, gloss, metallic, etc.) */
+export type FinishType = "matte" | "gloss" | "metallic" | "other";
+
+/** Series entity — Pantalla 2: Series de la marca */
 export interface Series {
   id: string;
   name: string;
   brandId: string;
-  description: string;
+  description?: string;
+  /** mate, brillo, metalizado… */
+  finishType?: FinishType;
+  /** low pressure, high pressure, etc. */
+  pressureType?: PressureType;
 }
 
-// Color entity from colors.json
+/** Series with computed color count (for Pantalla 2) */
+export interface SeriesWithCount extends Series {
+  colorCount: number;
+}
+
+/** Color entity — Pantalla 3/4: Grid y detalle */
 export interface Color {
   id: string;
   seriesId: string;
+  /** Optional for display; can be derived from series */
+  brandId?: string;
   hex: string;
   code: string;
+  rgb?: { r: number; g: number; b: number };
+  lab?: { l: number; a: number; b: number };
+  family?: string;
+  opacityLevel?: number;
 }
 
 // Color translations from colors-translations.json
@@ -33,11 +58,7 @@ export interface ColorTranslations {
 }
 
 // Combined color with translations (for application use)
-export interface ColorWithTranslations {
-  id: string;
-  seriesId: string;
-  code: string;
-  hex: string;
+export interface ColorWithTranslations extends Color {
   translations?: Partial<Record<LanguageCode, string>>;
 }
 
@@ -66,4 +87,9 @@ export interface Project {
   notes?: string;
   createdAt: Date;
   updatedAt: Date;
+}
+
+/** Brand with computed total color count (for Pantalla 1) */
+export interface BrandWithCount extends Brand {
+  colorCount: number;
 }

@@ -28,11 +28,10 @@ Contenido:
 * Grid de marcas (logos grandes):
 
   * Montana Colors
-  * MTN 94
-  * MTN Hardcore
   * Loop
   * Molotow
-  * Ironlak
+  * Flame
+  * AKA
   * etc.
 
 Cada card:
@@ -44,7 +43,6 @@ Cada card:
 Acciones:
 
 * Tap → Ir a series de esa marca
-* Filtro rápido (solo low pressure / solo matte…)
 
 ---
 
@@ -58,9 +56,12 @@ Contenido:
 
   * Nombre de serie
   * Tipo acabado (mate, brillo, metalizado…)
+  * Tipo de presión
   * Nº de colores
 
-Tap → Grid de colores
+Acciones:
+* Tap → Grid de colores
+* Filtro rápido (solo low pressure / solo matte…)
 
 ---
 
@@ -261,13 +262,15 @@ Te lo organizo a nivel conceptual:
 * id
 * name
 * logo
-* pressureType
+* description
 
 ### Series
 
 * id
 * brandId
+* description
 * finishType
+* pressureType
 * colors[]
 
 ### Color

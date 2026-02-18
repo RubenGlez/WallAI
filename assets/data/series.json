@@ -1,14 +1,4 @@
 [
-  {
-    "id": "aka-writter",
-    "name": "AKA Writter",
-    "brandId": "aka",
-    "description": "AKA Writter paint series"
-  },
-  {
-    "id": "flame-orange",
-    "name": "FLAME Orange",
-    "brandId": "flame",
-    "description": "FLAME Orange paint series"
-  }
+  {"id": "aka-writter", "name": "AKA Writter", "brandId": "aka", "finishType": "matte", "pressureType": "low", "description": "AKA Writter paint series"},
+  {"id": "flame-orange", "name": "FLAME Orange", "brandId": "flame", "finishType": "matte", "pressureType": "low", "description": "FLAME Orange paint series"}
 ]

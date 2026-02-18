@@ -1,1 +1,2 @@
-// Central export for all stores — add new stores here as they are created
+// Central export for all stores
+export * from './useCatalogStore';
