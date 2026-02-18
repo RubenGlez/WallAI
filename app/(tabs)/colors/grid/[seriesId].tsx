@@ -1,5 +1,6 @@
+import { BottomSheetModal } from '@gorhom/bottom-sheet';
 import { useLocalSearchParams, useNavigation } from 'expo-router';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   Dimensions,
@@ -10,12 +11,13 @@ import {
   View,
 } from 'react-native';
 
+import { ColorDetailContent, type ColorDetailParams } from '@/components/color-detail-bottom-sheet';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { IconSymbol } from '@/components/ui/icon-symbol';
 import { BorderRadius, Colors, Spacing, Typography } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
-import { getColorsBySeriesId, getSeriesById } from '@/stores/useCatalogStore';
+import { getBrandById, getColorsBySeriesId, getSeriesById } from '@/stores/useCatalogStore';
 import type { Color } from '@/types';
 
 const { width } = Dimensions.get('window');
@@ -38,11 +40,13 @@ function getColorDisplayName(color: Color, language: string): string {
 function ColorCard({
   color,
   displayName,
+  onPress,
   onFavorite,
   onAddToPalette,
 }: {
   color: Color;
   displayName: string;
+  onPress: () => void;
   onFavorite: () => void;
   onAddToPalette: () => void;
 }) {
@@ -51,7 +55,11 @@ function ColorCard({
   const isLight = color.hex.toLowerCase() === '#ffffff' || color.hex.toLowerCase().startsWith('#fff');
 
   return (
-    <View style={[styles.card, { backgroundColor: theme.card, borderColor: theme.border }]}>
+    <TouchableOpacity
+      style={[styles.card, { backgroundColor: theme.card, borderColor: theme.border }]}
+      onPress={onPress}
+      activeOpacity={0.7}
+    >
       <View
         style={[
           styles.swatch,
@@ -85,7 +93,7 @@ function ColorCard({
           <IconSymbol name="plus" size={20} color={theme.icon} />
         </TouchableOpacity>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 
@@ -97,6 +105,8 @@ export default function ColorGridScreen() {
   const theme = Colors[colorScheme];
 
   const [searchQuery, setSearchQuery] = useState('');
+  const [detailParams, setDetailParams] = useState<ColorDetailParams | null>(null);
+  const detailSheetRef = useRef<BottomSheetModal>(null);
 
   const series = seriesId ? getSeriesById(seriesId) : undefined;
   const allColors = seriesId ? getColorsBySeriesId(seriesId) : [];
@@ -124,20 +134,43 @@ export default function ColorGridScreen() {
     // TODO: add to palette
   }, []);
 
+  const openDetailSheet = useCallback((item: Color) => {
+    const s = getSeriesById(item.seriesId);
+    const brand = s ? getBrandById(s.brandId) : undefined;
+    setDetailParams({
+      color: item,
+      displayName: getColorDisplayName(item, i18n.language),
+      brandName: brand?.name ?? '—',
+      seriesName: s?.name ?? '—',
+    });
+    detailSheetRef.current?.present();
+  }, [i18n.language]);
+
   const renderItem = useCallback(
     ({ item }: { item: Color }) => (
       <ColorCard
         color={item}
         displayName={getColorDisplayName(item, i18n.language)}
+        onPress={() => openDetailSheet(item)}
         onFavorite={() => handleFavorite(item)}
         onAddToPalette={() => handleAddToPalette(item)}
       />
     ),
-    [i18n.language, handleFavorite, handleAddToPalette]
+    [i18n.language, openDetailSheet, handleFavorite, handleAddToPalette]
   );
 
   return (
     <ThemedView style={styles.container}>
+      <BottomSheetModal
+        ref={detailSheetRef}
+
+      >
+        <ColorDetailContent
+          color={detailParams}
+          onAddToPalette={() => detailParams && handleAddToPalette(detailParams.color)}
+        />
+      </BottomSheetModal>
+
       <TextInput
         style={[
           styles.searchInput,

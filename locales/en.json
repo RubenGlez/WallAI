@@ -58,6 +58,11 @@
     "brand": "Brand",
     "addToPalette": "Add to Palette",
     "addToFavorites": "Add to favorites",
+    "colorDetail": {
+      "similarInBrand": "Similar in brand",
+      "similarOtherBrands": "Similar in other brands",
+      "comingSoon": "Coming soon (when LAB data is available)."
+    },
     "removeFromPalette": "Remove from Palette",
     "placeholder": "Spray explorer — coming soon."
   },

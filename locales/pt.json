@@ -58,6 +58,11 @@
     "brand": "Marca",
     "addToPalette": "Adicionar à Paleta",
     "addToFavorites": "Adicionar aos favoritos",
+    "colorDetail": {
+      "similarInBrand": "Similares na marca",
+      "similarOtherBrands": "Similares em outras marcas",
+      "comingSoon": "Em breve (quando houver dados LAB)."
+    },
     "removeFromPalette": "Remover da Paleta",
     "placeholder": "Explorador de sprays — em breve."
   },

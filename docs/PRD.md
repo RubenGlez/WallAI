@@ -91,7 +91,6 @@ Cada color:
 * Swatch enorme
 * Código + nombre
 * Marca + serie
-* Familia
 * Similares dentro de la marca
 * Similares en otras marcas (esto es muy potente)
 * Botón: “Añadir a paleta”
