@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
+import { IconSymbol } from '@/components/ui/icon-symbol';
 import { BorderRadius, Colors, Spacing, Typography } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import type { Color } from '@/types';
@@ -17,10 +18,17 @@ export type ColorDetailParams = {
 
 type Props = {
   color: ColorDetailParams | null;
+  isFavorite: boolean;
+  onToggleFavorite: () => void;
   onAddToPalette: () => void;
 };
 
-export function ColorDetailContent({ color, onAddToPalette }: Props) {
+export function ColorDetailContent({
+  color,
+  isFavorite,
+  onToggleFavorite,
+  onAddToPalette,
+}: Props) {
   const { t } = useTranslation();
   const colorScheme = useColorScheme() ?? 'light';
   const theme = Colors[colorScheme];
@@ -33,10 +41,7 @@ export function ColorDetailContent({ color, onAddToPalette }: Props) {
   return (
     <BottomSheetScrollView
       style={[styles.scroll, { backgroundColor: theme.background }]}
-      contentContainerStyle={[
-        styles.content,
-        { paddingBottom: Spacing.xxl },
-      ]}
+      contentContainerStyle={styles.content}
     >
       <View
         style={[
@@ -45,9 +50,22 @@ export function ColorDetailContent({ color, onAddToPalette }: Props) {
           isLight && { borderWidth: 1, borderColor: theme.border },
         ]}
       />
-      <ThemedText type="title" style={styles.name}>
-        {color.displayName}
-      </ThemedText>
+      <View style={styles.titleRow}>
+        <ThemedText type="title" style={[styles.name, { flex: 1 }]} numberOfLines={1} ellipsizeMode="tail">
+          {color.displayName}
+        </ThemedText>
+        <TouchableOpacity
+          style={styles.favoriteBtn}
+          onPress={onToggleFavorite}
+          accessibilityLabel={isFavorite ? t('colors.removeFromFavorites') : t('colors.addToFavorites')}
+        >
+          <IconSymbol
+            name={isFavorite ? 'star.fill' : 'star'}
+            size={24}
+            color={isFavorite ? theme.warning : theme.icon}
+          />
+        </TouchableOpacity>
+      </View>
       <ThemedText style={[styles.code, { color: theme.textSecondary }]}>
         {color.color.code}
       </ThemedText>
@@ -90,6 +108,17 @@ const styles = StyleSheet.create({
   content: {
     padding: Spacing.md,
     paddingBottom: Spacing.xxl,
+  },
+  titleRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: '100%',
+    marginBottom: Spacing.xs,
+  },
+  favoriteBtn: {
+    padding: Spacing.xs,
+    marginLeft: Spacing.sm,
   },
   swatch: {
     width: SWATCH_SIZE,

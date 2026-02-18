@@ -58,6 +58,7 @@
     "brand": "Marque",
     "addToPalette": "Ajouter à la Palette",
     "addToFavorites": "Ajouter aux favoris",
+    "removeFromFavorites": "Retirer des favoris",
     "colorDetail": {
       "similarInBrand": "Similaires dans la marque",
       "similarOtherBrands": "Similaires dans d'autres marques",

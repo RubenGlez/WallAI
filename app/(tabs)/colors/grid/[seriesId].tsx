@@ -18,6 +18,7 @@ import { IconSymbol } from '@/components/ui/icon-symbol';
 import { BorderRadius, Colors, Spacing, Typography } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { getBrandById, getColorsBySeriesId, getSeriesById } from '@/stores/useCatalogStore';
+import { useFavoritesStore } from '@/stores/useFavoritesStore';
 import type { Color } from '@/types';
 
 const { width } = Dimensions.get('window');
@@ -40,12 +41,14 @@ function getColorDisplayName(color: Color, language: string): string {
 function ColorCard({
   color,
   displayName,
+  isFavorite,
   onPress,
   onFavorite,
   onAddToPalette,
 }: {
   color: Color;
   displayName: string;
+  isFavorite: boolean;
   onPress: () => void;
   onFavorite: () => void;
   onAddToPalette: () => void;
@@ -81,9 +84,13 @@ function ColorCard({
         <TouchableOpacity
           style={styles.actionBtn}
           onPress={onFavorite}
-          accessibilityLabel="Add to favorites"
+          accessibilityLabel={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
         >
-          <IconSymbol name="star" size={20} color={theme.icon} />
+          <IconSymbol
+            name={isFavorite ? 'star.fill' : 'star'}
+            size={20}
+            color={isFavorite ? theme.warning : theme.icon}
+          />
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.actionBtn}
@@ -126,9 +133,15 @@ export default function ColorGridScreen() {
     }
   }, [series, navigation]);
 
-  const handleFavorite = useCallback((_color: Color) => {
-    // TODO: add to favorites
-  }, []);
+  const favoriteColorIds = useFavoritesStore((s) => s.favoriteColorIds);
+  const toggleFavorite = useFavoritesStore((s) => s.toggleFavorite);
+
+  const handleFavorite = useCallback(
+    (color: Color) => {
+      toggleFavorite(color.id);
+    },
+    [toggleFavorite]
+  );
 
   const handleAddToPalette = useCallback((_color: Color) => {
     // TODO: add to palette
@@ -151,12 +164,13 @@ export default function ColorGridScreen() {
       <ColorCard
         color={item}
         displayName={getColorDisplayName(item, i18n.language)}
+        isFavorite={favoriteColorIds.includes(item.id)}
         onPress={() => openDetailSheet(item)}
         onFavorite={() => handleFavorite(item)}
         onAddToPalette={() => handleAddToPalette(item)}
       />
     ),
-    [i18n.language, openDetailSheet, handleFavorite, handleAddToPalette]
+    [i18n.language, favoriteColorIds, openDetailSheet, handleFavorite, handleAddToPalette]
   );
 
   return (
@@ -167,6 +181,8 @@ export default function ColorGridScreen() {
       >
         <ColorDetailContent
           color={detailParams}
+          isFavorite={detailParams ? favoriteColorIds.includes(detailParams.color.id) : false}
+          onToggleFavorite={() => detailParams && handleFavorite(detailParams.color)}
           onAddToPalette={() => detailParams && handleAddToPalette(detailParams.color)}
         />
       </BottomSheetModal>
