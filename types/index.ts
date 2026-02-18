@@ -41,25 +41,12 @@ export interface SeriesWithCount extends Series {
 export interface Color {
   id: string;
   seriesId: string;
-  /** Optional for display; can be derived from series */
-  brandId?: string;
   hex: string;
   code: string;
-  rgb?: { r: number; g: number; b: number };
-  lab?: { l: number; a: number; b: number };
-  family?: string;
-  opacityLevel?: number;
-}
-
-// Color translations from colors-translations.json
-export interface ColorTranslations {
-  id: string;
-  translations: Partial<Record<LanguageCode, string>>;
-}
-
-// Combined color with translations (for application use)
-export interface ColorWithTranslations extends Color {
-  translations?: Partial<Record<LanguageCode, string>>;
+  /** Traducciones por código de idioma (es, en, de, fr, pt) */
+  name: Partial<Record<LanguageCode, string>>;
+  /** null hasta que exista script generador desde hex */
+  lab?: { l: number; a: number; b: number } | null;
 }
 
 // Overlay config for a single layer (background or sketch)
@@ -79,7 +66,7 @@ export interface Project {
   /** Sketch layer image (in front) */
   sketchImageUri?: string;
   wallImageUri?: string;
-  colorPalette: ColorWithTranslations[];
+  colorPalette: Color[];
   /** Config for background layer */
   backgroundOverlayConfig?: LayerOverlayConfig;
   /** Config for sketch layer */

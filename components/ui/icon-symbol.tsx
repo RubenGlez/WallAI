@@ -51,6 +51,8 @@ const MAPPING = {
   'paintpalette.fill': 'palette',
   'person': 'person',
   'person.fill': 'person',
+  'star': 'star-outline',
+  'star.fill': 'star',
 } as IconMapping;
 
 /**

@@ -72,12 +72,6 @@ Aquí es donde el artista va a pasar tiempo.
 Contenido:
 
 * Grid visual tipo Pinterest (cuadrados grandes de color)
-* Filtros:
-
-  * Familia (rojos, azules, pieles, verdes…)
-  * Luminosidad
-  * Saturación
-  * Opacidad
 * Buscador por nombre o código
 
 Cada color:
@@ -276,13 +270,12 @@ Te lo organizo a nivel conceptual:
 ### Color
 
 * id
+* name
+* code
 * brandId
 * seriesId
 * hex
-* rgb
 * lab (importantísimo para similitud)
-* family
-* opacityLevel
 
 ### Palette
 

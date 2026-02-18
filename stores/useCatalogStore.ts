@@ -1,17 +1,26 @@
 import { useMemo } from 'react';
-import type { Brand, BrandWithCount, Series, SeriesWithCount } from '@/types';
+import type { Brand, BrandWithCount, Color, Series, SeriesWithCount } from '@/types';
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const brandsData = require('@/assets/data/brands.json') as Brand[];
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const seriesData = require('@/assets/data/series.json') as Series[];
 // eslint-disable-next-line @typescript-eslint/no-require-imports
-const colorsData = require('@/assets/data/colors.json') as { id: string; seriesId: string }[];
+const colorsData = require('@/assets/data/colors.json') as Color[];
 
 /** Count colors per series (seriesId -> count) */
 const colorCountBySeriesId: Record<string, number> = {};
 for (const c of colorsData) {
   colorCountBySeriesId[c.seriesId] = (colorCountBySeriesId[c.seriesId] ?? 0) + 1;
+}
+
+/**
+ * Returns colors for a series. lab is null until we have a generator script.
+ */
+export function getColorsBySeriesId(seriesId: string): Color[] {
+  return colorsData
+    .filter((c) => c.seriesId === seriesId)
+    .map((c) => ({ ...c, lab: c.lab ?? null }));
 }
 
 /** Count colors per brand (brandId -> count) */
