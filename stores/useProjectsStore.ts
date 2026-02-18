@@ -1,9 +1,13 @@
-import { ColorWithTranslations, Project } from "@/types";
+import {
+  ColorWithTranslations,
+  type LayerOverlayConfig,
+  Project,
+} from "@/types";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
-export type OverlayConfig = NonNullable<Project["overlayConfig"]>;
+export type OverlayConfig = LayerOverlayConfig;
 
 interface ProjectsState {
   projects: Project[];
@@ -17,8 +21,15 @@ interface ProjectsState {
     updates: Partial<Omit<Project, "id" | "createdAt" | "updatedAt">>
   ) => void;
   setProjectSketch: (projectId: string, sketchImageUri: string) => void;
+  clearProjectSketch: (projectId: string) => void;
+  setProjectBackground: (projectId: string, backgroundImageUri: string) => void;
+  clearProjectBackground: (projectId: string) => void;
   setProjectWallImage: (projectId: string, wallImageUri: string) => void;
   updateOverlayConfig: (projectId: string, config: Partial<OverlayConfig>) => void;
+  updateBackgroundOverlayConfig: (
+    projectId: string,
+    config: Partial<OverlayConfig>
+  ) => void;
   deleteProject: (id: string) => void;
 }
 
@@ -50,6 +61,7 @@ export const useProjectsStore = create<ProjectsState>()(
           id: `project-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`,
           name,
           colorPalette: [],
+          backgroundOverlayConfig: { ...defaultOverlayConfig },
           overlayConfig: { ...defaultOverlayConfig },
           createdAt: new Date(),
           updatedAt: new Date(),
@@ -84,6 +96,18 @@ export const useProjectsStore = create<ProjectsState>()(
         get().updateProject(projectId, { sketchImageUri });
       },
 
+      clearProjectSketch: (projectId) => {
+        get().updateProject(projectId, { sketchImageUri: undefined });
+      },
+
+      setProjectBackground: (projectId, backgroundImageUri) => {
+        get().updateProject(projectId, { backgroundImageUri });
+      },
+
+      clearProjectBackground: (projectId) => {
+        get().updateProject(projectId, { backgroundImageUri: undefined });
+      },
+
       setProjectWallImage: (projectId, wallImageUri) => {
         get().updateProject(projectId, { wallImageUri });
       },
@@ -102,6 +126,26 @@ export const useProjectsStore = create<ProjectsState>()(
             return {
               ...p,
               overlayConfig: next,
+              updatedAt: new Date(),
+            };
+          }),
+        }));
+      },
+
+      updateBackgroundOverlayConfig: (projectId, config) => {
+        set((state) => ({
+          projects: state.projects.map((p) => {
+            if (p.id !== projectId) return p;
+            const current = p.backgroundOverlayConfig ?? defaultOverlayConfig;
+            const next: OverlayConfig = {
+              opacity: config.opacity ?? current.opacity,
+              scale: config.scale ?? current.scale,
+              rotation: config.rotation ?? current.rotation,
+              position: config.position ?? current.position,
+            };
+            return {
+              ...p,
+              backgroundOverlayConfig: next,
               updatedAt: new Date(),
             };
           }),

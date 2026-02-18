@@ -32,11 +32,20 @@ const MAPPING = {
   'xmark.circle.fill': 'cancel',
   'checkmark.circle.fill': 'check-circle',
   'circle': 'radio-button-unchecked',
+  'circle.lefthalf.filled': 'opacity',
   'square.grid.2x2.fill': 'apps',
   'magnifyingglass': 'search',
   'plus.circle.fill': 'add-circle',
   'plus': 'add',
   'list.bullet': 'list',
+  'trash': 'delete',
+  'trash.fill': 'delete',
+  'photo.on.rectangle.angled': 'photo-library',
+  'wand.and.stars': 'auto-fix-high',
+  'pencil.and.outline': 'edit',
+  'photo.fill': 'photo-camera',
+  'eye': 'visibility',
+  'eye.fill': 'visibility',
 } as IconMapping;
 
 /**

@@ -41,19 +41,28 @@ export interface ColorWithTranslations {
   translations?: Partial<Record<LanguageCode, string>>;
 }
 
+// Overlay config for a single layer (background or sketch)
+export interface LayerOverlayConfig {
+  opacity: number;
+  scale: number;
+  rotation: number;
+  position: { x: number; y: number };
+}
+
 // Project entity
 export interface Project {
   id: string;
   name: string;
+  /** Background layer image (behind sketch) */
+  backgroundImageUri?: string;
+  /** Sketch layer image (in front) */
   sketchImageUri?: string;
   wallImageUri?: string;
   colorPalette: ColorWithTranslations[];
-  overlayConfig?: {
-    opacity: number;
-    scale: number;
-    rotation: number;
-    position: { x: number; y: number };
-  };
+  /** Config for background layer */
+  backgroundOverlayConfig?: LayerOverlayConfig;
+  /** Config for sketch layer */
+  overlayConfig?: LayerOverlayConfig;
   notes?: string;
   createdAt: Date;
   updatedAt: Date;
