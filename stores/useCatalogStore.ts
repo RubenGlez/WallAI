@@ -73,6 +73,22 @@ export function getSeriesWithCountByBrandId(brandId: string): SeriesWithCount[] 
     }));
 }
 
+export type SeriesWithCountAndBrand = SeriesWithCount & { brandName: string };
+
+/**
+ * Returns all series with color count and brand name (for "all series" list).
+ */
+export function getAllSeriesWithCount(): SeriesWithCountAndBrand[] {
+  const result: SeriesWithCountAndBrand[] = [];
+  for (const brand of brandsData) {
+    const seriesList = getSeriesWithCountByBrandId(brand.id);
+    for (const s of seriesList) {
+      result.push({ ...s, brandName: brand.name });
+    }
+  }
+  return result;
+}
+
 /**
  * Hook: brands with count.
  */

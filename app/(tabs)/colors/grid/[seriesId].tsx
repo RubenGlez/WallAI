@@ -187,21 +187,33 @@ export default function ColorGridScreen() {
         />
       </BottomSheetModal>
 
-      <TextInput
-        style={[
-          styles.searchInput,
-          {
-            backgroundColor: theme.backgroundSecondary,
-            borderColor: theme.border,
-            color: theme.text,
-          },
-        ]}
-        placeholder={t('colors.searchPlaceholder')}
-        placeholderTextColor={theme.textSecondary}
-        value={searchQuery}
-        onChangeText={setSearchQuery}
-        returnKeyType="search"
-      />
+      <View style={styles.searchWrap}>
+        <TextInput
+          style={[
+            styles.searchInput,
+            {
+              backgroundColor: theme.backgroundSecondary,
+              borderColor: theme.border,
+              color: theme.text,
+            },
+          ]}
+          placeholder={t('colors.searchPlaceholder')}
+          placeholderTextColor={theme.textSecondary}
+          value={searchQuery}
+          onChangeText={setSearchQuery}
+          returnKeyType="search"
+        />
+        {searchQuery.length > 0 && (
+          <TouchableOpacity
+            style={styles.searchClearBtn}
+            onPress={() => setSearchQuery('')}
+            accessibilityRole="button"
+            accessibilityLabel={t('common.clear')}
+          >
+            <IconSymbol name="xmark.circle.fill" size={22} color={theme.textSecondary} />
+          </TouchableOpacity>
+        )}
+      </View>
 
       <FlatList
         data={filteredColors}
@@ -221,13 +233,25 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: Spacing.md,
   },
+  searchWrap: {
+    position: 'relative',
+    marginBottom: Spacing.md,
+  },
   searchInput: {
     height: 44,
     paddingHorizontal: Spacing.md,
+    paddingRight: 44,
     borderRadius: BorderRadius.md,
     borderWidth: 1,
     fontSize: Typography.fontSize.md,
-    marginBottom: Spacing.md,
+  },
+  searchClearBtn: {
+    position: 'absolute',
+    right: Spacing.sm,
+    top: 0,
+    bottom: 0,
+    justifyContent: 'center',
+    padding: Spacing.xs,
   },
   listContent: {
     paddingBottom: Spacing.xl,
