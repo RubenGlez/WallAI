@@ -185,6 +185,12 @@
     "selectedSeriesCount_one": "{{count}} Serie ausgewählt",
     "selectedSeriesCount_other": "{{count}} Serien ausgewählt",
     "selectAtLeastOne": "Wähle mindestens eine Serie.",
+    "exploreColorsTitle": "Farben wählen",
+    "tapColorsToAdd": "Tippe auf Farben, um sie zur Palette hinzuzufügen.",
+    "savePalette": "Palette speichern",
+    "nameYourPalette": "Name der Palette",
+    "paletteNamePlaceholder": "z. B. Nordwand",
+    "defaultPaletteName": "Meine Palette",
     "color": "Farbe",
     "colors": "Farben",
     "searchPlaceholder": "Paletten suchen..."

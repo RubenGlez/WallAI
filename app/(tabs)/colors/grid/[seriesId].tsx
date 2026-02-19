@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 
 import { ColorDetailContent, type ColorDetailParams } from '@/components/color-detail-bottom-sheet';
+import { ColorGridCard } from '@/components/color-grid-card';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { IconSymbol } from '@/components/ui/icon-symbol';
@@ -36,72 +37,6 @@ function getColorDisplayName(color: Color, language: string): string {
   if (forLang) return forLang;
   const first = Object.values(names)[0];
   return typeof first === 'string' ? first : color.code;
-}
-
-function ColorCard({
-  color,
-  displayName,
-  isFavorite,
-  onPress,
-  onFavorite,
-  onAddToPalette,
-}: {
-  color: Color;
-  displayName: string;
-  isFavorite: boolean;
-  onPress: () => void;
-  onFavorite: () => void;
-  onAddToPalette: () => void;
-}) {
-  const colorScheme = useColorScheme() ?? 'light';
-  const theme = Colors[colorScheme];
-  const isLight = color.hex.toLowerCase() === '#ffffff' || color.hex.toLowerCase().startsWith('#fff');
-
-  return (
-    <TouchableOpacity
-      style={[styles.card, { backgroundColor: theme.card, borderColor: theme.border }]}
-      onPress={onPress}
-      activeOpacity={0.7}
-    >
-      <View
-        style={[
-          styles.swatch,
-          { backgroundColor: color.hex },
-          isLight && { borderWidth: 1, borderColor: theme.border },
-        ]}
-      />
-      <ThemedText style={styles.name} numberOfLines={1} ellipsizeMode="tail">
-        {displayName}
-      </ThemedText>
-      <ThemedText
-        style={[styles.codeMeta, { color: theme.textSecondary }]}
-        numberOfLines={1}
-        ellipsizeMode="tail"
-      >
-        {color.code}
-      </ThemedText>
-      <View style={styles.actions}>
-        <TouchableOpacity
-          style={styles.actionBtn}
-          onPress={onFavorite}
-          accessibilityLabel={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
-        >
-          <IconSymbol
-            name={isFavorite ? 'star.fill' : 'star'}
-            size={20}
-            color={isFavorite ? theme.warning : theme.icon}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.actionBtn}
-          onPress={onAddToPalette}
-          accessibilityLabel="Add to palette"
-        >
-          <IconSymbol name="plus" size={20} color={theme.icon} />
-        </TouchableOpacity>
-      </View>
-    </TouchableOpacity>
-  );
 }
 
 export default function ColorGridScreen() {
@@ -161,13 +96,15 @@ export default function ColorGridScreen() {
 
   const renderItem = useCallback(
     ({ item }: { item: Color }) => (
-      <ColorCard
+      <ColorGridCard
         color={item}
         displayName={getColorDisplayName(item, i18n.language)}
-        isFavorite={favoriteColorIds.includes(item.id)}
         onPress={() => openDetailSheet(item)}
-        onFavorite={() => handleFavorite(item)}
         onAddToPalette={() => handleAddToPalette(item)}
+        isFavorite={favoriteColorIds.includes(item.id)}
+        onFavorite={() => handleFavorite(item)}
+        cardWidth={CARD_WIDTH}
+        swatchSize={SWATCH_SIZE}
       />
     ),
     [i18n.language, favoriteColorIds, openDetailSheet, handleFavorite, handleAddToPalette]
@@ -259,34 +196,5 @@ const styles = StyleSheet.create({
   row: {
     gap: GAP,
     marginBottom: GAP,
-  },
-  card: {
-    width: CARD_WIDTH,
-    padding: CARD_PADDING,
-    borderRadius: BorderRadius.lg,
-    borderWidth: 1,
-  },
-  swatch: {
-    width: SWATCH_SIZE,
-    height: SWATCH_SIZE,
-    borderRadius: BorderRadius.md,
-    alignSelf: 'center',
-    marginBottom: Spacing.xs,
-  },
-  name: {
-    fontSize: Typography.fontSize.sm,
-    fontWeight: Typography.fontWeight.semibold,
-    marginBottom: 2,
-  },
-  codeMeta: {
-    fontSize: Typography.fontSize.xs,
-    marginBottom: Spacing.xs,
-  },
-  actions: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  actionBtn: {
-    padding: Spacing.xs,
   },
 });

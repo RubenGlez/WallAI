@@ -33,6 +33,15 @@ export default function PalettesLayout() {
           headerLeft: () => <HeaderBackButton />,
         }}
       />
+      <Stack.Screen
+        name="create/explore"
+        options={{
+          headerShown: true,
+          headerBackTitle: '',
+          headerShadowVisible: false,
+          headerLeft: () => <HeaderBackButton />,
+        }}
+      />
     </Stack>
   );
 }

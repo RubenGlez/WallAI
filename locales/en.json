@@ -185,6 +185,12 @@
     "selectedSeriesCount_one": "{{count}} series selected",
     "selectedSeriesCount_other": "{{count}} series selected",
     "selectAtLeastOne": "Select at least one series.",
+    "exploreColorsTitle": "Pick colors",
+    "tapColorsToAdd": "Tap colors to add them to the palette.",
+    "savePalette": "Save palette",
+    "nameYourPalette": "Palette name",
+    "paletteNamePlaceholder": "E.g. North wall",
+    "defaultPaletteName": "My palette",
     "color": "color",
     "colors": "colors",
     "searchPlaceholder": "Search palettes..."

@@ -97,9 +97,9 @@ export default function CreatePaletteSelectScreen() {
 
   const handleContinue = useCallback(() => {
     if (!canContinue) return;
-    // TODO: navigate to color explorer with selectedSeriesIds (e.g. create/explore)
-    router.back();
-  }, [canContinue, router]);
+    const ids = [...selectedSeriesIds].join(',');
+    router.push({ pathname: '/(tabs)/palettes/create/explore', params: { seriesIds: ids } });
+  }, [canContinue, router, selectedSeriesIds]);
 
   return (
     <ThemedView style={styles.container}>
