@@ -15,7 +15,6 @@ import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { BorderRadius, Colors, Shadows, Spacing, Typography } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
-import { getBrandById, getSeriesById } from '@/stores/useCatalogStore';
 import { usePalettesStore } from '@/stores/usePalettesStore';
 import type { Color, Palette } from '@/types';
 
@@ -27,32 +26,7 @@ const GAP = Spacing.sm;
 const CARD_PADDING = Spacing.md;
 const CARD_WIDTH = (width - Spacing.md * 2 - GAP * (NUM_COLUMNS - 1)) / NUM_COLUMNS;
 const SWATCH_SIZE = (CARD_WIDTH - CARD_PADDING * 2) / 4 - 2;
-const SWATCHES_TO_SHOW = 6;
-
-function getMainBrandName(palette: Palette): string {
-  const first = palette.colors[0];
-  if (!first) return '';
-  const series = getSeriesById(first.seriesId);
-  if (!series) return '';
-  const brand = getBrandById(series.brandId);
-  return brand?.name ?? '';
-}
-
-function formatCreatedAt(iso: string): string {
-  const d = new Date(iso);
-  const now = new Date();
-  const sameDay =
-    d.getDate() === now.getDate() &&
-    d.getMonth() === now.getMonth() &&
-    d.getFullYear() === now.getFullYear();
-  if (sameDay) {
-    return new Intl.DateTimeFormat(undefined, { timeStyle: 'short' }).format(d);
-  }
-  return new Intl.DateTimeFormat(undefined, {
-    day: 'numeric',
-    month: 'short',
-  }).format(d);
-}
+const SWATCHES_TO_SHOW = 7;
 
 function PaletteCard({
   palette,
@@ -63,8 +37,8 @@ function PaletteCard({
 }) {
   const colorScheme = useColorScheme() ?? 'light';
   const theme = Colors[colorScheme];
-  const mainBrand = getMainBrandName(palette);
   const swatches = palette.colors.slice(0, SWATCHES_TO_SHOW) as Color[];
+  const extraCount = palette.colors.length > SWATCHES_TO_SHOW ? palette.colors.length - SWATCHES_TO_SHOW : 0;
   const isLight = (hex: string) =>
     hex.toLowerCase() === '#ffffff' || hex.toLowerCase().startsWith('#fff');
 
@@ -76,16 +50,25 @@ function PaletteCard({
     >
       <View style={styles.swatchRow}>
         {swatches.length > 0 ? (
-          swatches.map((c) => (
-            <View
-              key={c.id}
-              style={[
-                styles.swatch,
-                { backgroundColor: c.hex },
-                isLight(c.hex) && { borderWidth: 1, borderColor: theme.border },
-              ]}
-            />
-          ))
+          <>
+            {swatches.map((c) => (
+              <View
+                key={c.id}
+                style={[
+                  styles.swatch,
+                  { backgroundColor: c.hex },
+                  isLight(c.hex) && { borderWidth: 1, borderColor: theme.border },
+                ]}
+              />
+            ))}
+            {extraCount > 0 && (
+              <View style={styles.swatchMore}>
+                <ThemedText style={[styles.swatchMoreText, { color: theme.textSecondary }]}>
+                  +{extraCount}
+                </ThemedText>
+              </View>
+            )}
+          </>
         ) : (
           <View style={[styles.swatchPlaceholder, { backgroundColor: theme.backgroundSecondary }]}>
             <MaterialIcons name="palette" size={20} color={theme.textSecondary} />
@@ -94,14 +77,6 @@ function PaletteCard({
       </View>
       <ThemedText style={styles.cardTitle} numberOfLines={2}>
         {palette.name || 'Sin nombre'}
-      </ThemedText>
-      {mainBrand ? (
-        <ThemedText style={[styles.cardMeta, { color: theme.textSecondary }]} numberOfLines={1}>
-          {mainBrand}
-        </ThemedText>
-      ) : null}
-      <ThemedText style={[styles.cardDate, { color: theme.textSecondary }]}>
-        {formatCreatedAt(palette.createdAt)}
       </ThemedText>
     </TouchableOpacity>
   );
@@ -305,16 +280,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  swatchMore: {
+    width: SWATCH_SIZE,
+    height: SWATCH_SIZE,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  swatchMoreText: {
+    fontSize: Typography.fontSize.xs,
+    fontWeight: Typography.fontWeight.semibold,
+  },
   cardTitle: {
     fontSize: Typography.fontSize.md,
     fontWeight: Typography.fontWeight.semibold,
-    marginBottom: 2,
-  },
-  cardMeta: {
-    fontSize: Typography.fontSize.sm,
-    marginBottom: 2,
-  },
-  cardDate: {
-    fontSize: Typography.fontSize.xs,
   },
 });
