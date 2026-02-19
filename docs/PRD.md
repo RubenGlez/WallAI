@@ -25,24 +25,23 @@ Explorar marcas → series → colores → detalles técnicos.
 
 Contenido:
 
-* Grid de marcas (logos grandes):
-
-  * Montana Colors
-  * Loop
-  * Molotow
-  * Flame
-  * AKA
-  * etc.
+- Grid de marcas (logos grandes):
+  - Montana Colors
+  - Loop
+  - Molotow
+  - Flame
+  - AKA
+  - etc.
 
 Cada card:
 
-* Logo
-* Nº total de colores
-* Tipo de spray (low pressure, high pressure…)
+- Logo
+- Nº total de colores
+- Tipo de spray (low pressure, high pressure…)
 
 Acciones:
 
-* Tap → Ir a series de esa marca
+- Tap → Ir a series de esa marca
 
 ---
 
@@ -52,16 +51,16 @@ Ejemplo: Montana → 94 / Hardcore / Water Based…
 
 Contenido:
 
-* Cards con:
-
-  * Nombre de serie
-  * Tipo acabado (mate, brillo, metalizado…)
-  * Tipo de presión
-  * Nº de colores
+- Cards con:
+  - Nombre de serie
+  - Tipo acabado (mate, brillo, metalizado…)
+  - Tipo de presión
+  - Nº de colores
 
 Acciones:
-* Tap → Grid de colores
-* Filtro rápido (solo low pressure / solo matte…)
+
+- Tap → Grid de colores
+- Filtro rápido (solo low pressure / solo matte…)
 
 ---
 
@@ -71,29 +70,28 @@ Aquí es donde el artista va a pasar tiempo.
 
 Contenido:
 
-* Grid visual tipo Pinterest (cuadrados grandes de color)
-* Buscador por nombre o código
+- Grid visual tipo Pinterest (cuadrados grandes de color)
+- Buscador por nombre o código
 
 Cada color:
 
-* Código (ej: RV-102)
-* Nombre
-* Swatch grande
-* Icono para:
-
-  * ⭐ Añadir a favoritos
-  * ➕ Añadir a paleta
+- Código (ej: RV-102)
+- Nombre
+- Swatch grande
+- Icono para:
+  - ⭐ Añadir a favoritos
+  - ➕ Añadir a paleta
 
 ---
 
 ## 🖥 Pantalla 4: Detalle de color
 
-* Swatch enorme
-* Código + nombre
-* Marca + serie
-* Similares dentro de la marca
-* Similares en otras marcas (esto es muy potente)
-* Botón: “Añadir a paleta”
+- Swatch enorme
+- Código + nombre
+- Marca + serie
+- Similares dentro de la marca
+- Similares en otras marcas (esto es muy potente)
+- Botón: “Añadir a paleta”
 
 ---
 
@@ -109,15 +107,15 @@ Grid de paletas guardadas:
 
 Cada paleta:
 
-* Nombre
-* Miniatura visual con 4-6 colores
-* Marca principal
-* Fecha creación
+- Nombre
+- Miniatura visual con 4-6 colores
+- Marca principal
+- Fecha creación
 
 Botones:
 
-* Crear nueva
-* Importar desde imagen
+- Crear nueva
+- Importar desde imagen
 
 ---
 
@@ -132,9 +130,9 @@ Botones:
 
 Extras muy potentes:
 
-* Mostrar contraste entre colores
-* Mostrar cómo quedarían outline/fill/3D/brillo
-* Reordenar colores
+- Mostrar contraste entre colores (no por ahora)
+- Mostrar cómo quedarían outline/fill/3D/brillo (no por ahora)
+- Reordenar colores
 
 ---
 
@@ -145,19 +143,18 @@ Flujo:
 1. Subes foto (muro, naturaleza, otra pieza…)
 2. Detectas colores dominantes
 3. La app:
+   - Extrae 5-8 colores principales
+   - Busca el color más cercano en la marca seleccionada
 
-   * Extrae 5-8 colores principales
-   * Busca el color más cercano en la marca seleccionada
 4. Te muestra:
-
-   * Color original
-   * Spray equivalente
-   * Nivel de similitud %
+   - Color original
+   - Spray equivalente
+   - Nivel de similitud %
 
 Pantalla final:
 
-* Guardar paleta
-* Editar manualmente
+- Guardar paleta
+- Editar manualmente
 
 ---
 
@@ -169,10 +166,10 @@ Esto es la feature diferencial 💣
 
 ## 🖥 Pantalla 1: Mis Doodles
 
-* Lista de proyectos
-* Miniatura combinada
-* Nombre del spot
-* Fecha
+- Lista de proyectos
+- Miniatura combinada
+- Nombre del spot
+- Fecha
 
 Botón: Nuevo doodle
 
@@ -182,8 +179,8 @@ Botón: Nuevo doodle
 
 Seleccionar:
 
-* 📷 Imagen del muro
-* 🖼 Imagen del boceto
+- 📷 Imagen del muro
+- 🖼 Imagen del boceto
 
 ---
 
@@ -200,34 +197,34 @@ Controles:
 
 ### Transformaciones
 
-* Escala
-* Rotación
-* Flip
-* Perspectiva (muy importante)
-* Ajuste libre por puntos
+- Escala
+- Rotación
+- Flip
+- Perspectiva (muy importante)
+- Ajuste libre por puntos
 
 ### Ajustes visuales
 
-* Opacidad
-* Modo de fusión (multiply, overlay…)
-* Contraste
-* Desaturar muro
+- Opacidad
+- Modo de fusión (multiply, overlay…)
+- Contraste
+- Desaturar muro
 
 ### Guías
 
-* Grid
-* Líneas de fuga
-* Centro
-* Proporciones
+- Grid
+- Líneas de fuga
+- Centro
+- Proporciones
 
 ---
 
 ## 🖥 Paso 3: Export
 
-* Guardar imagen
-* Exportar PNG
-* Compartir
-* Guardar como proyecto editable
+- Guardar imagen
+- Exportar PNG
+- Compartir
+- Guardar como proyecto editable
 
 ---
 
@@ -235,12 +232,12 @@ Controles:
 
 Contenido:
 
-* Mis favoritos
-* Historial de colores usados
-* Marcas preferidas
-* Sistema de unidades
-* Modo oscuro (muy importante para artistas)
-* Backup en la nube
+- Mis favoritos
+- Historial de colores usados
+- Marcas preferidas
+- Sistema de unidades
+- Modo oscuro (muy importante para artistas)
+- Backup en la nube
 
 ---
 
@@ -252,44 +249,44 @@ Te lo organizo a nivel conceptual:
 
 ### Brand
 
-* id
-* name
-* logo
-* description
+- id
+- name
+- logo
+- description
 
 ### Series
 
-* id
-* brandId
-* description
-* finishType
-* pressureType
-* colors[]
+- id
+- brandId
+- description
+- finishType
+- pressureType
+- colors[]
 
 ### Color
 
-* id
-* name
-* code
-* brandId
-* seriesId
-* hex
-* lab (importantísimo para similitud)
+- id
+- name
+- code
+- brandId
+- seriesId
+- hex
+- lab (importantísimo para similitud)
 
 ### Palette
 
-* id
-* name
-* colors[]
-* createdAt
+- id
+- name
+- colors[]
+- createdAt
 
 ### Doodle
 
-* id
-* wallImage
-* sketchImage
-* transformData
-* exportImage
+- id
+- wallImage
+- sketchImage
+- transformData
+- exportImage
 
 ---
 
@@ -302,9 +299,8 @@ Un writer podría:
 3. Guardarla.
 4. Crear doodle en el muro real.
 5. Ir a pintar con:
-
-   * Lista de sprays exactos.
-   * Referencia visual.
+   - Lista de sprays exactos.
+   - Referencia visual.
 
 Eso es valor real en calle.
 
@@ -314,9 +310,9 @@ Eso es valor real en calle.
 
 Te dejo ideas premium:
 
-* 📍 Guardar spots geolocalizados
-* 🧾 Lista automática de compra
-* 🧮 Calculadora de sprays necesarios por m²
-* 🧠 AI que sugiere combinaciones “estilo old school / chrome / pastel / horrorcore”
-* 🎨 Simulador 3D rápido
-* 🔄 Comparador de equivalencias entre marcas
+- 📍 Guardar spots geolocalizados
+- 🧾 Lista automática de compra
+- 🧮 Calculadora de sprays necesarios por m²
+- 🧠 AI que sugiere combinaciones “estilo old school / chrome / pastel / horrorcore”
+- 🎨 Simulador 3D rápido
+- 🔄 Comparador de equivalencias entre marcas

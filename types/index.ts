@@ -80,3 +80,12 @@ export interface Project {
 export interface BrandWithCount extends Brand {
   colorCount: number;
 }
+
+/** User-created palette — Tab Paletas, Pantalla 1 */
+export interface Palette {
+  id: string;
+  name: string;
+  /** Colors in this palette (full Color for thumbnail + catalog resolution) */
+  colors: Color[];
+  createdAt: string; // ISO date string for serialization
+}
