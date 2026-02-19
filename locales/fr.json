@@ -192,6 +192,7 @@
     "cameraPermissionDenied": "L'accès à la caméra est requis.",
     "selectBrandForMatch": "Marque pour les équivalents",
     "equivalents": "Équivalents spray",
+    "selectMatchPerColor": "Choisis une couleur par échantillon extrait pour ta palette.",
     "editManually": "Modifier manuellement",
     "color": "couleur",
     "colors": "couleurs",

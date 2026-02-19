@@ -91,6 +91,29 @@ export function findClosestColor(hex: string, catalogColors: Color[]): ColorMatc
   };
 }
 
+const DEFAULT_TOP_N = 8;
+
+/**
+ * Find the top N closest catalog colors to the given hex (by LAB delta E), sorted by similarity descending.
+ */
+export function findClosestColors(
+  hex: string,
+  catalogColors: Color[],
+  limit: number = DEFAULT_TOP_N
+): ColorMatch[] {
+  if (catalogColors.length === 0) return [];
+  const withDelta: { color: Color; delta: number }[] = catalogColors.map((c) => ({
+    color: c,
+    delta: colord(hex).delta(c.hex),
+  }));
+  withDelta.sort((a, b) => a.delta - b.delta);
+  return withDelta.slice(0, limit).map(({ color, delta }) => ({
+    originalHex: hex,
+    catalogColor: color,
+    similarity: deltaToSimilarity(delta),
+  }));
+}
+
 /**
  * For each hex, find closest color in catalog; return in same order.
  */

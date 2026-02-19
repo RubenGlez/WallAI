@@ -192,6 +192,7 @@
     "cameraPermissionDenied": "Camera access is required.",
     "selectBrandForMatch": "Brand to match equivalents",
     "equivalents": "Spray equivalents",
+    "selectMatchPerColor": "Choose one color per extracted swatch for your palette.",
     "editManually": "Edit manually",
     "color": "color",
     "colors": "colors",

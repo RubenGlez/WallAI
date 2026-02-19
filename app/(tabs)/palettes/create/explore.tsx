@@ -448,7 +448,8 @@ const styles = StyleSheet.create({
     fontSize: Typography.fontSize.sm,
   },
   saveButton: {
-    padding: Spacing.md,
+    paddingVertical: Spacing.sm,
+    paddingHorizontal: Spacing.md,
     borderRadius: BorderRadius.md,
     alignItems: "center",
   },

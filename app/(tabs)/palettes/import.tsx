@@ -21,33 +21,14 @@ import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { BorderRadius, Colors, Spacing, Typography } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
-import {
-  extractHexPalette,
-  findClosestColor,
-  type ColorMatch,
-} from '@/lib/colorMatch';
+import { extractHexPalette, findClosestColors } from '@/lib/colorMatch';
 import {
   getColorsBySeriesId,
-  getBrandsWithCount,
-  getSeriesWithCountByBrandId,
+  getAllSeriesWithCount,
+  type SeriesWithCountAndBrand,
 } from '@/stores/useCatalogStore';
 import { usePalettesStore } from '@/stores/usePalettesStore';
-import type { Color, SeriesWithCount } from '@/types';
-
-type CheckState = 'none' | 'some' | 'all';
-
-function getBrandCheckState(
-  brandId: string,
-  selectedSeriesIds: Set<string>,
-  seriesByBrand: Map<string, SeriesWithCount[]>
-): CheckState {
-  const series = seriesByBrand.get(brandId) ?? [];
-  if (series.length === 0) return 'none';
-  const selected = series.filter((s) => selectedSeriesIds.has(s.id)).length;
-  if (selected === 0) return 'none';
-  if (selected === series.length) return 'all';
-  return 'some';
-}
+import type { Color } from '@/types';
 
 function getColorDisplayName(color: Color, language: string): string {
   const lang = language.split('-')[0];
@@ -66,19 +47,13 @@ export default function ImportFromImageScreen() {
   const theme = Colors[colorScheme];
   const addPalette = usePalettesStore((s) => s.addPalette);
 
-  const brands = useMemo(() => getBrandsWithCount(), []);
-  const seriesByBrand = useMemo(() => {
-    const map = new Map<string, SeriesWithCount[]>();
-    for (const b of brands) {
-      map.set(b.id, getSeriesWithCountByBrandId(b.id));
-    }
-    return map;
-  }, [brands]);
+  const allSeries = useMemo(() => getAllSeriesWithCount(), []);
 
   const [imageUri, setImageUri] = useState<string | null>(null);
   const [extractedHexes, setExtractedHexes] = useState<string[]>([]);
-  const [expandedBrandIds, setExpandedBrandIds] = useState<Set<string>>(new Set());
   const [selectedSeriesIds, setSelectedSeriesIds] = useState<Set<string>>(new Set());
+  /** For each extracted hex, the catalog color id the user selected (optional). */
+  const [selectedCatalogColorByHex, setSelectedCatalogColorByHex] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showNameModal, setShowNameModal] = useState(false);
@@ -95,6 +70,7 @@ export default function ImportFromImageScreen() {
     const hexes = extractHexPalette(colorsResult as unknown as Record<string, string>);
     setExtractedHexes(hexes);
     setSelectedSeriesIds(new Set());
+    setSelectedCatalogColorByHex({});
   }, []);
 
   const pickImage = useCallback(async () => {
@@ -148,38 +124,30 @@ export default function ImportFromImageScreen() {
     }
   }, [t, processImageUri]);
 
-  const toggleBrandExpanded = useCallback((brandId: string) => {
-    setExpandedBrandIds((prev) => {
-      const next = new Set(prev);
-      if (next.has(brandId)) next.delete(brandId);
-      else next.add(brandId);
-      return next;
-    });
-  }, []);
-
-  const toggleBrandSelection = useCallback(
-    (brandId: string) => {
-      const series = seriesByBrand.get(brandId) ?? [];
-      const allSelected = series.every((s) => selectedSeriesIds.has(s.id));
-      setSelectedSeriesIds((prev) => {
-        const next = new Set(prev);
-        if (allSelected) {
-          series.forEach((s) => next.delete(s.id));
-        } else {
-          series.forEach((s) => next.add(s.id));
-        }
-        return next;
-      });
-    },
-    [seriesByBrand, selectedSeriesIds]
-  );
-
   const toggleSeriesSelection = useCallback((seriesId: string) => {
     setSelectedSeriesIds((prev) => {
       const next = new Set(prev);
       if (next.has(seriesId)) next.delete(seriesId);
       else next.add(seriesId);
       return next;
+    });
+    setSelectedCatalogColorByHex({});
+  }, []);
+
+  const selectCatalogColorForHex = useCallback((hex: string, catalogColorId: string | null) => {
+    setSelectedCatalogColorByHex((prev) => {
+      if (catalogColorId == null) {
+        const next = { ...prev };
+        delete next[hex];
+        return next;
+      }
+      const current = prev[hex];
+      if (current === catalogColorId) {
+        const next = { ...prev };
+        delete next[hex];
+        return next;
+      }
+      return { ...prev, [hex]: catalogColorId };
     });
   }, []);
 
@@ -198,44 +166,49 @@ export default function ImportFromImageScreen() {
     return out;
   }, [selectedSeriesIds]);
 
-  const matches = useMemo(() => {
-    if (extractedHexes.length === 0 || catalogColorsForMatch.length === 0) return [];
-    const results: ColorMatch[] = [];
-    for (const hex of extractedHexes) {
-      const m = findClosestColor(hex, catalogColorsForMatch);
-      if (m) results.push(m);
-    }
-    return results;
-  }, [extractedHexes, catalogColorsForMatch]);
+  const selectedSeriesWithNames = useMemo(
+    () => allSeries.filter((s) => selectedSeriesIds.has(s.id)),
+    [allSeries, selectedSeriesIds]
+  );
+
+  /** For each extracted hex, up to 3 similar colors per selected series. */
+  const similaritiesPerHex = useMemo(() => {
+    if (extractedHexes.length === 0 || selectedSeriesWithNames.length === 0) return [];
+    return extractedHexes.map((hex) => ({
+      hex,
+      bySeries: selectedSeriesWithNames.map((series) => ({
+        seriesId: series.id,
+        seriesName: series.name,
+        matches: findClosestColors(hex, getColorsBySeriesId(series.id), 3),
+      })),
+    }));
+  }, [extractedHexes, selectedSeriesWithNames]);
+
+  const selectedColorsForPalette = useMemo(() => {
+    return extractedHexes
+      .map((hex) => catalogColorsForMatch.find((c) => c.id === selectedCatalogColorByHex[hex]))
+      .filter((c): c is Color => c != null);
+  }, [extractedHexes, catalogColorsForMatch, selectedCatalogColorByHex]);
 
   const handleSavePalette = useCallback(() => {
-    if (matches.length === 0) return;
+    if (selectedColorsForPalette.length === 0) return;
     setShowNameModal(true);
-  }, [matches.length]);
+  }, [selectedColorsForPalette.length]);
 
   const handleConfirmSave = useCallback(() => {
     const name = paletteName.trim() || t('palettes.defaultPaletteName');
     addPalette({
       name,
-      colors: matches.map((m) => m.catalogColor),
+      colors: selectedColorsForPalette,
     });
     setShowNameModal(false);
     setPaletteName('');
     router.replace('/(tabs)/palettes');
-  }, [addPalette, paletteName, matches, t, router]);
-
-  const handleEditManually = useCallback(() => {
-    if (matches.length === 0) return;
-    const seriesIds = [...new Set(matches.map((m) => m.catalogColor.seriesId))].join(',');
-    const initialColorIds = matches.map((m) => m.catalogColor.id).join(',');
-    router.push({
-      pathname: '/(tabs)/palettes/create/explore',
-      params: { seriesIds, initialColorIds },
-    });
-  }, [matches, router]);
+  }, [addPalette, paletteName, selectedColorsForPalette, t, router]);
 
   const hasImage = imageUri != null && extractedHexes.length > 0;
-  const hasMatches = matches.length > 0;
+  const hasSeriesSelected = selectedSeriesIds.size > 0;
+  const showEquivalents = hasImage && hasSeriesSelected && similaritiesPerHex.length > 0;
 
   return (
     <ThemedView style={styles.container}>
@@ -304,156 +277,151 @@ export default function ImportFromImageScreen() {
             </View>
 
             <ThemedText style={[styles.sectionLabel, { color: theme.textSecondary }]}>
-              {t('palettes.selectBrandsAndSeries')}
+              {t('palettes.selectSeries')}
             </ThemedText>
             <ThemedText style={[styles.sectionSubtitle, { color: theme.textSecondary }]}>
-              {t('palettes.selectBrandsSubtitle')}
+              {t('palettes.selectSeriesSubtitle')}
             </ThemedText>
-            <View style={styles.brandList}>
-              {brands.map((brand) => {
-                const series = seriesByBrand.get(brand.id) ?? [];
-                const isExpanded = expandedBrandIds.has(brand.id);
-                const checkState = getBrandCheckState(brand.id, selectedSeriesIds, seriesByBrand);
-
+            <View style={styles.seriesList}>
+              {allSeries.map((s: SeriesWithCountAndBrand) => {
+                const isSelected = selectedSeriesIds.has(s.id);
                 return (
-                  <View key={brand.id} style={styles.brandBlock}>
-                    <View style={[styles.brandRowWrap, { borderBottomColor: theme.border }]}>
-                      <TouchableOpacity
-                        style={styles.checkboxHit}
-                        onPress={() => toggleBrandSelection(brand.id)}
-                        accessibilityRole="checkbox"
-                        accessibilityState={{ checked: checkState === 'all' }}
-                      >
-                        {checkState === 'none' && (
-                          <MaterialIcons name="check-box-outline-blank" size={24} color={theme.icon} />
-                        )}
-                        {checkState === 'some' && (
-                          <MaterialIcons name="indeterminate-check-box" size={24} color={theme.tint} />
-                        )}
-                        {checkState === 'all' && (
-                          <MaterialIcons name="check-box" size={24} color={theme.tint} />
-                        )}
-                      </TouchableOpacity>
-                      <TouchableOpacity
-                        style={styles.brandLabelWrap}
-                        onPress={() => toggleBrandExpanded(brand.id)}
-                        activeOpacity={0.7}
-                      >
-                        <ThemedText style={styles.brandName} numberOfLines={1}>
-                          {brand.name}
-                        </ThemedText>
-                        <ThemedText style={[styles.brandMeta, { color: theme.textSecondary }]}>
-                          {t('colors.colorCount', { count: brand.colorCount })}
-                        </ThemedText>
-                      </TouchableOpacity>
-                      <TouchableOpacity
-                        style={styles.chevron}
-                        onPress={() => toggleBrandExpanded(brand.id)}
-                        hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
-                      >
-                        <MaterialIcons
-                          name={isExpanded ? 'expand-less' : 'expand-more'}
-                          size={24}
-                          color={theme.textSecondary}
-                        />
-                      </TouchableOpacity>
+                  <TouchableOpacity
+                    key={s.id}
+                    style={[styles.seriesRow, { borderBottomColor: theme.border }]}
+                    onPress={() => toggleSeriesSelection(s.id)}
+                    activeOpacity={0.7}
+                    accessibilityRole="checkbox"
+                    accessibilityState={{ checked: isSelected }}
+                  >
+                    {isSelected ? (
+                      <MaterialIcons name="check-box" size={24} color={theme.tint} />
+                    ) : (
+                      <MaterialIcons name="check-box-outline-blank" size={24} color={theme.icon} />
+                    )}
+                    <View style={styles.seriesLabelWrap}>
+                      <ThemedText style={styles.seriesName} numberOfLines={1} ellipsizeMode="tail">
+                        {s.name}
+                      </ThemedText>
+                      <ThemedText style={[styles.seriesMeta, { color: theme.textSecondary }]} numberOfLines={1} ellipsizeMode="tail">
+                        {s.brandName} · {t('colors.colorCount', { count: s.colorCount })}
+                      </ThemedText>
                     </View>
-
-                    {isExpanded &&
-                      series.map((s) => {
-                        const isSelected = selectedSeriesIds.has(s.id);
-                        return (
-                          <TouchableOpacity
-                            key={s.id}
-                            style={[styles.seriesRow, { borderBottomColor: theme.border }]}
-                            onPress={() => toggleSeriesSelection(s.id)}
-                            activeOpacity={0.7}
-                            accessibilityRole="checkbox"
-                            accessibilityState={{ checked: isSelected }}
-                          >
-                            <View style={styles.seriesIndent} />
-                            {isSelected ? (
-                              <MaterialIcons name="check-box" size={22} color={theme.tint} />
-                            ) : (
-                              <MaterialIcons name="check-box-outline-blank" size={22} color={theme.icon} />
-                            )}
-                            <ThemedText style={styles.seriesName} numberOfLines={1}>
-                              {s.name}
-                            </ThemedText>
-                            <ThemedText style={[styles.seriesMeta, { color: theme.textSecondary }]}>
-                              {t('colors.colorCount', { count: s.colorCount })}
-                            </ThemedText>
-                          </TouchableOpacity>
-                        );
-                      })}
-                  </View>
+                  </TouchableOpacity>
                 );
               })}
             </View>
 
-            {hasMatches && (
+            {showEquivalents && (
               <>
                 <ThemedText style={[styles.sectionLabel, { color: theme.textSecondary }]}>
                   {t('palettes.equivalents')}
                 </ThemedText>
-                {matches.map((match, i) => {
-                  const name = getColorDisplayName(match.catalogColor, i18n.language);
+                <ThemedText style={[styles.sectionSubtitle, { color: theme.textSecondary }]}>
+                  {t('palettes.selectMatchPerColor')}
+                </ThemedText>
+                {similaritiesPerHex.map(({ hex, bySeries }) => {
+                  const selectedId = selectedCatalogColorByHex[hex];
                   return (
-                    <View
-                      key={`${match.originalHex}-${match.catalogColor.id}`}
-                      style={[styles.matchRow, { borderColor: theme.border }]}
-                    >
-                      <View
-                        style={[
-                          styles.matchSwatch,
-                          { backgroundColor: match.originalHex },
-                          (match.originalHex === '#ffffff' || match.originalHex.startsWith('#fff')) && {
-                            borderWidth: 1,
-                            borderColor: theme.border,
-                          },
-                        ]}
-                      />
-                      <View
-                        style={[
-                          styles.matchSwatch,
-                          { backgroundColor: match.catalogColor.hex },
-                          (match.catalogColor.hex === '#ffffff' ||
-                            match.catalogColor.hex.startsWith('#fff')) && {
-                            borderWidth: 1,
-                            borderColor: theme.border,
-                          },
-                        ]}
-                      />
-                      <View style={styles.matchInfo}>
-                        <ThemedText style={styles.matchName} numberOfLines={1}>
-                          {name}
-                        </ThemedText>
-                        <ThemedText style={[styles.matchCode, { color: theme.textSecondary }]}>
-                          {match.catalogColor.code}
+                    <View key={hex} style={[styles.extractedColorBlock, { borderColor: theme.border }]}>
+                      <View style={[styles.extractedColorHeader, { borderBottomColor: theme.border }]}>
+                        <View
+                          style={[
+                            styles.originalSwatch,
+                            { backgroundColor: hex },
+                            (hex === '#ffffff' || hex.startsWith('#fff')) && {
+                              borderWidth: 1,
+                              borderColor: theme.border,
+                            },
+                          ]}
+                        />
+                        <ThemedText style={[styles.extractedHexLabel, { color: theme.textSecondary }]}>
+                          {hex}
                         </ThemedText>
                       </View>
-                      <ThemedText style={[styles.similarity, { color: theme.tint }]}>
-                        {match.similarity}%
-                      </ThemedText>
+                      {bySeries.map(({ seriesId, seriesName, matches }, seriesIndex) => (
+                        <View
+                          key={seriesId}
+                          style={[
+                            styles.seriesMatchesSection,
+                            seriesIndex > 0 && { borderTopWidth: 1, borderTopColor: theme.border },
+                          ]}
+                        >
+                          <ThemedText
+                            style={[styles.seriesMatchesLabel, { color: theme.textSecondary }]}
+                            numberOfLines={1}
+                          >
+                            {seriesName}
+                          </ThemedText>
+                          {matches.map((match, matchIndex) => {
+                            const name = getColorDisplayName(match.catalogColor, i18n.language);
+                            const isSelected = selectedId === match.catalogColor.id;
+                            const isLastInSeries = matchIndex === matches.length - 1;
+                            return (
+                              <TouchableOpacity
+                                key={match.catalogColor.id}
+                                style={[
+                                  styles.similarRow,
+                                  isLastInSeries
+                                    ? { borderBottomWidth: 0 }
+                                    : { borderBottomWidth: 1, borderBottomColor: theme.border },
+                                  isSelected && { backgroundColor: theme.backgroundSecondary },
+                                ]}
+                                onPress={() =>
+                                  selectCatalogColorForHex(hex, isSelected ? null : match.catalogColor.id)
+                                }
+                                activeOpacity={0.7}
+                                accessibilityRole="radio"
+                                accessibilityState={{ checked: isSelected }}
+                              >
+                                <View
+                                  style={[
+                                    styles.matchSwatch,
+                                    { backgroundColor: match.catalogColor.hex },
+                                    (match.catalogColor.hex === '#ffffff' ||
+                                      match.catalogColor.hex.startsWith('#fff')) && {
+                                      borderWidth: 1,
+                                      borderColor: theme.border,
+                                    },
+                                  ]}
+                                />
+                                <View style={styles.matchInfo}>
+                                  <ThemedText style={styles.matchName} numberOfLines={1}>
+                                    {name}
+                                  </ThemedText>
+                                  <ThemedText style={[styles.matchCode, { color: theme.textSecondary }]}>
+                                    {match.catalogColor.code}
+                                  </ThemedText>
+                                </View>
+                                <ThemedText style={[styles.similarity, { color: theme.tint }]}>
+                                  {match.similarity}%
+                                </ThemedText>
+                                {isSelected ? (
+                                  <MaterialIcons name="check-circle" size={24} color={theme.tint} />
+                                ) : (
+                                  <MaterialIcons name="radio-button-unchecked" size={24} color={theme.icon} />
+                                )}
+                              </TouchableOpacity>
+                            );
+                          })}
+                        </View>
+                      ))}
                     </View>
                   );
                 })}
 
                 <View style={styles.footerActions}>
                   <TouchableOpacity
-                    style={[styles.primaryButton, { backgroundColor: theme.tint }]}
+                    style={[
+                      styles.primaryButton,
+                      { backgroundColor: theme.tint },
+                      selectedColorsForPalette.length === 0 && styles.primaryButtonDisabled,
+                    ]}
                     onPress={handleSavePalette}
+                    disabled={selectedColorsForPalette.length === 0}
                   >
                     <ThemedText style={[styles.primaryButtonText, { color: theme.background }]}>
                       {t('palettes.savePalette')}
-                    </ThemedText>
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    style={[styles.secondaryButton, { borderColor: theme.border }]}
-                    onPress={handleEditManually}
-                  >
-                    <ThemedText style={styles.secondaryButtonText}>
-                      {t('palettes.editManually')}
                     </ThemedText>
                   </TouchableOpacity>
                 </View>
@@ -598,53 +566,66 @@ const styles = StyleSheet.create({
     fontSize: Typography.fontSize.sm,
     marginBottom: Spacing.md,
   },
-  brandList: {
+  seriesList: {
     marginBottom: Spacing.lg,
-  },
-  brandBlock: {
-    marginBottom: Spacing.xs,
-  },
-  brandRowWrap: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: Spacing.sm,
-    borderBottomWidth: 1,
-  },
-  checkboxHit: {
-    padding: Spacing.xs,
-    marginRight: Spacing.sm,
-  },
-  brandLabelWrap: {
-    flex: 1,
-  },
-  brandName: {
-    fontSize: Typography.fontSize.md,
-    fontWeight: Typography.fontWeight.semibold,
-  },
-  brandMeta: {
-    fontSize: Typography.fontSize.sm,
-    marginTop: 2,
-  },
-  chevron: {
-    padding: Spacing.xs,
   },
   seriesRow: {
     flexDirection: 'row',
     alignItems: 'center',
     paddingVertical: Spacing.sm,
-    paddingLeft: Spacing.sm,
     borderBottomWidth: 1,
   },
-  seriesIndent: {
-    width: 24 + Spacing.sm,
+  seriesLabelWrap: {
+    flex: 1,
+    marginLeft: Spacing.sm,
+    minWidth: 0,
   },
   seriesName: {
-    flex: 1,
     fontSize: Typography.fontSize.md,
-    marginLeft: Spacing.sm,
+    fontWeight: Typography.fontWeight.semibold,
   },
   seriesMeta: {
     fontSize: Typography.fontSize.sm,
+    marginTop: 2,
+  },
+  extractedColorBlock: {
+    borderWidth: 1,
+    borderRadius: BorderRadius.md,
+    overflow: 'hidden',
+    marginBottom: Spacing.md,
+  },
+  extractedColorHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: Spacing.sm,
+    paddingHorizontal: Spacing.md,
+    borderBottomWidth: 1,
+    gap: Spacing.sm,
+  },
+  originalSwatch: {
+    width: 32,
+    height: 32,
+    borderRadius: BorderRadius.sm,
+  },
+  extractedHexLabel: {
+    fontSize: Typography.fontSize.sm,
+    fontFamily: 'monospace',
+  },
+  seriesMatchesSection: {},
+  seriesMatchesLabel: {
+    fontSize: Typography.fontSize.sm,
+    fontWeight: Typography.fontWeight.semibold,
+    paddingHorizontal: Spacing.md,
+    paddingTop: Spacing.sm,
+    paddingBottom: Spacing.xs,
+  },
+  similarRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: Spacing.sm,
+    paddingHorizontal: Spacing.md,
+    borderBottomWidth: 1,
+    gap: Spacing.sm,
   },
   matchRow: {
     flexDirection: 'row',
@@ -685,15 +666,8 @@ const styles = StyleSheet.create({
     fontSize: Typography.fontSize.md,
     fontWeight: Typography.fontWeight.semibold,
   },
-  secondaryButton: {
-    paddingVertical: Spacing.md,
-    borderRadius: BorderRadius.md,
-    borderWidth: 1,
-    alignItems: 'center',
-  },
-  secondaryButtonText: {
-    fontSize: Typography.fontSize.md,
-    fontWeight: Typography.fontWeight.semibold,
+  primaryButtonDisabled: {
+    opacity: 0.5,
   },
   modalOverlay: {
     flex: 1,

@@ -192,6 +192,7 @@
     "cameraPermissionDenied": "Kamerazugriff ist erforderlich.",
     "selectBrandForMatch": "Marke für Äquivalente",
     "equivalents": "Spray-Äquivalente",
+    "selectMatchPerColor": "Wähle pro extrahierter Farbe einen Katalogfarbton für deine Palette.",
     "editManually": "Manuell bearbeiten",
     "color": "Farbe",
     "colors": "Farben",
