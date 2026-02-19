@@ -121,7 +121,7 @@ export default function CreatePaletteExploreScreen() {
             headerRight: () => (
               <TouchableOpacity
                 onPress={handleDeletePalette}
-                style={{ paddingHorizontal: Spacing.md, paddingVertical: Spacing.sm }}
+                style={styles.headerRightButton}
                 accessibilityRole="button"
                 accessibilityLabel={t('projects.remove')}
               >
@@ -243,34 +243,6 @@ export default function CreatePaletteExploreScreen() {
       />
 
       <View style={[styles.footer, { backgroundColor: theme.background, borderTopColor: theme.border }]}>
-        <View style={styles.footerPreview}>
-          {selectedColors.length > 0 ? (
-            <View style={styles.swatchRow}>
-              {selectedColors.slice(0, 8).map((c) => (
-                <View
-                  key={c.id}
-                  style={[
-                    styles.previewSwatch,
-                    { backgroundColor: c.hex },
-                    (c.hex === '#ffffff' || c.hex.startsWith('#fff')) && {
-                      borderWidth: 1,
-                      borderColor: theme.border,
-                    },
-                  ]}
-                />
-              ))}
-              {selectedColors.length > 8 && (
-                <ThemedText style={[styles.previewMore, { color: theme.textSecondary }]}>
-                  +{selectedColors.length - 8}
-                </ThemedText>
-              )}
-            </View>
-          ) : (
-            <ThemedText style={[styles.footerHint, { color: theme.textSecondary }]}>
-              {t('palettes.tapColorsToAdd')}
-            </ThemedText>
-          )}
-        </View>
         <View style={styles.footerActionsRow}>
           <View style={styles.switchWrap}>
             <Switch
@@ -279,6 +251,9 @@ export default function CreatePaletteExploreScreen() {
               trackColor={{ false: theme.border, true: theme.tint }}
               thumbColor={theme.background}
             />
+            <ThemedText style={[styles.switchLabel, { color: theme.textSecondary }]}>
+              {t('colors.colorCount', { count: selectedColors.length })}
+            </ThemedText>
           </View>
           <TouchableOpacity
             style={[
@@ -356,6 +331,12 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: Spacing.md,
   },
+  headerRightButton: {
+    minHeight: 44,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingLeft: Spacing.md,
+  },
   searchWrap: {
     position: 'relative',
     marginBottom: Spacing.md,
@@ -393,35 +374,18 @@ const styles = StyleSheet.create({
     paddingBottom: Spacing.xl,
     borderTopWidth: 1,
   },
-  footerPreview: {
-    minHeight: 36,
-    marginBottom: Spacing.sm,
-  },
-  swatchRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    flexWrap: 'wrap',
-    gap: 4,
-  },
-  previewSwatch: {
-    width: 28,
-    height: 28,
-    borderRadius: BorderRadius.sm,
-  },
-  previewMore: {
-    fontSize: Typography.fontSize.sm,
-  },
-  footerHint: {
-    fontSize: Typography.fontSize.sm,
-  },
   footerActionsRow: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: Spacing.md,
   },
   switchWrap: {
-    justifyContent: 'center',
-    alignSelf: 'stretch',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.sm,
+  },
+  switchLabel: {
+    fontSize: Typography.fontSize.sm,
   },
   saveButton: {
     flex: 1,
