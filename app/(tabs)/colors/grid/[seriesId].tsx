@@ -1,4 +1,4 @@
-import { BottomSheetModal } from '@gorhom/bottom-sheet';
+import { BottomSheetBackdrop, BottomSheetModal } from '@gorhom/bottom-sheet';
 import { useLocalSearchParams, useNavigation } from 'expo-router';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -119,6 +119,18 @@ export default function ColorGridScreen() {
     detailSheetRef.current?.present();
   }, [i18n.language]);
 
+  const renderBackdrop = useCallback(
+    (props: React.ComponentProps<typeof BottomSheetBackdrop>) => (
+      <BottomSheetBackdrop
+        {...props}
+        appearsOnIndex={0}
+        disappearsOnIndex={-1}
+        opacity={0.5}
+      />
+    ),
+    []
+  );
+
   const renderItem = useCallback(
     ({ item }: { item: Color }) => (
       <ColorGridCard
@@ -138,7 +150,12 @@ export default function ColorGridScreen() {
     <ThemedView style={styles.container}>
       <BottomSheetModal
         ref={detailSheetRef}
-
+        backgroundStyle={{
+          backgroundColor: theme.background,
+          borderTopLeftRadius: 20,
+          borderTopRightRadius: 20,
+        }}
+        backdropComponent={renderBackdrop}
       >
         <ColorDetailContent
           color={detailParams}

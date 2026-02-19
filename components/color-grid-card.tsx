@@ -1,12 +1,12 @@
-import React from 'react';
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import React from "react";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 
-import { ThemedText } from '@/components/themed-text';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { BorderRadius, Colors, Spacing, Typography } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
-import type { Color } from '@/types';
+import { ThemedText } from "@/components/themed-text";
+import { IconSymbol } from "@/components/ui/icon-symbol";
+import { BorderRadius, Colors, Spacing, Typography } from "@/constants/theme";
+import { useColorScheme } from "@/hooks/use-color-scheme";
+import type { Color } from "@/types";
 
 const CARD_PADDING = Spacing.sm;
 
@@ -38,10 +38,11 @@ export function ColorGridCard({
   cardWidth,
   swatchSize,
 }: ColorGridCardProps) {
-  const colorScheme = useColorScheme() ?? 'light';
+  const colorScheme = useColorScheme() ?? "light";
   const theme = Colors[colorScheme];
   const isLight =
-    color.hex.toLowerCase() === '#ffffff' || color.hex.toLowerCase().startsWith('#fff');
+    color.hex.toLowerCase() === "#ffffff" ||
+    color.hex.toLowerCase().startsWith("#fff");
   const showActionsRow = !selectionMode && onAddToPalette != null;
 
   return (
@@ -57,9 +58,15 @@ export function ColorGridCard({
       ]}
       onPress={onPress}
       activeOpacity={0.7}
-      accessibilityRole={selectionMode ? 'checkbox' : 'button'}
+      accessibilityRole={selectionMode ? "checkbox" : "button"}
       accessibilityState={selectionMode ? { checked: isInPalette } : undefined}
-      accessibilityLabel={selectionMode ? (isInPalette ? 'Remove from palette' : 'Add to palette') : undefined}
+      accessibilityLabel={
+        selectionMode
+          ? isInPalette
+            ? "Remove from palette"
+            : "Add to palette"
+          : undefined
+      }
     >
       {selectionMode && isInPalette && (
         <View
@@ -71,7 +78,11 @@ export function ColorGridCard({
         <View
           style={[
             styles.swatch,
-            { width: swatchSize, height: swatchSize, backgroundColor: color.hex },
+            {
+              width: swatchSize,
+              height: swatchSize,
+              backgroundColor: color.hex,
+            },
             isLight && { borderWidth: 1, borderColor: theme.border },
           ]}
         />
@@ -79,10 +90,12 @@ export function ColorGridCard({
           <TouchableOpacity
             style={styles.favoriteBtn}
             onPress={onFavorite}
-            accessibilityLabel={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
+            accessibilityLabel={
+              isFavorite ? "Remove from favorites" : "Add to favorites"
+            }
           >
             <IconSymbol
-              name={isFavorite ? 'star.fill' : 'star'}
+              name={isFavorite ? "star.fill" : "star"}
               size={18}
               color={isFavorite ? theme.warning : theme.icon}
             />
@@ -104,7 +117,9 @@ export function ColorGridCard({
           <TouchableOpacity
             style={styles.actionBtn}
             onPress={onAddToPalette}
-            accessibilityLabel={isInPalette ? 'Remove from palette' : 'Add to palette'}
+            accessibilityLabel={
+              isInPalette ? "Remove from palette" : "Add to palette"
+            }
           >
             {isInPalette ? (
               <MaterialIcons name="check-circle" size={20} color={theme.tint} />
@@ -123,10 +138,10 @@ const styles = StyleSheet.create({
     padding: CARD_PADDING,
     borderRadius: BorderRadius.lg,
     borderWidth: 1,
-    position: 'relative',
+    position: "relative",
   },
   selectedRing: {
-    position: 'absolute',
+    position: "absolute",
     top: 0,
     left: 0,
     right: 0,
@@ -135,15 +150,15 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   swatchWrap: {
-    alignSelf: 'center',
+    alignSelf: "center",
     marginBottom: Spacing.xs,
-    position: 'relative',
+    position: "relative",
   },
   swatch: {
     borderRadius: BorderRadius.md,
   },
   favoriteBtn: {
-    position: 'absolute',
+    position: "absolute",
     top: Spacing.xs,
     right: Spacing.xs,
     padding: Spacing.xs,
@@ -152,15 +167,13 @@ const styles = StyleSheet.create({
   name: {
     fontSize: Typography.fontSize.sm,
     fontWeight: Typography.fontWeight.semibold,
-    marginBottom: 2,
   },
   codeMeta: {
     fontSize: Typography.fontSize.xs,
-    marginBottom: Spacing.xs,
   },
   actions: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
+    flexDirection: "row",
+    justifyContent: "flex-end",
   },
   actionBtn: {
     padding: Spacing.xs,

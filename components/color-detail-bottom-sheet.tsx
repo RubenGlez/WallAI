@@ -41,17 +41,14 @@ export function ColorDetailContent({
       style={[styles.scroll, { backgroundColor: theme.background }]}
       contentContainerStyle={styles.content}
     >
-      <View
-        style={[
-          styles.swatch,
-          { backgroundColor: color.color.hex },
-          isLight && { borderWidth: 1, borderColor: theme.border },
-        ]}
-      />
-      <View style={styles.titleRow}>
-        <ThemedText type="title" style={[styles.name, { flex: 1 }]} numberOfLines={1} ellipsizeMode="tail">
-          {color.displayName}
-        </ThemedText>
+      <View style={styles.swatchWrap}>
+        <View
+          style={[
+            styles.swatch,
+            { backgroundColor: color.color.hex },
+            isLight && { borderWidth: 1, borderColor: theme.border },
+          ]}
+        />
         <TouchableOpacity
           style={styles.favoriteBtn}
           onPress={onToggleFavorite}
@@ -64,6 +61,9 @@ export function ColorDetailContent({
           />
         </TouchableOpacity>
       </View>
+      <ThemedText type="title" style={styles.name} numberOfLines={1} ellipsizeMode="tail">
+        {color.displayName}
+      </ThemedText>
       <ThemedText style={[styles.code, { color: theme.textSecondary }]}>
         {color.color.code}
       </ThemedText>
@@ -88,8 +88,6 @@ export function ColorDetailContent({
   );
 }
 
-const SWATCH_SIZE = 160;
-
 const styles = StyleSheet.create({
   scroll: {
     flex: 1,
@@ -98,35 +96,33 @@ const styles = StyleSheet.create({
     padding: Spacing.md,
     paddingBottom: Spacing.xxl,
   },
-  titleRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    width: '100%',
-    marginBottom: Spacing.xs,
-  },
-  favoriteBtn: {
-    padding: Spacing.xs,
-    marginLeft: Spacing.sm,
-  },
-  swatch: {
-    width: SWATCH_SIZE,
-    height: SWATCH_SIZE,
-    borderRadius: BorderRadius.xl,
-    alignSelf: 'center',
+  swatchWrap: {
+    position: 'relative',
     marginBottom: Spacing.md,
   },
+  swatch: {
+    width: '100%',
+    aspectRatio: 2.5,
+    borderRadius: BorderRadius.xl,
+  },
+  favoriteBtn: {
+    position: 'absolute',
+    top: Spacing.xs,
+    right: Spacing.xs,
+    padding: Spacing.xs,
+    zIndex: 1,
+  },
   name: {
-    textAlign: 'center',
+    textAlign: 'left',
     marginBottom: Spacing.xs,
   },
   code: {
-    textAlign: 'center',
+    textAlign: 'left',
     fontSize: Typography.fontSize.sm,
     marginBottom: Spacing.xs,
   },
   meta: {
-    textAlign: 'center',
+    textAlign: 'left',
     fontSize: Typography.fontSize.sm,
     marginBottom: Spacing.lg,
   },
