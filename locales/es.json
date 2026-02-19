@@ -75,7 +75,9 @@
     "placeholder": "Simulador de pieza en muro — próximamente."
   },
   "profile": {
-    "placeholder": "Ajustes y favoritos — próximamente."
+    "placeholder": "Ajustes y favoritos — próximamente.",
+    "appearance": "Apariencia",
+    "darkMode": "Modo oscuro"
   },
   "filters": {
     "title": "Filtros",

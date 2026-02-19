@@ -75,7 +75,9 @@
     "placeholder": "Wandstück-Simulator — demnächst."
   },
   "profile": {
-    "placeholder": "Einstellungen und Favoriten — demnächst."
+    "placeholder": "Einstellungen und Favoriten — demnächst.",
+    "appearance": "Darstellung",
+    "darkMode": "Dunkelmodus"
   },
   "filters": {
     "title": "Filter",

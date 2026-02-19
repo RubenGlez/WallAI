@@ -75,7 +75,9 @@
     "placeholder": "Simulateur de pièce sur mur — bientôt."
   },
   "profile": {
-    "placeholder": "Réglages et favoris — bientôt."
+    "placeholder": "Réglages et favoris — bientôt.",
+    "appearance": "Apparence",
+    "darkMode": "Mode sombre"
   },
   "filters": {
     "title": "Filtres",

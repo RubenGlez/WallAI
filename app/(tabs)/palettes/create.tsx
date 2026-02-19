@@ -1,33 +1,32 @@
-import { useNavigation, useRouter } from 'expo-router';
-import React, { useCallback, useLayoutEffect, useMemo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import {
-  ScrollView,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { useNavigation, useRouter } from "expo-router";
+import React, { useCallback, useLayoutEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
 
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { BorderRadius, Colors, Spacing, Typography } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
-import { getAllSeriesWithCount } from '@/stores/useCatalogStore';
-import type { SeriesWithCountAndBrand } from '@/types';
+import { ThemedText } from "@/components/themed-text";
+import { ThemedView } from "@/components/themed-view";
+import { BorderRadius, Colors, Spacing, Typography } from "@/constants/theme";
+import { useColorScheme } from "@/hooks/use-color-scheme";
+import {
+  getAllSeriesWithCount,
+  SeriesWithCountAndBrand,
+} from "@/stores/useCatalogStore";
 
 export default function CreatePaletteSelectScreen() {
   const { t } = useTranslation();
   const navigation = useNavigation();
   const router = useRouter();
-  const colorScheme = useColorScheme() ?? 'light';
+  const colorScheme = useColorScheme() ?? "light";
   const theme = Colors[colorScheme];
 
   const allSeries = useMemo(() => getAllSeriesWithCount(), []);
-  const [selectedSeriesIds, setSelectedSeriesIds] = useState<Set<string>>(new Set());
+  const [selectedSeriesIds, setSelectedSeriesIds] = useState<Set<string>>(
+    new Set(),
+  );
 
   useLayoutEffect(() => {
-    navigation.setOptions({ title: t('palettes.selectSeries') });
+    navigation.setOptions({ title: t("palettes.selectSeries") });
   }, [navigation, t]);
 
   const toggleSeriesSelection = useCallback((seriesId: string) => {
@@ -44,14 +43,17 @@ export default function CreatePaletteSelectScreen() {
 
   const handleContinue = useCallback(() => {
     if (!canContinue) return;
-    const ids = [...selectedSeriesIds].join(',');
-    router.push({ pathname: '/(tabs)/palettes/create/explore', params: { seriesIds: ids } });
+    const ids = [...selectedSeriesIds].join(",");
+    router.push({
+      pathname: "/(tabs)/palettes/create/explore",
+      params: { seriesIds: ids },
+    });
   }, [canContinue, router, selectedSeriesIds]);
 
   return (
     <ThemedView style={styles.container}>
       <ThemedText style={[styles.subtitle, { color: theme.textSecondary }]}>
-        {t('palettes.selectSeriesSubtitle')}
+        {t("palettes.selectSeriesSubtitle")}
       </ThemedText>
 
       <ScrollView
@@ -74,14 +76,27 @@ export default function CreatePaletteSelectScreen() {
               {isSelected ? (
                 <MaterialIcons name="check-box" size={24} color={theme.tint} />
               ) : (
-                <MaterialIcons name="check-box-outline-blank" size={24} color={theme.icon} />
+                <MaterialIcons
+                  name="check-box-outline-blank"
+                  size={24}
+                  color={theme.icon}
+                />
               )}
               <View style={styles.seriesLabelWrap}>
-                <ThemedText style={styles.seriesName} numberOfLines={1} ellipsizeMode="tail">
+                <ThemedText
+                  style={styles.seriesName}
+                  numberOfLines={1}
+                  ellipsizeMode="tail"
+                >
                   {s.name}
                 </ThemedText>
-                <ThemedText style={[styles.seriesMeta, { color: theme.textSecondary }]} numberOfLines={1} ellipsizeMode="tail">
-                  {s.brandName} · {t('colors.colorCount', { count: s.colorCount })}
+                <ThemedText
+                  style={[styles.seriesMeta, { color: theme.textSecondary }]}
+                  numberOfLines={1}
+                  ellipsizeMode="tail"
+                >
+                  {s.brandName} ·{" "}
+                  {t("colors.colorCount", { count: s.colorCount })}
                 </ThemedText>
               </View>
             </TouchableOpacity>
@@ -99,8 +114,10 @@ export default function CreatePaletteSelectScreen() {
           onPress={handleContinue}
           disabled={!canContinue}
         >
-          <ThemedText style={[styles.continueButtonText, { color: theme.background }]}>
-            {t('palettes.continue')}
+          <ThemedText
+            style={[styles.continueButtonText, { color: theme.background }]}
+          >
+            {t("palettes.continue")}
           </ThemedText>
         </TouchableOpacity>
       </View>
@@ -125,8 +142,8 @@ const styles = StyleSheet.create({
     paddingBottom: Spacing.xxl,
   },
   seriesRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     paddingVertical: Spacing.sm,
     borderBottomWidth: 1,
   },
@@ -151,7 +168,7 @@ const styles = StyleSheet.create({
   continueButton: {
     paddingVertical: Spacing.md,
     borderRadius: BorderRadius.md,
-    alignItems: 'center',
+    alignItems: "center",
   },
   continueButtonDisabled: {
     opacity: 0.5,

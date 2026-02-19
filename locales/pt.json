@@ -75,7 +75,9 @@
     "placeholder": "Simulador de peça na parede — em breve."
   },
   "profile": {
-    "placeholder": "Configurações e favoritos — em breve."
+    "placeholder": "Configurações e favoritos — em breve.",
+    "appearance": "Aparência",
+    "darkMode": "Modo escuro"
   },
   "filters": {
     "title": "Filtros",

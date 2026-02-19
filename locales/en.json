@@ -75,7 +75,9 @@
     "placeholder": "Wall piece simulator — coming soon."
   },
   "profile": {
-    "placeholder": "Settings and favorites — coming soon."
+    "placeholder": "Settings and favorites — coming soon.",
+    "appearance": "Appearance",
+    "darkMode": "Dark mode"
   },
   "filters": {
     "title": "Filters",
