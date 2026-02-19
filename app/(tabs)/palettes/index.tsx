@@ -1,29 +1,36 @@
-import { useRouter } from 'expo-router';
-import React from 'react';
-import { useTranslation } from 'react-i18next';
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { useRouter } from "expo-router";
+import React from "react";
+import { useTranslation } from "react-i18next";
 import {
   Dimensions,
   ScrollView,
   StyleSheet,
   TouchableOpacity,
   View,
-} from 'react-native';
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+} from "react-native";
 
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { BorderRadius, Colors, Shadows, Spacing, Typography } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
-import { usePalettesStore } from '@/stores/usePalettesStore';
-import type { Color, Palette } from '@/types';
+import { ThemedText } from "@/components/themed-text";
+import { ThemedView } from "@/components/themed-view";
+import {
+  BorderRadius,
+  Colors,
+  Shadows,
+  Spacing,
+  Typography,
+} from "@/constants/theme";
+import { useColorScheme } from "@/hooks/use-color-scheme";
+import { usePalettesStore } from "@/stores/usePalettesStore";
+import type { Color, Palette } from "@/types";
 
-const { width } = Dimensions.get('window');
+const { width } = Dimensions.get("window");
 const FAB_SIZE = 56;
 const FAB_SIZE_SECONDARY = 48;
 const NUM_COLUMNS = 2;
 const GAP = Spacing.sm;
 const CARD_PADDING = Spacing.md;
-const CARD_WIDTH = (width - Spacing.md * 2 - GAP * (NUM_COLUMNS - 1)) / NUM_COLUMNS;
+const CARD_WIDTH =
+  (width - Spacing.md * 2 - GAP * (NUM_COLUMNS - 1)) / NUM_COLUMNS;
 const SWATCH_SIZE = (CARD_WIDTH - CARD_PADDING * 2) / 4 - 2;
 const SWATCHES_TO_SHOW = 7;
 
@@ -34,16 +41,22 @@ function PaletteCard({
   palette: Palette;
   onPress: () => void;
 }) {
-  const colorScheme = useColorScheme() ?? 'light';
+  const colorScheme = useColorScheme() ?? "light";
   const theme = Colors[colorScheme];
   const swatches = palette.colors.slice(0, SWATCHES_TO_SHOW) as Color[];
-  const extraCount = palette.colors.length > SWATCHES_TO_SHOW ? palette.colors.length - SWATCHES_TO_SHOW : 0;
+  const extraCount =
+    palette.colors.length > SWATCHES_TO_SHOW
+      ? palette.colors.length - SWATCHES_TO_SHOW
+      : 0;
   const isLight = (hex: string) =>
-    hex.toLowerCase() === '#ffffff' || hex.toLowerCase().startsWith('#fff');
+    hex.toLowerCase() === "#ffffff" || hex.toLowerCase().startsWith("#fff");
 
   return (
     <TouchableOpacity
-      style={[styles.card, { backgroundColor: theme.card, borderColor: theme.border }]}
+      style={[
+        styles.card,
+        { backgroundColor: theme.card, borderColor: theme.border },
+      ]}
       onPress={onPress}
       activeOpacity={0.7}
     >
@@ -56,26 +69,43 @@ function PaletteCard({
                 style={[
                   styles.swatch,
                   { backgroundColor: c.hex },
-                  isLight(c.hex) && { borderWidth: 1, borderColor: theme.border },
+                  isLight(c.hex) && {
+                    borderWidth: 1,
+                    borderColor: theme.border,
+                  },
                 ]}
               />
             ))}
             {extraCount > 0 && (
               <View style={styles.swatchMore}>
-                <ThemedText style={[styles.swatchMoreText, { color: theme.textSecondary }]}>
+                <ThemedText
+                  style={[
+                    styles.swatchMoreText,
+                    { color: theme.textSecondary },
+                  ]}
+                >
                   +{extraCount}
                 </ThemedText>
               </View>
             )}
           </>
         ) : (
-          <View style={[styles.swatchPlaceholder, { backgroundColor: theme.backgroundSecondary }]}>
-            <MaterialIcons name="palette" size={20} color={theme.textSecondary} />
+          <View
+            style={[
+              styles.swatchPlaceholder,
+              { backgroundColor: theme.backgroundSecondary },
+            ]}
+          >
+            <MaterialIcons
+              name="palette"
+              size={20}
+              color={theme.textSecondary}
+            />
           </View>
         )}
       </View>
-      <ThemedText style={styles.cardTitle} numberOfLines={2}>
-        {palette.name || 'Sin nombre'}
+      <ThemedText style={styles.cardTitle} numberOfLines={1}>
+        {palette.name || "Sin nombre"}
       </ThemedText>
     </TouchableOpacity>
   );
@@ -84,15 +114,15 @@ function PaletteCard({
 export default function PalettesIndexScreen() {
   const { t } = useTranslation();
   const router = useRouter();
-  const colorScheme = useColorScheme() ?? 'light';
+  const colorScheme = useColorScheme() ?? "light";
   const theme = Colors[colorScheme];
   const palettes = usePalettesStore((s) => s.palettes);
 
   const handleCreateNew = () => {
-    router.push('/(tabs)/palettes/create');
+    router.push("/(tabs)/palettes/create");
   };
   const handleImportFromImage = () => {
-    router.push('/(tabs)/palettes/import');
+    router.push("/(tabs)/palettes/import");
   };
 
   const fabBottom = Spacing.md;
@@ -105,10 +135,10 @@ export default function PalettesIndexScreen() {
         showsVerticalScrollIndicator={false}
       >
         <ThemedText type="title" style={styles.title}>
-          {t('palettes.myPalettes')}
+          {t("palettes.myPalettes")}
         </ThemedText>
         <ThemedText style={[styles.subtitle, { color: theme.textSecondary }]}>
-          {t('palettes.subtitle')}
+          {t("palettes.subtitle")}
         </ThemedText>
 
         {palettes.length === 0 ? (
@@ -116,18 +146,25 @@ export default function PalettesIndexScreen() {
             activeOpacity={0.7}
             style={[
               styles.emptyCard,
-              { backgroundColor: theme.backgroundSecondary, borderColor: theme.border },
+              {
+                backgroundColor: theme.backgroundSecondary,
+                borderColor: theme.border,
+              },
             ]}
             onPress={handleCreateNew}
           >
-            <View style={[styles.emptyIconWrap, { backgroundColor: theme.card }]}>
+            <View
+              style={[styles.emptyIconWrap, { backgroundColor: theme.card }]}
+            >
               <MaterialIcons name="palette" size={28} color={theme.tint} />
             </View>
             <ThemedText style={[styles.emptyTitle, { color: theme.text }]}>
-              {t('palettes.emptyTitle')}
+              {t("palettes.emptyTitle")}
             </ThemedText>
-            <ThemedText style={[styles.emptySubtitle, { color: theme.textSecondary }]}>
-              {t('palettes.emptyHint')}
+            <ThemedText
+              style={[styles.emptySubtitle, { color: theme.textSecondary }]}
+            >
+              {t("palettes.emptyHint")}
             </ThemedText>
           </TouchableOpacity>
         ) : (
@@ -137,11 +174,19 @@ export default function PalettesIndexScreen() {
                 key={palette.id}
                 palette={palette}
                 onPress={() => {
-                  const seriesIds = [...new Set(palette.colors.map((c) => c.seriesId))].join(',');
-                  const initialColorIds = palette.colors.map((c) => c.id).join(',');
+                  const seriesIds = [
+                    ...new Set(palette.colors.map((c) => c.seriesId)),
+                  ].join(",");
+                  const initialColorIds = palette.colors
+                    .map((c) => c.id)
+                    .join(",");
                   router.push({
-                    pathname: '/(tabs)/palettes/create/explore',
-                    params: { seriesIds, initialColorIds, paletteId: palette.id },
+                    pathname: "/(tabs)/palettes/create/explore",
+                    params: {
+                      seriesIds,
+                      initialColorIds,
+                      paletteId: palette.id,
+                    },
                   });
                 }}
               />
@@ -155,18 +200,26 @@ export default function PalettesIndexScreen() {
         pointerEvents="box-none"
       >
         <TouchableOpacity
-          style={[styles.fab, styles.fabSecondary, { backgroundColor: theme.card, borderColor: theme.border }]}
+          style={[
+            styles.fab,
+            styles.fabSecondary,
+            { backgroundColor: theme.card, borderColor: theme.border },
+          ]}
           onPress={handleImportFromImage}
           accessibilityRole="button"
-          accessibilityLabel={t('palettes.importFromImage')}
+          accessibilityLabel={t("palettes.importFromImage")}
         >
           <MaterialIcons name="image" size={24} color={theme.tint} />
         </TouchableOpacity>
         <TouchableOpacity
-          style={[styles.fab, styles.fabPrimary, { backgroundColor: theme.tint }]}
+          style={[
+            styles.fab,
+            styles.fabPrimary,
+            { backgroundColor: theme.tint },
+          ]}
           onPress={handleCreateNew}
           accessibilityRole="button"
-          accessibilityLabel={t('palettes.createNew')}
+          accessibilityLabel={t("palettes.createNew")}
         >
           <MaterialIcons name="add" size={28} color={theme.background} />
         </TouchableOpacity>
@@ -194,18 +247,18 @@ const styles = StyleSheet.create({
     opacity: 0.9,
   },
   fabContainer: {
-    position: 'absolute',
+    position: "absolute",
     right: Spacing.md,
-    flexDirection: 'column',
-    alignItems: 'center',
+    flexDirection: "column",
+    alignItems: "center",
     gap: Spacing.sm,
   },
   fab: {
     width: FAB_SIZE,
     height: FAB_SIZE,
     borderRadius: FAB_SIZE / 2,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     ...Shadows.lg,
   },
   fabPrimary: {
@@ -219,14 +272,14 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   emptyCard: {
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
     paddingVertical: Spacing.xl,
     paddingHorizontal: Spacing.lg,
     borderRadius: BorderRadius.lg,
     borderWidth: 1.5,
-    borderStyle: 'dashed',
+    borderStyle: "dashed",
     minHeight: 140,
     ...Shadows.sm,
   },
@@ -234,8 +287,8 @@ const styles = StyleSheet.create({
     width: 56,
     height: 56,
     borderRadius: 28,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     marginBottom: Spacing.md,
   },
   emptyTitle: {
@@ -245,12 +298,12 @@ const styles = StyleSheet.create({
   },
   emptySubtitle: {
     fontSize: Typography.fontSize.sm,
-    textAlign: 'center',
+    textAlign: "center",
   },
   grid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
   },
   card: {
     width: CARD_WIDTH,
@@ -261,8 +314,8 @@ const styles = StyleSheet.create({
     ...Shadows.sm,
   },
   swatchRow: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+    flexDirection: "row",
+    flexWrap: "wrap",
     gap: 2,
     marginBottom: Spacing.sm,
     minHeight: SWATCH_SIZE * 2 + 2,
@@ -276,14 +329,14 @@ const styles = StyleSheet.create({
     width: SWATCH_SIZE,
     height: SWATCH_SIZE,
     borderRadius: BorderRadius.sm,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   swatchMore: {
     width: SWATCH_SIZE,
     height: SWATCH_SIZE,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   swatchMoreText: {
     fontSize: Typography.fontSize.xs,

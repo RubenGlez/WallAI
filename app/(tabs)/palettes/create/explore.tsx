@@ -1,6 +1,14 @@
-import { useLocalSearchParams, useNavigation, useRouter } from 'expo-router';
-import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { useLocalSearchParams, useNavigation, useRouter } from "expo-router";
+import React, {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+import { useTranslation } from "react-i18next";
 import {
   Alert,
   Dimensions,
@@ -13,33 +21,33 @@ import {
   TextInput,
   TouchableOpacity,
   View,
-} from 'react-native';
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+} from "react-native";
 
-import { ColorGridCard } from '@/components/color-grid-card';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { BorderRadius, Colors, Spacing, Typography } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
-import { getColorsBySeriesId } from '@/stores/useCatalogStore';
-import { usePalettesStore } from '@/stores/usePalettesStore';
-import type { Color } from '@/types';
+import { ColorGridCard } from "@/components/color-grid-card";
+import { ThemedText } from "@/components/themed-text";
+import { ThemedView } from "@/components/themed-view";
+import { BorderRadius, Colors, Spacing, Typography } from "@/constants/theme";
+import { useColorScheme } from "@/hooks/use-color-scheme";
+import { getColorsBySeriesId } from "@/stores/useCatalogStore";
+import { usePalettesStore } from "@/stores/usePalettesStore";
+import type { Color } from "@/types";
 
-const { width } = Dimensions.get('window');
+const { width } = Dimensions.get("window");
 const NUM_COLUMNS = 3;
 const GAP = Spacing.sm;
 const CARD_PADDING = Spacing.sm;
-const CARD_WIDTH = (width - Spacing.md * 2 - GAP * (NUM_COLUMNS - 1)) / NUM_COLUMNS;
+const CARD_WIDTH =
+  (width - Spacing.md * 2 - GAP * (NUM_COLUMNS - 1)) / NUM_COLUMNS;
 const SWATCH_SIZE = CARD_WIDTH - CARD_PADDING * 2;
 
 function getColorDisplayName(color: Color, language: string): string {
-  const lang = language.split('-')[0];
+  const lang = language.split("-")[0];
   const names = color.name;
-  if (!names || typeof names !== 'object') return color.code;
+  if (!names || typeof names !== "object") return color.code;
   const forLang = names[lang as keyof typeof names];
   if (forLang) return forLang;
   const first = Object.values(names)[0];
-  return typeof first === 'string' ? first : color.code;
+  return typeof first === "string" ? first : color.code;
 }
 
 export default function CreatePaletteExploreScreen() {
@@ -51,7 +59,7 @@ export default function CreatePaletteExploreScreen() {
   const navigation = useNavigation();
   const router = useRouter();
   const { t, i18n } = useTranslation();
-  const colorScheme = useColorScheme() ?? 'light';
+  const colorScheme = useColorScheme() ?? "light";
   const theme = Colors[colorScheme];
   const addPalette = usePalettesStore((s) => s.addPalette);
   const updatePalette = usePalettesStore((s) => s.updatePalette);
@@ -59,8 +67,8 @@ export default function CreatePaletteExploreScreen() {
   const removePalette = usePalettesStore((s) => s.removePalette);
 
   const seriesIdList = useMemo(
-    () => (seriesIds ? seriesIds.split(',').filter(Boolean) : []),
-    [seriesIds]
+    () => (seriesIds ? seriesIds.split(",").filter(Boolean) : []),
+    [seriesIds],
   );
 
   const allColors = useMemo(() => {
@@ -78,42 +86,43 @@ export default function CreatePaletteExploreScreen() {
     return out;
   }, [seriesIdList]);
 
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const [selectedColors, setSelectedColors] = useState<Color[]>([]);
   const [showNameModal, setShowNameModal] = useState(false);
-  const [paletteName, setPaletteName] = useState('');
+  const [paletteName, setPaletteName] = useState("");
   const [showOnlySelected, setShowOnlySelected] = useState(false);
   const initialAppliedRef = useRef(false);
 
   useEffect(() => {
-    if (initialAppliedRef.current || !initialColorIds || allColors.length === 0) return;
+    if (initialAppliedRef.current || !initialColorIds || allColors.length === 0)
+      return;
     initialAppliedRef.current = true;
-    const ids = new Set(initialColorIds.split(',').filter(Boolean));
+    const ids = new Set(initialColorIds.split(",").filter(Boolean));
     setSelectedColors(allColors.filter((c) => ids.has(c.id)));
   }, [initialColorIds, allColors]);
 
   const handleDeletePalette = useCallback(() => {
     if (!paletteId) return;
     Alert.alert(
-      t('projects.removePaletteTitle'),
-      t('projects.removePaletteMessage'),
+      t("projects.removePaletteTitle"),
+      t("projects.removePaletteMessage"),
       [
-        { text: t('common.cancel'), style: 'cancel' },
+        { text: t("common.cancel"), style: "cancel" },
         {
-          text: t('projects.remove'),
-          style: 'destructive',
+          text: t("projects.remove"),
+          style: "destructive",
           onPress: () => {
             removePalette(paletteId);
-            router.replace('/(tabs)/palettes');
+            router.replace("/(tabs)/palettes");
           },
         },
-      ]
+      ],
     );
   }, [paletteId, removePalette, router, t]);
 
   useLayoutEffect(() => {
     const palette = paletteId ? getPalette(paletteId) : undefined;
-    const title = palette?.name?.trim() || t('palettes.exploreColorsTitle');
+    const title = palette?.name?.trim() || t("palettes.exploreColorsTitle");
     navigation.setOptions({
       title,
       ...(paletteId
@@ -123,9 +132,13 @@ export default function CreatePaletteExploreScreen() {
                 onPress={handleDeletePalette}
                 style={styles.headerRightButton}
                 accessibilityRole="button"
-                accessibilityLabel={t('projects.remove')}
+                accessibilityLabel={t("projects.remove")}
               >
-                <MaterialIcons name="delete-outline" size={24} color={theme.tint} />
+                <MaterialIcons
+                  name="delete-outline"
+                  size={24}
+                  color={theme.tint}
+                />
               </TouchableOpacity>
             ),
           }
@@ -148,13 +161,24 @@ export default function CreatePaletteExploreScreen() {
       const q = searchQuery.trim().toLowerCase();
       return selectedColors.filter((c) => {
         const name = getColorDisplayName(c, i18n.language);
-        return c.code.toLowerCase().includes(q) || name.toLowerCase().includes(q);
+        return (
+          c.code.toLowerCase().includes(q) || name.toLowerCase().includes(q)
+        );
       });
     }
     return filteredColors;
-  }, [showOnlySelected, selectedColors, filteredColors, searchQuery, i18n.language]);
+  }, [
+    showOnlySelected,
+    selectedColors,
+    filteredColors,
+    searchQuery,
+    i18n.language,
+  ]);
 
-  const selectedIds = useMemo(() => new Set(selectedColors.map((c) => c.id)), [selectedColors]);
+  const selectedIds = useMemo(
+    () => new Set(selectedColors.map((c) => c.id)),
+    [selectedColors],
+  );
 
   const toggleColorInPalette = useCallback((color: Color) => {
     setSelectedColors((prev) => {
@@ -168,24 +192,32 @@ export default function CreatePaletteExploreScreen() {
     if (selectedColors.length === 0) return;
     if (paletteId) {
       const palette = getPalette(paletteId);
-      setPaletteName(palette?.name ?? '');
+      setPaletteName(palette?.name ?? "");
     } else {
-      setPaletteName('');
+      setPaletteName("");
     }
     setShowNameModal(true);
   }, [selectedColors.length, paletteId, getPalette]);
 
   const handleConfirmSave = useCallback(() => {
-    const name = paletteName.trim() || t('palettes.defaultPaletteName');
+    const name = paletteName.trim() || t("palettes.defaultPaletteName");
     if (paletteId) {
       updatePalette(paletteId, { name, colors: selectedColors });
     } else {
       addPalette({ name, colors: selectedColors });
     }
     setShowNameModal(false);
-    setPaletteName('');
-    router.replace('/(tabs)/palettes');
-  }, [addPalette, updatePalette, paletteId, paletteName, selectedColors, t, router]);
+    setPaletteName("");
+    router.replace("/(tabs)/palettes");
+  }, [
+    addPalette,
+    updatePalette,
+    paletteId,
+    paletteName,
+    selectedColors,
+    t,
+    router,
+  ]);
 
   const renderItem = useCallback(
     ({ item }: { item: Color }) => (
@@ -199,7 +231,7 @@ export default function CreatePaletteExploreScreen() {
         swatchSize={SWATCH_SIZE}
       />
     ),
-    [i18n.language, selectedIds, toggleColorInPalette]
+    [i18n.language, selectedIds, toggleColorInPalette],
   );
 
   return (
@@ -214,7 +246,7 @@ export default function CreatePaletteExploreScreen() {
               color: theme.text,
             },
           ]}
-          placeholder={t('colors.searchPlaceholder')}
+          placeholder={t("colors.searchPlaceholder")}
           placeholderTextColor={theme.textSecondary}
           value={searchQuery}
           onChangeText={setSearchQuery}
@@ -223,11 +255,15 @@ export default function CreatePaletteExploreScreen() {
         {searchQuery.length > 0 && (
           <TouchableOpacity
             style={styles.searchClearBtn}
-            onPress={() => setSearchQuery('')}
+            onPress={() => setSearchQuery("")}
             accessibilityRole="button"
-            accessibilityLabel={t('common.clear')}
+            accessibilityLabel={t("common.clear")}
           >
-            <MaterialIcons name="cancel" size={22} color={theme.textSecondary} />
+            <MaterialIcons
+              name="cancel"
+              size={22}
+              color={theme.textSecondary}
+            />
           </TouchableOpacity>
         )}
       </View>
@@ -242,7 +278,12 @@ export default function CreatePaletteExploreScreen() {
         showsVerticalScrollIndicator={false}
       />
 
-      <View style={[styles.footer, { backgroundColor: theme.background, borderTopColor: theme.border }]}>
+      <View
+        style={[
+          styles.footer,
+          { backgroundColor: theme.background, borderTopColor: theme.border },
+        ]}
+      >
         <View style={styles.footerActionsRow}>
           <View style={styles.switchWrap}>
             <Switch
@@ -251,8 +292,10 @@ export default function CreatePaletteExploreScreen() {
               trackColor={{ false: theme.border, true: theme.tint }}
               thumbColor={theme.background}
             />
-            <ThemedText style={[styles.switchLabel, { color: theme.textSecondary }]}>
-              {t('colors.colorCount', { count: selectedColors.length })}
+            <ThemedText
+              style={[styles.switchLabel, { color: theme.textSecondary }]}
+            >
+              {t("colors.colorCount", { count: selectedColors.length })}
             </ThemedText>
           </View>
           <TouchableOpacity
@@ -264,8 +307,10 @@ export default function CreatePaletteExploreScreen() {
             onPress={handleSave}
             disabled={selectedColors.length === 0}
           >
-            <ThemedText style={[styles.saveButtonText, { color: theme.background }]}>
-              {t('palettes.savePalette')}
+            <ThemedText
+              style={[styles.saveButtonText, { color: theme.background }]}
+            >
+              {t("palettes.savePalette")}
             </ThemedText>
           </TouchableOpacity>
         </View>
@@ -278,7 +323,7 @@ export default function CreatePaletteExploreScreen() {
         onRequestClose={() => setShowNameModal(false)}
       >
         <KeyboardAvoidingView
-          behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+          behavior={Platform.OS === "ios" ? "padding" : undefined}
           style={styles.modalOverlay}
         >
           <TouchableOpacity
@@ -286,8 +331,15 @@ export default function CreatePaletteExploreScreen() {
             activeOpacity={1}
             onPress={() => setShowNameModal(false)}
           />
-          <View style={[styles.modalCard, { backgroundColor: theme.card, borderColor: theme.border }]}>
-            <ThemedText style={styles.modalTitle}>{t('palettes.nameYourPalette')}</ThemedText>
+          <View
+            style={[
+              styles.modalCard,
+              { backgroundColor: theme.card, borderColor: theme.border },
+            ]}
+          >
+            <ThemedText style={styles.modalTitle}>
+              {t("palettes.nameYourPalette")}
+            </ThemedText>
             <TextInput
               style={[
                 styles.nameInput,
@@ -297,7 +349,7 @@ export default function CreatePaletteExploreScreen() {
                   color: theme.text,
                 },
               ]}
-              placeholder={t('palettes.paletteNamePlaceholder')}
+              placeholder={t("palettes.paletteNamePlaceholder")}
               placeholderTextColor={theme.textSecondary}
               value={paletteName}
               onChangeText={setPaletteName}
@@ -308,14 +360,23 @@ export default function CreatePaletteExploreScreen() {
                 style={[styles.modalButton, { borderColor: theme.border }]}
                 onPress={() => setShowNameModal(false)}
               >
-                <ThemedText>{t('common.cancel')}</ThemedText>
+                <ThemedText>{t("common.cancel")}</ThemedText>
               </TouchableOpacity>
               <TouchableOpacity
-                style={[styles.modalButton, styles.modalButtonPrimary, { backgroundColor: theme.tint }]}
+                style={[
+                  styles.modalButton,
+                  styles.modalButtonPrimary,
+                  { backgroundColor: theme.tint },
+                ]}
                 onPress={handleConfirmSave}
               >
-                <ThemedText style={[styles.modalButtonPrimaryText, { color: theme.background }]}>
-                  {t('common.save')}
+                <ThemedText
+                  style={[
+                    styles.modalButtonPrimaryText,
+                    { color: theme.background },
+                  ]}
+                >
+                  {t("common.save")}
                 </ThemedText>
               </TouchableOpacity>
             </View>
@@ -333,12 +394,12 @@ const styles = StyleSheet.create({
   },
   headerRightButton: {
     minHeight: 44,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     paddingLeft: Spacing.md,
   },
   searchWrap: {
-    position: 'relative',
+    position: "relative",
     marginBottom: Spacing.md,
   },
   searchInput: {
@@ -350,11 +411,11 @@ const styles = StyleSheet.create({
     fontSize: Typography.fontSize.md,
   },
   searchClearBtn: {
-    position: 'absolute',
+    position: "absolute",
     right: Spacing.sm,
     top: 0,
     bottom: 0,
-    justifyContent: 'center',
+    justifyContent: "center",
     padding: Spacing.xs,
   },
   listContent: {
@@ -365,33 +426,31 @@ const styles = StyleSheet.create({
     marginBottom: GAP,
   },
   footer: {
-    position: 'absolute',
+    position: "absolute",
     left: 0,
     right: 0,
     bottom: 0,
-    paddingHorizontal: Spacing.md,
-    paddingTop: Spacing.md,
-    paddingBottom: Spacing.xl,
+    padding: Spacing.md,
     borderTopWidth: 1,
   },
   footerActionsRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     gap: Spacing.md,
   },
   switchWrap: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     gap: Spacing.sm,
   },
   switchLabel: {
     fontSize: Typography.fontSize.sm,
   },
   saveButton: {
-    flex: 1,
-    paddingVertical: Spacing.md,
+    padding: Spacing.md,
     borderRadius: BorderRadius.md,
-    alignItems: 'center',
+    alignItems: "center",
   },
   saveButtonDisabled: {
     opacity: 0.5,
@@ -402,12 +461,12 @@ const styles = StyleSheet.create({
   },
   modalOverlay: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: "center",
     padding: Spacing.lg,
   },
   modalBackdrop: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(0,0,0,0.5)',
+    backgroundColor: "rgba(0,0,0,0.5)",
   },
   modalCard: {
     borderRadius: BorderRadius.lg,
@@ -429,9 +488,9 @@ const styles = StyleSheet.create({
     marginBottom: Spacing.lg,
   },
   modalActions: {
-    flexDirection: 'row',
+    flexDirection: "row",
     gap: Spacing.sm,
-    justifyContent: 'flex-end',
+    justifyContent: "flex-end",
   },
   modalButton: {
     paddingVertical: Spacing.sm,

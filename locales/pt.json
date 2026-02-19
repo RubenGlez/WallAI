@@ -172,6 +172,8 @@
     "emptyHint": "Toque para criar sua primeira paleta.",
     "selectBrandsAndSeries": "Selecionar marcas e séries",
     "selectBrandsSubtitle": "Escolha de quais marcas ou séries deseja escolher cores.",
+    "selectSeries": "Selecionar séries",
+    "selectSeriesSubtitle": "Escolha de quais séries deseja escolher cores.",
     "continue": "Continuar",
     "selectedSeriesCount_one": "{{count}} série selecionada",
     "selectedSeriesCount_other": "{{count}} séries selecionadas",

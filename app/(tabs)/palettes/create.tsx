@@ -13,26 +13,8 @@ import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { BorderRadius, Colors, Spacing, Typography } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
-import {
-  getBrandsWithCount,
-  getSeriesWithCountByBrandId,
-} from '@/stores/useCatalogStore';
-import type { SeriesWithCount } from '@/types';
-
-type CheckState = 'none' | 'some' | 'all';
-
-function getBrandCheckState(
-  brandId: string,
-  selectedSeriesIds: Set<string>,
-  seriesByBrand: Map<string, SeriesWithCount[]>
-): CheckState {
-  const series = seriesByBrand.get(brandId) ?? [];
-  if (series.length === 0) return 'none';
-  const selected = series.filter((s) => selectedSeriesIds.has(s.id)).length;
-  if (selected === 0) return 'none';
-  if (selected === series.length) return 'all';
-  return 'some';
-}
+import { getAllSeriesWithCount } from '@/stores/useCatalogStore';
+import type { SeriesWithCountAndBrand } from '@/types';
 
 export default function CreatePaletteSelectScreen() {
   const { t } = useTranslation();
@@ -41,47 +23,12 @@ export default function CreatePaletteSelectScreen() {
   const colorScheme = useColorScheme() ?? 'light';
   const theme = Colors[colorScheme];
 
-  const brands = useMemo(() => getBrandsWithCount(), []);
-  const seriesByBrand = useMemo(() => {
-    const map = new Map<string, SeriesWithCount[]>();
-    for (const b of brands) {
-      map.set(b.id, getSeriesWithCountByBrandId(b.id));
-    }
-    return map;
-  }, [brands]);
-
-  const [expandedBrandIds, setExpandedBrandIds] = useState<Set<string>>(new Set());
+  const allSeries = useMemo(() => getAllSeriesWithCount(), []);
   const [selectedSeriesIds, setSelectedSeriesIds] = useState<Set<string>>(new Set());
 
   useLayoutEffect(() => {
-    navigation.setOptions({ title: t('palettes.selectBrandsAndSeries') });
+    navigation.setOptions({ title: t('palettes.selectSeries') });
   }, [navigation, t]);
-
-  const toggleBrandExpanded = useCallback((brandId: string) => {
-    setExpandedBrandIds((prev) => {
-      const next = new Set(prev);
-      if (next.has(brandId)) next.delete(brandId);
-      else next.add(brandId);
-      return next;
-    });
-  }, []);
-
-  const toggleBrandSelection = useCallback(
-    (brandId: string) => {
-      const series = seriesByBrand.get(brandId) ?? [];
-      const allSelected = series.every((s) => selectedSeriesIds.has(s.id));
-      setSelectedSeriesIds((prev) => {
-        const next = new Set(prev);
-        if (allSelected) {
-          series.forEach((s) => next.delete(s.id));
-        } else {
-          series.forEach((s) => next.add(s.id));
-        }
-        return next;
-      });
-    },
-    [seriesByBrand, selectedSeriesIds]
-  );
 
   const toggleSeriesSelection = useCallback((seriesId: string) => {
     setSelectedSeriesIds((prev) => {
@@ -104,7 +51,7 @@ export default function CreatePaletteSelectScreen() {
   return (
     <ThemedView style={styles.container}>
       <ThemedText style={[styles.subtitle, { color: theme.textSecondary }]}>
-        {t('palettes.selectBrandsSubtitle')}
+        {t('palettes.selectSeriesSubtitle')}
       </ThemedText>
 
       <ScrollView
@@ -113,93 +60,36 @@ export default function CreatePaletteSelectScreen() {
         showsVerticalScrollIndicator={false}
         keyboardShouldPersistTaps="handled"
       >
-        {brands.map((brand) => {
-          const series = seriesByBrand.get(brand.id) ?? [];
-          const isExpanded = expandedBrandIds.has(brand.id);
-          const checkState = getBrandCheckState(brand.id, selectedSeriesIds, seriesByBrand);
-
+        {allSeries.map((s: SeriesWithCountAndBrand) => {
+          const isSelected = selectedSeriesIds.has(s.id);
           return (
-            <View key={brand.id} style={styles.brandBlock}>
-              <View style={[styles.brandRow, { borderBottomColor: theme.border }]}>
-                <TouchableOpacity
-                  style={styles.checkboxHit}
-                  onPress={() => toggleBrandSelection(brand.id)}
-                  accessibilityRole="checkbox"
-                  accessibilityState={{ checked: checkState === 'all' }}
-                >
-                  {checkState === 'none' && (
-                    <MaterialIcons name="check-box-outline-blank" size={24} color={theme.icon} />
-                  )}
-                  {checkState === 'some' && (
-                    <MaterialIcons name="indeterminate-check-box" size={24} color={theme.tint} />
-                  )}
-                  {checkState === 'all' && (
-                    <MaterialIcons name="check-box" size={24} color={theme.tint} />
-                  )}
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={styles.brandLabelWrap}
-                  onPress={() => toggleBrandExpanded(brand.id)}
-                  activeOpacity={0.7}
-                >
-                  <ThemedText style={styles.brandName} numberOfLines={1}>
-                    {brand.name}
-                  </ThemedText>
-                  <ThemedText style={[styles.brandMeta, { color: theme.textSecondary }]}>
-                    {t('colors.colorCount', { count: brand.colorCount })}
-                  </ThemedText>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={styles.chevron}
-                  onPress={() => toggleBrandExpanded(brand.id)}
-                  hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
-                >
-                  <MaterialIcons
-                    name={isExpanded ? 'expand-less' : 'expand-more'}
-                    size={24}
-                    color={theme.textSecondary}
-                  />
-                </TouchableOpacity>
+            <TouchableOpacity
+              key={s.id}
+              style={[styles.seriesRow, { borderBottomColor: theme.border }]}
+              onPress={() => toggleSeriesSelection(s.id)}
+              activeOpacity={0.7}
+              accessibilityRole="checkbox"
+              accessibilityState={{ checked: isSelected }}
+            >
+              {isSelected ? (
+                <MaterialIcons name="check-box" size={24} color={theme.tint} />
+              ) : (
+                <MaterialIcons name="check-box-outline-blank" size={24} color={theme.icon} />
+              )}
+              <View style={styles.seriesLabelWrap}>
+                <ThemedText style={styles.seriesName} numberOfLines={1} ellipsizeMode="tail">
+                  {s.name}
+                </ThemedText>
+                <ThemedText style={[styles.seriesMeta, { color: theme.textSecondary }]} numberOfLines={1} ellipsizeMode="tail">
+                  {s.brandName} · {t('colors.colorCount', { count: s.colorCount })}
+                </ThemedText>
               </View>
-
-              {isExpanded &&
-                series.map((s) => {
-                  const isSelected = selectedSeriesIds.has(s.id);
-                  return (
-                    <TouchableOpacity
-                      key={s.id}
-                      style={[styles.seriesRow, { borderBottomColor: theme.border }]}
-                      onPress={() => toggleSeriesSelection(s.id)}
-                      activeOpacity={0.7}
-                      accessibilityRole="checkbox"
-                      accessibilityState={{ checked: isSelected }}
-                    >
-                      <View style={styles.seriesIndent} />
-                      {isSelected ? (
-                        <MaterialIcons name="check-box" size={22} color={theme.tint} />
-                      ) : (
-                        <MaterialIcons name="check-box-outline-blank" size={22} color={theme.icon} />
-                      )}
-                      <ThemedText style={styles.seriesName} numberOfLines={1}>
-                        {s.name}
-                      </ThemedText>
-                      <ThemedText style={[styles.seriesMeta, { color: theme.textSecondary }]}>
-                        {t('colors.colorCount', { count: s.colorCount })}
-                      </ThemedText>
-                    </TouchableOpacity>
-                  );
-                })}
-            </View>
+            </TouchableOpacity>
           );
         })}
       </ScrollView>
 
-      <View style={[styles.footer, { backgroundColor: theme.background, borderTopColor: theme.border }]}>
-        <ThemedText style={[styles.footerHint, { color: theme.textSecondary }]}>
-          {selectedCount > 0
-            ? t('palettes.selectedSeriesCount', { count: selectedCount })
-            : t('palettes.selectAtLeastOne')}
-        </ThemedText>
+      <View style={[styles.footer, { backgroundColor: theme.background }]}>
         <TouchableOpacity
           style={[
             styles.continueButton,
@@ -234,60 +124,29 @@ const styles = StyleSheet.create({
   scrollContent: {
     paddingBottom: Spacing.xxl,
   },
-  brandBlock: {
-    marginBottom: Spacing.xs,
-  },
-  brandRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: Spacing.sm,
-    borderBottomWidth: 1,
-  },
-  checkboxHit: {
-    padding: Spacing.xs,
-    marginRight: Spacing.sm,
-  },
-  brandLabelWrap: {
-    flex: 1,
-  },
-  brandName: {
-    fontSize: Typography.fontSize.md,
-    fontWeight: Typography.fontWeight.semibold,
-  },
-  brandMeta: {
-    fontSize: Typography.fontSize.sm,
-    marginTop: 2,
-  },
-  chevron: {
-    padding: Spacing.xs,
-  },
   seriesRow: {
     flexDirection: 'row',
     alignItems: 'center',
     paddingVertical: Spacing.sm,
-    paddingLeft: Spacing.sm,
     borderBottomWidth: 1,
   },
-  seriesIndent: {
-    width: 24 + Spacing.sm,
+  seriesLabelWrap: {
+    flex: 1,
+    marginLeft: Spacing.sm,
+    minWidth: 0,
   },
   seriesName: {
-    flex: 1,
     fontSize: Typography.fontSize.md,
-    marginLeft: Spacing.sm,
+    fontWeight: Typography.fontWeight.semibold,
   },
   seriesMeta: {
     fontSize: Typography.fontSize.sm,
+    marginTop: 2,
   },
   footer: {
     paddingHorizontal: Spacing.md,
     paddingTop: Spacing.md,
     paddingBottom: Spacing.lg,
-    borderTopWidth: 1,
-  },
-  footerHint: {
-    fontSize: Typography.fontSize.sm,
-    marginBottom: Spacing.sm,
   },
   continueButton: {
     paddingVertical: Spacing.md,
