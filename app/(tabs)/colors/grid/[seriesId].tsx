@@ -13,7 +13,6 @@ import {
 
 import { ColorDetailContent, type ColorDetailParams } from '@/components/color-detail-bottom-sheet';
 import { ColorGridCard } from '@/components/color-grid-card';
-import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { IconSymbol } from '@/components/ui/icon-symbol';
 import { BorderRadius, Colors, Spacing, Typography } from '@/constants/theme';
@@ -52,7 +51,10 @@ export default function ColorGridScreen() {
   const detailSheetRef = useRef<BottomSheetModal>(null);
 
   const series = seriesId ? getSeriesById(seriesId) : undefined;
-  const allColors = seriesId ? getColorsBySeriesId(seriesId) : [];
+  const allColors = useMemo(
+    () => (seriesId ? getColorsBySeriesId(seriesId) : []),
+    [seriesId]
+  );
 
   const favoriteColorIds = useFavoritesStore((s) => s.favoriteColorIds);
 

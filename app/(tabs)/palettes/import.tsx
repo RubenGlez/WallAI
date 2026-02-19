@@ -32,8 +32,7 @@ import {
   getSeriesWithCountByBrandId,
 } from '@/stores/useCatalogStore';
 import { usePalettesStore } from '@/stores/usePalettesStore';
-import type { Color } from '@/types';
-import type { SeriesWithCount } from '@/types';
+import type { Color, SeriesWithCount } from '@/types';
 
 type CheckState = 'none' | 'some' | 'all';
 
@@ -93,7 +92,7 @@ export default function ImportFromImageScreen() {
   const processImageUri = useCallback(async (uri: string) => {
     setImageUri(uri);
     const colorsResult = await getColors(uri, { fallback: '#000000' });
-    const hexes = extractHexPalette(colorsResult as Record<string, string>);
+    const hexes = extractHexPalette(colorsResult as unknown as Record<string, string>);
     setExtractedHexes(hexes);
     setSelectedSeriesIds(new Set());
   }, []);

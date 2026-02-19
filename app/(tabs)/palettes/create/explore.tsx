@@ -227,7 +227,7 @@ export default function CreatePaletteExploreScreen() {
             accessibilityRole="button"
             accessibilityLabel={t('common.clear')}
           >
-            <MaterialIcons name="xmark.circle.fill" size={22} color={theme.textSecondary} />
+            <MaterialIcons name="cancel" size={22} color={theme.textSecondary} />
           </TouchableOpacity>
         )}
       </View>
