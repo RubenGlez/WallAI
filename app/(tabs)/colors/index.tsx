@@ -11,15 +11,54 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
+import { IconSymbol } from '@/components/ui/icon-symbol';
 import { BorderRadius, Colors, Shadows, Spacing, Typography } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import {
   getAllSeriesWithCount,
-  getBrandsWithCount,
   type SeriesWithCountAndBrand,
 } from '@/stores/useCatalogStore';
 import { useFavoritesStore } from '@/stores/useFavoritesStore';
-import type { BrandWithCount } from '@/types';
+
+function SeriesCard({
+  series,
+  isFavorite,
+  onPress,
+  onFavorite,
+}: {
+  series: SeriesWithCountAndBrand;
+  isFavorite: boolean;
+  onPress: () => void;
+  onFavorite: () => void;
+}) {
+  const { t } = useTranslation();
+  const colorScheme = useColorScheme() ?? 'light';
+  const theme = Colors[colorScheme];
+
+  return (
+    <TouchableOpacity
+      activeOpacity={0.7}
+      style={[styles.card, { backgroundColor: theme.card, borderColor: theme.border }]}
+      onPress={onPress}
+    >
+      <TouchableOpacity
+        style={styles.favoriteBtn}
+        onPress={onFavorite}
+        accessibilityLabel={isFavorite ? t('colors.removeFromFavorites') : t('colors.addToFavorites')}
+      >
+        <IconSymbol
+          name={isFavorite ? 'star.fill' : 'star'}
+          size={22}
+          color={isFavorite ? theme.warning : theme.icon}
+        />
+      </TouchableOpacity>
+      <ThemedText style={styles.cardTitle} numberOfLines={2}>{series.name}</ThemedText>
+      <ThemedText style={[styles.cardMeta, { color: theme.textSecondary }]} numberOfLines={1}>
+        {series.brandName} · {t('colors.colorCount', { count: series.colorCount })}
+      </ThemedText>
+    </TouchableOpacity>
+  );
+}
 
 export default function ColorsOverviewScreen() {
   const { t } = useTranslation();
@@ -27,16 +66,10 @@ export default function ColorsOverviewScreen() {
   const colorScheme = useColorScheme() ?? 'light';
   const theme = Colors[colorScheme];
 
-  const favoriteBrandIds = useFavoritesStore((s) => s.favoriteBrandIds);
   const favoriteSeriesIds = useFavoritesStore((s) => s.favoriteSeriesIds);
+  const toggleFavoriteSeries = useFavoritesStore((s) => s.toggleFavoriteSeries);
 
-  const allBrands = useMemo(() => getBrandsWithCount(), []);
   const allSeries = useMemo(() => getAllSeriesWithCount(), []);
-
-  const favoriteBrands = useMemo(
-    () => allBrands.filter((b) => favoriteBrandIds.includes(b.id)),
-    [allBrands, favoriteBrandIds]
-  );
   const favoriteSeries = useMemo(
     () => allSeries.filter((s) => favoriteSeriesIds.includes(s.id)),
     [allSeries, favoriteSeriesIds]
@@ -56,19 +89,11 @@ export default function ColorsOverviewScreen() {
           {t('colors.overviewSubtitle')}
         </ThemedText>
 
-        <View style={styles.sectionHeader}>
-          <ThemedText style={[styles.sectionTitle, { color: theme.textSecondary }]}>
-            {t('colors.favoriteBrands')}
-          </ThemedText>
-          <TouchableOpacity onPress={() => router.push('/(tabs)/colors/brands')} hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}>
-            <ThemedText style={[styles.sectionLink, { color: theme.tint }]}>
-              {t('colors.viewAll')}
-            </ThemedText>
-          </TouchableOpacity>
-        </View>
-        {favoriteBrands.length === 0 ? (
-          <TouchableOpacity
-            activeOpacity={0.7}
+        <ThemedText style={[styles.sectionTitle, styles.sectionTitleSpaced, { color: theme.textSecondary }]}>
+          {t('colors.favoriteSeries')}
+        </ThemedText>
+        {favoriteSeries.length === 0 ? (
+          <View
             style={[
               styles.emptyCard,
               {
@@ -76,85 +101,42 @@ export default function ColorsOverviewScreen() {
                 borderColor: theme.border,
               },
             ]}
-            onPress={() => router.push('/(tabs)/colors/brands')}
           >
             <View style={[styles.emptyIconWrap, { backgroundColor: theme.card }]}>
-              <MaterialIcons name="business" size={28} color={theme.tint} />
+              <MaterialIcons name="palette" size={20} color={theme.tint} />
             </View>
-            <ThemedText style={[styles.emptyTitle, { color: theme.text }]}>
-              {t('colors.emptyBrandsTitle')}
+            <ThemedText style={[styles.emptyTitle, { color: theme.text }]} numberOfLines={2}>
+              {t('colors.emptySeriesTitle')}
             </ThemedText>
-            <ThemedText style={[styles.emptySubtitle, { color: theme.textSecondary }]}>
-              {t('colors.emptyBrandsHint')}
-            </ThemedText>
-          </TouchableOpacity>
+          </View>
         ) : (
           <View style={styles.sectionGrid}>
-            {favoriteBrands.map((brand: BrandWithCount) => (
-              <TouchableOpacity
-                key={brand.id}
-                activeOpacity={0.7}
-                style={[styles.card, { backgroundColor: theme.card, borderColor: theme.border }]}
-                onPress={() => router.push(`/(tabs)/colors/series/${brand.id}`)}
-              >
-                <ThemedText style={styles.cardTitle} numberOfLines={2}>{brand.name}</ThemedText>
-                <ThemedText style={[styles.cardMeta, { color: theme.textSecondary }]}>
-                  {t('colors.colorCount', { count: brand.colorCount })}
-                </ThemedText>
-              </TouchableOpacity>
+            {favoriteSeries.map((series: SeriesWithCountAndBrand) => (
+              <SeriesCard
+                key={series.id}
+                series={series}
+                isFavorite
+                onPress={() => router.push(`/(tabs)/colors/grid/${series.id}`)}
+                onFavorite={() => toggleFavoriteSeries(series.id)}
+              />
             ))}
           </View>
         )}
 
-        <View style={styles.sectionHeader}>
-          <ThemedText style={[styles.sectionTitle, { color: theme.textSecondary }]}>
-            {t('colors.favoriteSeries')}
-          </ThemedText>
-          <TouchableOpacity onPress={() => router.push('/(tabs)/colors/all-series')} hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}>
-            <ThemedText style={[styles.sectionLink, { color: theme.tint }]}>
-              {t('colors.viewAll')}
-            </ThemedText>
-          </TouchableOpacity>
+        <ThemedText style={[styles.sectionTitle, styles.sectionTitleSpaced, { color: theme.textSecondary }]}>
+          {t('colors.allSeriesTitle')}
+        </ThemedText>
+        <View style={styles.sectionGrid}>
+          {allSeries.map((series: SeriesWithCountAndBrand) => (
+            <SeriesCard
+              key={series.id}
+              series={series}
+              isFavorite={favoriteSeriesIds.includes(series.id)}
+              onPress={() => router.push(`/(tabs)/colors/grid/${series.id}`)}
+              onFavorite={() => toggleFavoriteSeries(series.id)}
+            />
+          ))}
         </View>
-        {favoriteSeries.length === 0 ? (
-          <TouchableOpacity
-            activeOpacity={0.7}
-            style={[
-              styles.emptyCard,
-              {
-                backgroundColor: theme.backgroundSecondary,
-                borderColor: theme.border,
-              },
-            ]}
-            onPress={() => router.push('/(tabs)/colors/all-series')}
-          >
-            <View style={[styles.emptyIconWrap, { backgroundColor: theme.card }]}>
-              <MaterialIcons name="palette" size={28} color={theme.tint} />
-            </View>
-            <ThemedText style={[styles.emptyTitle, { color: theme.text }]}>
-              {t('colors.emptySeriesTitle')}
-            </ThemedText>
-            <ThemedText style={[styles.emptySubtitle, { color: theme.textSecondary }]}>
-              {t('colors.emptySeriesHint')}
-            </ThemedText>
-          </TouchableOpacity>
-        ) : (
-          <View style={styles.sectionGrid}>
-            {favoriteSeries.map((series: SeriesWithCountAndBrand) => (
-              <TouchableOpacity
-                key={series.id}
-                activeOpacity={0.7}
-                style={[styles.card, { backgroundColor: theme.card, borderColor: theme.border }]}
-                onPress={() => router.push(`/(tabs)/colors/grid/${series.id}`)}
-              >
-                <ThemedText style={styles.cardTitle} numberOfLines={2}>{series.name}</ThemedText>
-                <ThemedText style={[styles.cardMeta, { color: theme.textSecondary }]} numberOfLines={1}>
-                  {series.brandName} · {t('colors.colorCount', { count: series.colorCount })}
-                </ThemedText>
-              </TouchableOpacity>
-            ))}
-          </View>
-        )}
 
       </ScrollView>
     </ThemedView>
@@ -179,49 +161,38 @@ const styles = StyleSheet.create({
     marginBottom: Spacing.lg,
     opacity: 0.9,
   },
-  sectionHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginBottom: Spacing.sm,
-  },
   sectionTitle: {
     fontSize: Typography.fontSize.sm,
     fontWeight: Typography.fontWeight.semibold,
     textTransform: 'uppercase',
   },
-  sectionLink: {
-    fontSize: Typography.fontSize.sm,
-    fontWeight: Typography.fontWeight.medium,
+  sectionTitleSpaced: {
+    marginBottom: Spacing.sm,
   },
   emptyCard: {
+    width: '100%',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: Spacing.xl,
-    paddingHorizontal: Spacing.lg,
-    marginBottom: Spacing.lg,
+    padding: Spacing.md,
+    marginBottom: Spacing.sm,
     borderRadius: BorderRadius.lg,
     borderWidth: 1.5,
     borderStyle: 'dashed',
-    minHeight: 120,
     ...Shadows.sm,
   },
   emptyIconWrap: {
-    width: 56,
-    height: 56,
-    borderRadius: 28,
+    width: 36,
+    height: 36,
+    borderRadius: 18,
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: Spacing.md,
+    marginBottom: Spacing.sm,
   },
   emptyTitle: {
+    width: '100%',
     fontSize: Typography.fontSize.md,
     fontWeight: Typography.fontWeight.semibold,
-    marginBottom: Spacing.xs,
-  },
-  emptySubtitle: {
-    fontSize: Typography.fontSize.sm,
     textAlign: 'center',
   },
   sectionGrid: {
@@ -237,6 +208,13 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: Spacing.sm,
     ...Shadows.sm,
+  },
+  favoriteBtn: {
+    position: 'absolute',
+    top: Spacing.xs,
+    right: Spacing.xs,
+    padding: Spacing.xs,
+    zIndex: 1,
   },
   cardTitle: {
     fontSize: Typography.fontSize.md,

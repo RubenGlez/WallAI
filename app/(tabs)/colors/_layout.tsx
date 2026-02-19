@@ -32,7 +32,6 @@ export default function ColorsLayout() {
     <Stack screenOptions={{ headerShown: false }}>
       <Stack.Screen name="index" />
       <Stack.Screen name="brands" options={headerWithBackOptions} />
-      <Stack.Screen name="all-series" options={headerWithBackOptions} />
       <Stack.Screen name="series/[brandId]" options={headerWithBackOptions} />
       <Stack.Screen name="grid/[seriesId]" options={headerWithBackOptions} />
     </Stack>

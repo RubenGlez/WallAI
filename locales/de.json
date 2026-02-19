@@ -15,6 +15,7 @@
     "create": "Erstellen"
   },
   "tabs": {
+    "home": "Start",
     "colors": "Farben",
     "palettes": "Paletten",
     "doodles": "Doodles",
@@ -23,7 +24,8 @@
   "home": {
     "title": "WallAI",
     "tagline": "Von der Skizze zur Wand, geleitet von KI",
-    "subtitle": "Planen Sie Ihre Graffiti-Stücke mit echten Sprühfarben und präzisen Wandüberlagerungen"
+    "subtitle": "Planen Sie Ihre Graffiti-Stücke mit echten Sprühfarben und präzisen Wandüberlagerungen",
+    "placeholder": "Startbildschirm — in Kürze."
   },
   "colors": {
     "title": "Farben",
@@ -38,7 +40,6 @@
     "emptyBrandsHint": "Tippen, um Marken zu erkunden",
     "emptySeriesTitle": "Keine Lieblingsserien",
     "emptySeriesHint": "Tippen, um Serien zu erkunden",
-    "viewAll": "Alle anzeigen",
     "allSeriesTitle": "Alle Serien",
     "brandsScreenTitle": "Marken",
     "selectBrand": "Marke wählen",

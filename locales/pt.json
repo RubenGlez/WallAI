@@ -15,6 +15,7 @@
     "create": "Criar"
   },
   "tabs": {
+    "home": "Início",
     "colors": "Cores",
     "palettes": "Paletas",
     "doodles": "Doodles",
@@ -23,7 +24,8 @@
   "home": {
     "title": "WallAI",
     "tagline": "Do esboço à parede, guiado por IA",
-    "subtitle": "Planeje suas peças de graffiti com cores de spray reais e sobreposições precisas de parede"
+    "subtitle": "Planeje suas peças de graffiti com cores de spray reais e sobreposições precisas de parede",
+    "placeholder": "Tela inicial — em breve."
   },
   "colors": {
     "title": "Cores",
@@ -38,7 +40,6 @@
     "emptyBrandsHint": "Toque para explorar marcas",
     "emptySeriesTitle": "Nenhuma série favorita",
     "emptySeriesHint": "Toque para explorar séries",
-    "viewAll": "Ver todas",
     "allSeriesTitle": "Todas as séries",
     "brandsScreenTitle": "Marcas",
     "selectBrand": "Seleção de marca",

@@ -21,7 +21,14 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          href: null,
+          title: t('tabs.home'),
+          tabBarIcon: ({ color, focused }) => (
+            <IconSymbol
+              size={28}
+              name={focused ? 'house.fill' : 'house'}
+              color={color}
+            />
+          ),
         }}
       />
       <Tabs.Screen
