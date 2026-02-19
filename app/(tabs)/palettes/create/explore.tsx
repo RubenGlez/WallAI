@@ -2,12 +2,14 @@ import { useLocalSearchParams, useNavigation, useRouter } from 'expo-router';
 import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
+  Alert,
   Dimensions,
   FlatList,
   KeyboardAvoidingView,
   Modal,
   Platform,
   StyleSheet,
+  Switch,
   TextInput,
   TouchableOpacity,
   View,
@@ -41,9 +43,10 @@ function getColorDisplayName(color: Color, language: string): string {
 }
 
 export default function CreatePaletteExploreScreen() {
-  const { seriesIds, initialColorIds } = useLocalSearchParams<{
+  const { seriesIds, initialColorIds, paletteId } = useLocalSearchParams<{
     seriesIds: string;
     initialColorIds?: string;
+    paletteId?: string;
   }>();
   const navigation = useNavigation();
   const router = useRouter();
@@ -51,6 +54,9 @@ export default function CreatePaletteExploreScreen() {
   const colorScheme = useColorScheme() ?? 'light';
   const theme = Colors[colorScheme];
   const addPalette = usePalettesStore((s) => s.addPalette);
+  const updatePalette = usePalettesStore((s) => s.updatePalette);
+  const getPalette = usePalettesStore((s) => s.getPalette);
+  const removePalette = usePalettesStore((s) => s.removePalette);
 
   const seriesIdList = useMemo(
     () => (seriesIds ? seriesIds.split(',').filter(Boolean) : []),
@@ -76,6 +82,7 @@ export default function CreatePaletteExploreScreen() {
   const [selectedColors, setSelectedColors] = useState<Color[]>([]);
   const [showNameModal, setShowNameModal] = useState(false);
   const [paletteName, setPaletteName] = useState('');
+  const [showOnlySelected, setShowOnlySelected] = useState(false);
   const initialAppliedRef = useRef(false);
 
   useEffect(() => {
@@ -85,9 +92,46 @@ export default function CreatePaletteExploreScreen() {
     setSelectedColors(allColors.filter((c) => ids.has(c.id)));
   }, [initialColorIds, allColors]);
 
+  const handleDeletePalette = useCallback(() => {
+    if (!paletteId) return;
+    Alert.alert(
+      t('projects.removePaletteTitle'),
+      t('projects.removePaletteMessage'),
+      [
+        { text: t('common.cancel'), style: 'cancel' },
+        {
+          text: t('projects.remove'),
+          style: 'destructive',
+          onPress: () => {
+            removePalette(paletteId);
+            router.replace('/(tabs)/palettes');
+          },
+        },
+      ]
+    );
+  }, [paletteId, removePalette, router, t]);
+
   useLayoutEffect(() => {
-    navigation.setOptions({ title: t('palettes.exploreColorsTitle') });
-  }, [navigation, t]);
+    const palette = paletteId ? getPalette(paletteId) : undefined;
+    const title = palette?.name?.trim() || t('palettes.exploreColorsTitle');
+    navigation.setOptions({
+      title,
+      ...(paletteId
+        ? {
+            headerRight: () => (
+              <TouchableOpacity
+                onPress={handleDeletePalette}
+                style={{ paddingHorizontal: Spacing.md, paddingVertical: Spacing.sm }}
+                accessibilityRole="button"
+                accessibilityLabel={t('projects.remove')}
+              >
+                <MaterialIcons name="delete-outline" size={24} color={theme.tint} />
+              </TouchableOpacity>
+            ),
+          }
+        : {}),
+    });
+  }, [navigation, t, paletteId, getPalette, handleDeletePalette, theme.tint]);
 
   const filteredColors = useMemo(() => {
     if (!searchQuery.trim()) return allColors;
@@ -97,6 +141,18 @@ export default function CreatePaletteExploreScreen() {
       return c.code.toLowerCase().includes(q) || name.toLowerCase().includes(q);
     });
   }, [allColors, searchQuery, i18n.language]);
+
+  const listData = useMemo(() => {
+    if (showOnlySelected && selectedColors.length > 0) {
+      if (!searchQuery.trim()) return selectedColors;
+      const q = searchQuery.trim().toLowerCase();
+      return selectedColors.filter((c) => {
+        const name = getColorDisplayName(c, i18n.language);
+        return c.code.toLowerCase().includes(q) || name.toLowerCase().includes(q);
+      });
+    }
+    return filteredColors;
+  }, [showOnlySelected, selectedColors, filteredColors, searchQuery, i18n.language]);
 
   const selectedIds = useMemo(() => new Set(selectedColors.map((c) => c.id)), [selectedColors]);
 
@@ -110,16 +166,26 @@ export default function CreatePaletteExploreScreen() {
 
   const handleSave = useCallback(() => {
     if (selectedColors.length === 0) return;
+    if (paletteId) {
+      const palette = getPalette(paletteId);
+      setPaletteName(palette?.name ?? '');
+    } else {
+      setPaletteName('');
+    }
     setShowNameModal(true);
-  }, [selectedColors.length]);
+  }, [selectedColors.length, paletteId, getPalette]);
 
   const handleConfirmSave = useCallback(() => {
     const name = paletteName.trim() || t('palettes.defaultPaletteName');
-    addPalette({ name, colors: selectedColors });
+    if (paletteId) {
+      updatePalette(paletteId, { name, colors: selectedColors });
+    } else {
+      addPalette({ name, colors: selectedColors });
+    }
     setShowNameModal(false);
     setPaletteName('');
     router.replace('/(tabs)/palettes');
-  }, [addPalette, paletteName, selectedColors, t, router]);
+  }, [addPalette, updatePalette, paletteId, paletteName, selectedColors, t, router]);
 
   const renderItem = useCallback(
     ({ item }: { item: Color }) => (
@@ -167,7 +233,7 @@ export default function CreatePaletteExploreScreen() {
       </View>
 
       <FlatList
-        data={filteredColors}
+        data={listData}
         keyExtractor={(item) => item.id}
         renderItem={renderItem}
         numColumns={NUM_COLUMNS}
@@ -205,19 +271,29 @@ export default function CreatePaletteExploreScreen() {
             </ThemedText>
           )}
         </View>
-        <TouchableOpacity
-          style={[
-            styles.saveButton,
-            { backgroundColor: theme.tint },
-            selectedColors.length === 0 && styles.saveButtonDisabled,
-          ]}
-          onPress={handleSave}
-          disabled={selectedColors.length === 0}
-        >
-          <ThemedText style={[styles.saveButtonText, { color: theme.background }]}>
-            {t('palettes.savePalette')}
-          </ThemedText>
-        </TouchableOpacity>
+        <View style={styles.footerActionsRow}>
+          <View style={styles.switchWrap}>
+            <Switch
+              value={showOnlySelected}
+              onValueChange={setShowOnlySelected}
+              trackColor={{ false: theme.border, true: theme.tint }}
+              thumbColor={theme.background}
+            />
+          </View>
+          <TouchableOpacity
+            style={[
+              styles.saveButton,
+              { backgroundColor: theme.tint },
+              selectedColors.length === 0 && styles.saveButtonDisabled,
+            ]}
+            onPress={handleSave}
+            disabled={selectedColors.length === 0}
+          >
+            <ThemedText style={[styles.saveButtonText, { color: theme.background }]}>
+              {t('palettes.savePalette')}
+            </ThemedText>
+          </TouchableOpacity>
+        </View>
       </View>
 
       <Modal
@@ -338,7 +414,17 @@ const styles = StyleSheet.create({
   footerHint: {
     fontSize: Typography.fontSize.sm,
   },
+  footerActionsRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.md,
+  },
+  switchWrap: {
+    justifyContent: 'center',
+    alignSelf: 'stretch',
+  },
   saveButton: {
+    flex: 1,
     paddingVertical: Spacing.md,
     borderRadius: BorderRadius.md,
     alignItems: 'center',

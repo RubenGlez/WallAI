@@ -163,7 +163,12 @@ export default function PalettesIndexScreen() {
                 key={palette.id}
                 palette={palette}
                 onPress={() => {
-                  // TODO: palette detail
+                  const seriesIds = [...new Set(palette.colors.map((c) => c.seriesId))].join(',');
+                  const initialColorIds = palette.colors.map((c) => c.id).join(',');
+                  router.push({
+                    pathname: '/(tabs)/palettes/create/explore',
+                    params: { seriesIds, initialColorIds, paletteId: palette.id },
+                  });
                 }}
               />
             ))}

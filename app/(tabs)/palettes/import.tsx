@@ -15,6 +15,7 @@ import {
   View,
 } from 'react-native';
 import { getColors } from 'react-native-image-colors';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
@@ -25,9 +26,29 @@ import {
   findClosestColor,
   type ColorMatch,
 } from '@/lib/colorMatch';
-import { getColorsByBrandId, getBrandsWithCount } from '@/stores/useCatalogStore';
+import {
+  getColorsBySeriesId,
+  getBrandsWithCount,
+  getSeriesWithCountByBrandId,
+} from '@/stores/useCatalogStore';
 import { usePalettesStore } from '@/stores/usePalettesStore';
 import type { Color } from '@/types';
+import type { SeriesWithCount } from '@/types';
+
+type CheckState = 'none' | 'some' | 'all';
+
+function getBrandCheckState(
+  brandId: string,
+  selectedSeriesIds: Set<string>,
+  seriesByBrand: Map<string, SeriesWithCount[]>
+): CheckState {
+  const series = seriesByBrand.get(brandId) ?? [];
+  if (series.length === 0) return 'none';
+  const selected = series.filter((s) => selectedSeriesIds.has(s.id)).length;
+  if (selected === 0) return 'none';
+  if (selected === series.length) return 'all';
+  return 'some';
+}
 
 function getColorDisplayName(color: Color, language: string): string {
   const lang = language.split('-')[0];
@@ -47,11 +68,18 @@ export default function ImportFromImageScreen() {
   const addPalette = usePalettesStore((s) => s.addPalette);
 
   const brands = useMemo(() => getBrandsWithCount(), []);
+  const seriesByBrand = useMemo(() => {
+    const map = new Map<string, SeriesWithCount[]>();
+    for (const b of brands) {
+      map.set(b.id, getSeriesWithCountByBrandId(b.id));
+    }
+    return map;
+  }, [brands]);
 
   const [imageUri, setImageUri] = useState<string | null>(null);
   const [extractedHexes, setExtractedHexes] = useState<string[]>([]);
-  const [selectedBrandId, setSelectedBrandId] = useState<string | null>(null);
-  const [matches, setMatches] = useState<ColorMatch[]>([]);
+  const [expandedBrandIds, setExpandedBrandIds] = useState<Set<string>>(new Set());
+  const [selectedSeriesIds, setSelectedSeriesIds] = useState<Set<string>>(new Set());
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showNameModal, setShowNameModal] = useState(false);
@@ -61,6 +89,14 @@ export default function ImportFromImageScreen() {
   useLayoutEffect(() => {
     navigation.setOptions({ title: t('palettes.importFromImage') });
   }, [navigation, t]);
+
+  const processImageUri = useCallback(async (uri: string) => {
+    setImageUri(uri);
+    const colorsResult = await getColors(uri, { fallback: '#000000' });
+    const hexes = extractHexPalette(colorsResult as Record<string, string>);
+    setExtractedHexes(hexes);
+    setSelectedSeriesIds(new Set());
+  }, []);
 
   const pickImage = useCallback(async () => {
     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -80,19 +116,98 @@ export default function ImportFromImageScreen() {
         setLoading(false);
         return;
       }
-      const uri = result.assets[0].uri;
-      setImageUri(uri);
-      const colorsResult = await getColors(uri, { fallback: '#000000' });
-      const hexes = extractHexPalette(colorsResult as Record<string, string>);
-      setExtractedHexes(hexes);
-      setSelectedBrandId(null);
-      setMatches([]);
+      await processImageUri(result.assets[0].uri);
     } catch (e) {
       setError(e instanceof Error ? e.message : t('common.error'));
     } finally {
       setLoading(false);
     }
-  }, [t]);
+  }, [t, processImageUri]);
+
+  const takePhoto = useCallback(async () => {
+    const { status } = await ImagePicker.requestCameraPermissionsAsync();
+    if (status !== 'granted') {
+      setError(t('palettes.cameraPermissionDenied'));
+      return;
+    }
+    setError(null);
+    setLoading(true);
+    try {
+      const result = await ImagePicker.launchCameraAsync({
+        allowsEditing: false,
+        quality: 0.8,
+      });
+      if (result.canceled || !result.assets[0]) {
+        setLoading(false);
+        return;
+      }
+      await processImageUri(result.assets[0].uri);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : t('common.error'));
+    } finally {
+      setLoading(false);
+    }
+  }, [t, processImageUri]);
+
+  const toggleBrandExpanded = useCallback((brandId: string) => {
+    setExpandedBrandIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(brandId)) next.delete(brandId);
+      else next.add(brandId);
+      return next;
+    });
+  }, []);
+
+  const toggleBrandSelection = useCallback(
+    (brandId: string) => {
+      const series = seriesByBrand.get(brandId) ?? [];
+      const allSelected = series.every((s) => selectedSeriesIds.has(s.id));
+      setSelectedSeriesIds((prev) => {
+        const next = new Set(prev);
+        if (allSelected) {
+          series.forEach((s) => next.delete(s.id));
+        } else {
+          series.forEach((s) => next.add(s.id));
+        }
+        return next;
+      });
+    },
+    [seriesByBrand, selectedSeriesIds]
+  );
+
+  const toggleSeriesSelection = useCallback((seriesId: string) => {
+    setSelectedSeriesIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(seriesId)) next.delete(seriesId);
+      else next.add(seriesId);
+      return next;
+    });
+  }, []);
+
+  const catalogColorsForMatch = useMemo(() => {
+    const seen = new Set<string>();
+    const out: Color[] = [];
+    for (const seriesId of selectedSeriesIds) {
+      const colors = getColorsBySeriesId(seriesId);
+      for (const c of colors) {
+        if (!seen.has(c.id)) {
+          seen.add(c.id);
+          out.push(c);
+        }
+      }
+    }
+    return out;
+  }, [selectedSeriesIds]);
+
+  const matches = useMemo(() => {
+    if (extractedHexes.length === 0 || catalogColorsForMatch.length === 0) return [];
+    const results: ColorMatch[] = [];
+    for (const hex of extractedHexes) {
+      const m = findClosestColor(hex, catalogColorsForMatch);
+      if (m) results.push(m);
+    }
+    return results;
+  }, [extractedHexes, catalogColorsForMatch]);
 
   const handleSavePalette = useCallback(() => {
     if (matches.length === 0) return;
@@ -131,24 +246,37 @@ export default function ImportFromImageScreen() {
         showsVerticalScrollIndicator={false}
       >
         {!hasImage && (
-          <TouchableOpacity
-            style={[styles.pickButton, { backgroundColor: theme.backgroundSecondary, borderColor: theme.border }]}
-            onPress={pickImage}
-            disabled={loading}
-          >
+          <View style={styles.pickSection}>
+            <ThemedText style={[styles.pickSectionSubtitle, { color: theme.textSecondary }]}>
+              {t('palettes.choosePhotoSubtitle')}
+            </ThemedText>
             {loading ? (
-              <ActivityIndicator color={theme.tint} />
+              <View style={styles.pickLoadingWrap}>
+                <ActivityIndicator size="large" color={theme.tint} />
+              </View>
             ) : (
-              <>
-                <ThemedText style={[styles.pickButtonTitle, { color: theme.tint }]}>
-                  {t('palettes.choosePhoto')}
-                </ThemedText>
-                <ThemedText style={[styles.pickButtonSubtitle, { color: theme.textSecondary }]}>
-                  {t('palettes.choosePhotoSubtitle')}
-                </ThemedText>
-              </>
+              <View style={styles.pickButtonsRow}>
+                <TouchableOpacity
+                  style={[styles.pickOption, { backgroundColor: theme.backgroundSecondary, borderColor: theme.border }]}
+                  onPress={pickImage}
+                >
+                  <MaterialIcons name="photo-library" size={32} color={theme.tint} style={styles.pickOptionIcon} />
+                  <ThemedText style={[styles.pickOptionTitle, { color: theme.tint }]}>
+                    {t('palettes.selectFromGallery')}
+                  </ThemedText>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={[styles.pickOption, { backgroundColor: theme.backgroundSecondary, borderColor: theme.border }]}
+                  onPress={takePhoto}
+                >
+                  <MaterialIcons name="camera-alt" size={32} color={theme.tint} style={styles.pickOptionIcon} />
+                  <ThemedText style={[styles.pickOptionTitle, { color: theme.tint }]}>
+                    {t('palettes.takePhoto')}
+                  </ThemedText>
+                </TouchableOpacity>
+              </View>
             )}
-          </TouchableOpacity>
+          </View>
         )}
 
         {error && (
@@ -177,32 +305,89 @@ export default function ImportFromImageScreen() {
             </View>
 
             <ThemedText style={[styles.sectionLabel, { color: theme.textSecondary }]}>
-              {t('palettes.selectBrandForMatch')}
+              {t('palettes.selectBrandsAndSeries')}
+            </ThemedText>
+            <ThemedText style={[styles.sectionSubtitle, { color: theme.textSecondary }]}>
+              {t('palettes.selectBrandsSubtitle')}
             </ThemedText>
             <View style={styles.brandList}>
               {brands.map((brand) => {
-                const selected = selectedBrandId === brand.id;
+                const series = seriesByBrand.get(brand.id) ?? [];
+                const isExpanded = expandedBrandIds.has(brand.id);
+                const checkState = getBrandCheckState(brand.id, selectedSeriesIds, seriesByBrand);
+
                 return (
-                  <TouchableOpacity
-                    key={brand.id}
-                    style={[
-                      styles.brandRow,
-                      { borderColor: theme.border },
-                      selected && { borderColor: theme.tint, borderWidth: 2 },
-                    ]}
-                    onPress={() => {
-                      setSelectedBrandId(brand.id);
-                      const catalogColors = getColorsByBrandId(brand.id);
-                      const results: ColorMatch[] = [];
-                      for (const hex of extractedHexes) {
-                        const m = findClosestColor(hex, catalogColors);
-                        if (m) results.push(m);
-                      }
-                      setMatches(results);
-                    }}
-                  >
-                    <ThemedText style={styles.brandName}>{brand.name}</ThemedText>
-                  </TouchableOpacity>
+                  <View key={brand.id} style={styles.brandBlock}>
+                    <View style={[styles.brandRowWrap, { borderBottomColor: theme.border }]}>
+                      <TouchableOpacity
+                        style={styles.checkboxHit}
+                        onPress={() => toggleBrandSelection(brand.id)}
+                        accessibilityRole="checkbox"
+                        accessibilityState={{ checked: checkState === 'all' }}
+                      >
+                        {checkState === 'none' && (
+                          <MaterialIcons name="check-box-outline-blank" size={24} color={theme.icon} />
+                        )}
+                        {checkState === 'some' && (
+                          <MaterialIcons name="indeterminate-check-box" size={24} color={theme.tint} />
+                        )}
+                        {checkState === 'all' && (
+                          <MaterialIcons name="check-box" size={24} color={theme.tint} />
+                        )}
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        style={styles.brandLabelWrap}
+                        onPress={() => toggleBrandExpanded(brand.id)}
+                        activeOpacity={0.7}
+                      >
+                        <ThemedText style={styles.brandName} numberOfLines={1}>
+                          {brand.name}
+                        </ThemedText>
+                        <ThemedText style={[styles.brandMeta, { color: theme.textSecondary }]}>
+                          {t('colors.colorCount', { count: brand.colorCount })}
+                        </ThemedText>
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        style={styles.chevron}
+                        onPress={() => toggleBrandExpanded(brand.id)}
+                        hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
+                      >
+                        <MaterialIcons
+                          name={isExpanded ? 'expand-less' : 'expand-more'}
+                          size={24}
+                          color={theme.textSecondary}
+                        />
+                      </TouchableOpacity>
+                    </View>
+
+                    {isExpanded &&
+                      series.map((s) => {
+                        const isSelected = selectedSeriesIds.has(s.id);
+                        return (
+                          <TouchableOpacity
+                            key={s.id}
+                            style={[styles.seriesRow, { borderBottomColor: theme.border }]}
+                            onPress={() => toggleSeriesSelection(s.id)}
+                            activeOpacity={0.7}
+                            accessibilityRole="checkbox"
+                            accessibilityState={{ checked: isSelected }}
+                          >
+                            <View style={styles.seriesIndent} />
+                            {isSelected ? (
+                              <MaterialIcons name="check-box" size={22} color={theme.tint} />
+                            ) : (
+                              <MaterialIcons name="check-box-outline-blank" size={22} color={theme.icon} />
+                            )}
+                            <ThemedText style={styles.seriesName} numberOfLines={1}>
+                              {s.name}
+                            </ThemedText>
+                            <ThemedText style={[styles.seriesMeta, { color: theme.textSecondary }]}>
+                              {t('colors.colorCount', { count: s.colorCount })}
+                            </ThemedText>
+                          </TouchableOpacity>
+                        );
+                      })}
+                  </View>
                 );
               })}
             </View>
@@ -345,23 +530,40 @@ const styles = StyleSheet.create({
   scrollContent: {
     paddingBottom: Spacing.xxl,
   },
-  pickButton: {
-    paddingVertical: Spacing.xxl,
-    paddingHorizontal: Spacing.lg,
+  pickSection: {
+    marginBottom: Spacing.md,
+  },
+  pickSectionSubtitle: {
+    fontSize: Typography.fontSize.sm,
+    textAlign: 'center',
+    marginBottom: Spacing.lg,
+  },
+  pickLoadingWrap: {
+    minHeight: 140,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  pickButtonsRow: {
+    flexDirection: 'row',
+    gap: Spacing.md,
+  },
+  pickOption: {
+    flex: 1,
+    paddingVertical: Spacing.xl,
+    paddingHorizontal: Spacing.md,
     borderRadius: BorderRadius.lg,
     borderWidth: 2,
     borderStyle: 'dashed',
     alignItems: 'center',
     justifyContent: 'center',
-    minHeight: 160,
+    minHeight: 140,
   },
-  pickButtonTitle: {
-    fontSize: Typography.fontSize.lg,
-    fontWeight: Typography.fontWeight.semibold,
-    marginBottom: Spacing.xs,
+  pickOptionIcon: {
+    marginBottom: Spacing.sm,
   },
-  pickButtonSubtitle: {
+  pickOptionTitle: {
     fontSize: Typography.fontSize.sm,
+    fontWeight: Typography.fontWeight.semibold,
     textAlign: 'center',
   },
   error: {
@@ -393,19 +595,57 @@ const styles = StyleSheet.create({
     marginBottom: Spacing.sm,
     textTransform: 'uppercase',
   },
+  sectionSubtitle: {
+    fontSize: Typography.fontSize.sm,
+    marginBottom: Spacing.md,
+  },
   brandList: {
     marginBottom: Spacing.lg,
   },
-  brandRow: {
-    paddingVertical: Spacing.md,
-    paddingHorizontal: Spacing.md,
-    borderRadius: BorderRadius.md,
-    borderWidth: 1,
-    marginBottom: Spacing.sm,
+  brandBlock: {
+    marginBottom: Spacing.xs,
+  },
+  brandRowWrap: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: Spacing.sm,
+    borderBottomWidth: 1,
+  },
+  checkboxHit: {
+    padding: Spacing.xs,
+    marginRight: Spacing.sm,
+  },
+  brandLabelWrap: {
+    flex: 1,
   },
   brandName: {
     fontSize: Typography.fontSize.md,
     fontWeight: Typography.fontWeight.semibold,
+  },
+  brandMeta: {
+    fontSize: Typography.fontSize.sm,
+    marginTop: 2,
+  },
+  chevron: {
+    padding: Spacing.xs,
+  },
+  seriesRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: Spacing.sm,
+    paddingLeft: Spacing.sm,
+    borderBottomWidth: 1,
+  },
+  seriesIndent: {
+    width: 24 + Spacing.sm,
+  },
+  seriesName: {
+    flex: 1,
+    fontSize: Typography.fontSize.md,
+    marginLeft: Spacing.sm,
+  },
+  seriesMeta: {
+    fontSize: Typography.fontSize.sm,
   },
   matchRow: {
     flexDirection: 'row',
