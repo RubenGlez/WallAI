@@ -1,6 +1,7 @@
+import { BottomSheetBackdrop, BottomSheetModal, BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { useNavigation, useRouter } from 'expo-router';
 import * as ImagePicker from 'expo-image-picker';
-import React, { useCallback, useLayoutEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   ActivityIndicator,
@@ -58,18 +59,41 @@ export default function ImportFromImageScreen() {
   const [error, setError] = useState<string | null>(null);
   const [showNameModal, setShowNameModal] = useState(false);
   const [paletteName, setPaletteName] = useState('');
+  const seriesFilterSheetRef = useRef<BottomSheetModal>(null);
+  const hasInitializedSeriesSelection = useRef(false);
+
+  /** Default: all series selected once catalog is available. */
+  useEffect(() => {
+    if (allSeries.length > 0 && !hasInitializedSeriesSelection.current) {
+      hasInitializedSeriesSelection.current = true;
+      setSelectedSeriesIds(new Set(allSeries.map((s) => s.id)));
+    }
+  }, [allSeries]);
 
   const navigation = useNavigation();
   useLayoutEffect(() => {
-    navigation.setOptions({ title: t('palettes.importFromImage') });
-  }, [navigation, t]);
+    navigation.setOptions({
+      title: t('palettes.importFromImage'),
+      headerRight: () => (
+        <TouchableOpacity
+          onPress={() => seriesFilterSheetRef.current?.present()}
+          style={{ paddingHorizontal: Spacing.sm, paddingVertical: Spacing.sm }}
+          accessibilityRole="button"
+          accessibilityLabel={t('palettes.selectSeries')}
+        >
+          <MaterialIcons name="filter-list" size={24} color={theme.tint} />
+        </TouchableOpacity>
+      ),
+    });
+  }, [navigation, t, theme.tint]);
 
   const processImageUri = useCallback(async (uri: string) => {
     setImageUri(uri);
     const colorsResult = await getColors(uri, { fallback: '#000000' });
     const hexes = extractHexPalette(colorsResult as unknown as Record<string, string>);
     setExtractedHexes(hexes);
-    setSelectedSeriesIds(new Set());
+    const series = getAllSeriesWithCount();
+    setSelectedSeriesIds(new Set(series.map((s) => s.id)));
     setSelectedCatalogColorByHex({});
   }, []);
 
@@ -210,8 +234,64 @@ export default function ImportFromImageScreen() {
   const hasSeriesSelected = selectedSeriesIds.size > 0;
   const showEquivalents = hasImage && hasSeriesSelected && similaritiesPerHex.length > 0;
 
+  const renderSeriesSheetBackdrop = useCallback(
+    (props: React.ComponentProps<typeof BottomSheetBackdrop>) => (
+      <BottomSheetBackdrop {...props} appearsOnIndex={0} disappearsOnIndex={-1} opacity={0.5} />
+    ),
+    []
+  );
+
   return (
     <ThemedView style={styles.container}>
+      <BottomSheetModal
+        ref={seriesFilterSheetRef}
+        snapPoints={['60%', '90%']}
+        backgroundStyle={{
+          backgroundColor: theme.background,
+          borderTopLeftRadius: 20,
+          borderTopRightRadius: 20,
+        }}
+        backdropComponent={renderSeriesSheetBackdrop}
+      >
+        <BottomSheetScrollView contentContainerStyle={styles.seriesSheetContent}>
+          <ThemedText style={[styles.sectionLabel, { color: theme.textSecondary }]}>
+            {t('palettes.selectSeries')}
+          </ThemedText>
+          <ThemedText style={[styles.sectionSubtitle, { color: theme.textSecondary }]}>
+            {t('palettes.selectSeriesSubtitle')}
+          </ThemedText>
+          <View style={styles.seriesList}>
+            {allSeries.map((s: SeriesWithCountAndBrand) => {
+              const isSelected = selectedSeriesIds.has(s.id);
+              return (
+                <TouchableOpacity
+                  key={s.id}
+                  style={[styles.seriesRow, { borderBottomColor: theme.border }]}
+                  onPress={() => toggleSeriesSelection(s.id)}
+                  activeOpacity={0.7}
+                  accessibilityRole="checkbox"
+                  accessibilityState={{ checked: isSelected }}
+                >
+                  {isSelected ? (
+                    <MaterialIcons name="check-box" size={24} color={theme.tint} />
+                  ) : (
+                    <MaterialIcons name="check-box-outline-blank" size={24} color={theme.icon} />
+                  )}
+                  <View style={styles.seriesLabelWrap}>
+                    <ThemedText style={styles.seriesName} numberOfLines={1} ellipsizeMode="tail">
+                      {s.name}
+                    </ThemedText>
+                    <ThemedText style={[styles.seriesMeta, { color: theme.textSecondary }]} numberOfLines={1} ellipsizeMode="tail">
+                      {s.brandName} · {t('colors.colorCount', { count: s.colorCount })}
+                    </ThemedText>
+                  </View>
+                </TouchableOpacity>
+              );
+            })}
+          </View>
+        </BottomSheetScrollView>
+      </BottomSheetModal>
+
       <ScrollView
         style={styles.scroll}
         contentContainerStyle={styles.scrollContent}
@@ -274,42 +354,6 @@ export default function ImportFromImageScreen() {
                   />
                 ))}
               </View>
-            </View>
-
-            <ThemedText style={[styles.sectionLabel, { color: theme.textSecondary }]}>
-              {t('palettes.selectSeries')}
-            </ThemedText>
-            <ThemedText style={[styles.sectionSubtitle, { color: theme.textSecondary }]}>
-              {t('palettes.selectSeriesSubtitle')}
-            </ThemedText>
-            <View style={styles.seriesList}>
-              {allSeries.map((s: SeriesWithCountAndBrand) => {
-                const isSelected = selectedSeriesIds.has(s.id);
-                return (
-                  <TouchableOpacity
-                    key={s.id}
-                    style={[styles.seriesRow, { borderBottomColor: theme.border }]}
-                    onPress={() => toggleSeriesSelection(s.id)}
-                    activeOpacity={0.7}
-                    accessibilityRole="checkbox"
-                    accessibilityState={{ checked: isSelected }}
-                  >
-                    {isSelected ? (
-                      <MaterialIcons name="check-box" size={24} color={theme.tint} />
-                    ) : (
-                      <MaterialIcons name="check-box-outline-blank" size={24} color={theme.icon} />
-                    )}
-                    <View style={styles.seriesLabelWrap}>
-                      <ThemedText style={styles.seriesName} numberOfLines={1} ellipsizeMode="tail">
-                        {s.name}
-                      </ThemedText>
-                      <ThemedText style={[styles.seriesMeta, { color: theme.textSecondary }]} numberOfLines={1} ellipsizeMode="tail">
-                        {s.brandName} · {t('colors.colorCount', { count: s.colorCount })}
-                      </ThemedText>
-                    </View>
-                  </TouchableOpacity>
-                );
-              })}
             </View>
 
             {showEquivalents && (
@@ -565,6 +609,10 @@ const styles = StyleSheet.create({
   sectionSubtitle: {
     fontSize: Typography.fontSize.sm,
     marginBottom: Spacing.md,
+  },
+  seriesSheetContent: {
+    paddingHorizontal: Spacing.md,
+    paddingBottom: Spacing.xl * 2,
   },
   seriesList: {
     marginBottom: Spacing.lg,
