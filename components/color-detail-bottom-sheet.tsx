@@ -20,14 +20,12 @@ type Props = {
   color: ColorDetailParams | null;
   isFavorite: boolean;
   onToggleFavorite: () => void;
-  onAddToPalette: () => void;
 };
 
 export function ColorDetailContent({
   color,
   isFavorite,
   onToggleFavorite,
-  onAddToPalette,
 }: Props) {
   const { t } = useTranslation();
   const colorScheme = useColorScheme() ?? 'light';
@@ -86,15 +84,6 @@ export function ColorDetailContent({
       <ThemedText style={[styles.placeholder, { color: theme.textSecondary }]}>
         {t('colors.colorDetail.comingSoon')}
       </ThemedText>
-
-      <TouchableOpacity
-        style={[styles.addButton, { backgroundColor: theme.tint }]}
-        onPress={onAddToPalette}
-      >
-        <ThemedText style={[styles.addButtonText, { color: theme.background }]}>
-          {t('colors.addToPalette')}
-        </ThemedText>
-      </TouchableOpacity>
     </BottomSheetScrollView>
   );
 }
@@ -149,15 +138,5 @@ const styles = StyleSheet.create({
   placeholder: {
     fontSize: Typography.fontSize.sm,
     marginBottom: Spacing.md,
-  },
-  addButton: {
-    marginTop: Spacing.lg,
-    paddingVertical: Spacing.md,
-    borderRadius: BorderRadius.md,
-    alignItems: 'center',
-  },
-  addButtonText: {
-    fontSize: Typography.fontSize.md,
-    fontWeight: Typography.fontWeight.semibold,
   },
 });

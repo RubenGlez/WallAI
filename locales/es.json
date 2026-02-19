@@ -31,7 +31,7 @@
     "title": "Colores",
     "brandsListDescription": "Elige una marca para ver sus series y colores.",
     "overviewTitle": "Colores",
-    "overviewSubtitle": "Accede a tus marcas y series favoritas o explora el catálogo.",
+    "overviewSubtitle": "Accede a tus series favoritas o explora el catálogo.",
     "favoriteBrands": "Marcas favoritas",
     "favoriteSeries": "Series favoritas",
     "noFavoriteBrands": "Añade marcas a favoritos desde la lista de marcas.",
@@ -73,6 +73,8 @@
     "addToPalette": "Agregar a Paleta",
     "addToFavorites": "Añadir a favoritos",
     "removeFromFavorites": "Quitar de favoritos",
+    "showOnlyFavorites": "Ver solo favoritos",
+    "showAllColors": "Ver todos los colores",
     "colorDetail": {
       "similarInBrand": "Similares en la marca",
       "similarOtherBrands": "Similares en otras marcas",

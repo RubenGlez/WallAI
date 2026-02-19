@@ -42,7 +42,7 @@ export function ColorGridCard({
   const theme = Colors[colorScheme];
   const isLight =
     color.hex.toLowerCase() === '#ffffff' || color.hex.toLowerCase().startsWith('#fff');
-  const showActions = !selectionMode && (onFavorite != null || onAddToPalette != null);
+  const showActionsRow = !selectionMode && onAddToPalette != null;
 
   return (
     <TouchableOpacity
@@ -75,6 +75,19 @@ export function ColorGridCard({
             isLight && { borderWidth: 1, borderColor: theme.border },
           ]}
         />
+        {onFavorite != null && (
+          <TouchableOpacity
+            style={styles.favoriteBtn}
+            onPress={onFavorite}
+            accessibilityLabel={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
+          >
+            <IconSymbol
+              name={isFavorite ? 'star.fill' : 'star'}
+              size={18}
+              color={isFavorite ? theme.warning : theme.icon}
+            />
+          </TouchableOpacity>
+        )}
       </View>
       <ThemedText style={styles.name} numberOfLines={1} ellipsizeMode="tail">
         {displayName}
@@ -86,30 +99,19 @@ export function ColorGridCard({
       >
         {color.code}
       </ThemedText>
-      {showActions && (
-        <View style={[styles.actions, onFavorite == null && styles.actionsEnd]}>
-          {onFavorite != null && (
-            <TouchableOpacity style={styles.actionBtn} onPress={onFavorite}>
-              <IconSymbol
-                name={isFavorite ? 'star.fill' : 'star'}
-                size={20}
-                color={isFavorite ? theme.warning : theme.icon}
-              />
-            </TouchableOpacity>
-          )}
-          {onAddToPalette != null && (
-            <TouchableOpacity
-              style={styles.actionBtn}
-              onPress={onAddToPalette}
-              accessibilityLabel={isInPalette ? 'Remove from palette' : 'Add to palette'}
-            >
-              {isInPalette ? (
-                <MaterialIcons name="check-circle" size={20} color={theme.tint} />
-              ) : (
-                <IconSymbol name="plus" size={20} color={theme.icon} />
-              )}
-            </TouchableOpacity>
-          )}
+      {showActionsRow && (
+        <View style={styles.actions}>
+          <TouchableOpacity
+            style={styles.actionBtn}
+            onPress={onAddToPalette}
+            accessibilityLabel={isInPalette ? 'Remove from palette' : 'Add to palette'}
+          >
+            {isInPalette ? (
+              <MaterialIcons name="check-circle" size={20} color={theme.tint} />
+            ) : (
+              <IconSymbol name="plus" size={20} color={theme.icon} />
+            )}
+          </TouchableOpacity>
         </View>
       )}
     </TouchableOpacity>
@@ -140,6 +142,13 @@ const styles = StyleSheet.create({
   swatch: {
     borderRadius: BorderRadius.md,
   },
+  favoriteBtn: {
+    position: 'absolute',
+    top: Spacing.xs,
+    right: Spacing.xs,
+    padding: Spacing.xs,
+    zIndex: 1,
+  },
   name: {
     fontSize: Typography.fontSize.sm,
     fontWeight: Typography.fontWeight.semibold,
@@ -151,9 +160,6 @@ const styles = StyleSheet.create({
   },
   actions: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  actionsEnd: {
     justifyContent: 'flex-end',
   },
   actionBtn: {

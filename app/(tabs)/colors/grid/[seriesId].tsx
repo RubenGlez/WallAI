@@ -47,20 +47,27 @@ export default function ColorGridScreen() {
   const theme = Colors[colorScheme];
 
   const [searchQuery, setSearchQuery] = useState('');
+  const [showOnlyFavorites, setShowOnlyFavorites] = useState(false);
   const [detailParams, setDetailParams] = useState<ColorDetailParams | null>(null);
   const detailSheetRef = useRef<BottomSheetModal>(null);
 
   const series = seriesId ? getSeriesById(seriesId) : undefined;
   const allColors = seriesId ? getColorsBySeriesId(seriesId) : [];
 
+  const favoriteColorIds = useFavoritesStore((s) => s.favoriteColorIds);
+
   const filteredColors = useMemo(() => {
-    if (!searchQuery.trim()) return allColors;
+    let list = allColors;
+    if (showOnlyFavorites) {
+      list = list.filter((c) => favoriteColorIds.includes(c.id));
+    }
+    if (!searchQuery.trim()) return list;
     const q = searchQuery.trim().toLowerCase();
-    return allColors.filter((c) => {
+    return list.filter((c) => {
       const name = getColorDisplayName(c, i18n.language);
       return c.code.toLowerCase().includes(q) || name.toLowerCase().includes(q);
     });
-  }, [allColors, searchQuery, i18n.language]);
+  }, [allColors, searchQuery, showOnlyFavorites, favoriteColorIds, i18n.language]);
 
   useEffect(() => {
     if (series) {
@@ -68,7 +75,27 @@ export default function ColorGridScreen() {
     }
   }, [series, navigation]);
 
-  const favoriteColorIds = useFavoritesStore((s) => s.favoriteColorIds);
+  useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <TouchableOpacity
+          onPress={() => setShowOnlyFavorites((s) => !s)}
+          style={{ paddingHorizontal: Spacing.sm, paddingVertical: Spacing.sm }}
+          accessibilityRole="button"
+          accessibilityLabel={
+            showOnlyFavorites ? t('colors.showAllColors') : t('colors.showOnlyFavorites')
+          }
+        >
+          <IconSymbol
+            name={showOnlyFavorites ? 'star.fill' : 'star'}
+            size={24}
+            color={showOnlyFavorites ? theme.tint : theme.icon}
+          />
+        </TouchableOpacity>
+      ),
+    });
+  }, [navigation, showOnlyFavorites, theme.tint, theme.icon, t]);
+
   const toggleFavorite = useFavoritesStore((s) => s.toggleFavorite);
 
   const handleFavorite = useCallback(
@@ -77,10 +104,6 @@ export default function ColorGridScreen() {
     },
     [toggleFavorite]
   );
-
-  const handleAddToPalette = useCallback((_color: Color) => {
-    // TODO: add to palette
-  }, []);
 
   const openDetailSheet = useCallback((item: Color) => {
     const s = getSeriesById(item.seriesId);
@@ -100,14 +123,13 @@ export default function ColorGridScreen() {
         color={item}
         displayName={getColorDisplayName(item, i18n.language)}
         onPress={() => openDetailSheet(item)}
-        onAddToPalette={() => handleAddToPalette(item)}
         isFavorite={favoriteColorIds.includes(item.id)}
         onFavorite={() => handleFavorite(item)}
         cardWidth={CARD_WIDTH}
         swatchSize={SWATCH_SIZE}
       />
     ),
-    [i18n.language, favoriteColorIds, openDetailSheet, handleFavorite, handleAddToPalette]
+    [i18n.language, favoriteColorIds, openDetailSheet, handleFavorite]
   );
 
   return (
@@ -120,7 +142,6 @@ export default function ColorGridScreen() {
           color={detailParams}
           isFavorite={detailParams ? favoriteColorIds.includes(detailParams.color.id) : false}
           onToggleFavorite={() => detailParams && handleFavorite(detailParams.color)}
-          onAddToPalette={() => detailParams && handleAddToPalette(detailParams.color)}
         />
       </BottomSheetModal>
 
