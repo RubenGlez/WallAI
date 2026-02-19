@@ -191,6 +191,12 @@
     "nameYourPalette": "Nome da paleta",
     "paletteNamePlaceholder": "Ex.: Muro norte",
     "defaultPaletteName": "Minha paleta",
+    "choosePhoto": "Escolher foto",
+    "choosePhotoSubtitle": "Muro, natureza, peça…",
+    "permissionDenied": "É necessário acesso à galeria.",
+    "selectBrandForMatch": "Marca para equivalências",
+    "equivalents": "Equivalentes em spray",
+    "editManually": "Editar manualmente",
     "color": "cor",
     "colors": "cores",
     "searchPlaceholder": "Pesquisar paletas..."

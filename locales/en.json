@@ -191,6 +191,12 @@
     "nameYourPalette": "Palette name",
     "paletteNamePlaceholder": "E.g. North wall",
     "defaultPaletteName": "My palette",
+    "choosePhoto": "Choose photo",
+    "choosePhotoSubtitle": "Wall, nature, piece…",
+    "permissionDenied": "Gallery access is required.",
+    "selectBrandForMatch": "Brand to match equivalents",
+    "equivalents": "Spray equivalents",
+    "editManually": "Edit manually",
     "color": "color",
     "colors": "colors",
     "searchPlaceholder": "Search palettes..."

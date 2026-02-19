@@ -191,6 +191,12 @@
     "nameYourPalette": "Name der Palette",
     "paletteNamePlaceholder": "z. B. Nordwand",
     "defaultPaletteName": "Meine Palette",
+    "choosePhoto": "Foto wählen",
+    "choosePhotoSubtitle": "Wand, Natur, Stück…",
+    "permissionDenied": "Galeriezugriff ist erforderlich.",
+    "selectBrandForMatch": "Marke für Äquivalente",
+    "equivalents": "Spray-Äquivalente",
+    "editManually": "Manuell bearbeiten",
     "color": "Farbe",
     "colors": "Farben",
     "searchPlaceholder": "Paletten suchen..."

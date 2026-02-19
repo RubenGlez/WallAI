@@ -118,7 +118,7 @@ export default function PalettesIndexScreen() {
     router.push('/(tabs)/palettes/create');
   };
   const handleImportFromImage = () => {
-    // TODO: import from image flow
+    router.push('/(tabs)/palettes/import');
   };
 
   const fabBottom = Spacing.md;

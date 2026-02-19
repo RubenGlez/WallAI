@@ -191,6 +191,12 @@
     "nameYourPalette": "Nom de la palette",
     "paletteNamePlaceholder": "Ex. Mur nord",
     "defaultPaletteName": "Ma palette",
+    "choosePhoto": "Choisir une photo",
+    "choosePhotoSubtitle": "Mur, nature, pièce…",
+    "permissionDenied": "L'accès à la galerie est requis.",
+    "selectBrandForMatch": "Marque pour les équivalents",
+    "equivalents": "Équivalents spray",
+    "editManually": "Modifier manuellement",
     "color": "couleur",
     "colors": "couleurs",
     "searchPlaceholder": "Rechercher des palettes..."

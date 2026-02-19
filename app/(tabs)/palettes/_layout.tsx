@@ -42,6 +42,15 @@ export default function PalettesLayout() {
           headerLeft: () => <HeaderBackButton />,
         }}
       />
+      <Stack.Screen
+        name="import"
+        options={{
+          headerShown: true,
+          headerBackTitle: '',
+          headerShadowVisible: false,
+          headerLeft: () => <HeaderBackButton />,
+        }}
+      />
     </Stack>
   );
 }

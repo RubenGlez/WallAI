@@ -1,5 +1,5 @@
 import { useLocalSearchParams, useNavigation, useRouter } from 'expo-router';
-import React, { useCallback, useLayoutEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   Dimensions,
@@ -41,7 +41,10 @@ function getColorDisplayName(color: Color, language: string): string {
 }
 
 export default function CreatePaletteExploreScreen() {
-  const { seriesIds } = useLocalSearchParams<{ seriesIds: string }>();
+  const { seriesIds, initialColorIds } = useLocalSearchParams<{
+    seriesIds: string;
+    initialColorIds?: string;
+  }>();
   const navigation = useNavigation();
   const router = useRouter();
   const { t, i18n } = useTranslation();
@@ -73,6 +76,14 @@ export default function CreatePaletteExploreScreen() {
   const [selectedColors, setSelectedColors] = useState<Color[]>([]);
   const [showNameModal, setShowNameModal] = useState(false);
   const [paletteName, setPaletteName] = useState('');
+  const initialAppliedRef = useRef(false);
+
+  useEffect(() => {
+    if (initialAppliedRef.current || !initialColorIds || allColors.length === 0) return;
+    initialAppliedRef.current = true;
+    const ids = new Set(initialColorIds.split(',').filter(Boolean));
+    setSelectedColors(allColors.filter((c) => ids.has(c.id)));
+  }, [initialColorIds, allColors]);
 
   useLayoutEffect(() => {
     navigation.setOptions({ title: t('palettes.exploreColorsTitle') });

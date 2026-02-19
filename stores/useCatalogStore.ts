@@ -62,6 +62,14 @@ export function getSeriesByBrandId(brandId: string): Series[] {
 }
 
 /**
+ * Returns all colors from all series of a brand (for "closest match" search).
+ */
+export function getColorsByBrandId(brandId: string): Color[] {
+  const seriesIds = seriesData.filter((s) => s.brandId === brandId).map((s) => s.id);
+  return colorsData.filter((c) => seriesIds.includes(c.seriesId));
+}
+
+/**
  * Returns series for a given brand with color count.
  */
 export function getSeriesWithCountByBrandId(brandId: string): SeriesWithCount[] {
