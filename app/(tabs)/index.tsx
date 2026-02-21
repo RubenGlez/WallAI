@@ -116,7 +116,7 @@ export default function HomeScreen() {
                 key={series.id}
                 series={series}
                 isFavorite
-                onPress={() => router.push({ pathname: '/(tabs)/colors', params: { seriesId: series.id } })}
+                onPress={() => router.push(`/color-grid/${series.id}`)}
                 onFavorite={() => toggleFavoriteSeries(series.id)}
               />
             ))}
@@ -132,7 +132,7 @@ export default function HomeScreen() {
               key={series.id}
               series={series}
               isFavorite={favoriteSeriesIds.includes(series.id)}
-              onPress={() => router.push({ pathname: '/(tabs)/colors', params: { seriesId: series.id } })}
+              onPress={() => router.push(`/color-grid/${series.id}`)}
               onFavorite={() => toggleFavoriteSeries(series.id)}
             />
           ))}
