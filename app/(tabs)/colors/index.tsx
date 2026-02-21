@@ -1,5 +1,5 @@
 import { BottomSheetBackdrop, BottomSheetModal, BottomSheetScrollView } from '@gorhom/bottom-sheet';
-import { useNavigation } from 'expo-router';
+import { useLocalSearchParams, useNavigation } from 'expo-router';
 import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
@@ -49,6 +49,7 @@ function getColorDisplayName(color: Color, language: string): string {
 
 export default function ColorsOverviewScreen() {
   const navigation = useNavigation();
+  const { seriesId: seriesIdParam } = useLocalSearchParams<{ seriesId?: string }>();
   const insets = useSafeAreaInsets();
   const { t, i18n } = useTranslation();
   const colorScheme = useColorScheme() ?? 'light';
@@ -61,9 +62,13 @@ export default function ColorsOverviewScreen() {
   useEffect(() => {
     if (allSeries.length > 0 && !hasInitializedSeriesSelection.current) {
       hasInitializedSeriesSelection.current = true;
-      setSelectedSeriesIds(new Set(allSeries.map((s) => s.id)));
+      if (seriesIdParam && allSeries.some((s) => s.id === seriesIdParam)) {
+        setSelectedSeriesIds(new Set([seriesIdParam]));
+      } else {
+        setSelectedSeriesIds(new Set(allSeries.map((s) => s.id)));
+      }
     }
-  }, [allSeries]);
+  }, [allSeries, seriesIdParam]);
 
   const toggleSeriesSelection = useCallback((seriesId: string) => {
     setSelectedSeriesIds((prev) => {
@@ -114,7 +119,11 @@ export default function ColorsOverviewScreen() {
     navigation.setOptions({
       headerShown: true,
       title: t('colors.overviewTitle'),
-      headerStyle: { paddingTop: insets.top },
+      headerStyle: {
+        paddingTop: insets.top,
+        borderBottomWidth: 0,
+      },
+      headerShadowVisible: false,
       headerRight: () => (
         <View style={styles.headerRightRow}>
           <TouchableOpacity
@@ -211,7 +220,7 @@ export default function ColorsOverviewScreen() {
   );
 
   return (
-    <ThemedView style={styles.container} safeArea="top">
+    <ThemedView style={styles.container}>
       <BottomSheetModal
         ref={detailSheetRef}
         backgroundStyle={{
