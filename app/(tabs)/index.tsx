@@ -1,26 +1,31 @@
-import { useRouter } from 'expo-router';
-import React, { useMemo } from 'react';
-import { useTranslation } from 'react-i18next';
-import { ScrollView, StyleSheet, View } from 'react-native';
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { useRouter } from "expo-router";
+import React, { useMemo } from "react";
+import { useTranslation } from "react-i18next";
+import { ScrollView, StyleSheet, View } from "react-native";
 
-import { ScreenHeader } from '@/components/screen-header';
-import { SeriesCard } from '@/components/series-card';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { BorderRadius, Colors, Shadows, Spacing, Typography } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
+import { ScreenHeader } from "@/components/screen-header";
+import { SeriesCard } from "@/components/series-card";
+import { ThemedText } from "@/components/themed-text";
+import { ThemedView } from "@/components/themed-view";
+import {
+  BorderRadius,
+  Colors,
+  Spacing,
+  Typography
+} from "@/constants/theme";
+import { useColorScheme } from "@/hooks/use-color-scheme";
 import {
   getAllSeriesWithCount,
   type SeriesWithCountAndBrand,
-} from '@/stores/useCatalogStore';
-import { useFavoritesStore } from '@/stores/useFavoritesStore';
-import { useProfileStore } from '@/stores/useProfileStore';
+} from "@/stores/useCatalogStore";
+import { useFavoritesStore } from "@/stores/useFavoritesStore";
+import { useProfileStore } from "@/stores/useProfileStore";
 
 export default function HomeScreen() {
   const { t } = useTranslation();
   const router = useRouter();
-  const colorScheme = useColorScheme() ?? 'light';
+  const colorScheme = useColorScheme() ?? "light";
   const theme = Colors[colorScheme];
   const aka = useProfileStore((s) => s.aka);
 
@@ -30,7 +35,7 @@ export default function HomeScreen() {
   const allSeries = useMemo(() => getAllSeriesWithCount(), []);
   const favoriteSeries = useMemo(
     () => allSeries.filter((s) => favoriteSeriesIds.includes(s.id)),
-    [allSeries, favoriteSeriesIds]
+    [allSeries, favoriteSeriesIds],
   );
 
   return (
@@ -41,12 +46,22 @@ export default function HomeScreen() {
         showsVerticalScrollIndicator={false}
       >
         <ScreenHeader
-          title={aka.trim() ? t('home.titleWithName', { name: aka.trim() }) : t('home.title')}
-          subtitle={t('home.subtitle')}
+          title={
+            aka.trim()
+              ? t("home.titleWithName", { name: aka.trim() })
+              : t("home.title")
+          }
+          subtitle={t("home.subtitle")}
         />
 
-        <ThemedText style={[styles.sectionTitle, styles.sectionTitleSpaced, { color: theme.textSecondary }]}>
-          {t('colors.favoriteSeries')}
+        <ThemedText
+          style={[
+            styles.sectionTitle,
+            styles.sectionTitleSpaced,
+            { color: theme.textSecondary },
+          ]}
+        >
+          {t("colors.favoriteSeries")}
         </ThemedText>
         {favoriteSeries.length === 0 ? (
           <View
@@ -58,11 +73,16 @@ export default function HomeScreen() {
               },
             ]}
           >
-            <View style={[styles.emptyIconWrap, { backgroundColor: theme.card }]}>
+            <View
+              style={[styles.emptyIconWrap, { backgroundColor: theme.card }]}
+            >
               <MaterialIcons name="palette" size={20} color={theme.tint} />
             </View>
-            <ThemedText style={[styles.emptyTitle, { color: theme.text }]} numberOfLines={2}>
-              {t('colors.emptySeriesTitle')}
+            <ThemedText
+              style={[styles.emptyTitle, { color: theme.text }]}
+              numberOfLines={2}
+            >
+              {t("colors.emptySeriesTitle")}
             </ThemedText>
           </View>
         ) : (
@@ -79,8 +99,14 @@ export default function HomeScreen() {
           </View>
         )}
 
-        <ThemedText style={[styles.sectionTitle, styles.sectionTitleSpaced, { color: theme.textSecondary }]}>
-          {t('colors.allSeriesTitle')}
+        <ThemedText
+          style={[
+            styles.sectionTitle,
+            styles.sectionTitleSpaced,
+            { color: theme.textSecondary },
+          ]}
+        >
+          {t("colors.allSeriesTitle")}
         </ThemedText>
         <View style={styles.sectionGrid}>
           {allSeries.map((series: SeriesWithCountAndBrand) => (
@@ -93,7 +119,6 @@ export default function HomeScreen() {
             />
           ))}
         </View>
-
       </ScrollView>
     </ThemedView>
   );
@@ -113,41 +138,40 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: Typography.fontSize.sm,
     fontWeight: Typography.fontWeight.semibold,
-    textTransform: 'uppercase',
+    textTransform: "uppercase",
   },
   sectionTitleSpaced: {
     marginBottom: Spacing.sm,
   },
   emptyCard: {
-    width: '100%',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
+    width: "100%",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
     padding: Spacing.md,
     marginBottom: Spacing.sm,
     borderRadius: BorderRadius.lg,
     borderWidth: 1.5,
-    borderStyle: 'dashed',
-    ...Shadows.sm,
+    borderStyle: "dashed",
   },
   emptyIconWrap: {
     width: 36,
     height: 36,
     borderRadius: 18,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     marginBottom: Spacing.sm,
   },
   emptyTitle: {
-    width: '100%',
+    width: "100%",
     fontSize: Typography.fontSize.md,
     fontWeight: Typography.fontWeight.semibold,
-    textAlign: 'center',
+    textAlign: "center",
   },
   sectionGrid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
     marginBottom: Spacing.lg,
   },
 });

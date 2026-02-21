@@ -1,38 +1,124 @@
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { useNavigation, useRouter } from "expo-router";
-import React, { useCallback, useLayoutEffect, useMemo, useState } from "react";
+import { useLocalSearchParams, useNavigation, useRouter } from "expo-router";
+import React, {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { useTranslation } from "react-i18next";
-import { ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
+import {
+  Alert,
+  FlatList,
+  StyleSheet,
+  Switch,
+  View,
+} from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { Button } from "@/components/button";
+import { ColorGridCard } from "@/components/color-grid-card";
+import { ColorSearchInput } from "@/components/color-search-input";
+import { SaveNameModal } from "@/components/save-name-modal";
+import {
+  SeriesSelectBottomSheet,
+  type SeriesSelectBottomSheetRef,
+} from "@/components/series-select-bottom-sheet";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
+import { COLOR_GRID } from "@/constants/color-grid";
 import { Colors, Spacing, Typography } from "@/constants/theme";
 import { useColorScheme } from "@/hooks/use-color-scheme";
 import {
+  filterColorsBySearch,
+  getColorDisplayName,
+  getColorsForSeriesIds,
+} from "@/lib/color";
+import {
   getAllSeriesWithCount,
-  SeriesWithCountAndBrand,
+  getColorsBySeriesId,
 } from "@/stores/useCatalogStore";
+import { usePalettesStore } from "@/stores/usePalettesStore";
+import type { Color } from "@/types";
 
-export default function CreatePaletteSelectScreen() {
-  const { t } = useTranslation();
+const { NUM_COLUMNS, GAP, HORIZONTAL_PADDING, CARD_WIDTH, SWATCH_SIZE } =
+  COLOR_GRID;
+
+export default function CreatePaletteScreen() {
+  const { paletteId, initialColorIds } = useLocalSearchParams<{
+    paletteId?: string;
+    initialColorIds?: string;
+  }>();
   const navigation = useNavigation();
   const router = useRouter();
+  const { t, i18n } = useTranslation();
   const colorScheme = useColorScheme() ?? "light";
   const theme = Colors[colorScheme];
+  const insets = useSafeAreaInsets();
 
   const allSeries = useMemo(() => getAllSeriesWithCount(), []);
   const [selectedSeriesIds, setSelectedSeriesIds] = useState<Set<string>>(
     new Set(),
   );
+  const hasInitializedSeriesSelection = useRef(false);
 
-  useLayoutEffect(() => {
-    navigation.getParent()?.setOptions({ tabBarStyle: { display: "none" } });
-    navigation.setOptions({ title: t("palettes.selectSeries") });
-    return () => {
-      navigation.getParent()?.setOptions({ tabBarStyle: undefined });
-    };
-  }, [navigation, t]);
+  const addPalette = usePalettesStore((s) => s.addPalette);
+  const updatePalette = usePalettesStore((s) => s.updatePalette);
+  const getPalette = usePalettesStore((s) => s.getPalette);
+  const removePalette = usePalettesStore((s) => s.removePalette);
+
+  const allColors = useMemo(
+    () =>
+      getColorsForSeriesIds([...selectedSeriesIds], getColorsBySeriesId),
+    [selectedSeriesIds],
+  );
+
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedColors, setSelectedColors] = useState<Color[]>([]);
+  const [showNameModal, setShowNameModal] = useState(false);
+  const [paletteName, setPaletteName] = useState("");
+  const [showOnlySelected, setShowOnlySelected] = useState(!!paletteId);
+  const seriesFilterSheetRef = useRef<SeriesSelectBottomSheetRef>(null);
+  const initialAppliedRef = useRef(false);
+
+  // New palette: preselect first series
+  useEffect(() => {
+    if (
+      paletteId ||
+      allSeries.length === 0 ||
+      hasInitializedSeriesSelection.current
+    )
+      return;
+    hasInitializedSeriesSelection.current = true;
+    setSelectedSeriesIds(new Set([allSeries[0].id]));
+  }, [paletteId, allSeries]);
+
+  // Edit palette: load series and selected colors from palette
+  useEffect(() => {
+    if (!paletteId) return;
+    const palette = getPalette(paletteId);
+    if (!palette) return;
+    const seriesIds = new Set(palette.colors.map((c) => c.seriesId));
+    setSelectedSeriesIds(seriesIds);
+    setSelectedColors(palette.colors);
+    initialAppliedRef.current = true;
+  }, [paletteId, getPalette]);
+
+  // Legacy: initialColorIds without paletteId (e.g. deep link)
+  useEffect(() => {
+    if (
+      initialAppliedRef.current ||
+      !initialColorIds ||
+      allColors.length === 0 ||
+      paletteId
+    )
+      return;
+    initialAppliedRef.current = true;
+    const ids = new Set(initialColorIds.split(",").filter(Boolean));
+    setSelectedColors(allColors.filter((c) => ids.has(c.id)));
+  }, [initialColorIds, allColors, paletteId]);
 
   const toggleSeriesSelection = useCallback((seriesId: string) => {
     setSelectedSeriesIds((prev) => {
@@ -43,83 +129,240 @@ export default function CreatePaletteSelectScreen() {
     });
   }, []);
 
-  const selectedCount = selectedSeriesIds.size;
-  const canContinue = selectedCount > 0;
+  const handleDeletePalette = useCallback(() => {
+    if (!paletteId) return;
+    Alert.alert(
+      t("projects.removePaletteTitle"),
+      t("projects.removePaletteMessage"),
+      [
+        { text: t("common.cancel"), style: "cancel" },
+        {
+          text: t("projects.remove"),
+          style: "destructive",
+          onPress: () => {
+            removePalette(paletteId);
+            router.replace("/(tabs)/palettes");
+          },
+        },
+      ],
+    );
+  }, [paletteId, removePalette, router, t]);
 
-  const handleContinue = useCallback(() => {
-    if (!canContinue) return;
-    const ids = [...selectedSeriesIds].join(",");
-    router.push({
-      pathname: "/(tabs)/palettes/create/explore",
-      params: { seriesIds: ids },
+  useLayoutEffect(() => {
+    navigation.getParent()?.setOptions({ tabBarStyle: { display: "none" } });
+    const palette = paletteId ? getPalette(paletteId) : undefined;
+    const title =
+      palette?.name?.trim() ||
+      t("palettes.exploreColorsTitle");
+    navigation.setOptions({
+      title,
+      headerRight: () => (
+        <View style={styles.headerRightRow}>
+          <Button
+            variant="ghost"
+            size="icon"
+            onPress={() => seriesFilterSheetRef.current?.present()}
+            accessibilityLabel={t("palettes.selectSeries")}
+            icon={
+              <MaterialIcons
+                name="filter-list"
+                size={24}
+                color={theme.tint}
+              />
+            }
+          />
+          {paletteId ? (
+            <Button
+              variant="ghost"
+              size="icon"
+              onPress={handleDeletePalette}
+              accessibilityLabel={t("projects.remove")}
+              icon={
+                <MaterialIcons
+                  name="delete-outline"
+                  size={24}
+                  color={theme.tint}
+                />
+              }
+            />
+          ) : null}
+        </View>
+      ),
     });
-  }, [canContinue, router, selectedSeriesIds]);
+    return () => {
+      navigation.getParent()?.setOptions({ tabBarStyle: undefined });
+    };
+  }, [
+    navigation,
+    t,
+    paletteId,
+    getPalette,
+    handleDeletePalette,
+    theme.tint,
+  ]);
+
+  const filteredColors = useMemo(
+    () => filterColorsBySearch(allColors, searchQuery, i18n.language),
+    [allColors, searchQuery, i18n.language],
+  );
+
+  const listData = useMemo(() => {
+    if (showOnlySelected && selectedColors.length > 0) {
+      return filterColorsBySearch(
+        selectedColors,
+        searchQuery,
+        i18n.language,
+      );
+    }
+    return filteredColors;
+  }, [
+    showOnlySelected,
+    selectedColors,
+    filteredColors,
+    searchQuery,
+    i18n.language,
+  ]);
+
+  const selectedIds = useMemo(
+    () => new Set(selectedColors.map((c) => c.id)),
+    [selectedColors],
+  );
+
+  const toggleColorInPalette = useCallback((color: Color) => {
+    setSelectedColors((prev) => {
+      const has = prev.some((c) => c.id === color.id);
+      if (has) return prev.filter((c) => c.id !== color.id);
+      return [...prev, color];
+    });
+  }, []);
+
+  const handleSave = useCallback(() => {
+    if (selectedColors.length === 0) return;
+    if (paletteId) {
+      const palette = getPalette(paletteId);
+      setPaletteName(palette?.name ?? "");
+    } else {
+      setPaletteName("");
+    }
+    setShowNameModal(true);
+  }, [selectedColors.length, paletteId, getPalette]);
+
+  const handleConfirmSave = useCallback(() => {
+    const name = paletteName.trim() || t("palettes.defaultPaletteName");
+    if (paletteId) {
+      updatePalette(paletteId, { name, colors: selectedColors });
+    } else {
+      addPalette({ name, colors: selectedColors });
+    }
+    setShowNameModal(false);
+    setPaletteName("");
+    router.replace("/(tabs)/palettes");
+  }, [
+    addPalette,
+    updatePalette,
+    paletteId,
+    paletteName,
+    selectedColors,
+    t,
+    router,
+  ]);
+
+  const renderItem = useCallback(
+    ({ item, index }: { item: Color; index: number }) => (
+      <View
+        style={{
+          width: CARD_WIDTH,
+          marginRight: index % NUM_COLUMNS === NUM_COLUMNS - 1 ? 0 : GAP,
+        }}
+      >
+        <ColorGridCard
+          color={item}
+          displayName={getColorDisplayName(item, i18n.language)}
+          onPress={() => toggleColorInPalette(item)}
+          isInPalette={selectedIds.has(item.id)}
+          selectionMode
+          cardWidth={CARD_WIDTH}
+          swatchSize={SWATCH_SIZE}
+        />
+      </View>
+    ),
+    [i18n.language, selectedIds, toggleColorInPalette],
+  );
 
   return (
     <ThemedView style={styles.container}>
-      <ThemedText style={[styles.subtitle, { color: theme.textSecondary }]}>
-        {t("palettes.selectSeriesSubtitle")}
-      </ThemedText>
+      <SeriesSelectBottomSheet
+        ref={seriesFilterSheetRef}
+        series={allSeries}
+        selectedSeriesIds={selectedSeriesIds}
+        onToggleSeries={toggleSeriesSelection}
+      />
 
-      <ScrollView
-        style={styles.scroll}
-        contentContainerStyle={styles.scrollContent}
+      <ColorSearchInput
+        value={searchQuery}
+        onChangeText={setSearchQuery}
+        placeholder={t("colors.searchPlaceholder")}
+        clearAccessibilityLabel={t("common.clear")}
+      />
+
+      <FlatList
+        data={listData}
+        keyExtractor={(item) => item.id}
+        renderItem={renderItem}
+        numColumns={NUM_COLUMNS}
+        columnWrapperStyle={styles.row}
+        contentContainerStyle={styles.listContent}
         showsVerticalScrollIndicator={false}
-        keyboardShouldPersistTaps="handled"
-      >
-        {allSeries.map((s: SeriesWithCountAndBrand) => {
-          const isSelected = selectedSeriesIds.has(s.id);
-          return (
-            <TouchableOpacity
-              key={s.id}
-              style={[styles.seriesRow, { borderBottomColor: theme.border }]}
-              onPress={() => toggleSeriesSelection(s.id)}
-              activeOpacity={0.7}
-              accessibilityRole="checkbox"
-              accessibilityState={{ checked: isSelected }}
-            >
-              {isSelected ? (
-                <MaterialIcons name="check-box" size={24} color={theme.tint} />
-              ) : (
-                <MaterialIcons
-                  name="check-box-outline-blank"
-                  size={24}
-                  color={theme.icon}
-                />
-              )}
-              <View style={styles.seriesLabelWrap}>
-                <ThemedText
-                  style={styles.seriesName}
-                  numberOfLines={1}
-                  ellipsizeMode="tail"
-                >
-                  {s.name}
-                </ThemedText>
-                <ThemedText
-                  style={[styles.seriesMeta, { color: theme.textSecondary }]}
-                  numberOfLines={1}
-                  ellipsizeMode="tail"
-                >
-                  {s.brandName} ·{" "}
-                  {t("colors.colorCount", { count: s.colorCount })}
-                </ThemedText>
-              </View>
-            </TouchableOpacity>
-          );
-        })}
-      </ScrollView>
+      />
 
-      <View style={[styles.footer, { backgroundColor: theme.background }]}>
-        <Button
-          variant="primary"
-          size="lg"
-          fullWidth
-          onPress={handleContinue}
-          disabled={!canContinue}
-        >
-          {t("palettes.continue")}
-        </Button>
+      <View
+        style={[
+          styles.footer,
+          {
+            backgroundColor: theme.background,
+            borderTopColor: theme.border,
+            paddingBottom: Spacing.md + insets.bottom,
+          },
+        ]}
+      >
+        <View style={styles.footerActionsRow}>
+          <View style={styles.switchWrap}>
+            <Switch
+              value={showOnlySelected}
+              onValueChange={setShowOnlySelected}
+              trackColor={{ false: theme.border, true: theme.tint }}
+              thumbColor={theme.background}
+            />
+            <ThemedText
+              style={[styles.switchLabel, { color: theme.textSecondary }]}
+            >
+              {t("colors.colorCount", { count: selectedColors.length })}
+            </ThemedText>
+          </View>
+          <Button
+            variant="primary"
+            size="md"
+            fullWidth
+            onPress={handleSave}
+            disabled={selectedColors.length === 0}
+          >
+            {t("palettes.savePalette")}
+          </Button>
+        </View>
       </View>
+
+      <SaveNameModal
+        visible={showNameModal}
+        onRequestClose={() => setShowNameModal(false)}
+        title={t("palettes.nameYourPalette")}
+        placeholder={t("palettes.paletteNamePlaceholder")}
+        value={paletteName}
+        onChangeText={setPaletteName}
+        onCancel={() => setShowNameModal(false)}
+        onConfirm={handleConfirmSave}
+        cancelLabel={t("common.cancel")}
+        saveLabel={t("common.save")}
+      />
     </ThemedView>
   );
 }
@@ -127,41 +370,40 @@ export default function CreatePaletteSelectScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: Spacing.md,
+    paddingHorizontal: HORIZONTAL_PADDING,
   },
-  subtitle: {
-    fontSize: Typography.fontSize.sm,
-    marginBottom: Spacing.md,
-    paddingTop: Spacing.xs,
-  },
-  scroll: {
-    flex: 1,
-  },
-  scrollContent: {
-    paddingBottom: Spacing.xxl,
-  },
-  seriesRow: {
+  headerRightRow: {
     flexDirection: "row",
     alignItems: "center",
-    paddingVertical: Spacing.sm,
-    borderBottomWidth: 1,
   },
-  seriesLabelWrap: {
-    flex: 1,
-    marginLeft: Spacing.sm,
-    minWidth: 0,
+  listContent: {
+    paddingTop: GAP,
+    paddingBottom: 160,
   },
-  seriesName: {
-    fontSize: Typography.fontSize.md,
-    fontWeight: Typography.fontWeight.semibold,
-  },
-  seriesMeta: {
-    fontSize: Typography.fontSize.sm,
-    marginTop: 2,
+  row: {
+    flexDirection: "row",
+    marginBottom: GAP,
   },
   footer: {
-    paddingHorizontal: Spacing.md,
-    paddingTop: Spacing.md,
-    paddingBottom: Spacing.lg,
+    position: "absolute",
+    left: 0,
+    right: 0,
+    bottom: 0,
+    padding: Spacing.md,
+    borderTopWidth: 1,
+  },
+  footerActionsRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: Spacing.md,
+  },
+  switchWrap: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: Spacing.sm,
+  },
+  switchLabel: {
+    fontSize: Typography.fontSize.sm,
   },
 });
