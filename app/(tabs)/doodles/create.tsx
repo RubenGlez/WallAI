@@ -599,7 +599,10 @@ function TransformableLayer({
   }));
 
   const content = (
-    <Animated.View style={[styles.superpositionLayer, animatedStyle]} pointerEvents="box-none">
+    <Animated.View
+      style={[styles.superpositionLayer, animatedStyle]}
+      pointerEvents={isActive ? 'box-none' : 'none'}
+    >
       <Image
         source={{ uri: imageUri }}
         style={StyleSheet.absoluteFillObject}
