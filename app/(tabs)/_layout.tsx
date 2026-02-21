@@ -33,9 +33,9 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="colors"
+        name="catalog"
         options={{
-          title: t("tabs.colors"),
+          title: t("tabs.catalog"),
           tabBarIcon: ({ color, focused }) => (
             <IconSymbol
               size={28}

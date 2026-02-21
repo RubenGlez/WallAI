@@ -35,7 +35,7 @@ import type { Color } from "@/types";
 
 const { NUM_COLUMNS, GAP, CARD_WIDTH, SWATCH_SIZE } = COLOR_GRID;
 
-export default function ColorsOverviewScreen() {
+export default function CatalogScreen() {
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
   const { t, i18n } = useTranslation();
@@ -74,7 +74,7 @@ export default function ColorsOverviewScreen() {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerShown: true,
-      title: t("colors.overviewTitle"),
+      title: t("catalog.overviewTitle"),
       headerStyle: {
         paddingTop: insets.top,
         borderBottomWidth: 0,
@@ -88,8 +88,8 @@ export default function ColorsOverviewScreen() {
             onPress={() => setShowOnlyFavorites((s) => !s)}
             accessibilityLabel={
               showOnlyFavorites
-                ? t("colors.showAllColors")
-                : t("colors.showOnlyFavorites")
+                ? t("catalog.showAllColors")
+                : t("catalog.showOnlyFavorites")
             }
             icon={
               <IconSymbol
@@ -181,7 +181,7 @@ export default function ColorsOverviewScreen() {
       <ColorSearchInput
         value={searchQuery}
         onChangeText={setSearchQuery}
-        placeholder={t("colors.searchPlaceholder")}
+        placeholder={t("catalog.searchPlaceholder")}
         clearAccessibilityLabel={t("common.clear")}
       />
 

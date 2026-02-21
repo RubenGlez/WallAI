@@ -1,6 +1,6 @@
 import { Stack } from "expo-router";
 
-export default function ColorsLayout() {
+export default function CatalogLayout() {
   return (
     <Stack screenOptions={{ headerShown: false }}>
       <Stack.Screen name="index" />

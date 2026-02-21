@@ -19,7 +19,7 @@
   },
   "tabs": {
     "home": "Accueil",
-    "colors": "Couleurs",
+    "catalog": "Catalogue",
     "palettes": "Palettes",
     "doodles": "Doodles",
     "profile": "Profil"
@@ -30,6 +30,12 @@
     "subtitle": "Qu'est-ce qu'on peint aujourd'hui ?",
     "tagline": "De l'esquisse au mur, guidé par l'IA",
     "placeholder": "Écran d'accueil — bientôt disponible."
+  },
+  "catalog": {
+    "overviewTitle": "Catalogue",
+    "searchPlaceholder": "Rechercher par code ou nom...",
+    "showOnlyFavorites": "Afficher uniquement les favoris",
+    "showAllColors": "Afficher toutes les couleurs"
   },
   "colors": {
     "title": "Couleurs",
@@ -182,7 +188,7 @@
     "subtitle": "Gérez vos projets de graffiti et palettes de couleurs",
     "palettesSection": "Mes palettes",
     "wallsSection": "Mes murs",
-    "noPalettes": "Pas encore de palettes. Créez-en une dans l'onglet Couleurs.",
+    "noPalettes": "Pas encore de palettes. Créez-en une dans l'onglet Catalogue.",
     "noWalls": "Pas encore de projets mur. Créez-en un dans l'onglet Mur.",
     "visualize": "Visualiser",
     "edit": "Modifier",

@@ -19,7 +19,7 @@
   },
   "tabs": {
     "home": "Inicio",
-    "colors": "Colores",
+    "catalog": "Catálogo",
     "palettes": "Paletas",
     "doodles": "Doodles",
     "profile": "Perfil"
@@ -30,6 +30,12 @@
     "subtitle": "¿Qué pintamos hoy?",
     "tagline": "Del boceto al muro, guiado por IA",
     "placeholder": "Pantalla de inicio — próximamente."
+  },
+  "catalog": {
+    "overviewTitle": "Catálogo",
+    "searchPlaceholder": "Buscar por código o nombre...",
+    "showOnlyFavorites": "Ver solo favoritos",
+    "showAllColors": "Ver todos los colores"
   },
   "colors": {
     "title": "Colores",
@@ -182,7 +188,7 @@
     "subtitle": "Administra tus proyectos de graffiti y paletas de colores",
     "palettesSection": "Mis paletas",
     "wallsSection": "Mis muros",
-    "noPalettes": "Aún no hay paletas. Crea una en la pestaña Colores.",
+    "noPalettes": "Aún no hay paletas. Crea una en la pestaña Catálogo.",
     "noWalls": "Aún no hay proyectos de muro. Crea uno en la pestaña Muro.",
     "visualize": "Visualizar",
     "edit": "Editar",

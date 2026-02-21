@@ -19,7 +19,7 @@
   },
   "tabs": {
     "home": "Start",
-    "colors": "Farben",
+    "catalog": "Katalog",
     "palettes": "Paletten",
     "doodles": "Doodles",
     "profile": "Profil"
@@ -30,6 +30,12 @@
     "subtitle": "Was malen wir heute?",
     "tagline": "Von der Skizze zur Wand, geleitet von KI",
     "placeholder": "Startbildschirm — in Kürze."
+  },
+  "catalog": {
+    "overviewTitle": "Katalog",
+    "searchPlaceholder": "Nach Code oder Name suchen...",
+    "showOnlyFavorites": "Nur Favoriten anzeigen",
+    "showAllColors": "Alle Farben anzeigen"
   },
   "colors": {
     "title": "Farben",
@@ -182,7 +188,7 @@
     "subtitle": "Verwalten Sie Ihre Graffiti-Projekte und Farbpaletten",
     "palettesSection": "Meine Paletten",
     "wallsSection": "Meine Wände",
-    "noPalettes": "Noch keine Paletten. Erstellen Sie eine im Farben-Tab.",
+    "noPalettes": "Noch keine Paletten. Erstellen Sie eine im Katalog-Tab.",
     "noWalls": "Noch keine Wand-Projekte. Erstellen Sie eines im Wand-Tab.",
     "visualize": "Anzeigen",
     "edit": "Bearbeiten",

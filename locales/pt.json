@@ -19,7 +19,7 @@
   },
   "tabs": {
     "home": "Início",
-    "colors": "Cores",
+    "catalog": "Catálogo",
     "palettes": "Paletas",
     "doodles": "Doodles",
     "profile": "Perfil"
@@ -30,6 +30,12 @@
     "subtitle": "O que pintamos hoje?",
     "tagline": "Do esboço à parede, guiado por IA",
     "placeholder": "Tela inicial — em breve."
+  },
+  "catalog": {
+    "overviewTitle": "Catálogo",
+    "searchPlaceholder": "Pesquisar por código ou nome...",
+    "showOnlyFavorites": "Mostrar apenas favoritos",
+    "showAllColors": "Mostrar todas as cores"
   },
   "colors": {
     "title": "Cores",
@@ -182,7 +188,7 @@
     "subtitle": "Gerencie seus projetos de graffiti e paletas de cores",
     "palettesSection": "Minhas paletas",
     "wallsSection": "Minhas paredes",
-    "noPalettes": "Nenhuma paleta ainda. Crie uma na aba Cores.",
+    "noPalettes": "Nenhuma paleta ainda. Crie uma na aba Catálogo.",
     "noWalls": "Nenhum projeto de parede ainda. Crie um na aba Parede.",
     "visualize": "Visualizar",
     "edit": "Editar",

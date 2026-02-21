@@ -19,7 +19,7 @@
   },
   "tabs": {
     "home": "Home",
-    "colors": "Colors",
+    "catalog": "Catalog",
     "palettes": "Palettes",
     "doodles": "Doodles",
     "profile": "Profile"
@@ -30,6 +30,12 @@
     "subtitle": "What are we painting today?",
     "tagline": "From sketch to wall, guided by AI",
     "placeholder": "Home screen — coming soon."
+  },
+  "catalog": {
+    "overviewTitle": "Catalog",
+    "searchPlaceholder": "Search by code or name...",
+    "showOnlyFavorites": "Show only favorites",
+    "showAllColors": "Show all colors"
   },
   "colors": {
     "title": "Colors",
@@ -182,7 +188,7 @@
     "subtitle": "Manage your graffiti projects and color palettes",
     "palettesSection": "My palettes",
     "wallsSection": "My walls",
-    "noPalettes": "No palettes yet. Create one in the Colors tab.",
+    "noPalettes": "No palettes yet. Create one in the Catalog tab.",
     "noWalls": "No wall projects yet. Create one in the Wall tab.",
     "visualize": "Visualize",
     "edit": "Edit",
