@@ -32,6 +32,7 @@ const MAPPING = {
   'checkmark.circle.fill': 'check-circle',
   'circle': 'radio-button-unchecked',
   'circle.lefthalf.filled': 'opacity',
+  'square.grid.2x2': 'apps',
   'square.grid.2x2.fill': 'apps',
   'magnifyingglass': 'search',
   'plus.circle.fill': 'add-circle',

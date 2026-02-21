@@ -39,7 +39,7 @@ export default function TabLayout() {
           tabBarIcon: ({ color, focused }) => (
             <IconSymbol
               size={28}
-              name={focused ? "paintbrush.fill" : "paintbrush"}
+              name={focused ? "square.grid.2x2.fill" : "square.grid.2x2"}
               color={color}
             />
           ),
