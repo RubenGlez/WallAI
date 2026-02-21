@@ -1,14 +1,21 @@
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import React from "react";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-import { ThemedText } from "@/components/themed-text";
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { BorderRadius, Colors, Spacing, Typography } from "@/constants/theme";
 import { useColorScheme } from "@/hooks/use-color-scheme";
 import type { Color } from "@/types";
 
-const CARD_PADDING = Spacing.sm;
+/** Returns true if the background is light (use black text), false if dark (use white text). */
+function isLightBackground(hex: string): boolean {
+  const h = hex.replace(/^#/, "");
+  const r = parseInt(h.slice(0, 2), 16);
+  const g = parseInt(h.slice(2, 4), 16);
+  const b = parseInt(h.slice(4, 6), 16);
+  const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+  return luminance > 0.5;
+}
 
 export type ColorGridCardProps = {
   color: Color;
@@ -40,22 +47,16 @@ export function ColorGridCard({
 }: ColorGridCardProps) {
   const colorScheme = useColorScheme() ?? "light";
   const theme = Colors[colorScheme];
-  const isLight =
+  const lightBg = isLightBackground(color.hex);
+  const textColor = lightBg ? "#000" : "#fff";
+  const isVeryLight =
     color.hex.toLowerCase() === "#ffffff" ||
     color.hex.toLowerCase().startsWith("#fff");
   const showActionsRow = !selectionMode && onAddToPalette != null;
 
   return (
     <TouchableOpacity
-      style={[
-        styles.card,
-        {
-          width: cardWidth,
-          backgroundColor: theme.card,
-          borderColor: theme.border,
-          borderWidth: 1,
-        },
-      ]}
+      style={[styles.cell, { width: cardWidth, height: swatchSize }]}
       onPress={onPress}
       activeOpacity={0.7}
       accessibilityRole={selectionMode ? "checkbox" : "button"}
@@ -74,18 +75,33 @@ export function ColorGridCard({
           pointerEvents="none"
         />
       )}
-      <View style={styles.swatchWrap}>
-        <View
-          style={[
-            styles.swatch,
-            {
-              width: swatchSize,
-              height: swatchSize,
-              backgroundColor: color.hex,
-            },
-            isLight && { borderWidth: 1, borderColor: theme.border },
-          ]}
-        />
+      <View
+        style={[
+          styles.swatch,
+          {
+            width: swatchSize,
+            height: swatchSize,
+            backgroundColor: color.hex,
+          },
+          isVeryLight && { borderWidth: 1, borderColor: theme.border },
+        ]}
+      >
+        <View style={styles.labelOverlay} pointerEvents="none">
+          <Text
+            style={[styles.labelName, { color: textColor }]}
+            numberOfLines={1}
+            ellipsizeMode="tail"
+          >
+            {displayName}
+          </Text>
+          <Text
+            style={[styles.labelCode, { color: textColor }]}
+            numberOfLines={1}
+            ellipsizeMode="tail"
+          >
+            {color.code}
+          </Text>
+        </View>
         {onFavorite != null && (
           <TouchableOpacity
             style={styles.favoriteBtn}
@@ -101,21 +117,9 @@ export function ColorGridCard({
             />
           </TouchableOpacity>
         )}
-      </View>
-      <ThemedText style={styles.name} numberOfLines={1} ellipsizeMode="tail">
-        {displayName}
-      </ThemedText>
-      <ThemedText
-        style={[styles.codeMeta, { color: theme.textSecondary }]}
-        numberOfLines={1}
-        ellipsizeMode="tail"
-      >
-        {color.code}
-      </ThemedText>
-      {showActionsRow && (
-        <View style={styles.actions}>
+        {showActionsRow && (
           <TouchableOpacity
-            style={styles.actionBtn}
+            style={styles.addBtn}
             onPress={onAddToPalette}
             accessibilityLabel={
               isInPalette ? "Remove from palette" : "Add to palette"
@@ -127,17 +131,14 @@ export function ColorGridCard({
               <IconSymbol name="plus" size={20} color={theme.icon} />
             )}
           </TouchableOpacity>
-        </View>
-      )}
+        )}
+      </View>
     </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
-  card: {
-    padding: CARD_PADDING,
-    borderRadius: BorderRadius.lg,
-    borderWidth: 1,
+  cell: {
     position: "relative",
   },
   selectedRing: {
@@ -146,16 +147,29 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
-    borderRadius: BorderRadius.lg,
-    borderWidth: 1,
-  },
-  swatchWrap: {
-    alignSelf: "center",
-    marginBottom: Spacing.xs,
-    position: "relative",
+    borderRadius: BorderRadius.md,
+    borderWidth: 2,
+    zIndex: 1,
+    pointerEvents: "none",
   },
   swatch: {
     borderRadius: BorderRadius.md,
+    overflow: "hidden",
+    position: "relative",
+  },
+  labelOverlay: {
+    position: "absolute",
+    left: Spacing.xs,
+    right: Spacing.xs,
+    bottom: Spacing.xs,
+  },
+  labelName: {
+    fontSize: Typography.fontSize.xs,
+    fontWeight: Typography.fontWeight.semibold,
+  },
+  labelCode: {
+    fontSize: 10,
+    opacity: 0.9,
   },
   favoriteBtn: {
     position: "absolute",
@@ -164,18 +178,11 @@ const styles = StyleSheet.create({
     padding: Spacing.xs,
     zIndex: 1,
   },
-  name: {
-    fontSize: Typography.fontSize.sm,
-    fontWeight: Typography.fontWeight.semibold,
-  },
-  codeMeta: {
-    fontSize: Typography.fontSize.xs,
-  },
-  actions: {
-    flexDirection: "row",
-    justifyContent: "flex-end",
-  },
-  actionBtn: {
+  addBtn: {
+    position: "absolute",
+    bottom: Spacing.xs,
+    right: Spacing.xs,
     padding: Spacing.xs,
+    zIndex: 1,
   },
 });

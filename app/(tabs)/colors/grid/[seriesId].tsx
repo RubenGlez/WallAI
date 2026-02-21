@@ -24,9 +24,9 @@ import type { Color } from '@/types';
 const { width } = Dimensions.get('window');
 const NUM_COLUMNS = 3;
 const GAP = Spacing.sm;
-const CARD_PADDING = Spacing.sm;
-const CARD_WIDTH = (width - Spacing.md * 2 - GAP * (NUM_COLUMNS - 1)) / NUM_COLUMNS;
-const SWATCH_SIZE = CARD_WIDTH - CARD_PADDING * 2;
+const HORIZONTAL_PADDING = Spacing.md;
+const CARD_WIDTH = (width - HORIZONTAL_PADDING * 2 - GAP * (NUM_COLUMNS - 1)) / NUM_COLUMNS;
+const SWATCH_SIZE = CARD_WIDTH;
 
 function getColorDisplayName(color: Color, language: string): string {
   const lang = language.split('-')[0];
@@ -131,16 +131,23 @@ export default function ColorGridScreen() {
   );
 
   const renderItem = useCallback(
-    ({ item }: { item: Color }) => (
-      <ColorGridCard
-        color={item}
-        displayName={getColorDisplayName(item, i18n.language)}
-        onPress={() => openDetailSheet(item)}
-        isFavorite={favoriteColorIds.includes(item.id)}
-        onFavorite={() => handleFavorite(item)}
-        cardWidth={CARD_WIDTH}
-        swatchSize={SWATCH_SIZE}
-      />
+    ({ item, index }: { item: Color; index: number }) => (
+      <View
+        style={{
+          width: CARD_WIDTH,
+          marginRight: index % NUM_COLUMNS === NUM_COLUMNS - 1 ? 0 : GAP,
+        }}
+      >
+        <ColorGridCard
+          color={item}
+          displayName={getColorDisplayName(item, i18n.language)}
+          onPress={() => openDetailSheet(item)}
+          isFavorite={favoriteColorIds.includes(item.id)}
+          onFavorite={() => handleFavorite(item)}
+          cardWidth={CARD_WIDTH}
+          swatchSize={SWATCH_SIZE}
+        />
+      </View>
     ),
     [i18n.language, favoriteColorIds, openDetailSheet, handleFavorite]
   );
@@ -207,7 +214,7 @@ export default function ColorGridScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: Spacing.md,
+    paddingHorizontal: HORIZONTAL_PADDING,
   },
   searchWrap: {
     position: 'relative',
@@ -230,10 +237,11 @@ const styles = StyleSheet.create({
     padding: Spacing.xs,
   },
   listContent: {
+    paddingTop: GAP,
     paddingBottom: Spacing.xl,
   },
   row: {
-    gap: GAP,
+    flexDirection: 'row',
     marginBottom: GAP,
   },
 });
