@@ -69,12 +69,6 @@ export function ColorGridCard({
           : undefined
       }
     >
-      {selectionMode && isInPalette && (
-        <View
-          style={[styles.selectedRing, { borderColor: theme.tint }]}
-          pointerEvents="none"
-        />
-      )}
       <View
         style={[
           styles.swatch,
@@ -102,6 +96,11 @@ export function ColorGridCard({
             {color.code}
           </Text>
         </View>
+        {selectionMode && isInPalette && (
+          <View style={styles.selectedBadge} pointerEvents="none">
+            <MaterialIcons name="check-circle" size={20} color={theme.tint} />
+          </View>
+        )}
         {onFavorite != null && (
           <TouchableOpacity
             style={styles.favoriteBtn}
@@ -141,17 +140,6 @@ const styles = StyleSheet.create({
   cell: {
     position: "relative",
   },
-  selectedRing: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    borderRadius: BorderRadius.md,
-    borderWidth: 2,
-    zIndex: 1,
-    pointerEvents: "none",
-  },
   swatch: {
     borderRadius: BorderRadius.md,
     overflow: "hidden",
@@ -170,6 +158,12 @@ const styles = StyleSheet.create({
   labelCode: {
     fontSize: 10,
     opacity: 0.9,
+  },
+  selectedBadge: {
+    position: "absolute",
+    top: Spacing.xs,
+    right: Spacing.xs,
+    zIndex: 1,
   },
   favoriteBtn: {
     position: "absolute",

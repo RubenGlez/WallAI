@@ -92,7 +92,7 @@ export default function CreatePaletteExploreScreen() {
   const [selectedColors, setSelectedColors] = useState<Color[]>([]);
   const [showNameModal, setShowNameModal] = useState(false);
   const [paletteName, setPaletteName] = useState("");
-  const [showOnlySelected, setShowOnlySelected] = useState(false);
+  const [showOnlySelected, setShowOnlySelected] = useState(!!paletteId);
   const initialAppliedRef = useRef(false);
 
   useEffect(() => {
