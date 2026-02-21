@@ -70,6 +70,13 @@ export default function ColorsOverviewScreen() {
     }
   }, [allSeries, seriesIdParam]);
 
+  // When navigating from Home with a seriesId, preselect that series (tab may already be mounted)
+  useEffect(() => {
+    if (seriesIdParam && allSeries.some((s) => s.id === seriesIdParam)) {
+      setSelectedSeriesIds(new Set([seriesIdParam]));
+    }
+  }, [seriesIdParam, allSeries]);
+
   const toggleSeriesSelection = useCallback((seriesId: string) => {
     setSelectedSeriesIds((prev) => {
       const next = new Set(prev);
