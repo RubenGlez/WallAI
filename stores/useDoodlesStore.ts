@@ -1,6 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
+import { generateId } from '@/lib/id';
 import type { Doodle } from '@/types';
 
 type DoodlesState = {
@@ -14,16 +15,12 @@ type DoodlesState = {
   getDoodle: (id: string) => Doodle | undefined;
 };
 
-function generateId(): string {
-  return `doodle-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
-}
-
 export const useDoodlesStore = create<DoodlesState>()(
   persist(
     (set, get) => ({
       doodles: [],
       addDoodle: (doodle) => {
-        const id = generateId();
+        const id = generateId('doodle');
         const now = new Date().toISOString();
         const newDoodle: Doodle = {
           ...doodle,

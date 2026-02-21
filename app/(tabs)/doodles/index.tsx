@@ -3,7 +3,6 @@ import { useRouter } from 'expo-router';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import {
-  Dimensions,
   Image,
   ScrollView,
   StyleSheet,
@@ -12,40 +11,31 @@ import {
 } from 'react-native';
 
 import { Button } from '@/components/button';
+import { EmptyStateCard } from '@/components/empty-state-card';
 import { ScreenHeader } from '@/components/screen-header';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import {
+  getListCardWidth,
+  LIST_FAB_SIZE,
+  LIST_GAP,
+  SCROLL_PADDING_BOTTOM_WITH_FAB,
+} from '@/constants/list-layout';
+import {
   BorderRadius,
-  Colors,
   Shadows,
   Spacing,
   Typography,
 } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
+import { useTheme } from '@/hooks/use-theme';
+import { formatRelativeDate } from '@/lib/date';
 import { useDoodlesStore } from '@/stores/useDoodlesStore';
 import type { Doodle } from '@/types';
 
-const { width } = Dimensions.get('window');
-const FAB_SIZE = 56;
-const NUM_COLUMNS = 2;
-const GAP = Spacing.sm;
+const CARD_WIDTH = getListCardWidth();
 const CARD_PADDING = Spacing.md;
-const CARD_WIDTH =
-  (width - Spacing.md * 2 - GAP * (NUM_COLUMNS - 1)) / NUM_COLUMNS;
 const THUMBNAIL_ASPECT = 4 / 3;
 const THUMBNAIL_HEIGHT = (CARD_WIDTH - CARD_PADDING * 2) / THUMBNAIL_ASPECT;
-
-function formatDoodleDate(iso: string): string {
-  const d = new Date(iso);
-  const now = new Date();
-  const diffDays = Math.floor(
-    (now.getTime() - d.getTime()) / (1000 * 60 * 60 * 24)
-  );
-  if (diffDays === 0) return new Intl.DateTimeFormat(undefined, { timeStyle: 'short' }).format(d);
-  if (diffDays === 1) return new Intl.DateTimeFormat(undefined, { dateStyle: 'medium' }).format(d);
-  return new Intl.DateTimeFormat(undefined, { dateStyle: 'short' }).format(d);
-}
 
 function DoodleCard({
   doodle,
@@ -55,8 +45,7 @@ function DoodleCard({
   onPress: () => void;
 }) {
   const { t } = useTranslation();
-  const colorScheme = useColorScheme() ?? 'light';
-  const theme = Colors[colorScheme];
+  const { theme } = useTheme();
   const thumbnailUri =
     doodle.thumbnailUri ?? doodle.exportImageUri ?? doodle.sketchImageUri ?? doodle.wallImageUri;
 
@@ -90,7 +79,7 @@ function DoodleCard({
         {doodle.name || t('common.untitled')}
       </ThemedText>
       <ThemedText style={[styles.cardDate, { color: theme.textSecondary }]}>
-        {formatDoodleDate(doodle.createdAt)}
+        {formatRelativeDate(doodle.createdAt)}
       </ThemedText>
     </TouchableOpacity>
   );
@@ -99,8 +88,7 @@ function DoodleCard({
 export default function DoodlesIndexScreen() {
   const { t } = useTranslation();
   const router = useRouter();
-  const colorScheme = useColorScheme() ?? 'light';
-  const theme = Colors[colorScheme];
+  const { theme } = useTheme();
   const doodles = useDoodlesStore((s) => s.doodles);
 
   const handleNewDoodle = () => {
@@ -120,31 +108,12 @@ export default function DoodlesIndexScreen() {
         />
 
         {doodles.length === 0 ? (
-          <TouchableOpacity
-            activeOpacity={0.7}
-            style={[
-              styles.emptyCard,
-              {
-                backgroundColor: theme.backgroundSecondary,
-                borderColor: theme.border,
-              },
-            ]}
+          <EmptyStateCard
+            icon="brush"
+            title={t('doodles.emptyTitle')}
+            subtitle={t('doodles.emptyHint')}
             onPress={handleNewDoodle}
-          >
-            <View
-              style={[styles.emptyIconWrap, { backgroundColor: theme.card }]}
-            >
-              <MaterialIcons name="brush" size={28} color={theme.tint} />
-            </View>
-            <ThemedText style={[styles.emptyTitle, { color: theme.text }]}>
-              {t('doodles.emptyTitle')}
-            </ThemedText>
-            <ThemedText
-              style={[styles.emptySubtitle, { color: theme.textSecondary }]}
-            >
-              {t('doodles.emptyHint')}
-            </ThemedText>
-          </TouchableOpacity>
+          />
         ) : (
           <View style={styles.grid}>
             {doodles.map((doodle) => (
@@ -186,7 +155,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   scrollContent: {
-    paddingBottom: Spacing.xxl + 80,
+    paddingBottom: SCROLL_PADDING_BOTTOM_WITH_FAB,
   },
   fabContainer: {
     position: 'absolute',
@@ -195,41 +164,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   fab: {
-    width: FAB_SIZE,
-    height: FAB_SIZE,
-    borderRadius: FAB_SIZE / 2,
+    width: LIST_FAB_SIZE,
+    height: LIST_FAB_SIZE,
+    borderRadius: LIST_FAB_SIZE / 2,
     alignItems: 'center',
     justifyContent: 'center',
     ...Shadows.lg,
-  },
-  emptyCard: {
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: Spacing.xl,
-    paddingHorizontal: Spacing.lg,
-    borderRadius: BorderRadius.lg,
-    borderWidth: 1.5,
-    borderStyle: 'dashed',
-    minHeight: 140,
-    ...Shadows.sm,
-  },
-  emptyIconWrap: {
-    width: 56,
-    height: 56,
-    borderRadius: 28,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: Spacing.md,
-  },
-  emptyTitle: {
-    fontSize: Typography.fontSize.md,
-    fontWeight: Typography.fontWeight.semibold,
-    marginBottom: Spacing.xs,
-  },
-  emptySubtitle: {
-    fontSize: Typography.fontSize.sm,
-    textAlign: 'center',
   },
   grid: {
     flexDirection: 'row',
@@ -241,7 +181,7 @@ const styles = StyleSheet.create({
     padding: CARD_PADDING,
     borderRadius: BorderRadius.lg,
     borderWidth: 1,
-    marginBottom: GAP,
+    marginBottom: LIST_GAP,
     ...Shadows.sm,
   },
   thumbnailWrap: {

@@ -37,6 +37,9 @@ export interface SeriesWithCount extends Series {
   colorCount: number;
 }
 
+/** Series with count and brand name (for UI lists) */
+export type SeriesWithCountAndBrand = SeriesWithCount & { brandName: string };
+
 /** Color entity — Screen 3/4: Grid and detail */
 export interface Color {
   id: string;

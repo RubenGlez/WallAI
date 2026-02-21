@@ -15,10 +15,8 @@ import {
   Typography
 } from "@/constants/theme";
 import { useColorScheme } from "@/hooks/use-color-scheme";
-import {
-  getAllSeriesWithCount,
-  type SeriesWithCountAndBrand,
-} from "@/stores/useCatalogStore";
+import { getAllSeriesWithCount } from "@/stores/useCatalogStore";
+import type { SeriesWithCountAndBrand } from "@/types";
 import { useFavoritesStore } from "@/stores/useFavoritesStore";
 import { useProfileStore } from "@/stores/useProfileStore";
 

@@ -25,10 +25,9 @@ import { extractHexPalette, findClosestColors } from '@/lib/colorMatch';
 import {
   getColorsBySeriesId,
   getAllSeriesWithCount,
-  type SeriesWithCountAndBrand,
 } from '@/stores/useCatalogStore';
 import { usePalettesStore } from '@/stores/usePalettesStore';
-import type { Color } from '@/types';
+import type { Color, SeriesWithCountAndBrand } from '@/types';
 
 export default function ImportFromImageScreen() {
   const { imageUri: imageUriParam } = useLocalSearchParams<{ imageUri?: string }>();

@@ -1,5 +1,4 @@
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import * as ImagePicker from "expo-image-picker";
 import { useLocalSearchParams, useNavigation, useRouter } from "expo-router";
 import React, {
   useCallback,
@@ -24,7 +23,8 @@ import { SaveNameModal } from "@/components/save-name-modal";
 import { ThemedView } from "@/components/themed-view";
 import { TransformToolbar } from "@/components/transform-toolbar";
 import { BorderRadius, Colors, Spacing, Typography } from "@/constants/theme";
-import { useColorScheme } from "@/hooks/use-color-scheme";
+import { useImagePicker } from "@/hooks/use-image-picker";
+import { useTheme } from "@/hooks/use-theme";
 import { useDoodlesStore } from "@/stores/useDoodlesStore";
 
 const CONTENT_PADDING = Spacing.md;
@@ -64,21 +64,29 @@ function isLayerTransformData(
 export default function DoodlesCreateScreen() {
   const { t } = useTranslation();
   const params = useLocalSearchParams<{ doodleId?: string }>();
-  const colorScheme = useColorScheme() ?? "light";
-  const theme = Colors[colorScheme];
+  const { theme } = useTheme();
   const router = useRouter();
   const navigation = useNavigation();
   const getDoodle = useDoodlesStore((s) => s.getDoodle);
   const addDoodle = useDoodlesStore((s) => s.addDoodle);
   const updateDoodle = useDoodlesStore((s) => s.updateDoodle);
+  const {
+    pickFromGallery: pickFromGalleryFromHook,
+    takePhoto: takePhotoFromHook,
+    loading: pickerLoading,
+  } = useImagePicker();
 
   const [activeTab, setActiveTab] = useState<TabId>("wall");
   const [wallUri, setWallUri] = useState<string | null>(null);
   const [sketchUri, setSketchUri] = useState<string | null>(null);
-  const [loading, setLoading] = useState<ImageSlot | null>(null);
+  const [loadingSlot, setLoadingSlot] = useState<ImageSlot | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const doodleId = params.doodleId ?? undefined;
+
+  useEffect(() => {
+    if (!pickerLoading) setLoadingSlot(null);
+  }, [pickerLoading]);
 
   useEffect(() => {
     if (doodleId) {
@@ -107,65 +115,29 @@ export default function DoodlesCreateScreen() {
   }, [doodleId, getDoodle, t, navigation]);
 
   const pickFromGallery = useCallback(
-    async (slot: ImageSlot) => {
-      const { status } =
-        await ImagePicker.requestMediaLibraryPermissionsAsync();
-      if (status !== "granted") {
-        setError(t("doodles.permissionDenied"));
-        return;
-      }
+    (slot: ImageSlot) => {
       setError(null);
-      setLoading(slot);
-      try {
-        const result = await ImagePicker.launchImageLibraryAsync({
-          mediaTypes: ["images"],
-          allowsEditing: false,
-          quality: 0.85,
-        });
-        if (result.canceled || !result.assets[0]) {
-          setLoading(null);
-          return;
-        }
-        const uri = result.assets[0].uri;
-        if (slot === "wall") setWallUri(uri);
-        else setSketchUri(uri);
-      } catch (e) {
-        setError(e instanceof Error ? e.message : t("common.error"));
-      } finally {
-        setLoading(null);
+      setLoadingSlot(slot);
+      if (slot === "wall") {
+        pickFromGalleryFromHook((uri) => setWallUri(uri));
+      } else {
+        pickFromGalleryFromHook((uri) => setSketchUri(uri));
       }
     },
-    [t],
+    [pickFromGalleryFromHook],
   );
 
   const takePhoto = useCallback(
-    async (slot: ImageSlot) => {
-      const { status } = await ImagePicker.requestCameraPermissionsAsync();
-      if (status !== "granted") {
-        setError(t("doodles.cameraPermissionDenied"));
-        return;
-      }
+    (slot: ImageSlot) => {
       setError(null);
-      setLoading(slot);
-      try {
-        const result = await ImagePicker.launchCameraAsync({
-          allowsEditing: false,
-          quality: 0.85,
-        });
-        if (result.canceled || !result.assets[0]) {
-          setLoading(null);
-          return;
-        }
-        const uri = result.assets[0].uri;
-        if (slot === "wall") setWallUri(uri);
-        else setSketchUri(uri);
-      } catch (e) {
-        setError(e instanceof Error ? e.message : t("common.error"));
-      } finally {
-        setLoading(null);
+      setLoadingSlot(slot);
+      if (slot === "wall") {
+        takePhotoFromHook((uri) => setWallUri(uri));
+      } else {
+        takePhotoFromHook((uri) => setSketchUri(uri));
       }
     },
-    [t],
+    [takePhotoFromHook],
   );
 
   const bothLoaded = Boolean(wallUri && sketchUri);
@@ -440,7 +412,7 @@ export default function DoodlesCreateScreen() {
             label={t("doodles.wallImage")}
             onTakePhoto={() => takePhoto("wall")}
             onPickGallery={() => pickFromGallery("wall")}
-            loading={loading === "wall"}
+            loading={loadingSlot === "wall"}
             theme={theme}
             t={t}
           />
@@ -476,7 +448,7 @@ export default function DoodlesCreateScreen() {
             label={t("doodles.sketchImage")}
             onTakePhoto={() => takePhoto("sketch")}
             onPickGallery={() => pickFromGallery("sketch")}
-            loading={loading === "sketch"}
+            loading={loadingSlot === "sketch"}
             theme={theme}
             t={t}
           />

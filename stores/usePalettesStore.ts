@@ -1,6 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
+import { generateId } from '@/lib/id';
 import type { Color, Palette } from '@/types';
 
 type PalettesState = {
@@ -11,16 +12,12 @@ type PalettesState = {
   getPalette: (id: string) => Palette | undefined;
 };
 
-function generateId(): string {
-  return `palette-${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
-}
-
 export const usePalettesStore = create<PalettesState>()(
   persist(
     (set, get) => ({
       palettes: [],
       addPalette: (palette) => {
-        const id = generateId();
+        const id = generateId('palette');
         const createdAt = new Date().toISOString();
         const newPalette: Palette = { ...palette, id, createdAt };
         set((state) => ({

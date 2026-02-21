@@ -29,17 +29,13 @@ import {
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { COLOR_GRID } from "@/constants/color-grid";
-import { Colors, Spacing, Typography } from "@/constants/theme";
-import { useColorScheme } from "@/hooks/use-color-scheme";
+import { Spacing, Typography } from "@/constants/theme";
+import { useSeriesColorSelection } from "@/hooks/use-series-color-selection";
+import { useTheme } from "@/hooks/use-theme";
 import {
   filterColorsBySearch,
   getColorDisplayName,
-  getColorsForSeriesIds,
 } from "@/lib/color";
-import {
-  getAllSeriesWithCount,
-  getColorsBySeriesId,
-} from "@/stores/useCatalogStore";
 import { usePalettesStore } from "@/stores/usePalettesStore";
 import type { Color } from "@/types";
 
@@ -54,26 +50,20 @@ export default function CreatePaletteScreen() {
   const navigation = useNavigation();
   const router = useRouter();
   const { t, i18n } = useTranslation();
-  const colorScheme = useColorScheme() ?? "light";
-  const theme = Colors[colorScheme];
+  const { theme } = useTheme();
   const insets = useSafeAreaInsets();
-
-  const allSeries = useMemo(() => getAllSeriesWithCount(), []);
-  const [selectedSeriesIds, setSelectedSeriesIds] = useState<Set<string>>(
-    new Set(),
-  );
-  const hasInitializedSeriesSelection = useRef(false);
+  const {
+    allSeries,
+    selectedSeriesIds,
+    setSelectedSeriesIds,
+    toggleSeriesSelection,
+    allColors,
+  } = useSeriesColorSelection();
 
   const addPalette = usePalettesStore((s) => s.addPalette);
   const updatePalette = usePalettesStore((s) => s.updatePalette);
   const getPalette = usePalettesStore((s) => s.getPalette);
   const removePalette = usePalettesStore((s) => s.removePalette);
-
-  const allColors = useMemo(
-    () =>
-      getColorsForSeriesIds([...selectedSeriesIds], getColorsBySeriesId),
-    [selectedSeriesIds],
-  );
 
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedColors, setSelectedColors] = useState<Color[]>([]);
@@ -82,18 +72,6 @@ export default function CreatePaletteScreen() {
   const [showOnlySelected, setShowOnlySelected] = useState(!!paletteId);
   const seriesFilterSheetRef = useRef<SeriesSelectBottomSheetRef>(null);
   const initialAppliedRef = useRef(false);
-
-  // New palette: preselect first series
-  useEffect(() => {
-    if (
-      paletteId ||
-      allSeries.length === 0 ||
-      hasInitializedSeriesSelection.current
-    )
-      return;
-    hasInitializedSeriesSelection.current = true;
-    setSelectedSeriesIds(new Set([allSeries[0].id]));
-  }, [paletteId, allSeries]);
 
   // Edit palette: load series and selected colors from palette
   useEffect(() => {
@@ -104,7 +82,7 @@ export default function CreatePaletteScreen() {
     setSelectedSeriesIds(seriesIds);
     setSelectedColors(palette.colors);
     initialAppliedRef.current = true;
-  }, [paletteId, getPalette]);
+  }, [paletteId, getPalette, setSelectedSeriesIds]);
 
   // Legacy: initialColorIds without paletteId (e.g. deep link)
   useEffect(() => {
@@ -119,15 +97,6 @@ export default function CreatePaletteScreen() {
     const ids = new Set(initialColorIds.split(",").filter(Boolean));
     setSelectedColors(allColors.filter((c) => ids.has(c.id)));
   }, [initialColorIds, allColors, paletteId]);
-
-  const toggleSeriesSelection = useCallback((seriesId: string) => {
-    setSelectedSeriesIds((prev) => {
-      const next = new Set(prev);
-      if (next.has(seriesId)) next.delete(seriesId);
-      else next.add(seriesId);
-      return next;
-    });
-  }, []);
 
   const handleDeletePalette = useCallback(() => {
     if (!paletteId) return;

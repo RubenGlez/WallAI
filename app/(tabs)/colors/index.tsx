@@ -2,7 +2,6 @@ import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useNavigation } from "expo-router";
 import React, {
   useCallback,
-  useEffect,
   useLayoutEffect,
   useMemo,
   useRef,
@@ -27,19 +26,11 @@ import { ColorSearchInput } from "@/components/color-search-input";
 import { ThemedView } from "@/components/themed-view";
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { COLOR_GRID } from "@/constants/color-grid";
-import { Colors, Spacing } from "@/constants/theme";
-import { useColorScheme } from "@/hooks/use-color-scheme";
-import {
-  getColorsForSeriesIds,
-  getColorDisplayName,
-  filterColorsBySearch,
-} from "@/lib/color";
-import {
-  getAllSeriesWithCount,
-  getBrandById,
-  getColorsBySeriesId,
-  getSeriesById,
-} from "@/stores/useCatalogStore";
+import { Spacing } from "@/constants/theme";
+import { useSeriesColorSelection } from "@/hooks/use-series-color-selection";
+import { useTheme } from "@/hooks/use-theme";
+import { getColorDisplayName, filterColorsBySearch } from "@/lib/color";
+import { getBrandById, getSeriesById } from "@/stores/useCatalogStore";
 import { useFavoritesStore } from "@/stores/useFavoritesStore";
 import type { Color } from "@/types";
 
@@ -49,37 +40,13 @@ export default function ColorsOverviewScreen() {
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
   const { t, i18n } = useTranslation();
-  const colorScheme = useColorScheme() ?? "light";
-  const theme = Colors[colorScheme];
-
-  const allSeries = useMemo(() => getAllSeriesWithCount(), []);
-  const [selectedSeriesIds, setSelectedSeriesIds] = useState<Set<string>>(
-    new Set(),
-  );
-  const hasInitializedSeriesSelection = useRef(false);
-
-  useEffect(() => {
-    if (allSeries.length > 0 && !hasInitializedSeriesSelection.current) {
-      hasInitializedSeriesSelection.current = true;
-      const firstSeriesId = allSeries[0].id;
-      setSelectedSeriesIds(new Set([firstSeriesId]));
-    }
-  }, [allSeries]);
-
-  const toggleSeriesSelection = useCallback((seriesId: string) => {
-    setSelectedSeriesIds((prev) => {
-      const next = new Set(prev);
-      if (next.has(seriesId)) next.delete(seriesId);
-      else next.add(seriesId);
-      return next;
-    });
-  }, []);
-
-  const allColors = useMemo(
-    () =>
-      getColorsForSeriesIds([...selectedSeriesIds], getColorsBySeriesId),
-    [selectedSeriesIds]
-  );
+  const { theme } = useTheme();
+  const {
+    allSeries,
+    selectedSeriesIds,
+    toggleSeriesSelection,
+    allColors,
+  } = useSeriesColorSelection();
 
   const [searchQuery, setSearchQuery] = useState("");
   const [showOnlyFavorites, setShowOnlyFavorites] = useState(false);

@@ -1,5 +1,12 @@
 import { useMemo } from 'react';
-import type { Brand, BrandWithCount, Color, Series, SeriesWithCount } from '@/types';
+import type {
+  Brand,
+  BrandWithCount,
+  Color,
+  Series,
+  SeriesWithCount,
+  SeriesWithCountAndBrand,
+} from '@/types';
 
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const brandsData = require('@/assets/data/brands.json') as Brand[];
@@ -80,8 +87,6 @@ export function getSeriesWithCountByBrandId(brandId: string): SeriesWithCount[] 
       colorCount: colorCountBySeriesId[s.id] ?? 0,
     }));
 }
-
-export type SeriesWithCountAndBrand = SeriesWithCount & { brandName: string };
 
 /**
  * Returns all series with color count and brand name (for "all series" list).

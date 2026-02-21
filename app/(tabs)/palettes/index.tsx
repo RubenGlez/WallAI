@@ -1,11 +1,9 @@
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import * as ImagePicker from "expo-image-picker";
 import { useRouter } from "expo-router";
-import React, { useCallback, useState } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import {
   ActivityIndicator,
-  Dimensions,
   ScrollView,
   StyleSheet,
   TouchableOpacity,
@@ -13,28 +11,30 @@ import {
 } from "react-native";
 
 import { Button } from "@/components/button";
+import { EmptyStateCard } from "@/components/empty-state-card";
 import { ScreenHeader } from "@/components/screen-header";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import {
+  getListCardWidth,
+  LIST_FAB_SIZE,
+  LIST_FAB_SIZE_SECONDARY,
+  LIST_GAP,
+  SCROLL_PADDING_BOTTOM_WITH_FAB_GROUP,
+} from "@/constants/list-layout";
+import {
   BorderRadius,
-  Colors,
   Shadows,
   Spacing,
   Typography,
 } from "@/constants/theme";
-import { useColorScheme } from "@/hooks/use-color-scheme";
+import { useImagePicker } from "@/hooks/use-image-picker";
+import { useTheme } from "@/hooks/use-theme";
 import { usePalettesStore } from "@/stores/usePalettesStore";
 import type { Color, Palette } from "@/types";
 
-const { width } = Dimensions.get("window");
-const FAB_SIZE = 56;
-const FAB_SIZE_SECONDARY = 48;
-const NUM_COLUMNS = 2;
-const GAP = Spacing.sm;
+const CARD_WIDTH = getListCardWidth();
 const CARD_PADDING = Spacing.md;
-const CARD_WIDTH =
-  (width - Spacing.md * 2 - GAP * (NUM_COLUMNS - 1)) / NUM_COLUMNS;
 const SWATCH_SIZE = (CARD_WIDTH - CARD_PADDING * 2) / 4 - 2;
 const SWATCHES_TO_SHOW = 7;
 
@@ -46,8 +46,7 @@ function PaletteCard({
   onPress: () => void;
 }) {
   const { t } = useTranslation();
-  const colorScheme = useColorScheme() ?? "light";
-  const theme = Colors[colorScheme];
+  const { theme } = useTheme();
   const swatches = palette.colors.slice(0, SWATCHES_TO_SHOW) as Color[];
   const extraCount =
     palette.colors.length > SWATCHES_TO_SHOW
@@ -119,65 +118,31 @@ function PaletteCard({
 export default function PalettesIndexScreen() {
   const { t } = useTranslation();
   const router = useRouter();
-  const colorScheme = useColorScheme() ?? "light";
-  const theme = Colors[colorScheme];
+  const { theme } = useTheme();
   const palettes = usePalettesStore((s) => s.palettes);
-
-  const [importLoading, setImportLoading] = useState<"gallery" | "camera" | null>(
-    null,
-  );
+  const { pickFromGallery, takePhoto, loading: importLoading } = useImagePicker();
 
   const handleCreateNew = () => {
     router.push("/(tabs)/palettes/create");
   };
 
-  const handleOpenGallery = useCallback(async () => {
-    const { status } =
-      await ImagePicker.requestMediaLibraryPermissionsAsync();
-    if (status !== "granted") {
-      return;
-    }
-    setImportLoading("gallery");
-    try {
-      const result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ["images"],
-        allowsEditing: false,
-        quality: 0.8,
+  const handleOpenGallery = () => {
+    pickFromGallery((uri) => {
+      router.push({
+        pathname: "/(tabs)/palettes/import",
+        params: { imageUri: uri },
       });
-      if (!result.canceled && result.assets[0]) {
-        router.push({
-          pathname: "/(tabs)/palettes/import",
-          params: { imageUri: result.assets[0].uri },
-        });
-      }
-    } finally {
-      setImportLoading(null);
-    }
-  }, [router]);
+    });
+  };
 
-  const handleOpenCamera = useCallback(async () => {
-    const { status } = await ImagePicker.requestCameraPermissionsAsync();
-    if (status !== "granted") {
-      return;
-    }
-    setImportLoading("camera");
-    try {
-      const result = await ImagePicker.launchCameraAsync({
-        allowsEditing: false,
-        quality: 0.8,
+  const handleOpenCamera = () => {
+    takePhoto((uri) => {
+      router.push({
+        pathname: "/(tabs)/palettes/import",
+        params: { imageUri: uri },
       });
-      if (!result.canceled && result.assets[0]) {
-        router.push({
-          pathname: "/(tabs)/palettes/import",
-          params: { imageUri: result.assets[0].uri },
-        });
-      }
-    } finally {
-      setImportLoading(null);
-    }
-  }, [router]);
-
-  const fabBottom = Spacing.md;
+    });
+  };
 
   return (
     <ThemedView style={styles.container} safeArea="top">
@@ -192,31 +157,12 @@ export default function PalettesIndexScreen() {
         />
 
         {palettes.length === 0 ? (
-          <TouchableOpacity
-            activeOpacity={0.7}
-            style={[
-              styles.emptyCard,
-              {
-                backgroundColor: theme.backgroundSecondary,
-                borderColor: theme.border,
-              },
-            ]}
+          <EmptyStateCard
+            icon="palette"
+            title={t("palettes.emptyTitle")}
+            subtitle={t("palettes.emptyHint")}
             onPress={handleCreateNew}
-          >
-            <View
-              style={[styles.emptyIconWrap, { backgroundColor: theme.card }]}
-            >
-              <MaterialIcons name="palette" size={28} color={theme.tint} />
-            </View>
-            <ThemedText style={[styles.emptyTitle, { color: theme.text }]}>
-              {t("palettes.emptyTitle")}
-            </ThemedText>
-            <ThemedText
-              style={[styles.emptySubtitle, { color: theme.textSecondary }]}
-            >
-              {t("palettes.emptyHint")}
-            </ThemedText>
-          </TouchableOpacity>
+          />
         ) : (
           <View style={styles.grid}>
             {palettes.map((palette) => (
@@ -236,7 +182,7 @@ export default function PalettesIndexScreen() {
       </ScrollView>
 
       <View
-        style={[styles.fabContainer, { bottom: fabBottom }]}
+        style={[styles.fabContainer, { bottom: Spacing.md }]}
         pointerEvents="box-none"
       >
         <Button
@@ -299,7 +245,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   scrollContent: {
-    paddingBottom: Spacing.xxl + 120,
+    paddingBottom: SCROLL_PADDING_BOTTOM_WITH_FAB_GROUP,
   },
   fabContainer: {
     position: "absolute",
@@ -309,51 +255,22 @@ const styles = StyleSheet.create({
     gap: Spacing.sm,
   },
   fab: {
-    width: FAB_SIZE,
-    height: FAB_SIZE,
-    borderRadius: FAB_SIZE / 2,
+    width: LIST_FAB_SIZE,
+    height: LIST_FAB_SIZE,
+    borderRadius: LIST_FAB_SIZE / 2,
     alignItems: "center",
     justifyContent: "center",
     ...Shadows.lg,
   },
   fabPrimary: {
-    width: FAB_SIZE,
-    height: FAB_SIZE,
+    width: LIST_FAB_SIZE,
+    height: LIST_FAB_SIZE,
   },
   fabSecondary: {
-    width: FAB_SIZE_SECONDARY,
-    height: FAB_SIZE_SECONDARY,
-    borderRadius: FAB_SIZE_SECONDARY / 2,
+    width: LIST_FAB_SIZE_SECONDARY,
+    height: LIST_FAB_SIZE_SECONDARY,
+    borderRadius: LIST_FAB_SIZE_SECONDARY / 2,
     borderWidth: 1,
-  },
-  emptyCard: {
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    paddingVertical: Spacing.xl,
-    paddingHorizontal: Spacing.lg,
-    borderRadius: BorderRadius.lg,
-    borderWidth: 1.5,
-    borderStyle: "dashed",
-    minHeight: 140,
-    ...Shadows.sm,
-  },
-  emptyIconWrap: {
-    width: 56,
-    height: 56,
-    borderRadius: 28,
-    alignItems: "center",
-    justifyContent: "center",
-    marginBottom: Spacing.md,
-  },
-  emptyTitle: {
-    fontSize: Typography.fontSize.md,
-    fontWeight: Typography.fontWeight.semibold,
-    marginBottom: Spacing.xs,
-  },
-  emptySubtitle: {
-    fontSize: Typography.fontSize.sm,
-    textAlign: "center",
   },
   grid: {
     flexDirection: "row",
@@ -365,7 +282,7 @@ const styles = StyleSheet.create({
     padding: CARD_PADDING,
     borderRadius: BorderRadius.lg,
     borderWidth: 1,
-    marginBottom: GAP,
+    marginBottom: LIST_GAP,
     ...Shadows.sm,
   },
   swatchRow: {

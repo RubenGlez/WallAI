@@ -24,9 +24,9 @@ import {
 import { ColorGridCard } from "@/components/color-grid-card";
 import { ThemedView } from "@/components/themed-view";
 import { IconSymbol } from "@/components/ui/icon-symbol";
-import { BorderRadius, Colors, Spacing, Typography } from "@/constants/theme";
-import { useColorScheme } from "@/hooks/use-color-scheme";
-import { getColorDisplayName } from "@/lib/color";
+import { BorderRadius, Spacing, Typography } from "@/constants/theme";
+import { useTheme } from "@/hooks/use-theme";
+import { filterColorsBySearch, getColorDisplayName } from "@/lib/color";
 import {
   getBrandById,
   getColorsBySeriesId,
@@ -47,8 +47,7 @@ export default function ColorGridScreen() {
   const { seriesId } = useLocalSearchParams<{ seriesId: string }>();
   const navigation = useNavigation();
   const { t, i18n } = useTranslation();
-  const colorScheme = useColorScheme() ?? "light";
-  const theme = Colors[colorScheme];
+  const { theme } = useTheme();
 
   const [searchQuery, setSearchQuery] = useState("");
   const [showOnlyFavorites, setShowOnlyFavorites] = useState(false);
@@ -70,14 +69,7 @@ export default function ColorGridScreen() {
     if (showOnlyFavorites) {
       list = list.filter((c) => favoriteColorIds.includes(c.id));
     }
-    if (!searchQuery.trim()) return list;
-    const q = searchQuery.trim().toLowerCase();
-    return list.filter((c) => {
-      const name = getColorDisplayName(c, i18n.language);
-      return (
-        c.code.toLowerCase().includes(q) || name.toLowerCase().includes(q)
-      );
-    });
+    return filterColorsBySearch(list, searchQuery, i18n.language);
   }, [
     allColors,
     searchQuery,

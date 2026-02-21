@@ -5,7 +5,7 @@ import { ThemedText } from '@/components/themed-text';
 import { IconSymbol } from '@/components/ui/icon-symbol';
 import { BorderRadius, Colors, Shadows, Spacing, Typography } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
-import type { SeriesWithCountAndBrand } from '@/stores/useCatalogStore';
+import type { SeriesWithCountAndBrand } from '@/types';
 
 export function SeriesCard({
   series,

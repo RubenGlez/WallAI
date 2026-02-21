@@ -11,7 +11,7 @@ import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { ThemedText } from "@/components/themed-text";
 import { Colors, Spacing, Typography } from "@/constants/theme";
 import { useColorScheme } from "@/hooks/use-color-scheme";
-import type { SeriesWithCountAndBrand } from "@/stores/useCatalogStore";
+import type { SeriesWithCountAndBrand } from "@/types";
 
 const SNAP_POINTS = ["60%", "90%"];
 
