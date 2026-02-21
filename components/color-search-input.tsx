@@ -1,8 +1,8 @@
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import React from "react";
 import { StyleSheet, TextInput, View } from "react-native";
 
 import { Button } from "@/components/button";
+import { IconSymbol } from "@/components/ui/icon-symbol";
 import { BorderRadius, Colors, Spacing, Typography } from "@/constants/theme";
 import { useColorScheme } from "@/hooks/use-color-scheme";
 
@@ -47,8 +47,8 @@ export function ColorSearchInput({
           onPress={() => onChangeText("")}
           accessibilityLabel={clearAccessibilityLabel}
           icon={
-            <MaterialIcons
-              name="cancel"
+            <IconSymbol
+              name="xmark.circle.fill"
               size={22}
               color={theme.textSecondary}
             />

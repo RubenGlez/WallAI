@@ -1,4 +1,3 @@
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useLocalSearchParams, useNavigation, useRouter } from "expo-router";
 import React, {
   useCallback,
@@ -20,6 +19,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { Button } from "@/components/button";
 import { ColorGridCard } from "@/components/color-grid-card";
+import { IconSymbol } from "@/components/ui/icon-symbol";
 import { ColorSearchInput } from "@/components/color-search-input";
 import { SaveNameModal } from "@/components/save-name-modal";
 import {
@@ -133,8 +133,8 @@ export default function CreatePaletteScreen() {
             onPress={() => seriesFilterSheetRef.current?.present()}
             accessibilityLabel={t("palettes.selectSeries")}
             icon={
-              <MaterialIcons
-                name="filter-list"
+              <IconSymbol
+                name="line.3.horizontal.decrease.circle.fill"
                 size={24}
                 color={theme.tint}
               />
@@ -147,8 +147,8 @@ export default function CreatePaletteScreen() {
               onPress={handleDeletePalette}
               accessibilityLabel={t("projects.remove")}
               icon={
-                <MaterialIcons
-                  name="delete-outline"
+                <IconSymbol
+                  name="trash"
                   size={24}
                   color={theme.tint}
                 />

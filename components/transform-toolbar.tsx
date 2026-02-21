@@ -1,8 +1,8 @@
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Slider from "@react-native-community/slider";
 import React from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 
+import { IconSymbol } from "@/components/ui/icon-symbol";
 import { Colors, Shadows, Spacing } from "@/constants/theme";
 import { useColorScheme } from "@/hooks/use-color-scheme";
 
@@ -74,8 +74,8 @@ export function TransformToolbar({
               accessibilityRole="button"
               accessibilityLabel={labels.save}
             >
-              <MaterialIcons
-                name="save"
+              <IconSymbol
+                name="square.and.arrow.down"
                 size={22}
                 color={theme.background}
               />
@@ -89,8 +89,8 @@ export function TransformToolbar({
               accessibilityRole="button"
               accessibilityLabel={labels.reset}
             >
-              <MaterialIcons
-                name="restart-alt"
+              <IconSymbol
+                name="arrow.clockwise"
                 size={22}
                 color={theme.tint}
               />
@@ -104,7 +104,7 @@ export function TransformToolbar({
               accessibilityRole="button"
               accessibilityLabel={labels.flipH}
             >
-              <MaterialIcons name="flip" size={22} color={theme.tint} />
+              <IconSymbol name="arrow.left.and.right" size={22} color={theme.tint} />
             </TouchableOpacity>
             <TouchableOpacity
               style={[
@@ -115,8 +115,8 @@ export function TransformToolbar({
               accessibilityRole="button"
               accessibilityLabel={labels.flipV}
             >
-              <MaterialIcons
-                name="flip"
+              <IconSymbol
+                name="arrow.left.and.right"
                 size={22}
                 color={theme.tint}
                 style={{ transform: [{ rotate: "90deg" }] }}
@@ -131,8 +131,8 @@ export function TransformToolbar({
               accessibilityRole="button"
               accessibilityLabel={labels.opacity}
             >
-              <MaterialIcons
-                name="opacity"
+              <IconSymbol
+                name="circle.lefthalf.filled"
                 size={22}
                 color={theme.tint}
               />
@@ -149,15 +149,15 @@ export function TransformToolbar({
               accessibilityRole="button"
               accessibilityLabel={labels.back}
             >
-              <MaterialIcons
-                name="arrow-back"
+              <IconSymbol
+                name="chevron.left"
                 size={22}
                 color={theme.tint}
               />
             </TouchableOpacity>
             <View style={styles.opacityRow}>
-              <MaterialIcons
-                name="opacity"
+              <IconSymbol
+                name="circle.lefthalf.filled"
                 size={20}
                 color={theme.textSecondary}
               />

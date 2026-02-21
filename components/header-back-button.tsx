@@ -1,8 +1,8 @@
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useRouter } from "expo-router";
 import { useTranslation } from "react-i18next";
 import { TouchableOpacity } from "react-native";
 
+import { IconSymbol } from "@/components/ui/icon-symbol";
 import { Spacing } from "@/constants/theme";
 import { useThemeColor } from "@/hooks/use-theme-color";
 
@@ -23,7 +23,7 @@ export function HeaderBackButton() {
       accessibilityRole="button"
       accessibilityLabel={t("common.back")}
     >
-      <MaterialIcons name="arrow-back" size={24} color={tint} />
+      <IconSymbol name="chevron.left" size={24} color={tint} />
     </TouchableOpacity>
   );
 }

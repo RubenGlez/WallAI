@@ -1,4 +1,3 @@
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useNavigation } from "expo-router";
 import React, {
   useCallback,
@@ -105,7 +104,7 @@ export default function ColorsOverviewScreen() {
             size="icon"
             onPress={() => seriesFilterSheetRef.current?.present()}
             accessibilityLabel={t("palettes.selectSeries")}
-            icon={<MaterialIcons name="filter-list" size={24} color={theme.tint} />}
+            icon={<IconSymbol name="line.3.horizontal.decrease.circle.fill" size={24} color={theme.tint} />}
           />
         </View>
       ),

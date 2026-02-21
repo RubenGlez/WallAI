@@ -1,4 +1,3 @@
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
@@ -98,7 +97,7 @@ export function ColorGridCard({
         </View>
         {selectionMode && isInPalette && (
           <View style={styles.selectedBadge} pointerEvents="none">
-            <MaterialIcons name="check-circle" size={20} color={theme.tint} />
+            <IconSymbol name="checkmark.circle.fill" size={20} color={theme.tint} />
           </View>
         )}
         {onFavorite != null && (
@@ -125,7 +124,7 @@ export function ColorGridCard({
             }
           >
             {isInPalette ? (
-              <MaterialIcons name="check-circle" size={20} color={theme.tint} />
+              <IconSymbol name="checkmark.circle.fill" size={20} color={theme.tint} />
             ) : (
               <IconSymbol name="plus" size={20} color={theme.icon} />
             )}

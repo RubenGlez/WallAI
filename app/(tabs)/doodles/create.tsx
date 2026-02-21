@@ -1,4 +1,3 @@
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useLocalSearchParams, useNavigation, useRouter } from "expo-router";
 import React, {
   useCallback,
@@ -18,6 +17,7 @@ import Animated, {
 
 import { Button } from "@/components/button";
 import { Tabs } from "@/components/tabs";
+import { IconSymbol, type IconSymbolName } from "@/components/ui/icon-symbol";
 import { ThemedText } from "@/components/themed-text";
 import { SaveNameModal } from "@/components/save-name-modal";
 import { ThemedView } from "@/components/themed-view";
@@ -408,7 +408,7 @@ export default function DoodlesCreateScreen() {
       if (!wallUri) {
         return (
           <PlaceholderSlot
-            icon="wallpaper"
+            icon="photo.fill.on.rectangle.fill"
             label={t("doodles.wallImage")}
             onTakePhoto={() => takePhoto("wall")}
             onPickGallery={() => pickFromGallery("wall")}
@@ -444,7 +444,7 @@ export default function DoodlesCreateScreen() {
       if (!sketchUri) {
         return (
           <PlaceholderSlot
-            icon="brush"
+            icon="paintbrush"
             label={t("doodles.sketchImage")}
             onTakePhoto={() => takePhoto("sketch")}
             onPickGallery={() => pickFromGallery("sketch")}
@@ -500,8 +500,8 @@ export default function DoodlesCreateScreen() {
             value: "wall",
             label: t("doodles.tabWall"),
             renderIcon: (selected) => (
-              <MaterialIcons
-                name="wallpaper"
+              <IconSymbol
+                name="photo.fill.on.rectangle.fill"
                 size={20}
                 color={selected ? theme.tint : theme.textSecondary}
               />
@@ -511,8 +511,8 @@ export default function DoodlesCreateScreen() {
             value: "sketch",
             label: t("doodles.tabSketch"),
             renderIcon: (selected) => (
-              <MaterialIcons
-                name="brush"
+              <IconSymbol
+                name="paintbrush"
                 size={20}
                 color={selected ? theme.tint : theme.textSecondary}
               />
@@ -696,7 +696,7 @@ function PlaceholderSlot({
   theme,
   t,
 }: {
-  icon: keyof typeof MaterialIcons.glyphMap;
+  icon: IconSymbolName;
   label: string;
   onTakePhoto: () => void;
   onPickGallery: () => void;
@@ -711,7 +711,7 @@ function PlaceholderSlot({
         { backgroundColor: theme.backgroundSecondary },
       ]}
     >
-      <MaterialIcons name={icon} size={48} color={theme.textSecondary} />
+      <IconSymbol name={icon} size={48} color={theme.textSecondary} />
       <ThemedText
         style={[styles.placeholderLabel, { color: theme.textSecondary }]}
       >
@@ -722,7 +722,7 @@ function PlaceholderSlot({
           variant="secondary"
           size="md"
           icon={
-            <MaterialIcons name="camera-alt" size={24} color={theme.tint} />
+            <IconSymbol name="camera.fill" size={24} color={theme.tint} />
           }
           style={[
             styles.placeholderBtn,
@@ -739,7 +739,7 @@ function PlaceholderSlot({
           variant="secondary"
           size="md"
           icon={
-            <MaterialIcons name="photo-library" size={24} color={theme.tint} />
+            <IconSymbol name="photo.on.rectangle.angled" size={24} color={theme.tint} />
           }
           style={[
             styles.placeholderBtn,

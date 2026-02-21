@@ -1,4 +1,3 @@
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import {
   BottomSheetBackdrop,
   BottomSheetModal,
@@ -9,6 +8,7 @@ import { useTranslation } from "react-i18next";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 
 import { ThemedText } from "@/components/themed-text";
+import { IconSymbol } from "@/components/ui/icon-symbol";
 import { Colors, Spacing, Typography } from "@/constants/theme";
 import { useColorScheme } from "@/hooks/use-color-scheme";
 import type { SeriesWithCountAndBrand } from "@/types";
@@ -81,14 +81,14 @@ export const SeriesSelectBottomSheet = forwardRef<
                 accessibilityState={{ checked: isSelected }}
               >
                 {isSelected ? (
-                  <MaterialIcons
-                    name="check-box"
+                  <IconSymbol
+                    name="checkmark.square.fill"
                     size={24}
                     color={theme.tint}
                   />
                 ) : (
-                  <MaterialIcons
-                    name="check-box-outline-blank"
+                  <IconSymbol
+                    name="square"
                     size={24}
                     color={theme.icon}
                   />

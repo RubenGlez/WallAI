@@ -1,4 +1,3 @@
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useRouter } from "expo-router";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -12,6 +11,7 @@ import {
 
 import { Button } from "@/components/button";
 import { EmptyStateCard } from "@/components/empty-state-card";
+import { IconSymbol } from "@/components/ui/icon-symbol";
 import { ScreenHeader } from "@/components/screen-header";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
@@ -100,8 +100,8 @@ function PaletteCard({
               { backgroundColor: theme.backgroundSecondary },
             ]}
           >
-            <MaterialIcons
-              name="palette"
+            <IconSymbol
+              name="swatchpalette"
               size={20}
               color={theme.textSecondary}
             />
@@ -158,7 +158,7 @@ export default function PalettesIndexScreen() {
 
         {palettes.length === 0 ? (
           <EmptyStateCard
-            icon="palette"
+            icon="swatchpalette"
             title={t("palettes.emptyTitle")}
             subtitle={t("palettes.emptyHint")}
             onPress={handleCreateNew}
@@ -200,7 +200,7 @@ export default function PalettesIndexScreen() {
             importLoading === "gallery" ? (
               <ActivityIndicator size="small" color={theme.tint} />
             ) : (
-              <MaterialIcons name="photo-library" size={24} color={theme.tint} />
+              <IconSymbol name="photo.on.rectangle.angled" size={24} color={theme.tint} />
             )
           }
         />
@@ -219,7 +219,7 @@ export default function PalettesIndexScreen() {
             importLoading === "camera" ? (
               <ActivityIndicator size="small" color={theme.tint} />
             ) : (
-              <MaterialIcons name="camera-alt" size={24} color={theme.tint} />
+              <IconSymbol name="camera.fill" size={24} color={theme.tint} />
             )
           }
         />
@@ -229,7 +229,7 @@ export default function PalettesIndexScreen() {
           style={[styles.fab, styles.fabPrimary]}
           onPress={handleCreateNew}
           accessibilityLabel={t("palettes.createNew")}
-          icon={<MaterialIcons name="add" size={28} color={theme.background} />}
+          icon={<IconSymbol name="plus" size={28} color={theme.background} />}
         />
       </View>
     </ThemedView>

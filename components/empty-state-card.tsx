@@ -1,8 +1,11 @@
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import React from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 
 import { ThemedText } from "@/components/themed-text";
+import {
+  IconSymbol,
+  type IconSymbolName,
+} from "@/components/ui/icon-symbol";
 import {
   BorderRadius,
   Shadows,
@@ -12,7 +15,7 @@ import {
 import { useTheme } from "@/hooks/use-theme";
 
 export type EmptyStateCardProps = {
-  icon: keyof typeof MaterialIcons.glyphMap;
+  icon: IconSymbolName;
   title: string;
   subtitle: string;
   onPress: () => void;
@@ -39,7 +42,7 @@ export function EmptyStateCard({
       onPress={onPress}
     >
       <View style={[styles.iconWrap, { backgroundColor: theme.card }]}>
-        <MaterialIcons name={icon} size={28} color={theme.tint} />
+        <IconSymbol name={icon} size={28} color={theme.tint} />
       </View>
       <ThemedText style={[styles.title, { color: theme.text }]}>
         {title}

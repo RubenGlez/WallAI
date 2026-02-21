@@ -12,9 +12,8 @@ import {
   View,
 } from 'react-native';
 import { getColors } from 'react-native-image-colors';
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-
 import { Button } from '@/components/button';
+import { IconSymbol } from '@/components/ui/icon-symbol';
 import { SaveNameModal } from '@/components/save-name-modal';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
@@ -71,7 +70,7 @@ export default function ImportFromImageScreen() {
           size="icon"
           onPress={() => seriesFilterSheetRef.current?.present()}
           accessibilityLabel={t('palettes.selectSeries')}
-          icon={<MaterialIcons name="filter-list" size={24} color={theme.tint} />}
+          icon={<IconSymbol name="line.3.horizontal.decrease.circle.fill" size={24} color={theme.tint} />}
         />
       ),
     });
@@ -275,9 +274,9 @@ export default function ImportFromImageScreen() {
                   accessibilityState={{ checked: isSelected }}
                 >
                   {isSelected ? (
-                    <MaterialIcons name="check-box" size={24} color={theme.tint} />
+                    <IconSymbol name="checkmark.square.fill" size={24} color={theme.tint} />
                   ) : (
-                    <MaterialIcons name="check-box-outline-blank" size={24} color={theme.icon} />
+                    <IconSymbol name="square" size={24} color={theme.icon} />
                   )}
                   <View style={styles.seriesLabelWrap}>
                     <ThemedText style={styles.seriesName} numberOfLines={1} ellipsizeMode="tail">
@@ -313,7 +312,7 @@ export default function ImportFromImageScreen() {
                 <Button
                   variant="secondary"
                   size="lg"
-                  icon={<MaterialIcons name="photo-library" size={32} color={theme.tint} style={styles.pickOptionIcon} />}
+                  icon={<IconSymbol name="photo.on.rectangle.angled" size={32} color={theme.tint} style={styles.pickOptionIcon} />}
                   style={[styles.pickOption, { backgroundColor: theme.backgroundSecondary, borderColor: theme.border }]}
                   onPress={pickImage}
                 >
@@ -322,7 +321,7 @@ export default function ImportFromImageScreen() {
                 <Button
                   variant="secondary"
                   size="lg"
-                  icon={<MaterialIcons name="camera-alt" size={32} color={theme.tint} style={styles.pickOptionIcon} />}
+                  icon={<IconSymbol name="camera.fill" size={32} color={theme.tint} style={styles.pickOptionIcon} />}
                   style={[styles.pickOption, { backgroundColor: theme.backgroundSecondary, borderColor: theme.border }]}
                   onPress={takePhoto}
                 >
@@ -449,9 +448,9 @@ export default function ImportFromImageScreen() {
                                   {match.similarity}%
                                 </ThemedText>
                                 {isSelected ? (
-                                  <MaterialIcons name="check-circle" size={24} color={theme.tint} />
+                                  <IconSymbol name="checkmark.circle.fill" size={24} color={theme.tint} />
                                 ) : (
-                                  <MaterialIcons name="radio-button-unchecked" size={24} color={theme.icon} />
+                                  <IconSymbol name="circle" size={24} color={theme.icon} />
                                 )}
                               </TouchableOpacity>
                             );

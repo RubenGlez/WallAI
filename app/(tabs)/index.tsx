@@ -1,4 +1,3 @@
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useRouter } from "expo-router";
 import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
@@ -6,6 +5,7 @@ import { ScrollView, StyleSheet, View } from "react-native";
 
 import { ScreenHeader } from "@/components/screen-header";
 import { SeriesCard } from "@/components/series-card";
+import { IconSymbol } from "@/components/ui/icon-symbol";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import {
@@ -74,7 +74,7 @@ export default function HomeScreen() {
             <View
               style={[styles.emptyIconWrap, { backgroundColor: theme.card }]}
             >
-              <MaterialIcons name="palette" size={20} color={theme.tint} />
+              <IconSymbol name="swatchpalette" size={20} color={theme.tint} />
             </View>
             <ThemedText
               style={[styles.emptyTitle, { color: theme.text }]}

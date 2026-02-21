@@ -1,4 +1,3 @@
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { useRouter } from 'expo-router';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -12,6 +11,7 @@ import {
 
 import { Button } from '@/components/button';
 import { EmptyStateCard } from '@/components/empty-state-card';
+import { IconSymbol } from '@/components/ui/icon-symbol';
 import { ScreenHeader } from '@/components/screen-header';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
@@ -67,8 +67,8 @@ function DoodleCard({
           />
         ) : (
           <View style={styles.thumbnailPlaceholder}>
-            <MaterialIcons
-              name="brush"
+            <IconSymbol
+              name="paintbrush"
               size={28}
               color={theme.textSecondary}
             />
@@ -109,7 +109,7 @@ export default function DoodlesIndexScreen() {
 
         {doodles.length === 0 ? (
           <EmptyStateCard
-            icon="brush"
+            icon="paintbrush"
             title={t('doodles.emptyTitle')}
             subtitle={t('doodles.emptyHint')}
             onPress={handleNewDoodle}
@@ -139,7 +139,7 @@ export default function DoodlesIndexScreen() {
           style={[styles.fab, { backgroundColor: theme.tint }]}
           onPress={handleNewDoodle}
           accessibilityLabel={t('doodles.newDoodle')}
-          icon={<MaterialIcons name="add" size={28} color={theme.background} />}
+          icon={<IconSymbol name="plus" size={28} color={theme.background} />}
         />
       </View>
     </ThemedView>
