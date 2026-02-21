@@ -7,7 +7,11 @@ import {
   ActivityIndicator,
   Dimensions,
   Image,
+  KeyboardAvoidingView,
+  Modal,
+  Platform,
   StyleSheet,
+  TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
@@ -164,6 +168,8 @@ export default function DoodlesCreateScreen() {
   const [wallOpacityAmount, setWallOpacityAmount] = useState(DEFAULT_WALL_OPACITY);
   const [sketchOpacityAmount, setSketchOpacityAmount] = useState(DEFAULT_SKETCH_OPACITY);
   const [toolbarView, setToolbarView] = useState<'icons' | 'opacity'>('icons');
+  const [showNameModal, setShowNameModal] = useState(false);
+  const [doodleName, setDoodleName] = useState('');
 
   const resetTransform = useCallback(() => {
     if (activeTab === 'muro') {
@@ -195,8 +201,15 @@ export default function DoodlesCreateScreen() {
     }
   }, [activeTab, wallOffsetX, wallOffsetY, wallSavedOffsetX, wallSavedOffsetY, wallScale, wallSavedScale, wallRotation, wallSavedRotation, wallFlipX, wallFlipY, wallOpacity, sketchOffsetX, sketchOffsetY, sketchSavedOffsetX, sketchSavedOffsetY, sketchScale, sketchSavedScale, sketchRotation, sketchSavedRotation, sketchFlipX, sketchFlipY, sketchOpacity]);
 
-  const handleSave = useCallback(() => {
+  const openSaveModal = useCallback(() => {
     if (!wallUri || !sketchUri) return;
+    setDoodleName(doodleId ? (getDoodle(doodleId)?.name ?? '') : '');
+    setShowNameModal(true);
+  }, [wallUri, sketchUri, doodleId, getDoodle]);
+
+  const handleConfirmSave = useCallback(() => {
+    if (!wallUri || !sketchUri) return;
+    const name = doodleName.trim() || t('doodles.defaultDoodleName');
     const transformData = {
       wall: {
         offsetX: wallOffsetX.value,
@@ -219,21 +232,23 @@ export default function DoodlesCreateScreen() {
     };
     if (doodleId) {
       updateDoodle(doodleId, {
-        name: t('doodles.defaultDoodleName'),
+        name,
         wallImageUri: wallUri,
         sketchImageUri: sketchUri,
         transformData,
       });
     } else {
       addDoodle({
-        name: t('doodles.defaultDoodleName'),
+        name,
         wallImageUri: wallUri,
         sketchImageUri: sketchUri,
         transformData,
       });
     }
+    setShowNameModal(false);
+    setDoodleName('');
     router.back();
-  }, [wallUri, sketchUri, doodleId, t, addDoodle, updateDoodle, router,
+  }, [wallUri, sketchUri, doodleId, doodleName, t, addDoodle, updateDoodle, router,
     wallOffsetX, wallOffsetY, wallScale, wallRotation, wallFlipX, wallFlipY, wallOpacity,
     sketchOffsetX, sketchOffsetY, sketchScale, sketchRotation, sketchFlipX, sketchFlipY, sketchOpacity]);
 
@@ -427,7 +442,7 @@ export default function DoodlesCreateScreen() {
                   <>
                     <TouchableOpacity
                       style={[styles.toolbarBtn, { backgroundColor: theme.tint }]}
-                      onPress={handleSave}
+                      onPress={openSaveModal}
                       accessibilityRole="button"
                       accessibilityLabel={t('doodles.toolbarSave')}
                     >
@@ -507,6 +522,58 @@ export default function DoodlesCreateScreen() {
           <ThemedText style={[styles.error, { color: theme.error }]}>{error}</ThemedText>
         </View>
       ) : null}
+
+      <Modal
+        visible={showNameModal}
+        transparent
+        animationType="fade"
+        onRequestClose={() => setShowNameModal(false)}
+      >
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+          style={styles.modalOverlay}
+        >
+          <TouchableOpacity
+            style={styles.modalBackdrop}
+            activeOpacity={1}
+            onPress={() => setShowNameModal(false)}
+          />
+          <View style={[styles.modalCard, { backgroundColor: theme.card, borderColor: theme.border }]}>
+            <ThemedText style={styles.modalTitle}>{t('doodles.nameYourDoodle')}</ThemedText>
+            <TextInput
+              style={[
+                styles.nameInput,
+                {
+                  backgroundColor: theme.backgroundSecondary,
+                  borderColor: theme.border,
+                  color: theme.text,
+                },
+              ]}
+              placeholder={t('doodles.doodleNamePlaceholder')}
+              placeholderTextColor={theme.textSecondary}
+              value={doodleName}
+              onChangeText={setDoodleName}
+              autoFocus
+            />
+            <View style={styles.modalActions}>
+              <TouchableOpacity
+                style={[styles.modalButton, { borderColor: theme.border }]}
+                onPress={() => setShowNameModal(false)}
+              >
+                <ThemedText>{t('common.cancel')}</ThemedText>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[styles.modalButton, styles.modalButtonPrimary, { backgroundColor: theme.tint }]}
+                onPress={handleConfirmSave}
+              >
+                <ThemedText style={[styles.modalButtonPrimaryText, { color: theme.background }]}>
+                  {t('common.save')}
+                </ThemedText>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </KeyboardAvoidingView>
+      </Modal>
     </ThemedView>
   );
 }
@@ -812,5 +879,48 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 24,
     minWidth: 60,
+  },
+  modalOverlay: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: Spacing.lg,
+  },
+  modalBackdrop: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+  },
+  modalCard: {
+    borderRadius: BorderRadius.lg,
+    borderWidth: 1,
+    padding: Spacing.lg,
+    zIndex: 1,
+  },
+  modalTitle: {
+    fontSize: Typography.fontSize.lg,
+    fontWeight: Typography.fontWeight.semibold,
+    marginBottom: Spacing.md,
+  },
+  nameInput: {
+    height: 44,
+    paddingHorizontal: Spacing.md,
+    borderRadius: BorderRadius.md,
+    borderWidth: 1,
+    fontSize: Typography.fontSize.md,
+    marginBottom: Spacing.lg,
+  },
+  modalActions: {
+    flexDirection: 'row',
+    gap: Spacing.sm,
+    justifyContent: 'flex-end',
+  },
+  modalButton: {
+    paddingVertical: Spacing.sm,
+    paddingHorizontal: Spacing.lg,
+    borderRadius: BorderRadius.md,
+    borderWidth: 1,
+  },
+  modalButtonPrimary: {},
+  modalButtonPrimaryText: {
+    fontWeight: Typography.fontWeight.semibold,
   },
 });

@@ -90,6 +90,8 @@
     "permissionDenied": "É necessário acesso à galeria para escolher imagens.",
     "cameraPermissionDenied": "É necessário acesso à câmera para tirar fotos.",
     "defaultDoodleName": "Meu doodle",
+    "nameYourDoodle": "Nome do doodle",
+    "doodleNamePlaceholder": "Ex.: Esboço parede norte",
     "editorTitle": "Editor",
     "editorPlaceholder": "Passo 2: editor (escala, rotação, perspectiva) — em breve.",
     "tabWall": "Parede",

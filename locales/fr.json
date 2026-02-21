@@ -90,6 +90,8 @@
     "permissionDenied": "L'accès à la galerie est nécessaire pour choisir des images.",
     "cameraPermissionDenied": "L'accès à la caméra est nécessaire pour prendre des photos.",
     "defaultDoodleName": "Mon doodle",
+    "nameYourDoodle": "Nom du doodle",
+    "doodleNamePlaceholder": "Ex. Esquisse mur nord",
     "editorTitle": "Éditeur",
     "editorPlaceholder": "Étape 2 : éditeur (échelle, rotation, perspective) — à venir.",
     "tabWall": "Mur",

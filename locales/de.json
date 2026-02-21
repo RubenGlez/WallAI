@@ -90,6 +90,8 @@
     "permissionDenied": "Galeriezugriff ist nötig, um Bilder zu wählen.",
     "cameraPermissionDenied": "Kamerazugriff ist nötig, um Fotos aufzunehmen.",
     "defaultDoodleName": "Mein Doodle",
+    "nameYourDoodle": "Doodle-Name",
+    "doodleNamePlaceholder": "z. B. Nordwand-Skizze",
     "editorTitle": "Editor",
     "editorPlaceholder": "Schritt 2: Editor (Skalierung, Rotation, Perspektive) — in Arbeit.",
     "tabWall": "Mauer",

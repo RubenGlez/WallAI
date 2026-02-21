@@ -90,6 +90,8 @@
     "permissionDenied": "Se necesita acceso a la galería para elegir imágenes.",
     "cameraPermissionDenied": "Se necesita acceso a la cámara para tomar fotos.",
     "defaultDoodleName": "Mi doodle",
+    "nameYourDoodle": "Nombre del doodle",
+    "doodleNamePlaceholder": "Ej. Boceto muro norte",
     "editorTitle": "Editor",
     "editorPlaceholder": "Paso 2: editor (escala, rotación, perspectiva) — en construcción.",
     "tabWall": "Muro",

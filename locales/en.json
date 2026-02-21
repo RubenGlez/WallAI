@@ -90,6 +90,8 @@
     "permissionDenied": "Gallery access is needed to pick images.",
     "cameraPermissionDenied": "Camera access is needed to take photos.",
     "defaultDoodleName": "My doodle",
+    "nameYourDoodle": "Doodle name",
+    "doodleNamePlaceholder": "E.g. North wall sketch",
     "editorTitle": "Editor",
     "editorPlaceholder": "Step 2: editor (scale, rotation, perspective) — coming soon.",
     "tabWall": "Wall",
