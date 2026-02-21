@@ -89,3 +89,22 @@ export interface Palette {
   colors: Color[];
   createdAt: string; // ISO date string for serialization
 }
+
+/** Doodle project — Tab Doodles, Pantalla 1: Mis Doodles (PRD entity) */
+export interface Doodle {
+  id: string;
+  /** Nombre del spot */
+  name: string;
+  /** Imagen del muro (fondo) */
+  wallImageUri?: string;
+  /** Imagen del boceto */
+  sketchImageUri?: string;
+  /** Miniatura combinada (preview o export) */
+  thumbnailUri?: string;
+  /** Datos de transformación (escala, rotación, perspectiva…) */
+  transformData?: Record<string, unknown>;
+  /** Imagen exportada (PNG final) */
+  exportImageUri?: string;
+  createdAt: string; // ISO date string for serialization
+  updatedAt: string;
+}

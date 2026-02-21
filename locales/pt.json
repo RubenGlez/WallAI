@@ -72,7 +72,29 @@
     "placeholder": "Explorador de sprays — em breve."
   },
   "doodles": {
-    "placeholder": "Simulador de peça na parede — em breve."
+    "placeholder": "Simulador de peça na parede — em breve.",
+    "myDoodles": "Meus Doodles",
+    "subtitle": "Projetos do simulador: parede e esboço sobrepostos.",
+    "newDoodle": "Novo doodle",
+    "emptyTitle": "Nenhum doodle",
+    "emptyHint": "Toque para criar seu primeiro projeto (parede + esboço).",
+    "createDoodle": "Criar doodle",
+    "editDoodle": "Editar doodle",
+    "createPlaceholder": "Passo 1: selecionar imagem da parede e do esboço — em breve.",
+    "step1Subtitle": "Escolha a foto da parede e o esboço que deseja sobrepor.",
+    "wallImage": "Imagem da parede",
+    "sketchImage": "Imagem do esboço",
+    "takePhoto": "Tirar foto",
+    "pickFromGallery": "Escolher da galeria",
+    "continue": "Continuar",
+    "permissionDenied": "É necessário acesso à galeria para escolher imagens.",
+    "cameraPermissionDenied": "É necessário acesso à câmera para tirar fotos.",
+    "defaultDoodleName": "Meu doodle",
+    "editorTitle": "Editor",
+    "editorPlaceholder": "Passo 2: editor (escala, rotação, perspectiva) — em breve.",
+    "tabWall": "Parede",
+    "tabSketch": "Esboço",
+    "replaceImage": "Substituir imagem"
   },
   "profile": {
     "placeholder": "Configurações e favoritos — em breve.",

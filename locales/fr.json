@@ -72,7 +72,29 @@
     "placeholder": "Explorateur de sprays — bientôt."
   },
   "doodles": {
-    "placeholder": "Simulateur de pièce sur mur — bientôt."
+    "placeholder": "Simulateur de pièce sur mur — bientôt.",
+    "myDoodles": "Mes Doodles",
+    "subtitle": "Projets simulateur : mur et croquis superposés.",
+    "newDoodle": "Nouveau doodle",
+    "emptyTitle": "Aucun doodle",
+    "emptyHint": "Appuie pour créer ton premier projet (mur + croquis).",
+    "createDoodle": "Créer un doodle",
+    "editDoodle": "Modifier le doodle",
+    "createPlaceholder": "Étape 1 : sélectionner l'image du mur et l'image du croquis — à venir.",
+    "step1Subtitle": "Choisis la photo du mur et le croquis à superposer.",
+    "wallImage": "Image du mur",
+    "sketchImage": "Image du croquis",
+    "takePhoto": "Prendre une photo",
+    "pickFromGallery": "Choisir dans la galerie",
+    "continue": "Continuer",
+    "permissionDenied": "L'accès à la galerie est nécessaire pour choisir des images.",
+    "cameraPermissionDenied": "L'accès à la caméra est nécessaire pour prendre des photos.",
+    "defaultDoodleName": "Mon doodle",
+    "editorTitle": "Éditeur",
+    "editorPlaceholder": "Étape 2 : éditeur (échelle, rotation, perspective) — à venir.",
+    "tabWall": "Mur",
+    "tabSketch": "Croquis",
+    "replaceImage": "Remplacer l'image"
   },
   "profile": {
     "placeholder": "Réglages et favoris — bientôt.",

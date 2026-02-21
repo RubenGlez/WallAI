@@ -72,7 +72,29 @@
     "placeholder": "Spray explorer — coming soon."
   },
   "doodles": {
-    "placeholder": "Wall piece simulator — coming soon."
+    "placeholder": "Wall piece simulator — coming soon.",
+    "myDoodles": "My Doodles",
+    "subtitle": "Simulator projects: wall and sketch overlaid.",
+    "newDoodle": "New doodle",
+    "emptyTitle": "No doodles",
+    "emptyHint": "Tap to create your first project (wall + sketch).",
+    "createDoodle": "Create doodle",
+    "editDoodle": "Edit doodle",
+    "createPlaceholder": "Step 1: select wall image and sketch image — coming soon.",
+    "step1Subtitle": "Pick the wall photo and the sketch you want to overlay.",
+    "wallImage": "Wall image",
+    "sketchImage": "Sketch image",
+    "takePhoto": "Take photo",
+    "pickFromGallery": "Pick from gallery",
+    "continue": "Continue",
+    "permissionDenied": "Gallery access is needed to pick images.",
+    "cameraPermissionDenied": "Camera access is needed to take photos.",
+    "defaultDoodleName": "My doodle",
+    "editorTitle": "Editor",
+    "editorPlaceholder": "Step 2: editor (scale, rotation, perspective) — coming soon.",
+    "tabWall": "Wall",
+    "tabSketch": "Sketch",
+    "replaceImage": "Replace image"
   },
   "profile": {
     "placeholder": "Settings and favorites — coming soon.",

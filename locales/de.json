@@ -72,7 +72,29 @@
     "placeholder": "Spray-Explorer — demnächst."
   },
   "doodles": {
-    "placeholder": "Wandstück-Simulator — demnächst."
+    "placeholder": "Wandstück-Simulator — demnächst.",
+    "myDoodles": "Meine Doodles",
+    "subtitle": "Simulator-Projekte: Mauer und Skizze überlagert.",
+    "newDoodle": "Neuer Doodle",
+    "emptyTitle": "Keine Doodles",
+    "emptyHint": "Tippe, um dein erstes Projekt (Mauer + Skizze) zu erstellen.",
+    "createDoodle": "Doodle erstellen",
+    "editDoodle": "Doodle bearbeiten",
+    "createPlaceholder": "Schritt 1: Mauerbild und Skizzenbild wählen — in Arbeit.",
+    "step1Subtitle": "Wähle das Mauerfoto und die Skizze zum Überlagern.",
+    "wallImage": "Mauerbild",
+    "sketchImage": "Skizzenbild",
+    "takePhoto": "Foto aufnehmen",
+    "pickFromGallery": "Aus Galerie wählen",
+    "continue": "Weiter",
+    "permissionDenied": "Galeriezugriff ist nötig, um Bilder zu wählen.",
+    "cameraPermissionDenied": "Kamerazugriff ist nötig, um Fotos aufzunehmen.",
+    "defaultDoodleName": "Mein Doodle",
+    "editorTitle": "Editor",
+    "editorPlaceholder": "Schritt 2: Editor (Skalierung, Rotation, Perspektive) — in Arbeit.",
+    "tabWall": "Mauer",
+    "tabSketch": "Skizze",
+    "replaceImage": "Bild ersetzen"
   },
   "profile": {
     "placeholder": "Einstellungen und Favoriten — demnächst.",

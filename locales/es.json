@@ -72,7 +72,29 @@
     "placeholder": "Explorador de sprays — próximamente."
   },
   "doodles": {
-    "placeholder": "Simulador de pieza en muro — próximamente."
+    "placeholder": "Simulador de pieza en muro — próximamente.",
+    "myDoodles": "Mis Doodles",
+    "subtitle": "Proyectos de simulador: muro y boceto superpuestos.",
+    "newDoodle": "Nuevo doodle",
+    "emptyTitle": "Ningún doodle",
+    "emptyHint": "Toca para crear tu primer proyecto (muro + boceto).",
+    "createDoodle": "Crear doodle",
+    "editDoodle": "Editar doodle",
+    "createPlaceholder": "Paso 1: selecciona imagen del muro e imagen del boceto — en construcción.",
+    "step1Subtitle": "Elige la foto del muro y el boceto que quieres superponer.",
+    "wallImage": "Imagen del muro",
+    "sketchImage": "Imagen del boceto",
+    "takePhoto": "Tomar foto",
+    "pickFromGallery": "Elegir de galería",
+    "continue": "Continuar",
+    "permissionDenied": "Se necesita acceso a la galería para elegir imágenes.",
+    "cameraPermissionDenied": "Se necesita acceso a la cámara para tomar fotos.",
+    "defaultDoodleName": "Mi doodle",
+    "editorTitle": "Editor",
+    "editorPlaceholder": "Paso 2: editor (escala, rotación, perspectiva) — en construcción.",
+    "tabWall": "Muro",
+    "tabSketch": "Boceto",
+    "replaceImage": "Cambiar imagen"
   },
   "profile": {
     "placeholder": "Ajustes y favoritos — próximamente.",
