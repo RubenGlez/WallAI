@@ -1,8 +1,10 @@
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import * as ImagePicker from "expo-image-picker";
 import { useRouter } from "expo-router";
-import React from "react";
+import React, { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
+  ActivityIndicator,
   Dimensions,
   ScrollView,
   StyleSheet,
@@ -121,12 +123,59 @@ export default function PalettesIndexScreen() {
   const theme = Colors[colorScheme];
   const palettes = usePalettesStore((s) => s.palettes);
 
+  const [importLoading, setImportLoading] = useState<"gallery" | "camera" | null>(
+    null,
+  );
+
   const handleCreateNew = () => {
     router.push("/(tabs)/palettes/create");
   };
-  const handleImportFromImage = () => {
-    router.push("/(tabs)/palettes/import");
-  };
+
+  const handleOpenGallery = useCallback(async () => {
+    const { status } =
+      await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (status !== "granted") {
+      return;
+    }
+    setImportLoading("gallery");
+    try {
+      const result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ["images"],
+        allowsEditing: false,
+        quality: 0.8,
+      });
+      if (!result.canceled && result.assets[0]) {
+        router.push({
+          pathname: "/(tabs)/palettes/import",
+          params: { imageUri: result.assets[0].uri },
+        });
+      }
+    } finally {
+      setImportLoading(null);
+    }
+  }, [router]);
+
+  const handleOpenCamera = useCallback(async () => {
+    const { status } = await ImagePicker.requestCameraPermissionsAsync();
+    if (status !== "granted") {
+      return;
+    }
+    setImportLoading("camera");
+    try {
+      const result = await ImagePicker.launchCameraAsync({
+        allowsEditing: false,
+        quality: 0.8,
+      });
+      if (!result.canceled && result.assets[0]) {
+        router.push({
+          pathname: "/(tabs)/palettes/import",
+          params: { imageUri: result.assets[0].uri },
+        });
+      }
+    } finally {
+      setImportLoading(null);
+    }
+  }, [router]);
 
   const fabBottom = Spacing.md;
 
@@ -198,9 +247,35 @@ export default function PalettesIndexScreen() {
             styles.fabSecondary,
             { backgroundColor: theme.card, borderColor: theme.border },
           ]}
-          onPress={handleImportFromImage}
-          accessibilityLabel={t("palettes.importFromImage")}
-          icon={<MaterialIcons name="image" size={24} color={theme.tint} />}
+          onPress={handleOpenGallery}
+          disabled={importLoading !== null}
+          accessibilityLabel={t("palettes.selectFromGallery")}
+          icon={
+            importLoading === "gallery" ? (
+              <ActivityIndicator size="small" color={theme.tint} />
+            ) : (
+              <MaterialIcons name="photo-library" size={24} color={theme.tint} />
+            )
+          }
+        />
+        <Button
+          variant="secondary"
+          size="icon"
+          style={[
+            styles.fab,
+            styles.fabSecondary,
+            { backgroundColor: theme.card, borderColor: theme.border },
+          ]}
+          onPress={handleOpenCamera}
+          disabled={importLoading !== null}
+          accessibilityLabel={t("palettes.takePhoto")}
+          icon={
+            importLoading === "camera" ? (
+              <ActivityIndicator size="small" color={theme.tint} />
+            ) : (
+              <MaterialIcons name="camera-alt" size={24} color={theme.tint} />
+            )
+          }
         />
         <Button
           variant="primary"

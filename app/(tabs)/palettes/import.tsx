@@ -1,5 +1,5 @@
 import { BottomSheetBackdrop, BottomSheetModal, BottomSheetScrollView } from '@gorhom/bottom-sheet';
-import { useNavigation, useRouter } from 'expo-router';
+import { useLocalSearchParams, useNavigation, useRouter } from 'expo-router';
 import * as ImagePicker from 'expo-image-picker';
 import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -31,6 +31,7 @@ import { usePalettesStore } from '@/stores/usePalettesStore';
 import type { Color } from '@/types';
 
 export default function ImportFromImageScreen() {
+  const { imageUri: imageUriParam } = useLocalSearchParams<{ imageUri?: string }>();
   const { t, i18n } = useTranslation();
   const router = useRouter();
   const colorScheme = useColorScheme() ?? 'light';
@@ -50,6 +51,7 @@ export default function ImportFromImageScreen() {
   const [paletteName, setPaletteName] = useState('');
   const seriesFilterSheetRef = useRef<BottomSheetModal>(null);
   const hasInitializedSeriesSelection = useRef(false);
+  const hasProcessedParamImage = useRef(false);
 
   /** Default: all series selected once catalog is available. */
   useEffect(() => {
@@ -88,6 +90,15 @@ export default function ImportFromImageScreen() {
     setSelectedSeriesIds(new Set(series.map((s) => s.id)));
     setSelectedCatalogColorByHex({});
   }, []);
+
+  /** When navigated with imageUri param (from FAB gallery/camera), process it and skip pick section. */
+  useEffect(() => {
+    if (!imageUriParam || hasProcessedParamImage.current) return;
+    hasProcessedParamImage.current = true;
+    setLoading(true);
+    setError(null);
+    processImageUri(imageUriParam).finally(() => setLoading(false));
+  }, [imageUriParam, processImageUri]);
 
   const pickImage = useCallback(async () => {
     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -289,7 +300,7 @@ export default function ImportFromImageScreen() {
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
-        {!hasImage && (
+        {!hasImage && !imageUriParam && (
           <View style={styles.pickSection}>
             <ThemedText style={[styles.pickSectionSubtitle, { color: theme.textSecondary }]}>
               {t('palettes.choosePhotoSubtitle')}
@@ -320,6 +331,12 @@ export default function ImportFromImageScreen() {
                 </Button>
               </View>
             )}
+          </View>
+        )}
+
+        {!hasImage && imageUriParam && loading && (
+          <View style={styles.pickLoadingWrap}>
+            <ActivityIndicator size="large" color={theme.tint} />
           </View>
         )}
 
