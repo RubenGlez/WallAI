@@ -95,9 +95,12 @@
     "tabWall": "Wall",
     "tabSketch": "Sketch",
     "replaceImage": "Replace image",
+    "toolbarSave": "Save",
     "toolbarReset": "Reset",
     "toolbarFlipH": "Flip H",
-    "toolbarFlipV": "Flip V"
+    "toolbarFlipV": "Flip V",
+    "toolbarOpacity": "Opacity",
+    "toolbarBack": "Back"
   },
   "profile": {
     "placeholder": "Settings and favorites — coming soon.",

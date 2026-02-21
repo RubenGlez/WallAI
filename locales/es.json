@@ -95,9 +95,12 @@
     "tabWall": "Muro",
     "tabSketch": "Boceto",
     "replaceImage": "Cambiar imagen",
+    "toolbarSave": "Guardar",
     "toolbarReset": "Restablecer",
     "toolbarFlipH": "Voltear H",
-    "toolbarFlipV": "Voltear V"
+    "toolbarFlipV": "Voltear V",
+    "toolbarOpacity": "Opacidad",
+    "toolbarBack": "Atrás"
   },
   "profile": {
     "placeholder": "Ajustes y favoritos — próximamente.",

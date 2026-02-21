@@ -95,9 +95,12 @@
     "tabWall": "Mur",
     "tabSketch": "Croquis",
     "replaceImage": "Remplacer l'image",
+    "toolbarSave": "Enregistrer",
     "toolbarReset": "Réinitialiser",
     "toolbarFlipH": "Retourner H",
-    "toolbarFlipV": "Retourner V"
+    "toolbarFlipV": "Retourner V",
+    "toolbarOpacity": "Opacité",
+    "toolbarBack": "Retour"
   },
   "profile": {
     "placeholder": "Réglages et favoris — bientôt.",

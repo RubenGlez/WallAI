@@ -1,5 +1,5 @@
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import { useLocalSearchParams } from 'expo-router';
+import { useLocalSearchParams, useRouter } from 'expo-router';
 import * as ImagePicker from 'expo-image-picker';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -37,6 +37,11 @@ const CONTENT_PADDING = Spacing.md;
 const CONTENT_HEIGHT = SCREEN_HEIGHT - TAB_BAR_HEIGHT - 120;
 const DEFAULT_SKETCH_OPACITY = 0.85;
 const DEFAULT_WALL_OPACITY = 1;
+const TOOLBAR_ICON_SIZE = 40;
+const TOOLBAR_GAP = Spacing.sm;
+const TOOLBAR_PILL_PADDING_H = Spacing.sm;
+const TOOLBAR_PILL_WIDTH =
+  2 * TOOLBAR_PILL_PADDING_H + 5 * TOOLBAR_ICON_SIZE + 4 * TOOLBAR_GAP;
 
 type ImageSlot = 'wall' | 'sketch';
 type TabId = 'muro' | 'boceto';
@@ -46,7 +51,10 @@ export default function DoodlesCreateScreen() {
   const params = useLocalSearchParams<{ doodleId?: string }>();
   const colorScheme = useColorScheme() ?? 'light';
   const theme = Colors[colorScheme];
+  const router = useRouter();
   const getDoodle = useDoodlesStore((s) => s.getDoodle);
+  const addDoodle = useDoodlesStore((s) => s.addDoodle);
+  const updateDoodle = useDoodlesStore((s) => s.updateDoodle);
 
   const [activeTab, setActiveTab] = useState<TabId>('muro');
   const [wallUri, setWallUri] = useState<string | null>(null);
@@ -155,6 +163,7 @@ export default function DoodlesCreateScreen() {
 
   const [wallOpacityAmount, setWallOpacityAmount] = useState(DEFAULT_WALL_OPACITY);
   const [sketchOpacityAmount, setSketchOpacityAmount] = useState(DEFAULT_SKETCH_OPACITY);
+  const [toolbarView, setToolbarView] = useState<'icons' | 'opacity'>('icons');
 
   const resetTransform = useCallback(() => {
     if (activeTab === 'muro') {
@@ -185,6 +194,48 @@ export default function DoodlesCreateScreen() {
       setSketchOpacityAmount(DEFAULT_SKETCH_OPACITY);
     }
   }, [activeTab, wallOffsetX, wallOffsetY, wallSavedOffsetX, wallSavedOffsetY, wallScale, wallSavedScale, wallRotation, wallSavedRotation, wallFlipX, wallFlipY, wallOpacity, sketchOffsetX, sketchOffsetY, sketchSavedOffsetX, sketchSavedOffsetY, sketchScale, sketchSavedScale, sketchRotation, sketchSavedRotation, sketchFlipX, sketchFlipY, sketchOpacity]);
+
+  const handleSave = useCallback(() => {
+    if (!wallUri || !sketchUri) return;
+    const transformData = {
+      wall: {
+        offsetX: wallOffsetX.value,
+        offsetY: wallOffsetY.value,
+        scale: wallScale.value,
+        rotation: wallRotation.value,
+        flipX: wallFlipX.value,
+        flipY: wallFlipY.value,
+        opacity: wallOpacity.value,
+      },
+      sketch: {
+        offsetX: sketchOffsetX.value,
+        offsetY: sketchOffsetY.value,
+        scale: sketchScale.value,
+        rotation: sketchRotation.value,
+        flipX: sketchFlipX.value,
+        flipY: sketchFlipY.value,
+        opacity: sketchOpacity.value,
+      },
+    };
+    if (doodleId) {
+      updateDoodle(doodleId, {
+        name: t('doodles.defaultDoodleName'),
+        wallImageUri: wallUri,
+        sketchImageUri: sketchUri,
+        transformData,
+      });
+    } else {
+      addDoodle({
+        name: t('doodles.defaultDoodleName'),
+        wallImageUri: wallUri,
+        sketchImageUri: sketchUri,
+        transformData,
+      });
+    }
+    router.back();
+  }, [wallUri, sketchUri, doodleId, t, addDoodle, updateDoodle, router,
+    wallOffsetX, wallOffsetY, wallScale, wallRotation, wallFlipX, wallFlipY, wallOpacity,
+    sketchOffsetX, sketchOffsetY, sketchScale, sketchRotation, sketchFlipX, sketchFlipY, sketchOpacity]);
 
   const contentArea = (() => {
     if (bothLoaded) {
@@ -365,52 +416,84 @@ export default function DoodlesCreateScreen() {
                 style={[
                   styles.toolbarPill,
                   {
+                    width: TOOLBAR_PILL_WIDTH,
                     backgroundColor: theme.card,
                     borderColor: theme.border,
                     shadowColor: theme.text,
                   },
                 ]}
               >
-                <TouchableOpacity
-                  style={[styles.toolbarBtn, { backgroundColor: theme.backgroundSecondary }]}
-                  onPress={resetTransform}
-                  accessibilityRole="button"
-                  accessibilityLabel={t('doodles.toolbarReset')}
-                >
-                  <MaterialIcons name="restart-alt" size={22} color={theme.tint} />
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={[styles.toolbarBtn, { backgroundColor: theme.backgroundSecondary }]}
-                  onPress={() => { activeFlipX.value = -activeFlipX.value; }}
-                  accessibilityRole="button"
-                  accessibilityLabel={t('doodles.toolbarFlipH')}
-                >
-                  <MaterialIcons name="flip" size={22} color={theme.tint} />
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={[styles.toolbarBtn, { backgroundColor: theme.backgroundSecondary }]}
-                  onPress={() => { activeFlipY.value = -activeFlipY.value; }}
-                  accessibilityRole="button"
-                  accessibilityLabel={t('doodles.toolbarFlipV')}
-                >
-                  <MaterialIcons name="flip" size={22} color={theme.tint} style={{ transform: [{ rotate: '90deg' }] }} />
-                </TouchableOpacity>
-                <View style={styles.toolbarOpacity}>
-                  <MaterialIcons name="opacity" size={20} color={theme.textSecondary} />
-                  <Slider
-                    style={styles.slider}
-                    minimumValue={0.1}
-                    maximumValue={1}
-                    value={activeOpacityAmount}
-                    onValueChange={(v) => {
-                      setActiveOpacityAmount(v);
-                      activeOpacity.value = v;
-                    }}
-                    minimumTrackTintColor={theme.tint}
-                    maximumTrackTintColor={theme.border}
-                    thumbTintColor={theme.tint}
-                  />
-                </View>
+                {toolbarView === 'icons' ? (
+                  <>
+                    <TouchableOpacity
+                      style={[styles.toolbarBtn, { backgroundColor: theme.tint }]}
+                      onPress={handleSave}
+                      accessibilityRole="button"
+                      accessibilityLabel={t('doodles.toolbarSave')}
+                    >
+                      <MaterialIcons name="save" size={22} color={theme.background} />
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      style={[styles.toolbarBtn, { backgroundColor: theme.backgroundSecondary }]}
+                      onPress={resetTransform}
+                      accessibilityRole="button"
+                      accessibilityLabel={t('doodles.toolbarReset')}
+                    >
+                      <MaterialIcons name="restart-alt" size={22} color={theme.tint} />
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      style={[styles.toolbarBtn, { backgroundColor: theme.backgroundSecondary }]}
+                      onPress={() => { activeFlipX.value = -activeFlipX.value; }}
+                      accessibilityRole="button"
+                      accessibilityLabel={t('doodles.toolbarFlipH')}
+                    >
+                      <MaterialIcons name="flip" size={22} color={theme.tint} />
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      style={[styles.toolbarBtn, { backgroundColor: theme.backgroundSecondary }]}
+                      onPress={() => { activeFlipY.value = -activeFlipY.value; }}
+                      accessibilityRole="button"
+                      accessibilityLabel={t('doodles.toolbarFlipV')}
+                    >
+                      <MaterialIcons name="flip" size={22} color={theme.tint} style={{ transform: [{ rotate: '90deg' }] }} />
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      style={[styles.toolbarBtn, { backgroundColor: theme.backgroundSecondary }]}
+                      onPress={() => setToolbarView('opacity')}
+                      accessibilityRole="button"
+                      accessibilityLabel={t('doodles.toolbarOpacity')}
+                    >
+                      <MaterialIcons name="opacity" size={22} color={theme.tint} />
+                    </TouchableOpacity>
+                  </>
+                ) : (
+                  <>
+                    <TouchableOpacity
+                      style={[styles.toolbarBtn, { backgroundColor: theme.backgroundSecondary }]}
+                      onPress={() => setToolbarView('icons')}
+                      accessibilityRole="button"
+                      accessibilityLabel={t('doodles.toolbarBack')}
+                    >
+                      <MaterialIcons name="arrow-back" size={22} color={theme.tint} />
+                    </TouchableOpacity>
+                    <View style={styles.toolbarOpacityRow}>
+                      <MaterialIcons name="opacity" size={20} color={theme.textSecondary} />
+                      <Slider
+                        style={styles.toolbarSlider}
+                        minimumValue={0.1}
+                        maximumValue={1}
+                        value={activeOpacityAmount}
+                        onValueChange={(v) => {
+                          setActiveOpacityAmount(v);
+                          activeOpacity.value = v;
+                        }}
+                        minimumTrackTintColor={theme.tint}
+                        maximumTrackTintColor={theme.border}
+                        thumbTintColor={theme.tint}
+                      />
+                    </View>
+                  </>
+                )}
               </View>
             </View>
           </View>
@@ -702,27 +785,29 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingVertical: Spacing.sm,
-    paddingHorizontal: Spacing.md,
+    paddingHorizontal: Spacing.sm,
     borderRadius: 9999,
     borderWidth: 1,
-    gap: Spacing.sm,
+    gap: TOOLBAR_GAP,
     ...Shadows.md,
   },
   toolbarBtn: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
+    width: TOOLBAR_ICON_SIZE,
+    height: TOOLBAR_ICON_SIZE,
+    borderRadius: TOOLBAR_ICON_SIZE / 2,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  toolbarOpacity: {
-    width: 100,
+  toolbarOpacityRow: {
+    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     gap: Spacing.xs,
+    minWidth: 0,
   },
-  slider: {
+  toolbarSlider: {
     flex: 1,
     height: 24,
+    minWidth: 60,
   },
 });

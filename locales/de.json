@@ -95,9 +95,12 @@
     "tabWall": "Mauer",
     "tabSketch": "Skizze",
     "replaceImage": "Bild ersetzen",
+    "toolbarSave": "Speichern",
     "toolbarReset": "Zurücksetzen",
     "toolbarFlipH": "H spiegeln",
-    "toolbarFlipV": "V spiegeln"
+    "toolbarFlipV": "V spiegeln",
+    "toolbarOpacity": "Deckkraft",
+    "toolbarBack": "Zurück"
   },
   "profile": {
     "placeholder": "Einstellungen und Favoriten — demnächst.",
