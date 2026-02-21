@@ -94,7 +94,10 @@
     "editorPlaceholder": "Paso 2: editor (escala, rotación, perspectiva) — en construcción.",
     "tabWall": "Muro",
     "tabSketch": "Boceto",
-    "replaceImage": "Cambiar imagen"
+    "replaceImage": "Cambiar imagen",
+    "toolbarReset": "Restablecer",
+    "toolbarFlipH": "Voltear H",
+    "toolbarFlipV": "Voltear V"
   },
   "profile": {
     "placeholder": "Ajustes y favoritos — próximamente.",

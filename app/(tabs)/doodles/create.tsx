@@ -1,7 +1,7 @@
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { useLocalSearchParams } from 'expo-router';
 import * as ImagePicker from 'expo-image-picker';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   ActivityIndicator,
@@ -11,6 +11,13 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import { Gesture, GestureDetector } from 'react-native-gesture-handler';
+import Animated, {
+  type SharedValue,
+  useAnimatedStyle,
+  useSharedValue,
+} from 'react-native-reanimated';
+import Slider from '@react-native-community/slider';
 
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
@@ -19,6 +26,7 @@ import {
   Colors,
   Spacing,
   Typography,
+  Shadows,
 } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { useDoodlesStore } from '@/stores/useDoodlesStore';
@@ -27,6 +35,8 @@ const { height: SCREEN_HEIGHT } = Dimensions.get('window');
 const TAB_BAR_HEIGHT = 48;
 const CONTENT_PADDING = Spacing.md;
 const CONTENT_HEIGHT = SCREEN_HEIGHT - TAB_BAR_HEIGHT - 120;
+const DEFAULT_SKETCH_OPACITY = 0.85;
+const DEFAULT_WALL_OPACITY = 1;
 
 type ImageSlot = 'wall' | 'sketch';
 type TabId = 'muro' | 'boceto';
@@ -119,19 +129,96 @@ export default function DoodlesCreateScreen() {
 
   const bothLoaded = Boolean(wallUri && sketchUri);
 
+  const wallOffsetX = useSharedValue(0);
+  const wallOffsetY = useSharedValue(0);
+  const wallSavedOffsetX = useSharedValue(0);
+  const wallSavedOffsetY = useSharedValue(0);
+  const wallScale = useSharedValue(1);
+  const wallSavedScale = useSharedValue(1);
+  const wallRotation = useSharedValue(0);
+  const wallSavedRotation = useSharedValue(0);
+  const wallFlipX = useSharedValue(1);
+  const wallFlipY = useSharedValue(1);
+  const wallOpacity = useSharedValue(DEFAULT_WALL_OPACITY);
+
+  const sketchOffsetX = useSharedValue(0);
+  const sketchOffsetY = useSharedValue(0);
+  const sketchSavedOffsetX = useSharedValue(0);
+  const sketchSavedOffsetY = useSharedValue(0);
+  const sketchScale = useSharedValue(1);
+  const sketchSavedScale = useSharedValue(1);
+  const sketchRotation = useSharedValue(0);
+  const sketchSavedRotation = useSharedValue(0);
+  const sketchFlipX = useSharedValue(1);
+  const sketchFlipY = useSharedValue(1);
+  const sketchOpacity = useSharedValue(DEFAULT_SKETCH_OPACITY);
+
+  const [wallOpacityAmount, setWallOpacityAmount] = useState(DEFAULT_WALL_OPACITY);
+  const [sketchOpacityAmount, setSketchOpacityAmount] = useState(DEFAULT_SKETCH_OPACITY);
+
+  const resetTransform = useCallback(() => {
+    if (activeTab === 'muro') {
+      wallOffsetX.value = 0;
+      wallOffsetY.value = 0;
+      wallSavedOffsetX.value = 0;
+      wallSavedOffsetY.value = 0;
+      wallScale.value = 1;
+      wallSavedScale.value = 1;
+      wallRotation.value = 0;
+      wallSavedRotation.value = 0;
+      wallFlipX.value = 1;
+      wallFlipY.value = 1;
+      wallOpacity.value = DEFAULT_WALL_OPACITY;
+      setWallOpacityAmount(DEFAULT_WALL_OPACITY);
+    } else {
+      sketchOffsetX.value = 0;
+      sketchOffsetY.value = 0;
+      sketchSavedOffsetX.value = 0;
+      sketchSavedOffsetY.value = 0;
+      sketchScale.value = 1;
+      sketchSavedScale.value = 1;
+      sketchRotation.value = 0;
+      sketchSavedRotation.value = 0;
+      sketchFlipX.value = 1;
+      sketchFlipY.value = 1;
+      sketchOpacity.value = DEFAULT_SKETCH_OPACITY;
+      setSketchOpacityAmount(DEFAULT_SKETCH_OPACITY);
+    }
+  }, [activeTab, wallOffsetX, wallOffsetY, wallSavedOffsetX, wallSavedOffsetY, wallScale, wallSavedScale, wallRotation, wallSavedRotation, wallFlipX, wallFlipY, wallOpacity, sketchOffsetX, sketchOffsetY, sketchSavedOffsetX, sketchSavedOffsetY, sketchScale, sketchSavedScale, sketchRotation, sketchSavedRotation, sketchFlipX, sketchFlipY, sketchOpacity]);
+
   const contentArea = (() => {
     if (bothLoaded) {
       return (
         <View style={styles.superpositionWrap}>
-          <Image
-            source={{ uri: wallUri! }}
-            style={styles.superpositionLayer}
-            resizeMode="contain"
+          <TransformableLayer
+            imageUri={wallUri!}
+            offsetX={wallOffsetX}
+            offsetY={wallOffsetY}
+            savedOffsetX={wallSavedOffsetX}
+            savedOffsetY={wallSavedOffsetY}
+            scale={wallScale}
+            savedScale={wallSavedScale}
+            rotation={wallRotation}
+            savedRotation={wallSavedRotation}
+            flipX={wallFlipX}
+            flipY={wallFlipY}
+            opacity={wallOpacity}
+            isActive={activeTab === 'muro'}
           />
-          <Image
-            source={{ uri: sketchUri! }}
-            style={[styles.superpositionLayer, styles.sketchLayer]}
-            resizeMode="contain"
+          <TransformableLayer
+            imageUri={sketchUri!}
+            offsetX={sketchOffsetX}
+            offsetY={sketchOffsetY}
+            savedOffsetX={sketchSavedOffsetX}
+            savedOffsetY={sketchSavedOffsetY}
+            scale={sketchScale}
+            savedScale={sketchSavedScale}
+            rotation={sketchRotation}
+            savedRotation={sketchSavedRotation}
+            flipX={sketchFlipX}
+            flipY={sketchFlipY}
+            opacity={sketchOpacity}
+            isActive={activeTab === 'boceto'}
           />
         </View>
       );
@@ -206,6 +293,13 @@ export default function DoodlesCreateScreen() {
     return null;
   })();
 
+  const isWallActive = activeTab === 'muro';
+  const activeFlipX = isWallActive ? wallFlipX : sketchFlipX;
+  const activeFlipY = isWallActive ? wallFlipY : sketchFlipY;
+  const activeOpacity = isWallActive ? wallOpacity : sketchOpacity;
+  const activeOpacityAmount = isWallActive ? wallOpacityAmount : sketchOpacityAmount;
+  const setActiveOpacityAmount = isWallActive ? setWallOpacityAmount : setSketchOpacityAmount;
+
   return (
     <ThemedView style={styles.container}>
       <View style={[styles.tabBar, { borderBottomColor: theme.border }]}>
@@ -260,7 +354,69 @@ export default function DoodlesCreateScreen() {
       </View>
 
       <View style={styles.content}>
-        {contentArea}
+        {bothLoaded ? (
+          <View style={styles.contentWithOverlay}>
+            {contentArea}
+            <View
+              style={[styles.toolbarFloatingWrap, { bottom: Spacing.sm }]}
+              pointerEvents="box-none"
+            >
+              <View
+                style={[
+                  styles.toolbarPill,
+                  {
+                    backgroundColor: theme.card,
+                    borderColor: theme.border,
+                    shadowColor: theme.text,
+                  },
+                ]}
+              >
+                <TouchableOpacity
+                  style={[styles.toolbarBtn, { backgroundColor: theme.backgroundSecondary }]}
+                  onPress={resetTransform}
+                  accessibilityRole="button"
+                  accessibilityLabel={t('doodles.toolbarReset')}
+                >
+                  <MaterialIcons name="restart-alt" size={22} color={theme.tint} />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={[styles.toolbarBtn, { backgroundColor: theme.backgroundSecondary }]}
+                  onPress={() => { activeFlipX.value = -activeFlipX.value; }}
+                  accessibilityRole="button"
+                  accessibilityLabel={t('doodles.toolbarFlipH')}
+                >
+                  <MaterialIcons name="flip" size={22} color={theme.tint} />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={[styles.toolbarBtn, { backgroundColor: theme.backgroundSecondary }]}
+                  onPress={() => { activeFlipY.value = -activeFlipY.value; }}
+                  accessibilityRole="button"
+                  accessibilityLabel={t('doodles.toolbarFlipV')}
+                >
+                  <MaterialIcons name="flip" size={22} color={theme.tint} style={{ transform: [{ rotate: '90deg' }] }} />
+                </TouchableOpacity>
+                <View style={styles.toolbarOpacity}>
+                  <MaterialIcons name="opacity" size={20} color={theme.textSecondary} />
+                  <Slider
+                    style={styles.slider}
+                    minimumValue={0.1}
+                    maximumValue={1}
+                    value={activeOpacityAmount}
+                    onValueChange={(v) => {
+                      setActiveOpacityAmount(v);
+                      activeOpacity.value = v;
+                    }}
+                    minimumTrackTintColor={theme.tint}
+                    maximumTrackTintColor={theme.border}
+                    thumbTintColor={theme.tint}
+                  />
+                </View>
+              </View>
+            </View>
+          </View>
+        ) : (
+          contentArea
+        )}
       </View>
 
       {error ? (
@@ -270,6 +426,109 @@ export default function DoodlesCreateScreen() {
       ) : null}
     </ThemedView>
   );
+}
+
+type TransformShared = {
+  offsetX: SharedValue<number>;
+  offsetY: SharedValue<number>;
+  savedOffsetX: SharedValue<number>;
+  savedOffsetY: SharedValue<number>;
+  scale: SharedValue<number>;
+  savedScale: SharedValue<number>;
+  rotation: SharedValue<number>;
+  savedRotation: SharedValue<number>;
+  flipX: SharedValue<number>;
+  flipY: SharedValue<number>;
+  opacity: SharedValue<number>;
+};
+
+function TransformableLayer({
+  imageUri,
+  offsetX,
+  offsetY,
+  savedOffsetX,
+  savedOffsetY,
+  scale,
+  savedScale,
+  rotation,
+  savedRotation,
+  flipX,
+  flipY,
+  opacity,
+  isActive,
+}: { imageUri: string; isActive: boolean } & TransformShared) {
+  const panGesture = useMemo(
+    () =>
+      Gesture.Pan()
+        .onUpdate((e) => {
+          offsetX.value = savedOffsetX.value + e.translationX;
+          offsetY.value = savedOffsetY.value + e.translationY;
+        })
+        .onEnd(() => {
+          savedOffsetX.value = offsetX.value;
+          savedOffsetY.value = offsetY.value;
+        }),
+    [offsetX, offsetY, savedOffsetX, savedOffsetY]
+  );
+
+  const pinchGesture = useMemo(
+    () =>
+      Gesture.Pinch()
+        .onChange((e) => {
+          scale.value = scale.value * e.scaleChange;
+        })
+        .onEnd(() => {
+          savedScale.value = scale.value;
+        }),
+    [scale, savedScale]
+  );
+
+  const rotationGesture = useMemo(
+    () =>
+      Gesture.Rotation()
+        .onChange((e) => {
+          rotation.value = rotation.value + e.rotationChange;
+        })
+        .onEnd(() => {
+          savedRotation.value = rotation.value;
+        }),
+    [rotation, savedRotation]
+  );
+
+  const composed = useMemo(
+    () => Gesture.Simultaneous(panGesture, pinchGesture, rotationGesture),
+    [panGesture, pinchGesture, rotationGesture]
+  );
+
+  const animatedStyle = useAnimatedStyle(() => ({
+    position: 'absolute' as const,
+    width: '100%',
+    height: '100%',
+    opacity: opacity.value,
+    transform: [
+      { translateX: offsetX.value },
+      { translateY: offsetY.value },
+      { scale: scale.value },
+      { scaleX: flipX.value },
+      { scaleY: flipY.value },
+      { rotate: `${rotation.value}rad` },
+    ],
+  }));
+
+  const content = (
+    <Animated.View style={[styles.superpositionLayer, animatedStyle]} pointerEvents="box-none">
+      <Image
+        source={{ uri: imageUri }}
+        style={StyleSheet.absoluteFillObject}
+        resizeMode="contain"
+      />
+    </Animated.View>
+  );
+
+  if (isActive) {
+    return <GestureDetector gesture={composed}>{content}</GestureDetector>;
+  }
+  return content;
 }
 
 function PlaceholderSlot({
@@ -355,7 +614,7 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     padding: CONTENT_PADDING,
-    minHeight: CONTENT_HEIGHT,
+    minHeight: 0,
   },
   placeholderWrap: {
     flex: 1,
@@ -428,5 +687,42 @@ const styles = StyleSheet.create({
   },
   error: {
     fontSize: Typography.fontSize.sm,
+  },
+  contentWithOverlay: {
+    flex: 1,
+    position: 'relative',
+  },
+  toolbarFloatingWrap: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    alignItems: 'center',
+  },
+  toolbarPill: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: Spacing.sm,
+    paddingHorizontal: Spacing.md,
+    borderRadius: 9999,
+    borderWidth: 1,
+    gap: Spacing.sm,
+    ...Shadows.md,
+  },
+  toolbarBtn: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  toolbarOpacity: {
+    width: 100,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.xs,
+  },
+  slider: {
+    flex: 1,
+    height: 24,
   },
 });

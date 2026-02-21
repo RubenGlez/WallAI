@@ -94,7 +94,10 @@
     "editorPlaceholder": "Step 2: editor (scale, rotation, perspective) — coming soon.",
     "tabWall": "Wall",
     "tabSketch": "Sketch",
-    "replaceImage": "Replace image"
+    "replaceImage": "Replace image",
+    "toolbarReset": "Reset",
+    "toolbarFlipH": "Flip H",
+    "toolbarFlipV": "Flip V"
   },
   "profile": {
     "placeholder": "Settings and favorites — coming soon.",

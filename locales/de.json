@@ -94,7 +94,10 @@
     "editorPlaceholder": "Schritt 2: Editor (Skalierung, Rotation, Perspektive) — in Arbeit.",
     "tabWall": "Mauer",
     "tabSketch": "Skizze",
-    "replaceImage": "Bild ersetzen"
+    "replaceImage": "Bild ersetzen",
+    "toolbarReset": "Zurücksetzen",
+    "toolbarFlipH": "H spiegeln",
+    "toolbarFlipV": "V spiegeln"
   },
   "profile": {
     "placeholder": "Einstellungen und Favoriten — demnächst.",

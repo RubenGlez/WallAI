@@ -94,7 +94,10 @@
     "editorPlaceholder": "Passo 2: editor (escala, rotação, perspectiva) — em breve.",
     "tabWall": "Parede",
     "tabSketch": "Esboço",
-    "replaceImage": "Substituir imagem"
+    "replaceImage": "Substituir imagem",
+    "toolbarReset": "Redefinir",
+    "toolbarFlipH": "Virar H",
+    "toolbarFlipV": "Virar V"
   },
   "profile": {
     "placeholder": "Configurações e favoritos — em breve.",

@@ -94,7 +94,10 @@
     "editorPlaceholder": "Étape 2 : éditeur (échelle, rotation, perspective) — à venir.",
     "tabWall": "Mur",
     "tabSketch": "Croquis",
-    "replaceImage": "Remplacer l'image"
+    "replaceImage": "Remplacer l'image",
+    "toolbarReset": "Réinitialiser",
+    "toolbarFlipH": "Retourner H",
+    "toolbarFlipV": "Retourner V"
   },
   "profile": {
     "placeholder": "Réglages et favoris — bientôt.",
