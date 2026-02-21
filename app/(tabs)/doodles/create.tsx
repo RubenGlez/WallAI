@@ -1,5 +1,4 @@
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import Slider from "@react-native-community/slider";
 import * as ImagePicker from "expo-image-picker";
 import { useLocalSearchParams, useNavigation, useRouter } from "expo-router";
 import React, {
@@ -10,16 +9,7 @@ import React, {
   useState,
 } from "react";
 import { useTranslation } from "react-i18next";
-import {
-  Image,
-  KeyboardAvoidingView,
-  Modal,
-  Platform,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Image, StyleSheet, View } from "react-native";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import Animated, {
   type SharedValue,
@@ -28,30 +18,21 @@ import Animated, {
 } from "react-native-reanimated";
 
 import { Button } from "@/components/button";
+import { Tabs } from "@/components/tabs";
 import { ThemedText } from "@/components/themed-text";
+import { SaveNameModal } from "@/components/save-name-modal";
 import { ThemedView } from "@/components/themed-view";
-import {
-  BorderRadius,
-  Colors,
-  Shadows,
-  Spacing,
-  Typography,
-} from "@/constants/theme";
+import { TransformToolbar } from "@/components/transform-toolbar";
+import { BorderRadius, Colors, Spacing, Typography } from "@/constants/theme";
 import { useColorScheme } from "@/hooks/use-color-scheme";
 import { useDoodlesStore } from "@/stores/useDoodlesStore";
 
-const TAB_BAR_HEIGHT = 48;
 const CONTENT_PADDING = Spacing.md;
 const DEFAULT_SKETCH_OPACITY = 0.85;
 const DEFAULT_WALL_OPACITY = 1;
-const TOOLBAR_ICON_SIZE = 40;
-const TOOLBAR_GAP = Spacing.sm;
-const TOOLBAR_PILL_PADDING_H = Spacing.sm;
-const TOOLBAR_PILL_WIDTH =
-  2 * TOOLBAR_PILL_PADDING_H + 5 * TOOLBAR_ICON_SIZE + 4 * TOOLBAR_GAP;
 
 type ImageSlot = "wall" | "sketch";
-type TabId = "muro" | "boceto";
+type TabId = "wall" | "sketch";
 
 export default function DoodlesCreateScreen() {
   const { t } = useTranslation();
@@ -64,7 +45,7 @@ export default function DoodlesCreateScreen() {
   const addDoodle = useDoodlesStore((s) => s.addDoodle);
   const updateDoodle = useDoodlesStore((s) => s.updateDoodle);
 
-  const [activeTab, setActiveTab] = useState<TabId>("muro");
+  const [activeTab, setActiveTab] = useState<TabId>("wall");
   const [wallUri, setWallUri] = useState<string | null>(null);
   const [sketchUri, setSketchUri] = useState<string | null>(null);
   const [loading, setLoading] = useState<ImageSlot | null>(null);
@@ -196,7 +177,7 @@ export default function DoodlesCreateScreen() {
   const [doodleName, setDoodleName] = useState("");
 
   const resetTransform = useCallback(() => {
-    if (activeTab === "muro") {
+    if (activeTab === "wall") {
       wallOffsetX.value = 0;
       wallOffsetY.value = 0;
       wallSavedOffsetX.value = 0;
@@ -338,7 +319,7 @@ export default function DoodlesCreateScreen() {
             flipX={wallFlipX}
             flipY={wallFlipY}
             opacity={wallOpacity}
-            isActive={activeTab === "muro"}
+            isActive={activeTab === "wall"}
           />
           <TransformableLayer
             imageUri={sketchUri!}
@@ -353,13 +334,13 @@ export default function DoodlesCreateScreen() {
             flipX={sketchFlipX}
             flipY={sketchFlipY}
             opacity={sketchOpacity}
-            isActive={activeTab === "boceto"}
+            isActive={activeTab === "sketch"}
           />
         </View>
       );
     }
 
-    if (activeTab === "muro") {
+    if (activeTab === "wall") {
       if (!wallUri) {
         return (
           <PlaceholderSlot
@@ -395,7 +376,7 @@ export default function DoodlesCreateScreen() {
       );
     }
 
-    if (activeTab === "boceto") {
+    if (activeTab === "sketch") {
       if (!sketchUri) {
         return (
           <PlaceholderSlot
@@ -434,7 +415,7 @@ export default function DoodlesCreateScreen() {
     return null;
   })();
 
-  const isWallActive = activeTab === "muro";
+  const isWallActive = activeTab === "wall";
   const activeFlipX = isWallActive ? wallFlipX : sketchFlipX;
   const activeFlipY = isWallActive ? wallFlipY : sketchFlipY;
   const activeOpacity = isWallActive ? wallOpacity : sketchOpacity;
@@ -447,207 +428,65 @@ export default function DoodlesCreateScreen() {
 
   return (
     <ThemedView style={styles.container} safeArea="bottom">
-      <View style={[styles.tabBar, { borderBottomColor: theme.border }]}>
-        <TouchableOpacity
-          style={[
-            styles.tab,
-            activeTab === "muro" && {
-              borderBottomColor: theme.tint,
-              borderBottomWidth: 2,
-            },
-          ]}
-          onPress={() => setActiveTab("muro")}
-          accessibilityRole="tab"
-          accessibilityState={{ selected: activeTab === "muro" }}
-          accessibilityLabel={t("doodles.wallImage")}
-        >
-          <MaterialIcons
-            name="wallpaper"
-            size={20}
-            color={activeTab === "muro" ? theme.tint : theme.textSecondary}
-          />
-          <ThemedText
-            style={[
-              styles.tabLabel,
-              {
-                color: activeTab === "muro" ? theme.tint : theme.textSecondary,
-              },
-            ]}
-          >
-            {t("doodles.tabWall")}
-          </ThemedText>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[
-            styles.tab,
-            activeTab === "boceto" && {
-              borderBottomColor: theme.tint,
-              borderBottomWidth: 2,
-            },
-          ]}
-          onPress={() => setActiveTab("boceto")}
-          accessibilityRole="tab"
-          accessibilityState={{ selected: activeTab === "boceto" }}
-          accessibilityLabel={t("doodles.sketchImage")}
-        >
-          <MaterialIcons
-            name="brush"
-            size={20}
-            color={activeTab === "boceto" ? theme.tint : theme.textSecondary}
-          />
-          <ThemedText
-            style={[
-              styles.tabLabel,
-              {
-                color:
-                  activeTab === "boceto" ? theme.tint : theme.textSecondary,
-              },
-            ]}
-          >
-            {t("doodles.tabSketch")}
-          </ThemedText>
-        </TouchableOpacity>
-      </View>
+      <Tabs
+        value={activeTab}
+        onChange={(v) => setActiveTab(v as TabId)}
+        tabs={[
+          {
+            value: "wall",
+            label: t("doodles.tabWall"),
+            renderIcon: (selected) => (
+              <MaterialIcons
+                name="wallpaper"
+                size={20}
+                color={selected ? theme.tint : theme.textSecondary}
+              />
+            ),
+          },
+          {
+            value: "sketch",
+            label: t("doodles.tabSketch"),
+            renderIcon: (selected) => (
+              <MaterialIcons
+                name="brush"
+                size={20}
+                color={selected ? theme.tint : theme.textSecondary}
+              />
+            ),
+          },
+        ]}
+      />
 
       <View style={styles.content}>
         {bothLoaded ? (
           <View style={styles.contentWithOverlay}>
             {contentArea}
-            <View
-              style={[styles.toolbarFloatingWrap, { bottom: Spacing.sm }]}
-              pointerEvents="box-none"
-            >
-              <View
-                style={[
-                  styles.toolbarPill,
-                  {
-                    width: TOOLBAR_PILL_WIDTH,
-                    backgroundColor: theme.card,
-                    borderColor: theme.border,
-                    shadowColor: theme.text,
-                  },
-                ]}
-              >
-                {toolbarView === "icons" ? (
-                  <>
-                    <TouchableOpacity
-                      style={[
-                        styles.toolbarBtn,
-                        { backgroundColor: theme.tint },
-                      ]}
-                      onPress={openSaveModal}
-                      accessibilityRole="button"
-                      accessibilityLabel={t("doodles.toolbarSave")}
-                    >
-                      <MaterialIcons
-                        name="save"
-                        size={22}
-                        color={theme.background}
-                      />
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      style={[
-                        styles.toolbarBtn,
-                        { backgroundColor: theme.backgroundSecondary },
-                      ]}
-                      onPress={resetTransform}
-                      accessibilityRole="button"
-                      accessibilityLabel={t("doodles.toolbarReset")}
-                    >
-                      <MaterialIcons
-                        name="restart-alt"
-                        size={22}
-                        color={theme.tint}
-                      />
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      style={[
-                        styles.toolbarBtn,
-                        { backgroundColor: theme.backgroundSecondary },
-                      ]}
-                      onPress={() => {
-                        activeFlipX.value = -activeFlipX.value;
-                      }}
-                      accessibilityRole="button"
-                      accessibilityLabel={t("doodles.toolbarFlipH")}
-                    >
-                      <MaterialIcons name="flip" size={22} color={theme.tint} />
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      style={[
-                        styles.toolbarBtn,
-                        { backgroundColor: theme.backgroundSecondary },
-                      ]}
-                      onPress={() => {
-                        activeFlipY.value = -activeFlipY.value;
-                      }}
-                      accessibilityRole="button"
-                      accessibilityLabel={t("doodles.toolbarFlipV")}
-                    >
-                      <MaterialIcons
-                        name="flip"
-                        size={22}
-                        color={theme.tint}
-                        style={{ transform: [{ rotate: "90deg" }] }}
-                      />
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      style={[
-                        styles.toolbarBtn,
-                        { backgroundColor: theme.backgroundSecondary },
-                      ]}
-                      onPress={() => setToolbarView("opacity")}
-                      accessibilityRole="button"
-                      accessibilityLabel={t("doodles.toolbarOpacity")}
-                    >
-                      <MaterialIcons
-                        name="opacity"
-                        size={22}
-                        color={theme.tint}
-                      />
-                    </TouchableOpacity>
-                  </>
-                ) : (
-                  <>
-                    <TouchableOpacity
-                      style={[
-                        styles.toolbarBtn,
-                        { backgroundColor: theme.backgroundSecondary },
-                      ]}
-                      onPress={() => setToolbarView("icons")}
-                      accessibilityRole="button"
-                      accessibilityLabel={t("doodles.toolbarBack")}
-                    >
-                      <MaterialIcons
-                        name="arrow-back"
-                        size={22}
-                        color={theme.tint}
-                      />
-                    </TouchableOpacity>
-                    <View style={styles.toolbarOpacityRow}>
-                      <MaterialIcons
-                        name="opacity"
-                        size={20}
-                        color={theme.textSecondary}
-                      />
-                      <Slider
-                        style={styles.toolbarSlider}
-                        minimumValue={0.1}
-                        maximumValue={1}
-                        value={activeOpacityAmount}
-                        onValueChange={(v) => {
-                          setActiveOpacityAmount(v);
-                          activeOpacity.value = v;
-                        }}
-                        minimumTrackTintColor={theme.tint}
-                        maximumTrackTintColor={theme.border}
-                        thumbTintColor={theme.tint}
-                      />
-                    </View>
-                  </>
-                )}
-              </View>
-            </View>
+            <TransformToolbar
+              view={toolbarView}
+              onViewChange={setToolbarView}
+              onSave={openSaveModal}
+              onReset={resetTransform}
+              onFlipH={() => {
+                activeFlipX.value = -activeFlipX.value;
+              }}
+              onFlipV={() => {
+                activeFlipY.value = -activeFlipY.value;
+              }}
+              opacityValue={activeOpacityAmount}
+              onOpacityChange={(v) => {
+                setActiveOpacityAmount(v);
+                activeOpacity.value = v;
+              }}
+              bottom={Spacing.sm}
+              labels={{
+                save: t("doodles.toolbarSave"),
+                reset: t("doodles.toolbarReset"),
+                flipH: t("doodles.toolbarFlipH"),
+                flipV: t("doodles.toolbarFlipV"),
+                opacity: t("doodles.toolbarOpacity"),
+                back: t("doodles.toolbarBack"),
+              }}
+            />
           </View>
         ) : (
           contentArea
@@ -662,60 +501,18 @@ export default function DoodlesCreateScreen() {
         </View>
       ) : null}
 
-      <Modal
+      <SaveNameModal
         visible={showNameModal}
-        transparent
-        animationType="fade"
         onRequestClose={() => setShowNameModal(false)}
-      >
-        <KeyboardAvoidingView
-          behavior={Platform.OS === "ios" ? "padding" : undefined}
-          style={styles.modalOverlay}
-        >
-          <TouchableOpacity
-            style={styles.modalBackdrop}
-            activeOpacity={1}
-            onPress={() => setShowNameModal(false)}
-          />
-          <View
-            style={[
-              styles.modalCard,
-              { backgroundColor: theme.card, borderColor: theme.border },
-            ]}
-          >
-            <ThemedText style={styles.modalTitle}>
-              {t("doodles.nameYourDoodle")}
-            </ThemedText>
-            <TextInput
-              style={[
-                styles.nameInput,
-                {
-                  backgroundColor: theme.backgroundSecondary,
-                  borderColor: theme.border,
-                  color: theme.text,
-                },
-              ]}
-              placeholder={t("doodles.doodleNamePlaceholder")}
-              placeholderTextColor={theme.textSecondary}
-              value={doodleName}
-              onChangeText={setDoodleName}
-              autoFocus
-            />
-            <View style={styles.modalActions}>
-              <Button
-                variant="outline"
-                size="md"
-                onPress={() => setShowNameModal(false)}
-              >
-                {t("common.cancel")}
-              </Button>
-              <Button variant="primary" size="md" onPress={handleConfirmSave}>
-                {t("common.save")}
-              </Button>
-            </View>
-          </View>
-        </KeyboardAvoidingView>
-      </Modal>
+        title={t("doodles.nameYourDoodle")}
+        placeholder={t("doodles.doodleNamePlaceholder")}
+        value={doodleName}
+        onChangeText={setDoodleName}
+        onCancel={() => setShowNameModal(false)}
+        onConfirm={handleConfirmSave}
+        cancelLabel={t("common.cancel")}
+        saveLabel={t("common.save")}
+      />
     </ThemedView>
   );
 }
@@ -899,23 +696,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  tabBar: {
-    flexDirection: "row",
-    height: TAB_BAR_HEIGHT,
-    borderBottomWidth: 1,
-    paddingHorizontal: Spacing.sm,
-  },
-  tab: {
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: Spacing.xs,
-  },
-  tabLabel: {
-    fontSize: Typography.fontSize.sm,
-    fontWeight: Typography.fontWeight.semibold,
-  },
   content: {
     flex: 1,
     padding: CONTENT_PADDING,
@@ -989,73 +769,5 @@ const styles = StyleSheet.create({
   contentWithOverlay: {
     flex: 1,
     position: "relative",
-  },
-  toolbarFloatingWrap: {
-    position: "absolute",
-    left: 0,
-    right: 0,
-    alignItems: "center",
-  },
-  toolbarPill: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingVertical: Spacing.sm,
-    paddingHorizontal: Spacing.sm,
-    borderRadius: 9999,
-    borderWidth: 1,
-    gap: TOOLBAR_GAP,
-    ...Shadows.md,
-  },
-  toolbarBtn: {
-    width: TOOLBAR_ICON_SIZE,
-    height: TOOLBAR_ICON_SIZE,
-    borderRadius: TOOLBAR_ICON_SIZE / 2,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  toolbarOpacityRow: {
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-    gap: Spacing.xs,
-    minWidth: 0,
-  },
-  toolbarSlider: {
-    flex: 1,
-    height: 24,
-    minWidth: 60,
-  },
-  modalOverlay: {
-    flex: 1,
-    justifyContent: "center",
-    padding: Spacing.lg,
-  },
-  modalBackdrop: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: "rgba(0,0,0,0.5)",
-  },
-  modalCard: {
-    borderRadius: BorderRadius.lg,
-    borderWidth: 1,
-    padding: Spacing.lg,
-    zIndex: 1,
-  },
-  modalTitle: {
-    fontSize: Typography.fontSize.lg,
-    fontWeight: Typography.fontWeight.semibold,
-    marginBottom: Spacing.md,
-  },
-  nameInput: {
-    height: 44,
-    paddingHorizontal: Spacing.md,
-    borderRadius: BorderRadius.md,
-    borderWidth: 1,
-    fontSize: Typography.fontSize.md,
-    marginBottom: Spacing.lg,
-  },
-  modalActions: {
-    flexDirection: "row",
-    gap: Spacing.sm,
-    justifyContent: "flex-end",
   },
 });

@@ -1,5 +1,6 @@
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useRouter } from "expo-router";
+import { useTranslation } from "react-i18next";
 import { TouchableOpacity } from "react-native";
 
 import { Spacing } from "@/constants/theme";
@@ -13,13 +14,14 @@ const HEADER_BUTTON = {
 
 export function HeaderBackButton() {
   const router = useRouter();
+  const { t } = useTranslation();
   const tint = useThemeColor({}, "tint");
   return (
     <TouchableOpacity
       onPress={() => router.back()}
       style={[HEADER_BUTTON, { paddingRight: Spacing.sm, paddingVertical: Spacing.sm }]}
       accessibilityRole="button"
-      accessibilityLabel="Volver"
+      accessibilityLabel={t("common.back")}
     >
       <MaterialIcons name="arrow-back" size={24} color={tint} />
     </TouchableOpacity>

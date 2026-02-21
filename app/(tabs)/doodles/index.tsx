@@ -54,6 +54,7 @@ function DoodleCard({
   doodle: Doodle;
   onPress: () => void;
 }) {
+  const { t } = useTranslation();
   const colorScheme = useColorScheme() ?? 'light';
   const theme = Colors[colorScheme];
   const thumbnailUri =
@@ -86,7 +87,7 @@ function DoodleCard({
         )}
       </View>
       <ThemedText style={styles.cardTitle} numberOfLines={1}>
-        {doodle.name || 'Sin nombre'}
+        {doodle.name || t('common.untitled')}
       </ThemedText>
       <ThemedText style={[styles.cardDate, { color: theme.textSecondary }]}>
         {formatDoodleDate(doodle.createdAt)}

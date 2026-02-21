@@ -6,12 +6,8 @@ import { useTranslation } from 'react-i18next';
 import {
   ActivityIndicator,
   Image,
-  KeyboardAvoidingView,
-  Modal,
-  Platform,
   ScrollView,
   StyleSheet,
-  TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
@@ -19,10 +15,12 @@ import { getColors } from 'react-native-image-colors';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 import { Button } from '@/components/button';
+import { SaveNameModal } from '@/components/save-name-modal';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { BorderRadius, Colors, Spacing, Typography } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
+import { getColorDisplayName } from '@/lib/color';
 import { extractHexPalette, findClosestColors } from '@/lib/colorMatch';
 import {
   getColorsBySeriesId,
@@ -31,16 +29,6 @@ import {
 } from '@/stores/useCatalogStore';
 import { usePalettesStore } from '@/stores/usePalettesStore';
 import type { Color } from '@/types';
-
-function getColorDisplayName(color: Color, language: string): string {
-  const lang = language.split('-')[0];
-  const names = color.name;
-  if (!names || typeof names !== 'object') return color.code;
-  const forLang = names[lang as keyof typeof names];
-  if (forLang) return forLang;
-  const first = Object.values(names)[0];
-  return typeof first === 'string' ? first : color.code;
-}
 
 export default function ImportFromImageScreen() {
   const { t, i18n } = useTranslation();
@@ -475,49 +463,18 @@ export default function ImportFromImageScreen() {
         )}
       </ScrollView>
 
-      <Modal
+      <SaveNameModal
         visible={showNameModal}
-        transparent
-        animationType="fade"
         onRequestClose={() => setShowNameModal(false)}
-      >
-        <KeyboardAvoidingView
-          behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-          style={styles.modalOverlay}
-        >
-          <TouchableOpacity
-            style={styles.modalBackdrop}
-            activeOpacity={1}
-            onPress={() => setShowNameModal(false)}
-          />
-          <View style={[styles.modalCard, { backgroundColor: theme.card, borderColor: theme.border }]}>
-            <ThemedText style={styles.modalTitle}>{t('palettes.nameYourPalette')}</ThemedText>
-            <TextInput
-              style={[
-                styles.nameInput,
-                {
-                  backgroundColor: theme.backgroundSecondary,
-                  borderColor: theme.border,
-                  color: theme.text,
-                },
-              ]}
-              placeholder={t('palettes.paletteNamePlaceholder')}
-              placeholderTextColor={theme.textSecondary}
-              value={paletteName}
-              onChangeText={setPaletteName}
-              autoFocus
-            />
-            <View style={styles.modalActions}>
-              <Button variant="outline" size="md" onPress={() => setShowNameModal(false)}>
-                {t('common.cancel')}
-              </Button>
-              <Button variant="primary" size="md" onPress={handleConfirmSave}>
-                {t('common.save')}
-              </Button>
-            </View>
-          </View>
-        </KeyboardAvoidingView>
-      </Modal>
+        title={t('palettes.nameYourPalette')}
+        placeholder={t('palettes.paletteNamePlaceholder')}
+        value={paletteName}
+        onChangeText={setPaletteName}
+        onCancel={() => setShowNameModal(false)}
+        onConfirm={handleConfirmSave}
+        cancelLabel={t('common.cancel')}
+        saveLabel={t('common.save')}
+      />
     </ThemedView>
   );
 }
@@ -696,38 +653,5 @@ const styles = StyleSheet.create({
   footerActions: {
     marginTop: Spacing.lg,
     gap: Spacing.sm,
-  },
-  modalOverlay: {
-    flex: 1,
-    justifyContent: 'center',
-    padding: Spacing.lg,
-  },
-  modalBackdrop: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(0,0,0,0.5)',
-  },
-  modalCard: {
-    borderRadius: BorderRadius.lg,
-    borderWidth: 1,
-    padding: Spacing.lg,
-    zIndex: 1,
-  },
-  modalTitle: {
-    fontSize: Typography.fontSize.lg,
-    fontWeight: Typography.fontWeight.semibold,
-    marginBottom: Spacing.md,
-  },
-  nameInput: {
-    height: 44,
-    paddingHorizontal: Spacing.md,
-    borderRadius: BorderRadius.md,
-    borderWidth: 1,
-    fontSize: Typography.fontSize.md,
-    marginBottom: Spacing.lg,
-  },
-  modalActions: {
-    flexDirection: 'row',
-    gap: Spacing.sm,
-    justifyContent: 'flex-end',
   },
 });

@@ -5,7 +5,7 @@ export type LanguageCode = "en" | "es" | "de" | "fr" | "pt";
 
 // --- PRD entities ---
 
-/** Brand entity — Pantalla 1: Selección de marca */
+/** Brand entity — Screen 1: Brand selection */
 export interface Brand {
   id: string;
   name: string;
@@ -20,32 +20,32 @@ export type PressureType = "low" | "high" | "mixed";
 /** Finish type (matte, gloss, metallic, etc.) */
 export type FinishType = "matte" | "gloss" | "metallic" | "other";
 
-/** Series entity — Pantalla 2: Series de la marca */
+/** Series entity — Screen 2: Brand series */
 export interface Series {
   id: string;
   name: string;
   brandId: string;
   description?: string;
-  /** mate, brillo, metalizado… */
+  /** matte, gloss, metallic, etc. */
   finishType?: FinishType;
   /** low pressure, high pressure, etc. */
   pressureType?: PressureType;
 }
 
-/** Series with computed color count (for Pantalla 2) */
+/** Series with computed color count (for Screen 2) */
 export interface SeriesWithCount extends Series {
   colorCount: number;
 }
 
-/** Color entity — Pantalla 3/4: Grid y detalle */
+/** Color entity — Screen 3/4: Grid and detail */
 export interface Color {
   id: string;
   seriesId: string;
   hex: string;
   code: string;
-  /** Traducciones por código de idioma (es, en, de, fr, pt) */
+  /** Translations by language code (es, en, de, fr, pt) */
   name: Partial<Record<LanguageCode, string>>;
-  /** null hasta que exista script generador desde hex */
+  /** null until hex-to-Lab generator exists */
   lab?: { l: number; a: number; b: number } | null;
 }
 
@@ -76,12 +76,12 @@ export interface Project {
   updatedAt: Date;
 }
 
-/** Brand with computed total color count (for Pantalla 1) */
+/** Brand with computed total color count (for Screen 1) */
 export interface BrandWithCount extends Brand {
   colorCount: number;
 }
 
-/** User-created palette — Tab Paletas, Pantalla 1 */
+/** User-created palette — Palettes tab, Screen 1 */
 export interface Palette {
   id: string;
   name: string;
@@ -90,20 +90,20 @@ export interface Palette {
   createdAt: string; // ISO date string for serialization
 }
 
-/** Doodle project — Tab Doodles, Pantalla 1: Mis Doodles (PRD entity) */
+/** Doodle project — Doodles tab, Screen 1 (PRD entity) */
 export interface Doodle {
   id: string;
-  /** Nombre del spot */
+  /** Project/spot name */
   name: string;
-  /** Imagen del muro (fondo) */
+  /** Wall image (background) */
   wallImageUri?: string;
-  /** Imagen del boceto */
+  /** Sketch image */
   sketchImageUri?: string;
-  /** Miniatura combinada (preview o export) */
+  /** Combined thumbnail (preview or export) */
   thumbnailUri?: string;
-  /** Datos de transformación (escala, rotación, perspectiva…) */
+  /** Transform data (scale, rotation, perspective, etc.) */
   transformData?: Record<string, unknown>;
-  /** Imagen exportada (PNG final) */
+  /** Exported image (final PNG) */
   exportImageUri?: string;
   createdAt: string; // ISO date string for serialization
   updatedAt: string;

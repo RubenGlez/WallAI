@@ -4,9 +4,10 @@ import React, { useCallback, useLayoutEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
 
+import { Button } from "@/components/button";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
-import { BorderRadius, Colors, Spacing, Typography } from "@/constants/theme";
+import { Colors, Spacing, Typography } from "@/constants/theme";
 import { useColorScheme } from "@/hooks/use-color-scheme";
 import {
   getAllSeriesWithCount,
@@ -109,21 +110,15 @@ export default function CreatePaletteSelectScreen() {
       </ScrollView>
 
       <View style={[styles.footer, { backgroundColor: theme.background }]}>
-        <TouchableOpacity
-          style={[
-            styles.continueButton,
-            { backgroundColor: theme.tint },
-            !canContinue && styles.continueButtonDisabled,
-          ]}
+        <Button
+          variant="primary"
+          size="lg"
+          fullWidth
           onPress={handleContinue}
           disabled={!canContinue}
         >
-          <ThemedText
-            style={[styles.continueButtonText, { color: theme.background }]}
-          >
-            {t("palettes.continue")}
-          </ThemedText>
-        </TouchableOpacity>
+          {t("palettes.continue")}
+        </Button>
       </View>
     </ThemedView>
   );
@@ -168,17 +163,5 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.md,
     paddingTop: Spacing.md,
     paddingBottom: Spacing.lg,
-  },
-  continueButton: {
-    paddingVertical: Spacing.md,
-    borderRadius: BorderRadius.md,
-    alignItems: "center",
-  },
-  continueButtonDisabled: {
-    opacity: 0.5,
-  },
-  continueButtonText: {
-    fontSize: Typography.fontSize.md,
-    fontWeight: Typography.fontWeight.semibold,
   },
 });

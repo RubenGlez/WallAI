@@ -26,6 +26,7 @@ import { ThemedView } from "@/components/themed-view";
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { BorderRadius, Colors, Spacing, Typography } from "@/constants/theme";
 import { useColorScheme } from "@/hooks/use-color-scheme";
+import { getColorDisplayName } from "@/lib/color";
 import {
   getBrandById,
   getColorsBySeriesId,
@@ -41,16 +42,6 @@ const HORIZONTAL_PADDING = Spacing.md;
 const CARD_WIDTH =
   (width - HORIZONTAL_PADDING * 2 - GAP * (NUM_COLUMNS - 1)) / NUM_COLUMNS;
 const SWATCH_SIZE = CARD_WIDTH;
-
-function getColorDisplayName(color: Color, language: string): string {
-  const lang = language.split("-")[0];
-  const names = color.name;
-  if (!names || typeof names !== "object") return color.code;
-  const forLang = names[lang as keyof typeof names];
-  if (forLang) return forLang;
-  const first = Object.values(names)[0];
-  return typeof first === "string" ? first : color.code;
-}
 
 export default function ColorGridScreen() {
   const { seriesId } = useLocalSearchParams<{ seriesId: string }>();
@@ -135,12 +126,12 @@ export default function ColorGridScreen() {
       setDetailParams({
         color: item,
         displayName: getColorDisplayName(item, i18n.language),
-        brandName: brand?.name ?? "—",
-        seriesName: s?.name ?? "—",
+        brandName: brand?.name ?? t("common.notAvailable"),
+        seriesName: s?.name ?? t("common.notAvailable"),
       });
       detailSheetRef.current?.present();
     },
-    [i18n.language],
+    [i18n.language, t],
   );
 
   const renderItem = useCallback(

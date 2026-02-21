@@ -11,46 +11,33 @@ import React, {
 import { useTranslation } from "react-i18next";
 import {
   Alert,
-  Dimensions,
   FlatList,
-  KeyboardAvoidingView,
-  Modal,
-  Platform,
   StyleSheet,
   Switch,
-  TextInput,
-  TouchableOpacity,
   View,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { Button } from "@/components/button";
 import { ColorGridCard } from "@/components/color-grid-card";
+import { ColorSearchInput } from "@/components/color-search-input";
+import { SaveNameModal } from "@/components/save-name-modal";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
-import { BorderRadius, Colors, Spacing, Typography } from "@/constants/theme";
+import { COLOR_GRID } from "@/constants/color-grid";
+import { Colors, Spacing, Typography } from "@/constants/theme";
 import { useColorScheme } from "@/hooks/use-color-scheme";
+import {
+  filterColorsBySearch,
+  getColorDisplayName,
+  getColorsForSeriesIds,
+} from "@/lib/color";
 import { getColorsBySeriesId } from "@/stores/useCatalogStore";
 import { usePalettesStore } from "@/stores/usePalettesStore";
 import type { Color } from "@/types";
 
-const { width } = Dimensions.get("window");
-const NUM_COLUMNS = 3;
-const GAP = Spacing.sm;
-const HORIZONTAL_PADDING = Spacing.md;
-const CARD_WIDTH =
-  (width - HORIZONTAL_PADDING * 2 - GAP * (NUM_COLUMNS - 1)) / NUM_COLUMNS;
-const SWATCH_SIZE = CARD_WIDTH;
-
-function getColorDisplayName(color: Color, language: string): string {
-  const lang = language.split("-")[0];
-  const names = color.name;
-  if (!names || typeof names !== "object") return color.code;
-  const forLang = names[lang as keyof typeof names];
-  if (forLang) return forLang;
-  const first = Object.values(names)[0];
-  return typeof first === "string" ? first : color.code;
-}
+const { NUM_COLUMNS, GAP, HORIZONTAL_PADDING, CARD_WIDTH, SWATCH_SIZE } =
+  COLOR_GRID;
 
 export default function CreatePaletteExploreScreen() {
   const { seriesIds, initialColorIds, paletteId } = useLocalSearchParams<{
@@ -74,20 +61,10 @@ export default function CreatePaletteExploreScreen() {
     [seriesIds],
   );
 
-  const allColors = useMemo(() => {
-    const seen = new Set<string>();
-    const out: Color[] = [];
-    for (const sid of seriesIdList) {
-      const colors = getColorsBySeriesId(sid);
-      for (const c of colors) {
-        if (!seen.has(c.id)) {
-          seen.add(c.id);
-          out.push(c);
-        }
-      }
-    }
-    return out;
-  }, [seriesIdList]);
+  const allColors = useMemo(
+    () => getColorsForSeriesIds(seriesIdList, getColorsBySeriesId),
+    [seriesIdList]
+  );
 
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedColors, setSelectedColors] = useState<Color[]>([]);
@@ -148,34 +125,21 @@ export default function CreatePaletteExploreScreen() {
     };
   }, [navigation, t, paletteId, getPalette, handleDeletePalette, theme.tint]);
 
-  const filteredColors = useMemo(() => {
-    if (!searchQuery.trim()) return allColors;
-    const q = searchQuery.trim().toLowerCase();
-    return allColors.filter((c) => {
-      const name = getColorDisplayName(c, i18n.language);
-      return c.code.toLowerCase().includes(q) || name.toLowerCase().includes(q);
-    });
-  }, [allColors, searchQuery, i18n.language]);
+  const filteredColors = useMemo(
+    () => filterColorsBySearch(allColors, searchQuery, i18n.language),
+    [allColors, searchQuery, i18n.language]
+  );
 
   const listData = useMemo(() => {
     if (showOnlySelected && selectedColors.length > 0) {
-      if (!searchQuery.trim()) return selectedColors;
-      const q = searchQuery.trim().toLowerCase();
-      return selectedColors.filter((c) => {
-        const name = getColorDisplayName(c, i18n.language);
-        return (
-          c.code.toLowerCase().includes(q) || name.toLowerCase().includes(q)
-        );
-      });
+      return filterColorsBySearch(
+        selectedColors,
+        searchQuery,
+        i18n.language
+      );
     }
     return filteredColors;
-  }, [
-    showOnlySelected,
-    selectedColors,
-    filteredColors,
-    searchQuery,
-    i18n.language,
-  ]);
+  }, [showOnlySelected, selectedColors, filteredColors, searchQuery, i18n.language]);
 
   const selectedIds = useMemo(
     () => new Set(selectedColors.map((c) => c.id)),
@@ -245,33 +209,12 @@ export default function CreatePaletteExploreScreen() {
 
   return (
     <ThemedView style={styles.container}>
-      <View style={styles.searchWrap}>
-        <TextInput
-          style={[
-            styles.searchInput,
-            {
-              backgroundColor: theme.backgroundSecondary,
-              borderColor: theme.border,
-              color: theme.text,
-            },
-          ]}
-          placeholder={t("colors.searchPlaceholder")}
-          placeholderTextColor={theme.textSecondary}
-          value={searchQuery}
-          onChangeText={setSearchQuery}
-          returnKeyType="search"
-        />
-        {searchQuery.length > 0 && (
-          <Button
-            variant="ghost"
-            size="icon"
-            style={styles.searchClearBtn}
-            onPress={() => setSearchQuery("")}
-            accessibilityLabel={t("common.clear")}
-            icon={<MaterialIcons name="cancel" size={22} color={theme.textSecondary} />}
-          />
-        )}
-      </View>
+      <ColorSearchInput
+        value={searchQuery}
+        onChangeText={setSearchQuery}
+        placeholder={t("colors.searchPlaceholder")}
+        clearAccessibilityLabel={t("common.clear")}
+      />
 
       <FlatList
         data={listData}
@@ -319,64 +262,18 @@ export default function CreatePaletteExploreScreen() {
         </View>
       </View>
 
-      <Modal
+      <SaveNameModal
         visible={showNameModal}
-        transparent
-        animationType="fade"
         onRequestClose={() => setShowNameModal(false)}
-      >
-        <KeyboardAvoidingView
-          behavior={Platform.OS === "ios" ? "padding" : undefined}
-          style={styles.modalOverlay}
-        >
-          <TouchableOpacity
-            style={styles.modalBackdrop}
-            activeOpacity={1}
-            onPress={() => setShowNameModal(false)}
-          />
-          <View
-            style={[
-              styles.modalCard,
-              { backgroundColor: theme.card, borderColor: theme.border },
-            ]}
-          >
-            <ThemedText style={styles.modalTitle}>
-              {t("palettes.nameYourPalette")}
-            </ThemedText>
-            <TextInput
-              style={[
-                styles.nameInput,
-                {
-                  backgroundColor: theme.backgroundSecondary,
-                  borderColor: theme.border,
-                  color: theme.text,
-                },
-              ]}
-              placeholder={t("palettes.paletteNamePlaceholder")}
-              placeholderTextColor={theme.textSecondary}
-              value={paletteName}
-              onChangeText={setPaletteName}
-              autoFocus
-            />
-            <View style={styles.modalActions}>
-              <Button
-                variant="outline"
-                size="md"
-                onPress={() => setShowNameModal(false)}
-              >
-                {t("common.cancel")}
-              </Button>
-              <Button
-                variant="primary"
-                size="md"
-                onPress={handleConfirmSave}
-              >
-                {t("common.save")}
-              </Button>
-            </View>
-          </View>
-        </KeyboardAvoidingView>
-      </Modal>
+        title={t("palettes.nameYourPalette")}
+        placeholder={t("palettes.paletteNamePlaceholder")}
+        value={paletteName}
+        onChangeText={setPaletteName}
+        onCancel={() => setShowNameModal(false)}
+        onConfirm={handleConfirmSave}
+        cancelLabel={t("common.cancel")}
+        saveLabel={t("common.save")}
+      />
     </ThemedView>
   );
 }
@@ -385,26 +282,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: HORIZONTAL_PADDING,
-  },
-  searchWrap: {
-    position: "relative",
-    marginBottom: Spacing.md,
-  },
-  searchInput: {
-    height: 44,
-    paddingHorizontal: Spacing.md,
-    paddingRight: 44,
-    borderRadius: BorderRadius.md,
-    borderWidth: 1,
-    fontSize: Typography.fontSize.md,
-  },
-  searchClearBtn: {
-    position: "absolute",
-    right: Spacing.sm,
-    top: 0,
-    bottom: 0,
-    justifyContent: "center",
-    padding: Spacing.xs,
   },
   listContent: {
     paddingTop: GAP,
@@ -435,38 +312,5 @@ const styles = StyleSheet.create({
   },
   switchLabel: {
     fontSize: Typography.fontSize.sm,
-  },
-  modalOverlay: {
-    flex: 1,
-    justifyContent: "center",
-    padding: Spacing.lg,
-  },
-  modalBackdrop: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: "rgba(0,0,0,0.5)",
-  },
-  modalCard: {
-    borderRadius: BorderRadius.lg,
-    borderWidth: 1,
-    padding: Spacing.lg,
-    zIndex: 1,
-  },
-  modalTitle: {
-    fontSize: Typography.fontSize.lg,
-    fontWeight: Typography.fontWeight.semibold,
-    marginBottom: Spacing.md,
-  },
-  nameInput: {
-    height: 44,
-    paddingHorizontal: Spacing.md,
-    borderRadius: BorderRadius.md,
-    borderWidth: 1,
-    fontSize: Typography.fontSize.md,
-    marginBottom: Spacing.lg,
-  },
-  modalActions: {
-    flexDirection: "row",
-    gap: Spacing.sm,
-    justifyContent: "flex-end",
   },
 });

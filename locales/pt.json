@@ -5,6 +5,7 @@
     "close": "Fechar",
     "cancel": "Cancelar",
     "save": "Salvar",
+    "back": "Voltar",
     "delete": "Excluir",
     "edit": "Editar",
     "add": "Adicionar",
@@ -12,6 +13,8 @@
     "clear": "Limpar",
     "all": "Todos",
     "unknown": "Desconhecido",
+    "notAvailable": "—",
+    "untitled": "Sem título",
     "create": "Criar"
   },
   "tabs": {

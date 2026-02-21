@@ -43,6 +43,7 @@ function PaletteCard({
   palette: Palette;
   onPress: () => void;
 }) {
+  const { t } = useTranslation();
   const colorScheme = useColorScheme() ?? "light";
   const theme = Colors[colorScheme];
   const swatches = palette.colors.slice(0, SWATCHES_TO_SHOW) as Color[];
@@ -107,7 +108,7 @@ function PaletteCard({
         )}
       </View>
       <ThemedText style={styles.cardTitle} numberOfLines={1}>
-        {palette.name || "Sin nombre"}
+        {palette.name || t("common.untitled")}
       </ThemedText>
     </TouchableOpacity>
   );

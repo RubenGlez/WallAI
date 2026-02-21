@@ -9,13 +9,7 @@ import React, {
   useState,
 } from "react";
 import { useTranslation } from "react-i18next";
-import {
-  Dimensions,
-  FlatList,
-  StyleSheet,
-  TextInput,
-  View,
-} from "react-native";
+import { FlatList, StyleSheet, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import {
@@ -29,10 +23,17 @@ import {
   SeriesSelectBottomSheet,
   type SeriesSelectBottomSheetRef,
 } from "@/components/series-select-bottom-sheet";
+import { ColorSearchInput } from "@/components/color-search-input";
 import { ThemedView } from "@/components/themed-view";
 import { IconSymbol } from "@/components/ui/icon-symbol";
-import { BorderRadius, Colors, Spacing, Typography } from "@/constants/theme";
+import { COLOR_GRID } from "@/constants/color-grid";
+import { Colors, Spacing } from "@/constants/theme";
 import { useColorScheme } from "@/hooks/use-color-scheme";
+import {
+  getColorsForSeriesIds,
+  getColorDisplayName,
+  filterColorsBySearch,
+} from "@/lib/color";
 import {
   getAllSeriesWithCount,
   getBrandById,
@@ -42,23 +43,7 @@ import {
 import { useFavoritesStore } from "@/stores/useFavoritesStore";
 import type { Color } from "@/types";
 
-const { width } = Dimensions.get("window");
-const NUM_COLUMNS = 3;
-const GAP = Spacing.sm;
-const HORIZONTAL_PADDING = Spacing.md;
-const CARD_WIDTH =
-  (width - HORIZONTAL_PADDING * 2 - GAP * (NUM_COLUMNS - 1)) / NUM_COLUMNS;
-const SWATCH_SIZE = CARD_WIDTH;
-
-function getColorDisplayName(color: Color, language: string): string {
-  const lang = language.split("-")[0];
-  const names = color.name;
-  if (!names || typeof names !== "object") return color.code;
-  const forLang = names[lang as keyof typeof names];
-  if (forLang) return forLang;
-  const first = Object.values(names)[0];
-  return typeof first === "string" ? first : color.code;
-}
+const { NUM_COLUMNS, GAP, CARD_WIDTH, SWATCH_SIZE } = COLOR_GRID;
 
 export default function ColorsOverviewScreen() {
   const navigation = useNavigation();
@@ -90,13 +75,11 @@ export default function ColorsOverviewScreen() {
     });
   }, []);
 
-  const allColors = useMemo(() => {
-    const out: Color[] = [];
-    for (const seriesId of selectedSeriesIds) {
-      out.push(...getColorsBySeriesId(seriesId));
-    }
-    return out;
-  }, [selectedSeriesIds]);
+  const allColors = useMemo(
+    () =>
+      getColorsForSeriesIds([...selectedSeriesIds], getColorsBySeriesId),
+    [selectedSeriesIds]
+  );
 
   const [searchQuery, setSearchQuery] = useState("");
   const [showOnlyFavorites, setShowOnlyFavorites] = useState(false);
@@ -113,12 +96,7 @@ export default function ColorsOverviewScreen() {
     if (showOnlyFavorites) {
       list = list.filter((c) => favoriteColorIds.includes(c.id));
     }
-    if (!searchQuery.trim()) return list;
-    const q = searchQuery.trim().toLowerCase();
-    return list.filter((c) => {
-      const name = getColorDisplayName(c, i18n.language);
-      return c.code.toLowerCase().includes(q) || name.toLowerCase().includes(q);
-    });
+    return filterColorsBySearch(list, searchQuery, i18n.language);
   }, [
     allColors,
     searchQuery,
@@ -182,12 +160,12 @@ export default function ColorsOverviewScreen() {
       setDetailParams({
         color: item,
         displayName: getColorDisplayName(item, i18n.language),
-        brandName: brand?.name ?? "—",
-        seriesName: s?.name ?? "—",
+        brandName: brand?.name ?? t("common.notAvailable"),
+        seriesName: s?.name ?? t("common.notAvailable"),
       });
       detailSheetRef.current?.present();
     },
-    [i18n.language],
+    [i18n.language, t],
   );
 
   const renderItem = useCallback(
@@ -234,39 +212,12 @@ export default function ColorsOverviewScreen() {
         onToggleSeries={toggleSeriesSelection}
       />
 
-      <View style={styles.searchWrap}>
-        <TextInput
-          style={[
-            styles.searchInput,
-            {
-              backgroundColor: theme.backgroundSecondary,
-              borderColor: theme.border,
-              color: theme.text,
-            },
-          ]}
-          placeholder={t("colors.searchPlaceholder")}
-          placeholderTextColor={theme.textSecondary}
-          value={searchQuery}
-          onChangeText={setSearchQuery}
-          returnKeyType="search"
-        />
-        {searchQuery.length > 0 && (
-          <Button
-            variant="ghost"
-            size="icon"
-            style={styles.searchClearBtn}
-            onPress={() => setSearchQuery("")}
-            accessibilityLabel={t("common.clear")}
-            icon={
-              <IconSymbol
-                name="xmark.circle.fill"
-                size={22}
-                color={theme.textSecondary}
-              />
-            }
-          />
-        )}
-      </View>
+      <ColorSearchInput
+        value={searchQuery}
+        onChangeText={setSearchQuery}
+        placeholder={t("colors.searchPlaceholder")}
+        clearAccessibilityLabel={t("common.clear")}
+      />
 
       <FlatList
         data={filteredColors}
@@ -284,31 +235,11 @@ export default function ColorsOverviewScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: HORIZONTAL_PADDING,
+    paddingHorizontal: COLOR_GRID.HORIZONTAL_PADDING,
   },
   headerRightRow: {
     flexDirection: "row",
     alignItems: "center",
-  },
-  searchWrap: {
-    position: "relative",
-    marginBottom: Spacing.md,
-  },
-  searchInput: {
-    height: 44,
-    paddingHorizontal: Spacing.md,
-    paddingRight: 44,
-    borderRadius: BorderRadius.md,
-    borderWidth: 1,
-    fontSize: Typography.fontSize.md,
-  },
-  searchClearBtn: {
-    position: "absolute",
-    right: Spacing.sm,
-    top: 0,
-    bottom: 0,
-    justifyContent: "center",
-    padding: Spacing.xs,
   },
   listContent: {
     paddingTop: GAP,
