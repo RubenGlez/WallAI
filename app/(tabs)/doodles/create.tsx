@@ -34,6 +34,33 @@ const DEFAULT_WALL_OPACITY = 1;
 type ImageSlot = "wall" | "sketch";
 type TabId = "wall" | "sketch";
 
+/** Shape we persist for each layer (wall/sketch) — must match handleConfirmSave */
+type LayerTransformData = {
+  offsetX: number;
+  offsetY: number;
+  scale: number;
+  rotation: number;
+  flipX: number;
+  flipY: number;
+  opacity: number;
+};
+
+function isLayerTransformData(
+  v: unknown,
+): v is LayerTransformData {
+  return (
+    typeof v === "object" &&
+    v !== null &&
+    "offsetX" in v &&
+    "offsetY" in v &&
+    "scale" in v &&
+    "rotation" in v &&
+    "flipX" in v &&
+    "flipY" in v &&
+    "opacity" in v
+  );
+}
+
 export default function DoodlesCreateScreen() {
   const { t } = useTranslation();
   const params = useLocalSearchParams<{ doodleId?: string }>();
@@ -206,6 +233,71 @@ export default function DoodlesCreateScreen() {
     }
   }, [
     activeTab,
+    wallOffsetX,
+    wallOffsetY,
+    wallSavedOffsetX,
+    wallSavedOffsetY,
+    wallScale,
+    wallSavedScale,
+    wallRotation,
+    wallSavedRotation,
+    wallFlipX,
+    wallFlipY,
+    wallOpacity,
+    sketchOffsetX,
+    sketchOffsetY,
+    sketchSavedOffsetX,
+    sketchSavedOffsetY,
+    sketchScale,
+    sketchSavedScale,
+    sketchRotation,
+    sketchSavedRotation,
+    sketchFlipX,
+    sketchFlipY,
+    sketchOpacity,
+  ]);
+
+  // Restore saved transform when editing an existing doodle
+  useEffect(() => {
+    if (!doodleId) return;
+    const doodle = getDoodle(doodleId);
+    const raw = doodle?.transformData as
+      | { wall?: unknown; sketch?: unknown }
+      | undefined;
+    if (!raw?.wall || !raw?.sketch) return;
+    if (!isLayerTransformData(raw.wall) || !isLayerTransformData(raw.sketch))
+      return;
+
+    const w = raw.wall;
+    wallOffsetX.value = w.offsetX;
+    wallOffsetY.value = w.offsetY;
+    wallSavedOffsetX.value = w.offsetX;
+    wallSavedOffsetY.value = w.offsetY;
+    wallScale.value = w.scale;
+    wallSavedScale.value = w.scale;
+    wallRotation.value = w.rotation;
+    wallSavedRotation.value = w.rotation;
+    wallFlipX.value = w.flipX;
+    wallFlipY.value = w.flipY;
+    wallOpacity.value = w.opacity;
+    setWallOpacityAmount(w.opacity);
+
+    const s = raw.sketch;
+    sketchOffsetX.value = s.offsetX;
+    sketchOffsetY.value = s.offsetY;
+    sketchSavedOffsetX.value = s.offsetX;
+    sketchSavedOffsetY.value = s.offsetY;
+    sketchScale.value = s.scale;
+    sketchSavedScale.value = s.scale;
+    sketchRotation.value = s.rotation;
+    sketchSavedRotation.value = s.rotation;
+    sketchFlipX.value = s.flipX;
+    sketchFlipY.value = s.flipY;
+    sketchOpacity.value = s.opacity;
+    setSketchOpacityAmount(s.opacity);
+  }, [
+    doodleId,
+    getDoodle,
     wallOffsetX,
     wallOffsetY,
     wallSavedOffsetX,
