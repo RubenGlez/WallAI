@@ -1,6 +1,6 @@
 import { BottomSheetBackdrop, BottomSheetModal } from '@gorhom/bottom-sheet';
 import { useLocalSearchParams, useNavigation } from 'expo-router';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   Dimensions,
@@ -71,14 +71,10 @@ export default function ColorGridScreen() {
     });
   }, [allColors, searchQuery, showOnlyFavorites, favoriteColorIds, i18n.language]);
 
-  useEffect(() => {
-    if (series) {
-      navigation.setOptions({ title: series.name });
-    }
-  }, [series, navigation]);
-
-  useEffect(() => {
+  useLayoutEffect(() => {
+    navigation.getParent()?.setOptions({ tabBarStyle: { display: 'none' } });
     navigation.setOptions({
+      ...(series ? { title: series.name } : {}),
       headerRight: () => (
         <TouchableOpacity
           onPress={() => setShowOnlyFavorites((s) => !s)}
@@ -96,7 +92,10 @@ export default function ColorGridScreen() {
         </TouchableOpacity>
       ),
     });
-  }, [navigation, showOnlyFavorites, theme.tint, theme.icon, t]);
+    return () => {
+      navigation.getParent()?.setOptions({ tabBarStyle: undefined });
+    };
+  }, [navigation, series, showOnlyFavorites, theme.tint, theme.icon, t]);
 
   const toggleFavorite = useFavoritesStore((s) => s.toggleFavorite);
 

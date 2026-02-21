@@ -22,6 +22,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { ColorGridCard } from "@/components/color-grid-card";
 import { ThemedText } from "@/components/themed-text";
@@ -61,6 +62,7 @@ export default function CreatePaletteExploreScreen() {
   const { t, i18n } = useTranslation();
   const colorScheme = useColorScheme() ?? "light";
   const theme = Colors[colorScheme];
+  const insets = useSafeAreaInsets();
   const addPalette = usePalettesStore((s) => s.addPalette);
   const updatePalette = usePalettesStore((s) => s.updatePalette);
   const getPalette = usePalettesStore((s) => s.getPalette);
@@ -121,6 +123,7 @@ export default function CreatePaletteExploreScreen() {
   }, [paletteId, removePalette, router, t]);
 
   useLayoutEffect(() => {
+    navigation.getParent()?.setOptions({ tabBarStyle: { display: "none" } });
     const palette = paletteId ? getPalette(paletteId) : undefined;
     const title = palette?.name?.trim() || t("palettes.exploreColorsTitle");
     navigation.setOptions({
@@ -144,6 +147,9 @@ export default function CreatePaletteExploreScreen() {
           }
         : {}),
     });
+    return () => {
+      navigation.getParent()?.setOptions({ tabBarStyle: undefined });
+    };
   }, [navigation, t, paletteId, getPalette, handleDeletePalette, theme.tint]);
 
   const filteredColors = useMemo(() => {
@@ -281,7 +287,11 @@ export default function CreatePaletteExploreScreen() {
       <View
         style={[
           styles.footer,
-          { backgroundColor: theme.background, borderTopColor: theme.border },
+          {
+            backgroundColor: theme.background,
+            borderTopColor: theme.border,
+            paddingBottom: Spacing.md + insets.bottom,
+          },
         ]}
       >
         <View style={styles.footerActionsRow}>

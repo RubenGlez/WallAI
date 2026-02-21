@@ -1,11 +1,11 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
-import { useTranslation } from 'react-i18next';
+import { Tabs } from "expo-router";
+import React from "react";
+import { useTranslation } from "react-i18next";
 
-import { HapticTab } from '@/components/haptic-tab';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Colors } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
+import { HapticTab } from "@/components/haptic-tab";
+import { IconSymbol } from "@/components/ui/icon-symbol";
+import { Colors } from "@/constants/theme";
+import { useColorScheme } from "@/hooks/use-color-scheme";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -14,18 +14,19 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+        tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
         headerShown: false,
         tabBarButton: HapticTab,
-      }}>
+      }}
+    >
       <Tabs.Screen
         name="index"
         options={{
-          title: t('tabs.home'),
+          title: t("tabs.home"),
           tabBarIcon: ({ color, focused }) => (
             <IconSymbol
               size={28}
-              name={focused ? 'house.fill' : 'house'}
+              name={focused ? "house.fill" : "house"}
               color={color}
             />
           ),
@@ -34,11 +35,11 @@ export default function TabLayout() {
       <Tabs.Screen
         name="colors"
         options={{
-          title: t('tabs.colors'),
+          title: t("tabs.colors"),
           tabBarIcon: ({ color, focused }) => (
             <IconSymbol
               size={28}
-              name={focused ? 'paintbrush.fill' : 'paintbrush'}
+              name={focused ? "paintbrush.fill" : "paintbrush"}
               color={color}
             />
           ),
@@ -47,11 +48,11 @@ export default function TabLayout() {
       <Tabs.Screen
         name="palettes"
         options={{
-          title: t('tabs.palettes'),
+          title: t("tabs.palettes"),
           tabBarIcon: ({ color, focused }) => (
             <IconSymbol
               size={28}
-              name={focused ? 'paintpalette.fill' : 'paintpalette'}
+              name={focused ? "paintpalette.fill" : "paintpalette"}
               color={color}
             />
           ),
@@ -60,11 +61,11 @@ export default function TabLayout() {
       <Tabs.Screen
         name="doodles"
         options={{
-          title: t('tabs.doodles'),
+          title: t("tabs.doodles"),
           tabBarIcon: ({ color, focused }) => (
             <IconSymbol
               size={28}
-              name={focused ? 'square.stack.3d.up.fill' : 'square.stack.3d.up'}
+              name={focused ? "square.stack.3d.up.fill" : "square.stack.3d.up"}
               color={color}
             />
           ),
@@ -73,11 +74,11 @@ export default function TabLayout() {
       <Tabs.Screen
         name="profile"
         options={{
-          title: t('tabs.profile'),
+          title: t("tabs.profile"),
           tabBarIcon: ({ color, focused }) => (
             <IconSymbol
               size={28}
-              name={focused ? 'person.fill' : 'person'}
+              name={focused ? "person.fill" : "person"}
               color={color}
             />
           ),

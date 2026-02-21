@@ -72,6 +72,7 @@ export default function ImportFromImageScreen() {
 
   const navigation = useNavigation();
   useLayoutEffect(() => {
+    navigation.getParent()?.setOptions({ tabBarStyle: { display: 'none' } });
     navigation.setOptions({
       title: t('palettes.importFromImage'),
       headerRight: () => (
@@ -85,6 +86,9 @@ export default function ImportFromImageScreen() {
         </TouchableOpacity>
       ),
     });
+    return () => {
+      navigation.getParent()?.setOptions({ tabBarStyle: undefined });
+    };
   }, [navigation, t, theme.tint]);
 
   const processImageUri = useCallback(async (uri: string) => {

@@ -1,8 +1,9 @@
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import { useLocalSearchParams, useRouter, useNavigation } from 'expo-router';
-import * as ImagePicker from 'expo-image-picker';
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import Slider from "@react-native-community/slider";
+import * as ImagePicker from "expo-image-picker";
+import { useLocalSearchParams, useNavigation, useRouter } from "expo-router";
+import React, { useCallback, useEffect, useLayoutEffect, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   ActivityIndicator,
   Dimensions,
@@ -14,28 +15,27 @@ import {
   TextInput,
   TouchableOpacity,
   View,
-} from 'react-native';
-import { Gesture, GestureDetector } from 'react-native-gesture-handler';
+} from "react-native";
+import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import Animated, {
   type SharedValue,
   useAnimatedStyle,
   useSharedValue,
-} from 'react-native-reanimated';
-import Slider from '@react-native-community/slider';
+} from "react-native-reanimated";
 
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
+import { ThemedText } from "@/components/themed-text";
+import { ThemedView } from "@/components/themed-view";
 import {
   BorderRadius,
   Colors,
+  Shadows,
   Spacing,
   Typography,
-  Shadows,
-} from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
-import { useDoodlesStore } from '@/stores/useDoodlesStore';
+} from "@/constants/theme";
+import { useColorScheme } from "@/hooks/use-color-scheme";
+import { useDoodlesStore } from "@/stores/useDoodlesStore";
 
-const { height: SCREEN_HEIGHT } = Dimensions.get('window');
+const { height: SCREEN_HEIGHT } = Dimensions.get("window");
 const TAB_BAR_HEIGHT = 48;
 const CONTENT_PADDING = Spacing.md;
 const CONTENT_HEIGHT = SCREEN_HEIGHT - TAB_BAR_HEIGHT - 120;
@@ -47,13 +47,13 @@ const TOOLBAR_PILL_PADDING_H = Spacing.sm;
 const TOOLBAR_PILL_WIDTH =
   2 * TOOLBAR_PILL_PADDING_H + 5 * TOOLBAR_ICON_SIZE + 4 * TOOLBAR_GAP;
 
-type ImageSlot = 'wall' | 'sketch';
-type TabId = 'muro' | 'boceto';
+type ImageSlot = "wall" | "sketch";
+type TabId = "muro" | "boceto";
 
 export default function DoodlesCreateScreen() {
   const { t } = useTranslation();
   const params = useLocalSearchParams<{ doodleId?: string }>();
-  const colorScheme = useColorScheme() ?? 'light';
+  const colorScheme = useColorScheme() ?? "light";
   const theme = Colors[colorScheme];
   const router = useRouter();
   const navigation = useNavigation();
@@ -61,7 +61,7 @@ export default function DoodlesCreateScreen() {
   const addDoodle = useDoodlesStore((s) => s.addDoodle);
   const updateDoodle = useDoodlesStore((s) => s.updateDoodle);
 
-  const [activeTab, setActiveTab] = useState<TabId>('muro');
+  const [activeTab, setActiveTab] = useState<TabId>("muro");
   const [wallUri, setWallUri] = useState<string | null>(null);
   const [sketchUri, setSketchUri] = useState<string | null>(null);
   const [loading, setLoading] = useState<ImageSlot | null>(null);
@@ -79,28 +79,35 @@ export default function DoodlesCreateScreen() {
     }
   }, [doodleId, getDoodle]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (doodleId) {
       const doodle = getDoodle(doodleId);
-      const title = doodle?.name?.trim() || t('doodles.defaultDoodleName');
+      const title = doodle?.name?.trim() || t("doodles.defaultDoodleName");
       navigation.setOptions({ title });
     } else {
-      navigation.setOptions({ title: t('doodles.createDoodle') });
+      navigation.setOptions({ title: t("doodles.createDoodle") });
     }
+    navigation.getParent()?.setOptions({
+      tabBarStyle: { display: "none" },
+    });
+    return () => {
+      navigation.getParent()?.setOptions({ tabBarStyle: undefined });
+    };
   }, [doodleId, getDoodle, t, navigation]);
 
   const pickFromGallery = useCallback(
     async (slot: ImageSlot) => {
-      const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-      if (status !== 'granted') {
-        setError(t('doodles.permissionDenied'));
+      const { status } =
+        await ImagePicker.requestMediaLibraryPermissionsAsync();
+      if (status !== "granted") {
+        setError(t("doodles.permissionDenied"));
         return;
       }
       setError(null);
       setLoading(slot);
       try {
         const result = await ImagePicker.launchImageLibraryAsync({
-          mediaTypes: ['images'],
+          mediaTypes: ["images"],
           allowsEditing: false,
           quality: 0.85,
         });
@@ -109,22 +116,22 @@ export default function DoodlesCreateScreen() {
           return;
         }
         const uri = result.assets[0].uri;
-        if (slot === 'wall') setWallUri(uri);
+        if (slot === "wall") setWallUri(uri);
         else setSketchUri(uri);
       } catch (e) {
-        setError(e instanceof Error ? e.message : t('common.error'));
+        setError(e instanceof Error ? e.message : t("common.error"));
       } finally {
         setLoading(null);
       }
     },
-    [t]
+    [t],
   );
 
   const takePhoto = useCallback(
     async (slot: ImageSlot) => {
       const { status } = await ImagePicker.requestCameraPermissionsAsync();
-      if (status !== 'granted') {
-        setError(t('doodles.cameraPermissionDenied'));
+      if (status !== "granted") {
+        setError(t("doodles.cameraPermissionDenied"));
         return;
       }
       setError(null);
@@ -139,15 +146,15 @@ export default function DoodlesCreateScreen() {
           return;
         }
         const uri = result.assets[0].uri;
-        if (slot === 'wall') setWallUri(uri);
+        if (slot === "wall") setWallUri(uri);
         else setSketchUri(uri);
       } catch (e) {
-        setError(e instanceof Error ? e.message : t('common.error'));
+        setError(e instanceof Error ? e.message : t("common.error"));
       } finally {
         setLoading(null);
       }
     },
-    [t]
+    [t],
   );
 
   const bothLoaded = Boolean(wallUri && sketchUri);
@@ -176,14 +183,17 @@ export default function DoodlesCreateScreen() {
   const sketchFlipY = useSharedValue(1);
   const sketchOpacity = useSharedValue(DEFAULT_SKETCH_OPACITY);
 
-  const [wallOpacityAmount, setWallOpacityAmount] = useState(DEFAULT_WALL_OPACITY);
-  const [sketchOpacityAmount, setSketchOpacityAmount] = useState(DEFAULT_SKETCH_OPACITY);
-  const [toolbarView, setToolbarView] = useState<'icons' | 'opacity'>('icons');
+  const [wallOpacityAmount, setWallOpacityAmount] =
+    useState(DEFAULT_WALL_OPACITY);
+  const [sketchOpacityAmount, setSketchOpacityAmount] = useState(
+    DEFAULT_SKETCH_OPACITY,
+  );
+  const [toolbarView, setToolbarView] = useState<"icons" | "opacity">("icons");
   const [showNameModal, setShowNameModal] = useState(false);
-  const [doodleName, setDoodleName] = useState('');
+  const [doodleName, setDoodleName] = useState("");
 
   const resetTransform = useCallback(() => {
-    if (activeTab === 'muro') {
+    if (activeTab === "muro") {
       wallOffsetX.value = 0;
       wallOffsetY.value = 0;
       wallSavedOffsetX.value = 0;
@@ -210,17 +220,41 @@ export default function DoodlesCreateScreen() {
       sketchOpacity.value = DEFAULT_SKETCH_OPACITY;
       setSketchOpacityAmount(DEFAULT_SKETCH_OPACITY);
     }
-  }, [activeTab, wallOffsetX, wallOffsetY, wallSavedOffsetX, wallSavedOffsetY, wallScale, wallSavedScale, wallRotation, wallSavedRotation, wallFlipX, wallFlipY, wallOpacity, sketchOffsetX, sketchOffsetY, sketchSavedOffsetX, sketchSavedOffsetY, sketchScale, sketchSavedScale, sketchRotation, sketchSavedRotation, sketchFlipX, sketchFlipY, sketchOpacity]);
+  }, [
+    activeTab,
+    wallOffsetX,
+    wallOffsetY,
+    wallSavedOffsetX,
+    wallSavedOffsetY,
+    wallScale,
+    wallSavedScale,
+    wallRotation,
+    wallSavedRotation,
+    wallFlipX,
+    wallFlipY,
+    wallOpacity,
+    sketchOffsetX,
+    sketchOffsetY,
+    sketchSavedOffsetX,
+    sketchSavedOffsetY,
+    sketchScale,
+    sketchSavedScale,
+    sketchRotation,
+    sketchSavedRotation,
+    sketchFlipX,
+    sketchFlipY,
+    sketchOpacity,
+  ]);
 
   const openSaveModal = useCallback(() => {
     if (!wallUri || !sketchUri) return;
-    setDoodleName(doodleId ? (getDoodle(doodleId)?.name ?? '') : '');
+    setDoodleName(doodleId ? (getDoodle(doodleId)?.name ?? "") : "");
     setShowNameModal(true);
   }, [wallUri, sketchUri, doodleId, getDoodle]);
 
   const handleConfirmSave = useCallback(() => {
     if (!wallUri || !sketchUri) return;
-    const name = doodleName.trim() || t('doodles.defaultDoodleName');
+    const name = doodleName.trim() || t("doodles.defaultDoodleName");
     const transformData = {
       wall: {
         offsetX: wallOffsetX.value,
@@ -257,11 +291,32 @@ export default function DoodlesCreateScreen() {
       });
     }
     setShowNameModal(false);
-    setDoodleName('');
+    setDoodleName("");
     router.back();
-  }, [wallUri, sketchUri, doodleId, doodleName, t, addDoodle, updateDoodle, router,
-    wallOffsetX, wallOffsetY, wallScale, wallRotation, wallFlipX, wallFlipY, wallOpacity,
-    sketchOffsetX, sketchOffsetY, sketchScale, sketchRotation, sketchFlipX, sketchFlipY, sketchOpacity]);
+  }, [
+    wallUri,
+    sketchUri,
+    doodleId,
+    doodleName,
+    t,
+    addDoodle,
+    updateDoodle,
+    router,
+    wallOffsetX,
+    wallOffsetY,
+    wallScale,
+    wallRotation,
+    wallFlipX,
+    wallFlipY,
+    wallOpacity,
+    sketchOffsetX,
+    sketchOffsetY,
+    sketchScale,
+    sketchRotation,
+    sketchFlipX,
+    sketchFlipY,
+    sketchOpacity,
+  ]);
 
   const contentArea = (() => {
     if (bothLoaded) {
@@ -280,7 +335,7 @@ export default function DoodlesCreateScreen() {
             flipX={wallFlipX}
             flipY={wallFlipY}
             opacity={wallOpacity}
-            isActive={activeTab === 'muro'}
+            isActive={activeTab === "muro"}
           />
           <TransformableLayer
             imageUri={sketchUri!}
@@ -295,21 +350,21 @@ export default function DoodlesCreateScreen() {
             flipX={sketchFlipX}
             flipY={sketchFlipY}
             opacity={sketchOpacity}
-            isActive={activeTab === 'boceto'}
+            isActive={activeTab === "boceto"}
           />
         </View>
       );
     }
 
-    if (activeTab === 'muro') {
+    if (activeTab === "muro") {
       if (!wallUri) {
         return (
           <PlaceholderSlot
             icon="wallpaper"
-            label={t('doodles.wallImage')}
-            onTakePhoto={() => takePhoto('wall')}
-            onPickGallery={() => pickFromGallery('wall')}
-            loading={loading === 'wall'}
+            label={t("doodles.wallImage")}
+            onTakePhoto={() => takePhoto("wall")}
+            onPickGallery={() => pickFromGallery("wall")}
+            loading={loading === "wall"}
             theme={theme}
             t={t}
           />
@@ -323,26 +378,31 @@ export default function DoodlesCreateScreen() {
             resizeMode="contain"
           />
           <TouchableOpacity
-            style={[styles.replaceBtn, { backgroundColor: theme.card, borderColor: theme.border }]}
+            style={[
+              styles.replaceBtn,
+              { backgroundColor: theme.card, borderColor: theme.border },
+            ]}
             onPress={() => setWallUri(null)}
           >
-            <ThemedText style={[styles.replaceBtnText, { color: theme.textSecondary }]}>
-              {t('doodles.replaceImage')}
+            <ThemedText
+              style={[styles.replaceBtnText, { color: theme.textSecondary }]}
+            >
+              {t("doodles.replaceImage")}
             </ThemedText>
           </TouchableOpacity>
         </View>
       );
     }
 
-    if (activeTab === 'boceto') {
+    if (activeTab === "boceto") {
       if (!sketchUri) {
         return (
           <PlaceholderSlot
             icon="brush"
-            label={t('doodles.sketchImage')}
-            onTakePhoto={() => takePhoto('sketch')}
-            onPickGallery={() => pickFromGallery('sketch')}
-            loading={loading === 'sketch'}
+            label={t("doodles.sketchImage")}
+            onTakePhoto={() => takePhoto("sketch")}
+            onPickGallery={() => pickFromGallery("sketch")}
+            loading={loading === "sketch"}
             theme={theme}
             t={t}
           />
@@ -356,11 +416,16 @@ export default function DoodlesCreateScreen() {
             resizeMode="contain"
           />
           <TouchableOpacity
-            style={[styles.replaceBtn, { backgroundColor: theme.card, borderColor: theme.border }]}
+            style={[
+              styles.replaceBtn,
+              { backgroundColor: theme.card, borderColor: theme.border },
+            ]}
             onPress={() => setSketchUri(null)}
           >
-            <ThemedText style={[styles.replaceBtnText, { color: theme.textSecondary }]}>
-              {t('doodles.replaceImage')}
+            <ThemedText
+              style={[styles.replaceBtnText, { color: theme.textSecondary }]}
+            >
+              {t("doodles.replaceImage")}
             </ThemedText>
           </TouchableOpacity>
         </View>
@@ -370,62 +435,77 @@ export default function DoodlesCreateScreen() {
     return null;
   })();
 
-  const isWallActive = activeTab === 'muro';
+  const isWallActive = activeTab === "muro";
   const activeFlipX = isWallActive ? wallFlipX : sketchFlipX;
   const activeFlipY = isWallActive ? wallFlipY : sketchFlipY;
   const activeOpacity = isWallActive ? wallOpacity : sketchOpacity;
-  const activeOpacityAmount = isWallActive ? wallOpacityAmount : sketchOpacityAmount;
-  const setActiveOpacityAmount = isWallActive ? setWallOpacityAmount : setSketchOpacityAmount;
+  const activeOpacityAmount = isWallActive
+    ? wallOpacityAmount
+    : sketchOpacityAmount;
+  const setActiveOpacityAmount = isWallActive
+    ? setWallOpacityAmount
+    : setSketchOpacityAmount;
 
   return (
-    <ThemedView style={styles.container}>
+    <ThemedView style={styles.container} safeArea="bottom">
       <View style={[styles.tabBar, { borderBottomColor: theme.border }]}>
         <TouchableOpacity
           style={[
             styles.tab,
-            activeTab === 'muro' && { borderBottomColor: theme.tint, borderBottomWidth: 2 },
+            activeTab === "muro" && {
+              borderBottomColor: theme.tint,
+              borderBottomWidth: 2,
+            },
           ]}
-          onPress={() => setActiveTab('muro')}
+          onPress={() => setActiveTab("muro")}
           accessibilityRole="tab"
-          accessibilityState={{ selected: activeTab === 'muro' }}
-          accessibilityLabel={t('doodles.wallImage')}
+          accessibilityState={{ selected: activeTab === "muro" }}
+          accessibilityLabel={t("doodles.wallImage")}
         >
           <MaterialIcons
             name="wallpaper"
             size={20}
-            color={activeTab === 'muro' ? theme.tint : theme.textSecondary}
+            color={activeTab === "muro" ? theme.tint : theme.textSecondary}
           />
           <ThemedText
             style={[
               styles.tabLabel,
-              { color: activeTab === 'muro' ? theme.tint : theme.textSecondary },
+              {
+                color: activeTab === "muro" ? theme.tint : theme.textSecondary,
+              },
             ]}
           >
-            {t('doodles.tabWall')}
+            {t("doodles.tabWall")}
           </ThemedText>
         </TouchableOpacity>
         <TouchableOpacity
           style={[
             styles.tab,
-            activeTab === 'boceto' && { borderBottomColor: theme.tint, borderBottomWidth: 2 },
+            activeTab === "boceto" && {
+              borderBottomColor: theme.tint,
+              borderBottomWidth: 2,
+            },
           ]}
-          onPress={() => setActiveTab('boceto')}
+          onPress={() => setActiveTab("boceto")}
           accessibilityRole="tab"
-          accessibilityState={{ selected: activeTab === 'boceto' }}
-          accessibilityLabel={t('doodles.sketchImage')}
+          accessibilityState={{ selected: activeTab === "boceto" }}
+          accessibilityLabel={t("doodles.sketchImage")}
         >
           <MaterialIcons
             name="brush"
             size={20}
-            color={activeTab === 'boceto' ? theme.tint : theme.textSecondary}
+            color={activeTab === "boceto" ? theme.tint : theme.textSecondary}
           />
           <ThemedText
             style={[
               styles.tabLabel,
-              { color: activeTab === 'boceto' ? theme.tint : theme.textSecondary },
+              {
+                color:
+                  activeTab === "boceto" ? theme.tint : theme.textSecondary,
+              },
             ]}
           >
-            {t('doodles.tabSketch')}
+            {t("doodles.tabSketch")}
           </ThemedText>
         </TouchableOpacity>
       </View>
@@ -449,61 +529,108 @@ export default function DoodlesCreateScreen() {
                   },
                 ]}
               >
-                {toolbarView === 'icons' ? (
+                {toolbarView === "icons" ? (
                   <>
                     <TouchableOpacity
-                      style={[styles.toolbarBtn, { backgroundColor: theme.tint }]}
+                      style={[
+                        styles.toolbarBtn,
+                        { backgroundColor: theme.tint },
+                      ]}
                       onPress={openSaveModal}
                       accessibilityRole="button"
-                      accessibilityLabel={t('doodles.toolbarSave')}
+                      accessibilityLabel={t("doodles.toolbarSave")}
                     >
-                      <MaterialIcons name="save" size={22} color={theme.background} />
+                      <MaterialIcons
+                        name="save"
+                        size={22}
+                        color={theme.background}
+                      />
                     </TouchableOpacity>
                     <TouchableOpacity
-                      style={[styles.toolbarBtn, { backgroundColor: theme.backgroundSecondary }]}
+                      style={[
+                        styles.toolbarBtn,
+                        { backgroundColor: theme.backgroundSecondary },
+                      ]}
                       onPress={resetTransform}
                       accessibilityRole="button"
-                      accessibilityLabel={t('doodles.toolbarReset')}
+                      accessibilityLabel={t("doodles.toolbarReset")}
                     >
-                      <MaterialIcons name="restart-alt" size={22} color={theme.tint} />
+                      <MaterialIcons
+                        name="restart-alt"
+                        size={22}
+                        color={theme.tint}
+                      />
                     </TouchableOpacity>
                     <TouchableOpacity
-                      style={[styles.toolbarBtn, { backgroundColor: theme.backgroundSecondary }]}
-                      onPress={() => { activeFlipX.value = -activeFlipX.value; }}
+                      style={[
+                        styles.toolbarBtn,
+                        { backgroundColor: theme.backgroundSecondary },
+                      ]}
+                      onPress={() => {
+                        activeFlipX.value = -activeFlipX.value;
+                      }}
                       accessibilityRole="button"
-                      accessibilityLabel={t('doodles.toolbarFlipH')}
+                      accessibilityLabel={t("doodles.toolbarFlipH")}
                     >
                       <MaterialIcons name="flip" size={22} color={theme.tint} />
                     </TouchableOpacity>
                     <TouchableOpacity
-                      style={[styles.toolbarBtn, { backgroundColor: theme.backgroundSecondary }]}
-                      onPress={() => { activeFlipY.value = -activeFlipY.value; }}
+                      style={[
+                        styles.toolbarBtn,
+                        { backgroundColor: theme.backgroundSecondary },
+                      ]}
+                      onPress={() => {
+                        activeFlipY.value = -activeFlipY.value;
+                      }}
                       accessibilityRole="button"
-                      accessibilityLabel={t('doodles.toolbarFlipV')}
+                      accessibilityLabel={t("doodles.toolbarFlipV")}
                     >
-                      <MaterialIcons name="flip" size={22} color={theme.tint} style={{ transform: [{ rotate: '90deg' }] }} />
+                      <MaterialIcons
+                        name="flip"
+                        size={22}
+                        color={theme.tint}
+                        style={{ transform: [{ rotate: "90deg" }] }}
+                      />
                     </TouchableOpacity>
                     <TouchableOpacity
-                      style={[styles.toolbarBtn, { backgroundColor: theme.backgroundSecondary }]}
-                      onPress={() => setToolbarView('opacity')}
+                      style={[
+                        styles.toolbarBtn,
+                        { backgroundColor: theme.backgroundSecondary },
+                      ]}
+                      onPress={() => setToolbarView("opacity")}
                       accessibilityRole="button"
-                      accessibilityLabel={t('doodles.toolbarOpacity')}
+                      accessibilityLabel={t("doodles.toolbarOpacity")}
                     >
-                      <MaterialIcons name="opacity" size={22} color={theme.tint} />
+                      <MaterialIcons
+                        name="opacity"
+                        size={22}
+                        color={theme.tint}
+                      />
                     </TouchableOpacity>
                   </>
                 ) : (
                   <>
                     <TouchableOpacity
-                      style={[styles.toolbarBtn, { backgroundColor: theme.backgroundSecondary }]}
-                      onPress={() => setToolbarView('icons')}
+                      style={[
+                        styles.toolbarBtn,
+                        { backgroundColor: theme.backgroundSecondary },
+                      ]}
+                      onPress={() => setToolbarView("icons")}
                       accessibilityRole="button"
-                      accessibilityLabel={t('doodles.toolbarBack')}
+                      accessibilityLabel={t("doodles.toolbarBack")}
                     >
-                      <MaterialIcons name="arrow-back" size={22} color={theme.tint} />
+                      <MaterialIcons
+                        name="arrow-back"
+                        size={22}
+                        color={theme.tint}
+                      />
                     </TouchableOpacity>
                     <View style={styles.toolbarOpacityRow}>
-                      <MaterialIcons name="opacity" size={20} color={theme.textSecondary} />
+                      <MaterialIcons
+                        name="opacity"
+                        size={20}
+                        color={theme.textSecondary}
+                      />
                       <Slider
                         style={styles.toolbarSlider}
                         minimumValue={0.1}
@@ -530,7 +657,9 @@ export default function DoodlesCreateScreen() {
 
       {error ? (
         <View style={styles.errorWrap}>
-          <ThemedText style={[styles.error, { color: theme.error }]}>{error}</ThemedText>
+          <ThemedText style={[styles.error, { color: theme.error }]}>
+            {error}
+          </ThemedText>
         </View>
       ) : null}
 
@@ -541,7 +670,7 @@ export default function DoodlesCreateScreen() {
         onRequestClose={() => setShowNameModal(false)}
       >
         <KeyboardAvoidingView
-          behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+          behavior={Platform.OS === "ios" ? "padding" : undefined}
           style={styles.modalOverlay}
         >
           <TouchableOpacity
@@ -549,8 +678,15 @@ export default function DoodlesCreateScreen() {
             activeOpacity={1}
             onPress={() => setShowNameModal(false)}
           />
-          <View style={[styles.modalCard, { backgroundColor: theme.card, borderColor: theme.border }]}>
-            <ThemedText style={styles.modalTitle}>{t('doodles.nameYourDoodle')}</ThemedText>
+          <View
+            style={[
+              styles.modalCard,
+              { backgroundColor: theme.card, borderColor: theme.border },
+            ]}
+          >
+            <ThemedText style={styles.modalTitle}>
+              {t("doodles.nameYourDoodle")}
+            </ThemedText>
             <TextInput
               style={[
                 styles.nameInput,
@@ -560,7 +696,7 @@ export default function DoodlesCreateScreen() {
                   color: theme.text,
                 },
               ]}
-              placeholder={t('doodles.doodleNamePlaceholder')}
+              placeholder={t("doodles.doodleNamePlaceholder")}
               placeholderTextColor={theme.textSecondary}
               value={doodleName}
               onChangeText={setDoodleName}
@@ -571,14 +707,23 @@ export default function DoodlesCreateScreen() {
                 style={[styles.modalButton, { borderColor: theme.border }]}
                 onPress={() => setShowNameModal(false)}
               >
-                <ThemedText>{t('common.cancel')}</ThemedText>
+                <ThemedText>{t("common.cancel")}</ThemedText>
               </TouchableOpacity>
               <TouchableOpacity
-                style={[styles.modalButton, styles.modalButtonPrimary, { backgroundColor: theme.tint }]}
+                style={[
+                  styles.modalButton,
+                  styles.modalButtonPrimary,
+                  { backgroundColor: theme.tint },
+                ]}
                 onPress={handleConfirmSave}
               >
-                <ThemedText style={[styles.modalButtonPrimaryText, { color: theme.background }]}>
-                  {t('common.save')}
+                <ThemedText
+                  style={[
+                    styles.modalButtonPrimaryText,
+                    { color: theme.background },
+                  ]}
+                >
+                  {t("common.save")}
                 </ThemedText>
               </TouchableOpacity>
             </View>
@@ -629,7 +774,7 @@ function TransformableLayer({
           savedOffsetX.value = offsetX.value;
           savedOffsetY.value = offsetY.value;
         }),
-    [offsetX, offsetY, savedOffsetX, savedOffsetY]
+    [offsetX, offsetY, savedOffsetX, savedOffsetY],
   );
 
   const pinchGesture = useMemo(
@@ -641,7 +786,7 @@ function TransformableLayer({
         .onEnd(() => {
           savedScale.value = scale.value;
         }),
-    [scale, savedScale]
+    [scale, savedScale],
   );
 
   const rotationGesture = useMemo(
@@ -653,18 +798,18 @@ function TransformableLayer({
         .onEnd(() => {
           savedRotation.value = rotation.value;
         }),
-    [rotation, savedRotation]
+    [rotation, savedRotation],
   );
 
   const composed = useMemo(
     () => Gesture.Simultaneous(panGesture, pinchGesture, rotationGesture),
-    [panGesture, pinchGesture, rotationGesture]
+    [panGesture, pinchGesture, rotationGesture],
   );
 
   const animatedStyle = useAnimatedStyle(() => ({
-    position: 'absolute' as const,
-    width: '100%',
-    height: '100%',
+    position: "absolute" as const,
+    width: "100%",
+    height: "100%",
     opacity: opacity.value,
     transform: [
       { translateX: offsetX.value },
@@ -679,7 +824,7 @@ function TransformableLayer({
   const content = (
     <Animated.View
       style={[styles.superpositionLayer, animatedStyle]}
-      pointerEvents={isActive ? 'box-none' : 'none'}
+      pointerEvents={isActive ? "box-none" : "none"}
     >
       <Image
         source={{ uri: imageUri }}
@@ -709,44 +854,61 @@ function PlaceholderSlot({
   onTakePhoto: () => void;
   onPickGallery: () => void;
   loading: boolean;
-  theme: (typeof Colors)['light'];
+  theme: (typeof Colors)["light"];
   t: (key: string) => string;
 }) {
   return (
-    <View style={[styles.placeholderWrap, { backgroundColor: theme.backgroundSecondary }]}>
+    <View
+      style={[
+        styles.placeholderWrap,
+        { backgroundColor: theme.backgroundSecondary },
+      ]}
+    >
       <MaterialIcons name={icon} size={48} color={theme.textSecondary} />
-      <ThemedText style={[styles.placeholderLabel, { color: theme.textSecondary }]}>
+      <ThemedText
+        style={[styles.placeholderLabel, { color: theme.textSecondary }]}
+      >
         {label}
       </ThemedText>
       <View style={styles.placeholderButtons}>
         <TouchableOpacity
-          style={[styles.placeholderBtn, { backgroundColor: theme.card, borderColor: theme.border }]}
+          style={[
+            styles.placeholderBtn,
+            { backgroundColor: theme.card, borderColor: theme.border },
+          ]}
           onPress={onTakePhoto}
           disabled={loading}
           accessibilityRole="button"
-          accessibilityLabel={t('doodles.takePhoto')}
+          accessibilityLabel={t("doodles.takePhoto")}
         >
           {loading ? (
             <ActivityIndicator size="small" color={theme.tint} />
           ) : (
             <>
               <MaterialIcons name="camera-alt" size={24} color={theme.tint} />
-              <ThemedText style={[styles.placeholderBtnText, { color: theme.text }]}>
-                {t('doodles.takePhoto')}
+              <ThemedText
+                style={[styles.placeholderBtnText, { color: theme.text }]}
+              >
+                {t("doodles.takePhoto")}
               </ThemedText>
             </>
           )}
         </TouchableOpacity>
         <TouchableOpacity
-          style={[styles.placeholderBtn, { backgroundColor: theme.card, borderColor: theme.border }]}
+          style={[
+            styles.placeholderBtn,
+            { backgroundColor: theme.card, borderColor: theme.border },
+          ]}
           onPress={onPickGallery}
           disabled={loading}
           accessibilityRole="button"
-          accessibilityLabel={t('doodles.pickFromGallery')}
+          accessibilityLabel={t("doodles.pickFromGallery")}
         >
           <MaterialIcons name="photo-library" size={24} color={theme.tint} />
-          <ThemedText style={[styles.placeholderBtnText, { color: theme.text }]}>
-            {t('doodles.pickFromGallery')}
+          <ThemedText
+            style={[styles.placeholderBtnText, { color: theme.text }]}
+          >
+            {t("doodles.pickFromGallery")}
           </ThemedText>
         </TouchableOpacity>
       </View>
@@ -759,16 +921,16 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   tabBar: {
-    flexDirection: 'row',
+    flexDirection: "row",
     height: TAB_BAR_HEIGHT,
     borderBottomWidth: 1,
     paddingHorizontal: Spacing.sm,
   },
   tab: {
     flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
     gap: Spacing.xs,
   },
   tabLabel: {
@@ -783,8 +945,8 @@ const styles = StyleSheet.create({
   placeholderWrap: {
     flex: 1,
     borderRadius: BorderRadius.lg,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     padding: Spacing.lg,
   },
   placeholderLabel: {
@@ -793,13 +955,13 @@ const styles = StyleSheet.create({
     marginBottom: Spacing.lg,
   },
   placeholderButtons: {
-    flexDirection: 'row',
+    flexDirection: "row",
     gap: Spacing.md,
   },
   placeholderBtn: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
     gap: Spacing.xs,
     paddingVertical: Spacing.md,
     paddingHorizontal: Spacing.lg,
@@ -813,17 +975,17 @@ const styles = StyleSheet.create({
   },
   singleImageWrap: {
     flex: 1,
-    position: 'relative',
+    position: "relative",
   },
   singleImage: {
-    width: '100%',
-    height: '100%',
+    width: "100%",
+    height: "100%",
     borderRadius: BorderRadius.md,
   },
   replaceBtn: {
-    position: 'absolute',
+    position: "absolute",
     bottom: Spacing.md,
-    alignSelf: 'center',
+    alignSelf: "center",
     paddingVertical: Spacing.sm,
     paddingHorizontal: Spacing.md,
     borderRadius: BorderRadius.md,
@@ -834,14 +996,14 @@ const styles = StyleSheet.create({
   },
   superpositionWrap: {
     flex: 1,
-    position: 'relative',
+    position: "relative",
     borderRadius: BorderRadius.md,
-    overflow: 'hidden',
+    overflow: "hidden",
   },
   superpositionLayer: {
     ...StyleSheet.absoluteFillObject,
-    width: '100%',
-    height: '100%',
+    width: "100%",
+    height: "100%",
   },
   sketchLayer: {
     opacity: 0.85,
@@ -854,17 +1016,17 @@ const styles = StyleSheet.create({
   },
   contentWithOverlay: {
     flex: 1,
-    position: 'relative',
+    position: "relative",
   },
   toolbarFloatingWrap: {
-    position: 'absolute',
+    position: "absolute",
     left: 0,
     right: 0,
-    alignItems: 'center',
+    alignItems: "center",
   },
   toolbarPill: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     paddingVertical: Spacing.sm,
     paddingHorizontal: Spacing.sm,
     borderRadius: 9999,
@@ -876,13 +1038,13 @@ const styles = StyleSheet.create({
     width: TOOLBAR_ICON_SIZE,
     height: TOOLBAR_ICON_SIZE,
     borderRadius: TOOLBAR_ICON_SIZE / 2,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   toolbarOpacityRow: {
     flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     gap: Spacing.xs,
     minWidth: 0,
   },
@@ -893,12 +1055,12 @@ const styles = StyleSheet.create({
   },
   modalOverlay: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: "center",
     padding: Spacing.lg,
   },
   modalBackdrop: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(0,0,0,0.5)',
+    backgroundColor: "rgba(0,0,0,0.5)",
   },
   modalCard: {
     borderRadius: BorderRadius.lg,
@@ -920,9 +1082,9 @@ const styles = StyleSheet.create({
     marginBottom: Spacing.lg,
   },
   modalActions: {
-    flexDirection: 'row',
+    flexDirection: "row",
     gap: Spacing.sm,
-    justifyContent: 'flex-end',
+    justifyContent: "flex-end",
   },
   modalButton: {
     paddingVertical: Spacing.sm,

@@ -26,7 +26,11 @@ export default function CreatePaletteSelectScreen() {
   );
 
   useLayoutEffect(() => {
+    navigation.getParent()?.setOptions({ tabBarStyle: { display: "none" } });
     navigation.setOptions({ title: t("palettes.selectSeries") });
+    return () => {
+      navigation.getParent()?.setOptions({ tabBarStyle: undefined });
+    };
   }, [navigation, t]);
 
   const toggleSeriesSelection = useCallback((seriesId: string) => {
