@@ -1,31 +1,7 @@
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { Stack, useNavigation } from "expo-router";
+import { Stack } from "expo-router";
 import { useTranslation } from "react-i18next";
-import { TouchableOpacity } from "react-native";
 
-import { Spacing } from "@/constants/theme";
-import { useThemeColor } from "@/hooks/use-theme-color";
-
-const HEADER_BUTTON = {
-  minHeight: 44,
-  justifyContent: "center" as const,
-  alignItems: "center" as const,
-};
-
-function HeaderBackButton() {
-  const navigation = useNavigation();
-  const tint = useThemeColor({}, "tint");
-  return (
-    <TouchableOpacity
-      onPress={() => navigation.goBack()}
-      style={[HEADER_BUTTON, { paddingRight: Spacing.sm }]}
-      accessibilityRole="button"
-      accessibilityLabel="Volver"
-    >
-      <MaterialIcons name="arrow-back" size={24} color={tint} />
-    </TouchableOpacity>
-  );
-}
+import { HeaderBackButton } from "@/components/header-back-button";
 
 export default function DoodlesLayout() {
   const { t } = useTranslation();

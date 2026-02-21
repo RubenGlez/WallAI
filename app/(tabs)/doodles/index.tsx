@@ -11,6 +11,8 @@ import {
   View,
 } from 'react-native';
 
+import { Button } from '@/components/button';
+import { ScreenHeader } from '@/components/screen-header';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import {
@@ -111,12 +113,10 @@ export default function DoodlesIndexScreen() {
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
-        <ThemedText type="title" style={styles.title}>
-          {t('doodles.myDoodles')}
-        </ThemedText>
-        <ThemedText style={[styles.subtitle, { color: theme.textSecondary }]}>
-          {t('doodles.subtitle')}
-        </ThemedText>
+        <ScreenHeader
+          title={t('doodles.myDoodles')}
+          subtitle={t('doodles.subtitle')}
+        />
 
         {doodles.length === 0 ? (
           <TouchableOpacity
@@ -163,14 +163,14 @@ export default function DoodlesIndexScreen() {
         style={[styles.fabContainer, { bottom: Spacing.md }]}
         pointerEvents="box-none"
       >
-        <TouchableOpacity
+        <Button
+          variant="primary"
+          size="icon"
           style={[styles.fab, { backgroundColor: theme.tint }]}
           onPress={handleNewDoodle}
-          accessibilityRole="button"
           accessibilityLabel={t('doodles.newDoodle')}
-        >
-          <MaterialIcons name="add" size={28} color={theme.background} />
-        </TouchableOpacity>
+          icon={<MaterialIcons name="add" size={28} color={theme.background} />}
+        />
       </View>
     </ThemedView>
   );
@@ -186,13 +186,6 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     paddingBottom: Spacing.xxl + 80,
-  },
-  title: {
-    marginBottom: Spacing.xs,
-  },
-  subtitle: {
-    marginBottom: Spacing.lg,
-    opacity: 0.9,
   },
   fabContainer: {
     position: 'absolute',

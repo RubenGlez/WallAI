@@ -1,4 +1,3 @@
-import { BottomSheetBackdrop, BottomSheetModal } from "@gorhom/bottom-sheet";
 import { useLocalSearchParams, useNavigation } from "expo-router";
 import React, {
   useCallback,
@@ -13,12 +12,13 @@ import {
   FlatList,
   StyleSheet,
   TextInput,
-  TouchableOpacity,
   View,
 } from "react-native";
 
+import { Button } from "@/components/button";
 import {
-  ColorDetailContent,
+  ColorDetailBottomSheet,
+  type ColorDetailBottomSheetRef,
   type ColorDetailParams,
 } from "@/components/color-detail-bottom-sheet";
 import { ColorGridCard } from "@/components/color-grid-card";
@@ -64,7 +64,7 @@ export default function ColorGridScreen() {
   const [detailParams, setDetailParams] = useState<ColorDetailParams | null>(
     null,
   );
-  const detailSheetRef = useRef<BottomSheetModal>(null);
+  const detailSheetRef = useRef<ColorDetailBottomSheetRef>(null);
 
   const series = seriesId ? getSeriesById(seriesId) : undefined;
   const allColors = useMemo(
@@ -99,25 +99,23 @@ export default function ColorGridScreen() {
     navigation.setOptions({
       ...(series ? { title: series.name } : {}),
       headerRight: () => (
-        <TouchableOpacity
+        <Button
+          variant="ghost"
+          size="icon"
           onPress={() => setShowOnlyFavorites((s) => !s)}
-          style={{
-            paddingHorizontal: Spacing.sm,
-            paddingVertical: Spacing.sm,
-          }}
-          accessibilityRole="button"
           accessibilityLabel={
             showOnlyFavorites
               ? t("colors.showAllColors")
               : t("colors.showOnlyFavorites")
           }
-        >
-          <IconSymbol
-            name={showOnlyFavorites ? "star.fill" : "star"}
-            size={24}
-            color={showOnlyFavorites ? theme.tint : theme.icon}
-          />
-        </TouchableOpacity>
+          icon={
+            <IconSymbol
+              name={showOnlyFavorites ? "star.fill" : "star"}
+              size={24}
+              color={showOnlyFavorites ? theme.tint : theme.icon}
+            />
+          }
+        />
       ),
     });
   }, [navigation, series, showOnlyFavorites, theme.tint, theme.icon, t]);
@@ -145,18 +143,6 @@ export default function ColorGridScreen() {
     [i18n.language],
   );
 
-  const renderBackdrop = useCallback(
-    (props: React.ComponentProps<typeof BottomSheetBackdrop>) => (
-      <BottomSheetBackdrop
-        {...props}
-        appearsOnIndex={0}
-        disappearsOnIndex={-1}
-        opacity={0.5}
-      />
-    ),
-    [],
-  );
-
   const renderItem = useCallback(
     ({ item, index }: { item: Color; index: number }) => (
       <View
@@ -182,27 +168,18 @@ export default function ColorGridScreen() {
 
   return (
     <ThemedView style={styles.container}>
-      <BottomSheetModal
+      <ColorDetailBottomSheet
         ref={detailSheetRef}
-        backgroundStyle={{
-          backgroundColor: theme.background,
-          borderTopLeftRadius: 20,
-          borderTopRightRadius: 20,
-        }}
-        backdropComponent={renderBackdrop}
-      >
-        <ColorDetailContent
-          color={detailParams}
-          isFavorite={
-            detailParams
-              ? favoriteColorIds.includes(detailParams.color.id)
-              : false
-          }
-          onToggleFavorite={() =>
-            detailParams && handleFavorite(detailParams.color)
-          }
-        />
-      </BottomSheetModal>
+        color={detailParams}
+        isFavorite={
+          detailParams
+            ? favoriteColorIds.includes(detailParams.color.id)
+            : false
+        }
+        onToggleFavorite={() =>
+          detailParams && handleFavorite(detailParams.color)
+        }
+      />
 
       <View style={styles.searchWrap}>
         <TextInput
@@ -221,18 +198,20 @@ export default function ColorGridScreen() {
           returnKeyType="search"
         />
         {searchQuery.length > 0 && (
-          <TouchableOpacity
+          <Button
+            variant="ghost"
+            size="icon"
             style={styles.searchClearBtn}
             onPress={() => setSearchQuery("")}
-            accessibilityRole="button"
             accessibilityLabel={t("common.clear")}
-          >
-            <IconSymbol
-              name="xmark.circle.fill"
-              size={22}
-              color={theme.textSecondary}
-            />
-          </TouchableOpacity>
+            icon={
+              <IconSymbol
+                name="xmark.circle.fill"
+                size={22}
+                color={theme.textSecondary}
+              />
+            }
+          />
         )}
       </View>
 

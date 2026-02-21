@@ -24,6 +24,7 @@ import {
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
+import { Button } from "@/components/button";
 import { ColorGridCard } from "@/components/color-grid-card";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
@@ -131,18 +132,13 @@ export default function CreatePaletteExploreScreen() {
       ...(paletteId
         ? {
             headerRight: () => (
-              <TouchableOpacity
+              <Button
+                variant="ghost"
+                size="icon"
                 onPress={handleDeletePalette}
-                style={styles.headerRightButton}
-                accessibilityRole="button"
                 accessibilityLabel={t("projects.remove")}
-              >
-                <MaterialIcons
-                  name="delete-outline"
-                  size={24}
-                  color={theme.tint}
-                />
-              </TouchableOpacity>
+                icon={<MaterialIcons name="delete-outline" size={24} color={theme.tint} />}
+              />
             ),
           }
         : {}),
@@ -266,18 +262,14 @@ export default function CreatePaletteExploreScreen() {
           returnKeyType="search"
         />
         {searchQuery.length > 0 && (
-          <TouchableOpacity
+          <Button
+            variant="ghost"
+            size="icon"
             style={styles.searchClearBtn}
             onPress={() => setSearchQuery("")}
-            accessibilityRole="button"
             accessibilityLabel={t("common.clear")}
-          >
-            <MaterialIcons
-              name="cancel"
-              size={22}
-              color={theme.textSecondary}
-            />
-          </TouchableOpacity>
+            icon={<MaterialIcons name="cancel" size={22} color={theme.textSecondary} />}
+          />
         )}
       </View>
 
@@ -315,21 +307,15 @@ export default function CreatePaletteExploreScreen() {
               {t("colors.colorCount", { count: selectedColors.length })}
             </ThemedText>
           </View>
-          <TouchableOpacity
-            style={[
-              styles.saveButton,
-              { backgroundColor: theme.tint },
-              selectedColors.length === 0 && styles.saveButtonDisabled,
-            ]}
+          <Button
+            variant="primary"
+            size="md"
+            fullWidth
             onPress={handleSave}
             disabled={selectedColors.length === 0}
           >
-            <ThemedText
-              style={[styles.saveButtonText, { color: theme.background }]}
-            >
-              {t("palettes.savePalette")}
-            </ThemedText>
-          </TouchableOpacity>
+            {t("palettes.savePalette")}
+          </Button>
         </View>
       </View>
 
@@ -373,29 +359,20 @@ export default function CreatePaletteExploreScreen() {
               autoFocus
             />
             <View style={styles.modalActions}>
-              <TouchableOpacity
-                style={[styles.modalButton, { borderColor: theme.border }]}
+              <Button
+                variant="outline"
+                size="md"
                 onPress={() => setShowNameModal(false)}
               >
-                <ThemedText>{t("common.cancel")}</ThemedText>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={[
-                  styles.modalButton,
-                  styles.modalButtonPrimary,
-                  { backgroundColor: theme.tint },
-                ]}
+                {t("common.cancel")}
+              </Button>
+              <Button
+                variant="primary"
+                size="md"
                 onPress={handleConfirmSave}
               >
-                <ThemedText
-                  style={[
-                    styles.modalButtonPrimaryText,
-                    { color: theme.background },
-                  ]}
-                >
-                  {t("common.save")}
-                </ThemedText>
-              </TouchableOpacity>
+                {t("common.save")}
+              </Button>
             </View>
           </View>
         </KeyboardAvoidingView>
@@ -408,12 +385,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: HORIZONTAL_PADDING,
-  },
-  headerRightButton: {
-    minHeight: 44,
-    justifyContent: "center",
-    alignItems: "center",
-    paddingLeft: Spacing.md,
   },
   searchWrap: {
     position: "relative",
@@ -465,19 +436,6 @@ const styles = StyleSheet.create({
   switchLabel: {
     fontSize: Typography.fontSize.sm,
   },
-  saveButton: {
-    paddingVertical: Spacing.sm,
-    paddingHorizontal: Spacing.md,
-    borderRadius: BorderRadius.md,
-    alignItems: "center",
-  },
-  saveButtonDisabled: {
-    opacity: 0.5,
-  },
-  saveButtonText: {
-    fontSize: Typography.fontSize.md,
-    fontWeight: Typography.fontWeight.semibold,
-  },
   modalOverlay: {
     flex: 1,
     justifyContent: "center",
@@ -510,15 +468,5 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     gap: Spacing.sm,
     justifyContent: "flex-end",
-  },
-  modalButton: {
-    paddingVertical: Spacing.sm,
-    paddingHorizontal: Spacing.lg,
-    borderRadius: BorderRadius.md,
-    borderWidth: 1,
-  },
-  modalButtonPrimary: {},
-  modalButtonPrimaryText: {
-    fontWeight: Typography.fontWeight.semibold,
   },
 });

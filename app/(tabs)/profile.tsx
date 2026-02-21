@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, Switch, TextInput, View } from 'react-native';
 
+import { ScreenHeader } from '@/components/screen-header';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { BorderRadius, Colors, Spacing, Typography } from '@/constants/theme';
@@ -19,9 +20,7 @@ export default function ProfileScreen() {
 
   return (
     <ThemedView style={styles.container} safeArea="top">
-      <ThemedText type="title" style={styles.title}>
-        {t('tabs.profile')}
-      </ThemedText>
+      <ScreenHeader title={t('tabs.profile')} />
 
       <View style={[styles.section, { borderTopColor: theme.border }]}>
         <ThemedText style={[styles.sectionLabel, { color: theme.textSecondary }]}>
@@ -70,9 +69,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: Spacing.md,
-  },
-  title: {
-    marginBottom: Spacing.lg,
   },
   section: {
     borderTopWidth: 1,

@@ -18,6 +18,7 @@ import {
 import { getColors } from 'react-native-image-colors';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
+import { Button } from '@/components/button';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { BorderRadius, Colors, Spacing, Typography } from '@/constants/theme';
@@ -76,14 +77,13 @@ export default function ImportFromImageScreen() {
     navigation.setOptions({
       title: t('palettes.importFromImage'),
       headerRight: () => (
-        <TouchableOpacity
+        <Button
+          variant="ghost"
+          size="icon"
           onPress={() => seriesFilterSheetRef.current?.present()}
-          style={{ paddingHorizontal: Spacing.sm, paddingVertical: Spacing.sm }}
-          accessibilityRole="button"
           accessibilityLabel={t('palettes.selectSeries')}
-        >
-          <MaterialIcons name="filter-list" size={24} color={theme.tint} />
-        </TouchableOpacity>
+          icon={<MaterialIcons name="filter-list" size={24} color={theme.tint} />}
+        />
       ),
     });
     return () => {
@@ -312,24 +312,24 @@ export default function ImportFromImageScreen() {
               </View>
             ) : (
               <View style={styles.pickButtonsRow}>
-                <TouchableOpacity
+                <Button
+                  variant="secondary"
+                  size="lg"
+                  icon={<MaterialIcons name="photo-library" size={32} color={theme.tint} style={styles.pickOptionIcon} />}
                   style={[styles.pickOption, { backgroundColor: theme.backgroundSecondary, borderColor: theme.border }]}
                   onPress={pickImage}
                 >
-                  <MaterialIcons name="photo-library" size={32} color={theme.tint} style={styles.pickOptionIcon} />
-                  <ThemedText style={[styles.pickOptionTitle, { color: theme.tint }]}>
-                    {t('palettes.selectFromGallery')}
-                  </ThemedText>
-                </TouchableOpacity>
-                <TouchableOpacity
+                  {t('palettes.selectFromGallery')}
+                </Button>
+                <Button
+                  variant="secondary"
+                  size="lg"
+                  icon={<MaterialIcons name="camera-alt" size={32} color={theme.tint} style={styles.pickOptionIcon} />}
                   style={[styles.pickOption, { backgroundColor: theme.backgroundSecondary, borderColor: theme.border }]}
                   onPress={takePhoto}
                 >
-                  <MaterialIcons name="camera-alt" size={32} color={theme.tint} style={styles.pickOptionIcon} />
-                  <ThemedText style={[styles.pickOptionTitle, { color: theme.tint }]}>
-                    {t('palettes.takePhoto')}
-                  </ThemedText>
-                </TouchableOpacity>
+                  {t('palettes.takePhoto')}
+                </Button>
               </View>
             )}
           </View>
@@ -459,19 +459,15 @@ export default function ImportFromImageScreen() {
                 })}
 
                 <View style={styles.footerActions}>
-                  <TouchableOpacity
-                    style={[
-                      styles.primaryButton,
-                      { backgroundColor: theme.tint },
-                      selectedColorsForPalette.length === 0 && styles.primaryButtonDisabled,
-                    ]}
+                  <Button
+                    variant="primary"
+                    size="lg"
+                    fullWidth
                     onPress={handleSavePalette}
                     disabled={selectedColorsForPalette.length === 0}
                   >
-                    <ThemedText style={[styles.primaryButtonText, { color: theme.background }]}>
-                      {t('palettes.savePalette')}
-                    </ThemedText>
-                  </TouchableOpacity>
+                    {t('palettes.savePalette')}
+                  </Button>
                 </View>
               </>
             )}
@@ -512,20 +508,12 @@ export default function ImportFromImageScreen() {
               autoFocus
             />
             <View style={styles.modalActions}>
-              <TouchableOpacity
-                style={[styles.modalButton, { borderColor: theme.border }]}
-                onPress={() => setShowNameModal(false)}
-              >
-                <ThemedText>{t('common.cancel')}</ThemedText>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={[styles.modalButton, styles.modalButtonPrimary, { backgroundColor: theme.tint }]}
-                onPress={handleConfirmSave}
-              >
-                <ThemedText style={[styles.modalButtonPrimaryText, { color: theme.background }]}>
-                  {t('common.save')}
-                </ThemedText>
-              </TouchableOpacity>
+              <Button variant="outline" size="md" onPress={() => setShowNameModal(false)}>
+                {t('common.cancel')}
+              </Button>
+              <Button variant="primary" size="md" onPress={handleConfirmSave}>
+                {t('common.save')}
+              </Button>
             </View>
           </View>
         </KeyboardAvoidingView>
@@ -709,18 +697,6 @@ const styles = StyleSheet.create({
     marginTop: Spacing.lg,
     gap: Spacing.sm,
   },
-  primaryButton: {
-    paddingVertical: Spacing.md,
-    borderRadius: BorderRadius.md,
-    alignItems: 'center',
-  },
-  primaryButtonText: {
-    fontSize: Typography.fontSize.md,
-    fontWeight: Typography.fontWeight.semibold,
-  },
-  primaryButtonDisabled: {
-    opacity: 0.5,
-  },
   modalOverlay: {
     flex: 1,
     justifyContent: 'center',
@@ -753,15 +729,5 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: Spacing.sm,
     justifyContent: 'flex-end',
-  },
-  modalButton: {
-    paddingVertical: Spacing.sm,
-    paddingHorizontal: Spacing.lg,
-    borderRadius: BorderRadius.md,
-    borderWidth: 1,
-  },
-  modalButtonPrimary: {},
-  modalButtonPrimaryText: {
-    fontWeight: Typography.fontWeight.semibold,
   },
 });

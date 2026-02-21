@@ -1,5 +1,9 @@
-import { BottomSheetScrollView } from '@gorhom/bottom-sheet';
-import React from 'react';
+import {
+  BottomSheetBackdrop,
+  BottomSheetModal,
+  BottomSheetScrollView,
+} from '@gorhom/bottom-sheet';
+import React, { forwardRef, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
@@ -16,7 +20,9 @@ export type ColorDetailParams = {
   seriesName: string;
 };
 
-type Props = {
+export type ColorDetailBottomSheetRef = BottomSheetModal;
+
+type ContentProps = {
   color: ColorDetailParams | null;
   isFavorite: boolean;
   onToggleFavorite: () => void;
@@ -26,7 +32,7 @@ export function ColorDetailContent({
   color,
   isFavorite,
   onToggleFavorite,
-}: Props) {
+}: ContentProps) {
   const { t } = useTranslation();
   const colorScheme = useColorScheme() ?? 'light';
   const theme = Colors[colorScheme];
@@ -135,4 +141,47 @@ const styles = StyleSheet.create({
     fontSize: Typography.fontSize.sm,
     marginBottom: Spacing.md,
   },
+});
+
+type BottomSheetProps = ContentProps;
+
+export const ColorDetailBottomSheet = forwardRef<
+  ColorDetailBottomSheetRef,
+  BottomSheetProps
+>(function ColorDetailBottomSheet(
+  { color, isFavorite, onToggleFavorite },
+  ref
+) {
+  const colorScheme = useColorScheme() ?? 'light';
+  const theme = Colors[colorScheme];
+
+  const renderBackdrop = useCallback(
+    (props: React.ComponentProps<typeof BottomSheetBackdrop>) => (
+      <BottomSheetBackdrop
+        {...props}
+        appearsOnIndex={0}
+        disappearsOnIndex={-1}
+        opacity={0.5}
+      />
+    ),
+    []
+  );
+
+  return (
+    <BottomSheetModal
+      ref={ref}
+      backgroundStyle={{
+        backgroundColor: theme.background,
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+      }}
+      backdropComponent={renderBackdrop}
+    >
+      <ColorDetailContent
+        color={color}
+        isFavorite={isFavorite}
+        onToggleFavorite={onToggleFavorite}
+      />
+    </BottomSheetModal>
+  );
 });

@@ -1,10 +1,5 @@
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import {
-  BottomSheetBackdrop,
-  BottomSheetModal,
-  BottomSheetScrollView,
-} from "@gorhom/bottom-sheet";
-import { useLocalSearchParams, useNavigation } from "expo-router";
+import { useNavigation } from "expo-router";
 import React, {
   useCallback,
   useEffect,
@@ -19,17 +14,21 @@ import {
   FlatList,
   StyleSheet,
   TextInput,
-  TouchableOpacity,
   View,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import {
-  ColorDetailContent,
+  ColorDetailBottomSheet,
+  type ColorDetailBottomSheetRef,
   type ColorDetailParams,
 } from "@/components/color-detail-bottom-sheet";
+import { Button } from "@/components/button";
 import { ColorGridCard } from "@/components/color-grid-card";
-import { ThemedText } from "@/components/themed-text";
+import {
+  SeriesSelectBottomSheet,
+  type SeriesSelectBottomSheetRef,
+} from "@/components/series-select-bottom-sheet";
 import { ThemedView } from "@/components/themed-view";
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { BorderRadius, Colors, Spacing, Typography } from "@/constants/theme";
@@ -39,7 +38,6 @@ import {
   getBrandById,
   getColorsBySeriesId,
   getSeriesById,
-  type SeriesWithCountAndBrand,
 } from "@/stores/useCatalogStore";
 import { useFavoritesStore } from "@/stores/useFavoritesStore";
 import type { Color } from "@/types";
@@ -64,9 +62,6 @@ function getColorDisplayName(color: Color, language: string): string {
 
 export default function ColorsOverviewScreen() {
   const navigation = useNavigation();
-  const { seriesId: seriesIdParam } = useLocalSearchParams<{
-    seriesId?: string;
-  }>();
   const insets = useSafeAreaInsets();
   const { t, i18n } = useTranslation();
   const colorScheme = useColorScheme() ?? "light";
@@ -81,19 +76,10 @@ export default function ColorsOverviewScreen() {
   useEffect(() => {
     if (allSeries.length > 0 && !hasInitializedSeriesSelection.current) {
       hasInitializedSeriesSelection.current = true;
-      if (seriesIdParam && allSeries.some((s) => s.id === seriesIdParam)) {
-        setSelectedSeriesIds(new Set([seriesIdParam]));
-      } else {
-        setSelectedSeriesIds(new Set(allSeries.map((s) => s.id)));
-      }
+      const firstSeriesId = allSeries[0].id;
+      setSelectedSeriesIds(new Set([firstSeriesId]));
     }
-  }, [allSeries, seriesIdParam]);
-
-  useEffect(() => {
-    if (seriesIdParam && allSeries.some((s) => s.id === seriesIdParam)) {
-      setSelectedSeriesIds(new Set([seriesIdParam]));
-    }
-  }, [seriesIdParam, allSeries]);
+  }, [allSeries]);
 
   const toggleSeriesSelection = useCallback((seriesId: string) => {
     setSelectedSeriesIds((prev) => {
@@ -105,16 +91,9 @@ export default function ColorsOverviewScreen() {
   }, []);
 
   const allColors = useMemo(() => {
-    const seen = new Set<string>();
     const out: Color[] = [];
     for (const seriesId of selectedSeriesIds) {
-      const colors = getColorsBySeriesId(seriesId);
-      for (const c of colors) {
-        if (!seen.has(c.id)) {
-          seen.add(c.id);
-          out.push(c);
-        }
-      }
+      out.push(...getColorsBySeriesId(seriesId));
     }
     return out;
   }, [selectedSeriesIds]);
@@ -124,8 +103,8 @@ export default function ColorsOverviewScreen() {
   const [detailParams, setDetailParams] = useState<ColorDetailParams | null>(
     null,
   );
-  const detailSheetRef = useRef<BottomSheetModal>(null);
-  const seriesFilterSheetRef = useRef<BottomSheetModal>(null);
+  const detailSheetRef = useRef<ColorDetailBottomSheetRef>(null);
+  const seriesFilterSheetRef = useRef<SeriesSelectBottomSheetRef>(null);
 
   const favoriteColorIds = useFavoritesStore((s) => s.favoriteColorIds);
 
@@ -159,36 +138,30 @@ export default function ColorsOverviewScreen() {
       headerShadowVisible: false,
       headerRight: () => (
         <View style={styles.headerRightRow}>
-          <TouchableOpacity
+          <Button
+            variant="ghost"
+            size="icon"
             onPress={() => setShowOnlyFavorites((s) => !s)}
-            style={{
-              paddingHorizontal: Spacing.xs,
-              paddingVertical: Spacing.sm,
-            }}
-            accessibilityRole="button"
             accessibilityLabel={
               showOnlyFavorites
                 ? t("colors.showAllColors")
                 : t("colors.showOnlyFavorites")
             }
-          >
-            <IconSymbol
-              name={showOnlyFavorites ? "star.fill" : "star"}
-              size={24}
-              color={showOnlyFavorites ? theme.tint : theme.icon}
-            />
-          </TouchableOpacity>
-          <TouchableOpacity
+            icon={
+              <IconSymbol
+                name={showOnlyFavorites ? "star.fill" : "star"}
+                size={24}
+                color={showOnlyFavorites ? theme.tint : theme.icon}
+              />
+            }
+          />
+          <Button
+            variant="ghost"
+            size="icon"
             onPress={() => seriesFilterSheetRef.current?.present()}
-            style={{
-              paddingHorizontal: Spacing.sm,
-              paddingVertical: Spacing.sm,
-            }}
-            accessibilityRole="button"
             accessibilityLabel={t("palettes.selectSeries")}
-          >
-            <MaterialIcons name="filter-list" size={24} color={theme.tint} />
-          </TouchableOpacity>
+            icon={<MaterialIcons name="filter-list" size={24} color={theme.tint} />}
+          />
         </View>
       ),
     });
@@ -217,30 +190,6 @@ export default function ColorsOverviewScreen() {
     [i18n.language],
   );
 
-  const renderDetailBackdrop = useCallback(
-    (props: React.ComponentProps<typeof BottomSheetBackdrop>) => (
-      <BottomSheetBackdrop
-        {...props}
-        appearsOnIndex={0}
-        disappearsOnIndex={-1}
-        opacity={0.5}
-      />
-    ),
-    [],
-  );
-
-  const renderSeriesSheetBackdrop = useCallback(
-    (props: React.ComponentProps<typeof BottomSheetBackdrop>) => (
-      <BottomSheetBackdrop
-        {...props}
-        appearsOnIndex={0}
-        disappearsOnIndex={-1}
-        opacity={0.5}
-      />
-    ),
-    [],
-  );
-
   const renderItem = useCallback(
     ({ item, index }: { item: Color; index: number }) => (
       <View
@@ -265,105 +214,25 @@ export default function ColorsOverviewScreen() {
 
   return (
     <ThemedView style={styles.container}>
-      <BottomSheetModal
+      <ColorDetailBottomSheet
         ref={detailSheetRef}
-        backgroundStyle={{
-          backgroundColor: theme.background,
-          borderTopLeftRadius: 20,
-          borderTopRightRadius: 20,
-        }}
-        backdropComponent={renderDetailBackdrop}
-      >
-        <ColorDetailContent
-          color={detailParams}
-          isFavorite={
-            detailParams
-              ? favoriteColorIds.includes(detailParams.color.id)
-              : false
-          }
-          onToggleFavorite={() =>
-            detailParams && handleFavorite(detailParams.color)
-          }
-        />
-      </BottomSheetModal>
+        color={detailParams}
+        isFavorite={
+          detailParams
+            ? favoriteColorIds.includes(detailParams.color.id)
+            : false
+        }
+        onToggleFavorite={() =>
+          detailParams && handleFavorite(detailParams.color)
+        }
+      />
 
-      <BottomSheetModal
+      <SeriesSelectBottomSheet
         ref={seriesFilterSheetRef}
-        snapPoints={["60%", "90%"]}
-        backgroundStyle={{
-          backgroundColor: theme.background,
-          borderTopLeftRadius: 20,
-          borderTopRightRadius: 20,
-        }}
-        backdropComponent={renderSeriesSheetBackdrop}
-      >
-        <BottomSheetScrollView
-          contentContainerStyle={styles.seriesSheetContent}
-        >
-          <ThemedText
-            style={[styles.sectionLabel, { color: theme.textSecondary }]}
-          >
-            {t("palettes.selectSeries")}
-          </ThemedText>
-          <ThemedText
-            style={[styles.sectionSubtitle, { color: theme.textSecondary }]}
-          >
-            {t("palettes.selectSeriesSubtitle")}
-          </ThemedText>
-          <View style={styles.seriesList}>
-            {allSeries.map((s: SeriesWithCountAndBrand) => {
-              const isSelected = selectedSeriesIds.has(s.id);
-              return (
-                <TouchableOpacity
-                  key={s.id}
-                  style={[
-                    styles.seriesRow,
-                    { borderBottomColor: theme.border },
-                  ]}
-                  onPress={() => toggleSeriesSelection(s.id)}
-                  activeOpacity={0.7}
-                  accessibilityRole="checkbox"
-                  accessibilityState={{ checked: isSelected }}
-                >
-                  {isSelected ? (
-                    <MaterialIcons
-                      name="check-box"
-                      size={24}
-                      color={theme.tint}
-                    />
-                  ) : (
-                    <MaterialIcons
-                      name="check-box-outline-blank"
-                      size={24}
-                      color={theme.icon}
-                    />
-                  )}
-                  <View style={styles.seriesLabelWrap}>
-                    <ThemedText
-                      style={styles.seriesName}
-                      numberOfLines={1}
-                      ellipsizeMode="tail"
-                    >
-                      {s.name}
-                    </ThemedText>
-                    <ThemedText
-                      style={[
-                        styles.seriesMeta,
-                        { color: theme.textSecondary },
-                      ]}
-                      numberOfLines={1}
-                      ellipsizeMode="tail"
-                    >
-                      {s.brandName} ·{" "}
-                      {t("colors.colorCount", { count: s.colorCount })}
-                    </ThemedText>
-                  </View>
-                </TouchableOpacity>
-              );
-            })}
-          </View>
-        </BottomSheetScrollView>
-      </BottomSheetModal>
+        series={allSeries}
+        selectedSeriesIds={selectedSeriesIds}
+        onToggleSeries={toggleSeriesSelection}
+      />
 
       <View style={styles.searchWrap}>
         <TextInput
@@ -382,18 +251,20 @@ export default function ColorsOverviewScreen() {
           returnKeyType="search"
         />
         {searchQuery.length > 0 && (
-          <TouchableOpacity
+          <Button
+            variant="ghost"
+            size="icon"
             style={styles.searchClearBtn}
             onPress={() => setSearchQuery("")}
-            accessibilityRole="button"
             accessibilityLabel={t("common.clear")}
-          >
-            <IconSymbol
-              name="xmark.circle.fill"
-              size={22}
-              color={theme.textSecondary}
-            />
-          </TouchableOpacity>
+            icon={
+              <IconSymbol
+                name="xmark.circle.fill"
+                size={22}
+                color={theme.textSecondary}
+              />
+            }
+          />
         )}
       </View>
 
@@ -446,41 +317,5 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: "row",
     marginBottom: GAP,
-  },
-  seriesSheetContent: {
-    paddingHorizontal: Spacing.md,
-    paddingBottom: Spacing.xl * 2,
-  },
-  sectionLabel: {
-    fontSize: Typography.fontSize.sm,
-    fontWeight: Typography.fontWeight.semibold,
-    marginBottom: Spacing.sm,
-    textTransform: "uppercase",
-  },
-  sectionSubtitle: {
-    fontSize: Typography.fontSize.sm,
-    marginBottom: Spacing.md,
-  },
-  seriesList: {
-    marginBottom: Spacing.lg,
-  },
-  seriesRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingVertical: Spacing.sm,
-    borderBottomWidth: 1,
-  },
-  seriesLabelWrap: {
-    flex: 1,
-    marginLeft: Spacing.sm,
-    minWidth: 0,
-  },
-  seriesName: {
-    fontSize: Typography.fontSize.md,
-    fontWeight: Typography.fontWeight.semibold,
-  },
-  seriesMeta: {
-    fontSize: Typography.fontSize.sm,
-    marginTop: 2,
   },
 });

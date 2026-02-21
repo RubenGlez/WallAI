@@ -2,11 +2,15 @@ import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Slider from "@react-native-community/slider";
 import * as ImagePicker from "expo-image-picker";
 import { useLocalSearchParams, useNavigation, useRouter } from "expo-router";
-import React, { useCallback, useEffect, useLayoutEffect, useMemo, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useState,
+} from "react";
 import { useTranslation } from "react-i18next";
 import {
-  ActivityIndicator,
-  Dimensions,
   Image,
   KeyboardAvoidingView,
   Modal,
@@ -23,6 +27,7 @@ import Animated, {
   useSharedValue,
 } from "react-native-reanimated";
 
+import { Button } from "@/components/button";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import {
@@ -35,10 +40,8 @@ import {
 import { useColorScheme } from "@/hooks/use-color-scheme";
 import { useDoodlesStore } from "@/stores/useDoodlesStore";
 
-const { height: SCREEN_HEIGHT } = Dimensions.get("window");
 const TAB_BAR_HEIGHT = 48;
 const CONTENT_PADDING = Spacing.md;
-const CONTENT_HEIGHT = SCREEN_HEIGHT - TAB_BAR_HEIGHT - 120;
 const DEFAULT_SKETCH_OPACITY = 0.85;
 const DEFAULT_WALL_OPACITY = 1;
 const TOOLBAR_ICON_SIZE = 40;
@@ -377,19 +380,17 @@ export default function DoodlesCreateScreen() {
             style={styles.singleImage}
             resizeMode="contain"
           />
-          <TouchableOpacity
+          <Button
+            variant="outline"
+            size="sm"
             style={[
               styles.replaceBtn,
               { backgroundColor: theme.card, borderColor: theme.border },
             ]}
             onPress={() => setWallUri(null)}
           >
-            <ThemedText
-              style={[styles.replaceBtnText, { color: theme.textSecondary }]}
-            >
-              {t("doodles.replaceImage")}
-            </ThemedText>
-          </TouchableOpacity>
+            {t("doodles.replaceImage")}
+          </Button>
         </View>
       );
     }
@@ -415,19 +416,17 @@ export default function DoodlesCreateScreen() {
             style={styles.singleImage}
             resizeMode="contain"
           />
-          <TouchableOpacity
+          <Button
+            variant="outline"
+            size="sm"
             style={[
               styles.replaceBtn,
               { backgroundColor: theme.card, borderColor: theme.border },
             ]}
             onPress={() => setSketchUri(null)}
           >
-            <ThemedText
-              style={[styles.replaceBtnText, { color: theme.textSecondary }]}
-            >
-              {t("doodles.replaceImage")}
-            </ThemedText>
-          </TouchableOpacity>
+            {t("doodles.replaceImage")}
+          </Button>
         </View>
       );
     }
@@ -703,29 +702,16 @@ export default function DoodlesCreateScreen() {
               autoFocus
             />
             <View style={styles.modalActions}>
-              <TouchableOpacity
-                style={[styles.modalButton, { borderColor: theme.border }]}
+              <Button
+                variant="outline"
+                size="md"
                 onPress={() => setShowNameModal(false)}
               >
-                <ThemedText>{t("common.cancel")}</ThemedText>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={[
-                  styles.modalButton,
-                  styles.modalButtonPrimary,
-                  { backgroundColor: theme.tint },
-                ]}
-                onPress={handleConfirmSave}
-              >
-                <ThemedText
-                  style={[
-                    styles.modalButtonPrimaryText,
-                    { color: theme.background },
-                  ]}
-                >
-                  {t("common.save")}
-                </ThemedText>
-              </TouchableOpacity>
+                {t("common.cancel")}
+              </Button>
+              <Button variant="primary" size="md" onPress={handleConfirmSave}>
+                {t("common.save")}
+              </Button>
             </View>
           </View>
         </KeyboardAvoidingView>
@@ -871,46 +857,39 @@ function PlaceholderSlot({
         {label}
       </ThemedText>
       <View style={styles.placeholderButtons}>
-        <TouchableOpacity
+        <Button
+          variant="secondary"
+          size="md"
+          icon={
+            <MaterialIcons name="camera-alt" size={24} color={theme.tint} />
+          }
           style={[
             styles.placeholderBtn,
             { backgroundColor: theme.card, borderColor: theme.border },
           ]}
           onPress={onTakePhoto}
           disabled={loading}
-          accessibilityRole="button"
+          loading={loading}
           accessibilityLabel={t("doodles.takePhoto")}
         >
-          {loading ? (
-            <ActivityIndicator size="small" color={theme.tint} />
-          ) : (
-            <>
-              <MaterialIcons name="camera-alt" size={24} color={theme.tint} />
-              <ThemedText
-                style={[styles.placeholderBtnText, { color: theme.text }]}
-              >
-                {t("doodles.takePhoto")}
-              </ThemedText>
-            </>
-          )}
-        </TouchableOpacity>
-        <TouchableOpacity
+          {t("doodles.takePhoto")}
+        </Button>
+        <Button
+          variant="secondary"
+          size="md"
+          icon={
+            <MaterialIcons name="photo-library" size={24} color={theme.tint} />
+          }
           style={[
             styles.placeholderBtn,
             { backgroundColor: theme.card, borderColor: theme.border },
           ]}
           onPress={onPickGallery}
           disabled={loading}
-          accessibilityRole="button"
           accessibilityLabel={t("doodles.pickFromGallery")}
         >
-          <MaterialIcons name="photo-library" size={24} color={theme.tint} />
-          <ThemedText
-            style={[styles.placeholderBtnText, { color: theme.text }]}
-          >
-            {t("doodles.pickFromGallery")}
-          </ThemedText>
-        </TouchableOpacity>
+          {t("doodles.pickFromGallery")}
+        </Button>
       </View>
     </View>
   );
@@ -969,10 +948,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     minHeight: 48,
   },
-  placeholderBtnText: {
-    fontSize: Typography.fontSize.sm,
-    fontWeight: Typography.fontWeight.medium,
-  },
   singleImageWrap: {
     flex: 1,
     position: "relative",
@@ -990,9 +965,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.md,
     borderRadius: BorderRadius.md,
     borderWidth: 1,
-  },
-  replaceBtnText: {
-    fontSize: Typography.fontSize.sm,
   },
   superpositionWrap: {
     flex: 1,
@@ -1085,15 +1057,5 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     gap: Spacing.sm,
     justifyContent: "flex-end",
-  },
-  modalButton: {
-    paddingVertical: Spacing.sm,
-    paddingHorizontal: Spacing.lg,
-    borderRadius: BorderRadius.md,
-    borderWidth: 1,
-  },
-  modalButtonPrimary: {},
-  modalButtonPrimaryText: {
-    fontWeight: Typography.fontWeight.semibold,
   },
 });

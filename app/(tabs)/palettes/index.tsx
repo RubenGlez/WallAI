@@ -10,6 +10,8 @@ import {
   View,
 } from "react-native";
 
+import { Button } from "@/components/button";
+import { ScreenHeader } from "@/components/screen-header";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import {
@@ -134,12 +136,10 @@ export default function PalettesIndexScreen() {
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
-        <ThemedText type="title" style={styles.title}>
-          {t("palettes.myPalettes")}
-        </ThemedText>
-        <ThemedText style={[styles.subtitle, { color: theme.textSecondary }]}>
-          {t("palettes.subtitle")}
-        </ThemedText>
+        <ScreenHeader
+          title={t("palettes.myPalettes")}
+          subtitle={t("palettes.subtitle")}
+        />
 
         {palettes.length === 0 ? (
           <TouchableOpacity
@@ -199,30 +199,26 @@ export default function PalettesIndexScreen() {
         style={[styles.fabContainer, { bottom: fabBottom }]}
         pointerEvents="box-none"
       >
-        <TouchableOpacity
+        <Button
+          variant="secondary"
+          size="icon"
           style={[
             styles.fab,
             styles.fabSecondary,
             { backgroundColor: theme.card, borderColor: theme.border },
           ]}
           onPress={handleImportFromImage}
-          accessibilityRole="button"
           accessibilityLabel={t("palettes.importFromImage")}
-        >
-          <MaterialIcons name="image" size={24} color={theme.tint} />
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[
-            styles.fab,
-            styles.fabPrimary,
-            { backgroundColor: theme.tint },
-          ]}
+          icon={<MaterialIcons name="image" size={24} color={theme.tint} />}
+        />
+        <Button
+          variant="primary"
+          size="icon"
+          style={[styles.fab, styles.fabPrimary]}
           onPress={handleCreateNew}
-          accessibilityRole="button"
           accessibilityLabel={t("palettes.createNew")}
-        >
-          <MaterialIcons name="add" size={28} color={theme.background} />
-        </TouchableOpacity>
+          icon={<MaterialIcons name="add" size={28} color={theme.background} />}
+        />
       </View>
     </ThemedView>
   );
@@ -238,13 +234,6 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     paddingBottom: Spacing.xxl + 120,
-  },
-  title: {
-    marginBottom: Spacing.xs,
-  },
-  subtitle: {
-    marginBottom: Spacing.lg,
-    opacity: 0.9,
   },
   fabContainer: {
     position: "absolute",
