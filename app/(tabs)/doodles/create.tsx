@@ -1,5 +1,5 @@
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import { useLocalSearchParams, useRouter } from 'expo-router';
+import { useLocalSearchParams, useRouter, useNavigation } from 'expo-router';
 import * as ImagePicker from 'expo-image-picker';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -56,6 +56,7 @@ export default function DoodlesCreateScreen() {
   const colorScheme = useColorScheme() ?? 'light';
   const theme = Colors[colorScheme];
   const router = useRouter();
+  const navigation = useNavigation();
   const getDoodle = useDoodlesStore((s) => s.getDoodle);
   const addDoodle = useDoodlesStore((s) => s.addDoodle);
   const updateDoodle = useDoodlesStore((s) => s.updateDoodle);
@@ -77,6 +78,16 @@ export default function DoodlesCreateScreen() {
       }
     }
   }, [doodleId, getDoodle]);
+
+  useEffect(() => {
+    if (doodleId) {
+      const doodle = getDoodle(doodleId);
+      const title = doodle?.name?.trim() || t('doodles.defaultDoodleName');
+      navigation.setOptions({ title });
+    } else {
+      navigation.setOptions({ title: t('doodles.createDoodle') });
+    }
+  }, [doodleId, getDoodle, t, navigation]);
 
   const pickFromGallery = useCallback(
     async (slot: ImageSlot) => {
