@@ -23,8 +23,9 @@
   },
   "home": {
     "title": "Hey!",
+    "titleWithName": "Hey {{name}}!",
+    "subtitle": "What are we painting today?",
     "tagline": "From sketch to wall, guided by AI",
-    "subtitle": "Plan your graffiti pieces with real spray colors and precise wall overlays",
     "placeholder": "Home screen — coming soon."
   },
   "colors": {
@@ -106,6 +107,9 @@
   },
   "profile": {
     "placeholder": "Settings and favorites — coming soon.",
+    "akaSection": "Your aka",
+    "akaPlaceholder": "Graffiti name",
+    "akaHint": "We'll use it to greet you on the home screen.",
     "appearance": "Appearance",
     "darkMode": "Dark mode"
   },

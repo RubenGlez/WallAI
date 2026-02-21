@@ -19,6 +19,7 @@ import {
   type SeriesWithCountAndBrand,
 } from '@/stores/useCatalogStore';
 import { useFavoritesStore } from '@/stores/useFavoritesStore';
+import { useProfileStore } from '@/stores/useProfileStore';
 
 function SeriesCard({
   series,
@@ -65,6 +66,7 @@ export default function HomeScreen() {
   const router = useRouter();
   const colorScheme = useColorScheme() ?? 'light';
   const theme = Colors[colorScheme];
+  const aka = useProfileStore((s) => s.aka);
 
   const favoriteSeriesIds = useFavoritesStore((s) => s.favoriteSeriesIds);
   const toggleFavoriteSeries = useFavoritesStore((s) => s.toggleFavoriteSeries);
@@ -83,10 +85,10 @@ export default function HomeScreen() {
         showsVerticalScrollIndicator={false}
       >
         <ThemedText type="title" style={styles.title}>
-          {t('home.title')}
+          {aka.trim() ? t('home.titleWithName', { name: aka.trim() }) : t('home.title')}
         </ThemedText>
         <ThemedText style={[styles.subtitle, { color: theme.textSecondary }]}>
-          {t('colors.overviewSubtitle')}
+          {t('home.subtitle')}
         </ThemedText>
 
         <ThemedText style={[styles.sectionTitle, styles.sectionTitleSpaced, { color: theme.textSecondary }]}>
@@ -155,9 +157,11 @@ const styles = StyleSheet.create({
     paddingBottom: Spacing.xxl,
   },
   title: {
-    marginBottom: Spacing.xs,
+    marginBottom: Spacing.sm,
   },
   subtitle: {
+    fontSize: Typography.fontSize.md,
+    lineHeight: 24,
     marginBottom: Spacing.lg,
     opacity: 0.9,
   },

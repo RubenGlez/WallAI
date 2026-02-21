@@ -23,8 +23,9 @@
   },
   "home": {
     "title": "Hey!",
+    "titleWithName": "Hey {{name}} !",
+    "subtitle": "Qu'est-ce qu'on peint aujourd'hui ?",
     "tagline": "De l'esquisse au mur, guidé par l'IA",
-    "subtitle": "Planifiez vos pièces de graffiti avec de vraies couleurs de spray et des superpositions précises de mur",
     "placeholder": "Écran d'accueil — bientôt disponible."
   },
   "colors": {
@@ -106,6 +107,9 @@
   },
   "profile": {
     "placeholder": "Réglages et favoris — bientôt.",
+    "akaSection": "Ton aka",
+    "akaPlaceholder": "Nom de graffiti",
+    "akaHint": "On l'utilisera pour te saluer sur l'écran d'accueil.",
     "appearance": "Apparence",
     "darkMode": "Mode sombre"
   },

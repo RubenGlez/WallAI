@@ -23,8 +23,9 @@
   },
   "home": {
     "title": "Hey!",
+    "titleWithName": "Hey {{name}}!",
+    "subtitle": "Was malen wir heute?",
     "tagline": "Von der Skizze zur Wand, geleitet von KI",
-    "subtitle": "Planen Sie Ihre Graffiti-Stücke mit echten Sprühfarben und präzisen Wandüberlagerungen",
     "placeholder": "Startbildschirm — in Kürze."
   },
   "colors": {
@@ -106,6 +107,9 @@
   },
   "profile": {
     "placeholder": "Einstellungen und Favoriten — demnächst.",
+    "akaSection": "Dein Aka",
+    "akaPlaceholder": "Graffiti-Name",
+    "akaHint": "Wir nutzen ihn zur Begrüßung auf dem Startbildschirm.",
     "appearance": "Darstellung",
     "darkMode": "Dunkelmodus"
   },

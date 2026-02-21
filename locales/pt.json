@@ -23,8 +23,9 @@
   },
   "home": {
     "title": "Hey!",
+    "titleWithName": "Hey {{name}}!",
+    "subtitle": "O que pintamos hoje?",
     "tagline": "Do esboço à parede, guiado por IA",
-    "subtitle": "Planeje suas peças de graffiti com cores de spray reais e sobreposições precisas de parede",
     "placeholder": "Tela inicial — em breve."
   },
   "colors": {
@@ -106,6 +107,9 @@
   },
   "profile": {
     "placeholder": "Configurações e favoritos — em breve.",
+    "akaSection": "Seu aka",
+    "akaPlaceholder": "Nome de graffiti",
+    "akaHint": "Usaremos para te cumprimentar na tela inicial.",
     "appearance": "Aparência",
     "darkMode": "Modo escuro"
   },
