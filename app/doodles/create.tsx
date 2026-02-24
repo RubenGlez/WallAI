@@ -473,7 +473,7 @@ export default function DoodlesCreateScreen() {
     : setSketchOpacityAmount;
 
   return (
-    <ThemedView style={styles.container} safeArea="bottom">
+    <ThemedView style={styles.container} safeArea={true}>
       <HeaderBackButton title={headerTitle} />
       <Tabs
         value={activeTab}

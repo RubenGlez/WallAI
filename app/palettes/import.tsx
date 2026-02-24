@@ -257,7 +257,7 @@ export default function ImportFromImageScreen() {
   );
 
   return (
-    <ThemedView style={styles.container}>
+    <ThemedView style={styles.container} safeArea="top">
       <HeaderBackButton
         title={t("palettes.importFromImage")}
         right={

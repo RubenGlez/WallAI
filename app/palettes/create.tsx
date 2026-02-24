@@ -198,7 +198,7 @@ export default function CreatePaletteScreen() {
   );
 
   return (
-    <ThemedView style={styles.container}>
+    <ThemedView style={styles.container} safeArea="top">
       <HeaderBackButton
         title={headerTitle}
         right={

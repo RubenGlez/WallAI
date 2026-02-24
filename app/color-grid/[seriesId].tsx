@@ -118,7 +118,7 @@ export default function ColorGridScreen() {
   );
 
   return (
-    <ThemedView style={styles.container}>
+    <ThemedView style={styles.container} safeArea="top">
       <HeaderBackButton
         title={series?.name ?? t("colors.title")}
         right={
@@ -205,7 +205,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: HORIZONTAL_PADDING,
-    paddingTop: Spacing.md,
   },
   searchWrap: {
     position: "relative",

@@ -104,7 +104,7 @@ export default function CatalogScreen() {
   );
 
   return (
-    <ThemedView style={styles.container}>
+    <ThemedView style={styles.container} safeArea="top">
       <ColorDetailBottomSheet
         ref={detailSheetRef}
         color={detailParams}
