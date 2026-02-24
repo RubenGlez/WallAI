@@ -1,8 +1,18 @@
-import { BottomSheetBackdrop, BottomSheetModal, BottomSheetScrollView } from '@gorhom/bottom-sheet';
-import { useLocalSearchParams, useNavigation, useRouter } from 'expo-router';
-import * as ImagePicker from 'expo-image-picker';
-import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import {
+  BottomSheetBackdrop,
+  BottomSheetModal,
+  BottomSheetScrollView,
+} from "@gorhom/bottom-sheet";
+import * as ImagePicker from "expo-image-picker";
+import { useLocalSearchParams, useRouter } from "expo-router";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+import { useTranslation } from "react-i18next";
 import {
   ActivityIndicator,
   Image,
@@ -10,31 +20,33 @@ import {
   StyleSheet,
   TouchableOpacity,
   View,
-} from 'react-native';
-import { getColors } from 'react-native-image-colors';
+} from "react-native";
+import { getColors } from "react-native-image-colors";
 
-import { Button } from '@/components/button';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { SaveNameModal } from '@/components/save-name-modal';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { BorderRadius, Colors, Spacing, Typography } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
-import { getColorDisplayName } from '@/lib/color';
-import { extractHexPalette, findClosestColors } from '@/lib/colorMatch';
+import { Button } from "@/components/button";
+import { HeaderBackButton } from "@/components/header-back-button";
+import { SaveNameModal } from "@/components/save-name-modal";
+import { ThemedText } from "@/components/themed-text";
+import { ThemedView } from "@/components/themed-view";
+import { IconSymbol } from "@/components/ui/icon-symbol";
+import { BorderRadius, Colors, Spacing, Typography } from "@/constants/theme";
+import { useColorScheme } from "@/hooks/use-color-scheme";
+import { getColorDisplayName } from "@/lib/color";
+import { extractHexPalette, findClosestColors } from "@/lib/colorMatch";
 import {
-  getColorsBySeriesId,
   getAllSeriesWithCount,
-} from '@/stores/useCatalogStore';
-import { usePalettesStore } from '@/stores/usePalettesStore';
-import type { Color, SeriesWithCountAndBrand } from '@/types';
+  getColorsBySeriesId,
+} from "@/stores/useCatalogStore";
+import { usePalettesStore } from "@/stores/usePalettesStore";
+import type { Color, SeriesWithCountAndBrand } from "@/types";
 
 export default function ImportFromImageScreen() {
-  const { imageUri: imageUriParam } = useLocalSearchParams<{ imageUri?: string }>();
+  const { imageUri: imageUriParam } = useLocalSearchParams<{
+    imageUri?: string;
+  }>();
   const { t, i18n } = useTranslation();
   const router = useRouter();
-  const navigation = useNavigation();
-  const colorScheme = useColorScheme() ?? 'light';
+  const colorScheme = useColorScheme() ?? "light";
   const theme = Colors[colorScheme];
   const addPalette = usePalettesStore((s) => s.addPalette);
 
@@ -42,13 +54,17 @@ export default function ImportFromImageScreen() {
 
   const [imageUri, setImageUri] = useState<string | null>(null);
   const [extractedHexes, setExtractedHexes] = useState<string[]>([]);
-  const [selectedSeriesIds, setSelectedSeriesIds] = useState<Set<string>>(new Set());
+  const [selectedSeriesIds, setSelectedSeriesIds] = useState<Set<string>>(
+    new Set(),
+  );
   /** For each extracted hex, the catalog color id the user selected (optional). */
-  const [selectedCatalogColorByHex, setSelectedCatalogColorByHex] = useState<Record<string, string>>({});
+  const [selectedCatalogColorByHex, setSelectedCatalogColorByHex] = useState<
+    Record<string, string>
+  >({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showNameModal, setShowNameModal] = useState(false);
-  const [paletteName, setPaletteName] = useState('');
+  const [paletteName, setPaletteName] = useState("");
   const seriesFilterSheetRef = useRef<BottomSheetModal>(null);
   const hasInitializedSeriesSelection = useRef(false);
   const hasProcessedParamImage = useRef(false);
@@ -61,25 +77,12 @@ export default function ImportFromImageScreen() {
     }
   }, [allSeries]);
 
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      title: t('palettes.importFromImage'),
-      headerRight: () => (
-        <Button
-          variant="ghost"
-          size="icon"
-          onPress={() => seriesFilterSheetRef.current?.present()}
-          accessibilityLabel={t('palettes.selectSeries')}
-          icon={<IconSymbol name="line.3.horizontal.decrease.circle.fill" size={24} color={theme.tint} />}
-        />
-      ),
-    });
-  }, [navigation, t, theme.tint]);
-
   const processImageUri = useCallback(async (uri: string) => {
     setImageUri(uri);
-    const colorsResult = await getColors(uri, { fallback: '#000000' });
-    const hexes = extractHexPalette(colorsResult as unknown as Record<string, string>);
+    const colorsResult = await getColors(uri, { fallback: "#000000" });
+    const hexes = extractHexPalette(
+      colorsResult as unknown as Record<string, string>,
+    );
     setExtractedHexes(hexes);
     const series = getAllSeriesWithCount();
     setSelectedSeriesIds(new Set(series.map((s) => s.id)));
@@ -97,15 +100,15 @@ export default function ImportFromImageScreen() {
 
   const pickImage = useCallback(async () => {
     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    if (status !== 'granted') {
-      setError(t('palettes.permissionDenied'));
+    if (status !== "granted") {
+      setError(t("palettes.permissionDenied"));
       return;
     }
     setError(null);
     setLoading(true);
     try {
       const result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ['images'],
+        mediaTypes: ["images"],
         allowsEditing: false,
         quality: 0.8,
       });
@@ -115,7 +118,7 @@ export default function ImportFromImageScreen() {
       }
       await processImageUri(result.assets[0].uri);
     } catch (e) {
-      setError(e instanceof Error ? e.message : t('common.error'));
+      setError(e instanceof Error ? e.message : t("common.error"));
     } finally {
       setLoading(false);
     }
@@ -123,8 +126,8 @@ export default function ImportFromImageScreen() {
 
   const takePhoto = useCallback(async () => {
     const { status } = await ImagePicker.requestCameraPermissionsAsync();
-    if (status !== 'granted') {
-      setError(t('palettes.cameraPermissionDenied'));
+    if (status !== "granted") {
+      setError(t("palettes.cameraPermissionDenied"));
       return;
     }
     setError(null);
@@ -140,7 +143,7 @@ export default function ImportFromImageScreen() {
       }
       await processImageUri(result.assets[0].uri);
     } catch (e) {
-      setError(e instanceof Error ? e.message : t('common.error'));
+      setError(e instanceof Error ? e.message : t("common.error"));
     } finally {
       setLoading(false);
     }
@@ -156,22 +159,25 @@ export default function ImportFromImageScreen() {
     setSelectedCatalogColorByHex({});
   }, []);
 
-  const selectCatalogColorForHex = useCallback((hex: string, catalogColorId: string | null) => {
-    setSelectedCatalogColorByHex((prev) => {
-      if (catalogColorId == null) {
-        const next = { ...prev };
-        delete next[hex];
-        return next;
-      }
-      const current = prev[hex];
-      if (current === catalogColorId) {
-        const next = { ...prev };
-        delete next[hex];
-        return next;
-      }
-      return { ...prev, [hex]: catalogColorId };
-    });
-  }, []);
+  const selectCatalogColorForHex = useCallback(
+    (hex: string, catalogColorId: string | null) => {
+      setSelectedCatalogColorByHex((prev) => {
+        if (catalogColorId == null) {
+          const next = { ...prev };
+          delete next[hex];
+          return next;
+        }
+        const current = prev[hex];
+        if (current === catalogColorId) {
+          const next = { ...prev };
+          delete next[hex];
+          return next;
+        }
+        return { ...prev, [hex]: catalogColorId };
+      });
+    },
+    [],
+  );
 
   const catalogColorsForMatch = useMemo(() => {
     const seen = new Set<string>();
@@ -190,12 +196,13 @@ export default function ImportFromImageScreen() {
 
   const selectedSeriesWithNames = useMemo(
     () => allSeries.filter((s) => selectedSeriesIds.has(s.id)),
-    [allSeries, selectedSeriesIds]
+    [allSeries, selectedSeriesIds],
   );
 
   /** For each extracted hex, up to 3 similar colors per selected series. */
   const similaritiesPerHex = useMemo(() => {
-    if (extractedHexes.length === 0 || selectedSeriesWithNames.length === 0) return [];
+    if (extractedHexes.length === 0 || selectedSeriesWithNames.length === 0)
+      return [];
     return extractedHexes.map((hex) => ({
       hex,
       bySeries: selectedSeriesWithNames.map((series) => ({
@@ -208,7 +215,11 @@ export default function ImportFromImageScreen() {
 
   const selectedColorsForPalette = useMemo(() => {
     return extractedHexes
-      .map((hex) => catalogColorsForMatch.find((c) => c.id === selectedCatalogColorByHex[hex]))
+      .map((hex) =>
+        catalogColorsForMatch.find(
+          (c) => c.id === selectedCatalogColorByHex[hex],
+        ),
+      )
       .filter((c): c is Color => c != null);
   }, [extractedHexes, catalogColorsForMatch, selectedCatalogColorByHex]);
 
@@ -218,32 +229,56 @@ export default function ImportFromImageScreen() {
   }, [selectedColorsForPalette.length]);
 
   const handleConfirmSave = useCallback(() => {
-    const name = paletteName.trim() || t('palettes.defaultPaletteName');
+    const name = paletteName.trim() || t("palettes.defaultPaletteName");
     addPalette({
       name,
       colors: selectedColorsForPalette,
     });
     setShowNameModal(false);
-    setPaletteName('');
-    router.replace('/(tabs)/palettes');
+    setPaletteName("");
+    router.replace("/(tabs)/palettes");
   }, [addPalette, paletteName, selectedColorsForPalette, t, router]);
 
   const hasImage = imageUri != null && extractedHexes.length > 0;
   const hasSeriesSelected = selectedSeriesIds.size > 0;
-  const showEquivalents = hasImage && hasSeriesSelected && similaritiesPerHex.length > 0;
+  const showEquivalents =
+    hasImage && hasSeriesSelected && similaritiesPerHex.length > 0;
 
   const renderSeriesSheetBackdrop = useCallback(
     (props: React.ComponentProps<typeof BottomSheetBackdrop>) => (
-      <BottomSheetBackdrop {...props} appearsOnIndex={0} disappearsOnIndex={-1} opacity={0.5} />
+      <BottomSheetBackdrop
+        {...props}
+        appearsOnIndex={0}
+        disappearsOnIndex={-1}
+        opacity={0.5}
+      />
     ),
-    []
+    [],
   );
 
   return (
     <ThemedView style={styles.container}>
+      <HeaderBackButton
+        title={t("palettes.importFromImage")}
+        right={
+          <Button
+            variant="ghost"
+            size="icon"
+            onPress={() => seriesFilterSheetRef.current?.present()}
+            accessibilityLabel={t("palettes.selectSeries")}
+            icon={
+              <IconSymbol
+                name="line.3.horizontal.decrease.circle.fill"
+                size={24}
+                color={theme.tint}
+              />
+            }
+          />
+        }
+      />
       <BottomSheetModal
         ref={seriesFilterSheetRef}
-        snapPoints={['60%', '90%']}
+        snapPoints={["60%", "90%"]}
         backgroundStyle={{
           backgroundColor: theme.background,
           borderTopLeftRadius: 20,
@@ -251,12 +286,18 @@ export default function ImportFromImageScreen() {
         }}
         backdropComponent={renderSeriesSheetBackdrop}
       >
-        <BottomSheetScrollView contentContainerStyle={styles.seriesSheetContent}>
-          <ThemedText style={[styles.sectionLabel, { color: theme.textSecondary }]}>
-            {t('palettes.selectSeries')}
+        <BottomSheetScrollView
+          contentContainerStyle={styles.seriesSheetContent}
+        >
+          <ThemedText
+            style={[styles.sectionLabel, { color: theme.textSecondary }]}
+          >
+            {t("palettes.selectSeries")}
           </ThemedText>
-          <ThemedText style={[styles.sectionSubtitle, { color: theme.textSecondary }]}>
-            {t('palettes.selectSeriesSubtitle')}
+          <ThemedText
+            style={[styles.sectionSubtitle, { color: theme.textSecondary }]}
+          >
+            {t("palettes.selectSeriesSubtitle")}
           </ThemedText>
           <View style={styles.seriesList}>
             {allSeries.map((s: SeriesWithCountAndBrand) => {
@@ -264,23 +305,42 @@ export default function ImportFromImageScreen() {
               return (
                 <TouchableOpacity
                   key={s.id}
-                  style={[styles.seriesRow, { borderBottomColor: theme.border }]}
+                  style={[
+                    styles.seriesRow,
+                    { borderBottomColor: theme.border },
+                  ]}
                   onPress={() => toggleSeriesSelection(s.id)}
                   activeOpacity={0.7}
                   accessibilityRole="checkbox"
                   accessibilityState={{ checked: isSelected }}
                 >
                   {isSelected ? (
-                    <IconSymbol name="checkmark.square.fill" size={24} color={theme.tint} />
+                    <IconSymbol
+                      name="checkmark.square.fill"
+                      size={24}
+                      color={theme.tint}
+                    />
                   ) : (
                     <IconSymbol name="square" size={24} color={theme.icon} />
                   )}
                   <View style={styles.seriesLabelWrap}>
-                    <ThemedText style={styles.seriesName} numberOfLines={1} ellipsizeMode="tail">
+                    <ThemedText
+                      style={styles.seriesName}
+                      numberOfLines={1}
+                      ellipsizeMode="tail"
+                    >
                       {s.name}
                     </ThemedText>
-                    <ThemedText style={[styles.seriesMeta, { color: theme.textSecondary }]} numberOfLines={1} ellipsizeMode="tail">
-                      {s.brandName} · {t('colors.colorCount', { count: s.colorCount })}
+                    <ThemedText
+                      style={[
+                        styles.seriesMeta,
+                        { color: theme.textSecondary },
+                      ]}
+                      numberOfLines={1}
+                      ellipsizeMode="tail"
+                    >
+                      {s.brandName} ·{" "}
+                      {t("colors.colorCount", { count: s.colorCount })}
                     </ThemedText>
                   </View>
                 </TouchableOpacity>
@@ -297,8 +357,13 @@ export default function ImportFromImageScreen() {
       >
         {!hasImage && !imageUriParam && (
           <View style={styles.pickSection}>
-            <ThemedText style={[styles.pickSectionSubtitle, { color: theme.textSecondary }]}>
-              {t('palettes.choosePhotoSubtitle')}
+            <ThemedText
+              style={[
+                styles.pickSectionSubtitle,
+                { color: theme.textSecondary },
+              ]}
+            >
+              {t("palettes.choosePhotoSubtitle")}
             </ThemedText>
             {loading ? (
               <View style={styles.pickLoadingWrap}>
@@ -309,20 +374,46 @@ export default function ImportFromImageScreen() {
                 <Button
                   variant="secondary"
                   size="lg"
-                  icon={<IconSymbol name="photo.on.rectangle.angled" size={32} color={theme.tint} style={styles.pickOptionIcon} />}
-                  style={[styles.pickOption, { backgroundColor: theme.backgroundSecondary, borderColor: theme.border }]}
+                  icon={
+                    <IconSymbol
+                      name="photo.on.rectangle.angled"
+                      size={32}
+                      color={theme.tint}
+                      style={styles.pickOptionIcon}
+                    />
+                  }
+                  style={[
+                    styles.pickOption,
+                    {
+                      backgroundColor: theme.backgroundSecondary,
+                      borderColor: theme.border,
+                    },
+                  ]}
                   onPress={pickImage}
                 >
-                  {t('palettes.selectFromGallery')}
+                  {t("palettes.selectFromGallery")}
                 </Button>
                 <Button
                   variant="secondary"
                   size="lg"
-                  icon={<IconSymbol name="camera.fill" size={32} color={theme.tint} style={styles.pickOptionIcon} />}
-                  style={[styles.pickOption, { backgroundColor: theme.backgroundSecondary, borderColor: theme.border }]}
+                  icon={
+                    <IconSymbol
+                      name="camera.fill"
+                      size={32}
+                      color={theme.tint}
+                      style={styles.pickOptionIcon}
+                    />
+                  }
+                  style={[
+                    styles.pickOption,
+                    {
+                      backgroundColor: theme.backgroundSecondary,
+                      borderColor: theme.border,
+                    },
+                  ]}
                   onPress={takePhoto}
                 >
-                  {t('palettes.takePhoto')}
+                  {t("palettes.takePhoto")}
                 </Button>
               </View>
             )}
@@ -336,13 +427,19 @@ export default function ImportFromImageScreen() {
         )}
 
         {error && (
-          <ThemedText style={[styles.error, { color: theme.error }]}>{error}</ThemedText>
+          <ThemedText style={[styles.error, { color: theme.error }]}>
+            {error}
+          </ThemedText>
         )}
 
         {hasImage && (
           <>
             <View style={styles.thumbnailWrap}>
-              <Image source={{ uri: imageUri! }} style={styles.thumbnail} resizeMode="cover" />
+              <Image
+                source={{ uri: imageUri! }}
+                style={styles.thumbnail}
+                resizeMode="cover"
+              />
               <View style={styles.swatchRow}>
                 {extractedHexes.map((hex) => (
                   <View
@@ -350,7 +447,7 @@ export default function ImportFromImageScreen() {
                     style={[
                       styles.miniSwatch,
                       { backgroundColor: hex },
-                      (hex === '#ffffff' || hex.startsWith('#fff')) && {
+                      (hex === "#ffffff" || hex.startsWith("#fff")) && {
                         borderWidth: 1,
                         borderColor: theme.border,
                       },
@@ -362,98 +459,168 @@ export default function ImportFromImageScreen() {
 
             {showEquivalents && (
               <>
-                <ThemedText style={[styles.sectionLabel, { color: theme.textSecondary }]}>
-                  {t('palettes.equivalents')}
+                <ThemedText
+                  style={[styles.sectionLabel, { color: theme.textSecondary }]}
+                >
+                  {t("palettes.equivalents")}
                 </ThemedText>
-                <ThemedText style={[styles.sectionSubtitle, { color: theme.textSecondary }]}>
-                  {t('palettes.selectMatchPerColor')}
+                <ThemedText
+                  style={[
+                    styles.sectionSubtitle,
+                    { color: theme.textSecondary },
+                  ]}
+                >
+                  {t("palettes.selectMatchPerColor")}
                 </ThemedText>
                 {similaritiesPerHex.map(({ hex, bySeries }) => {
                   const selectedId = selectedCatalogColorByHex[hex];
                   return (
-                    <View key={hex} style={[styles.extractedColorBlock, { borderColor: theme.border }]}>
-                      <View style={[styles.extractedColorHeader, { borderBottomColor: theme.border }]}>
+                    <View
+                      key={hex}
+                      style={[
+                        styles.extractedColorBlock,
+                        { borderColor: theme.border },
+                      ]}
+                    >
+                      <View
+                        style={[
+                          styles.extractedColorHeader,
+                          { borderBottomColor: theme.border },
+                        ]}
+                      >
                         <View
                           style={[
                             styles.originalSwatch,
                             { backgroundColor: hex },
-                            (hex === '#ffffff' || hex.startsWith('#fff')) && {
+                            (hex === "#ffffff" || hex.startsWith("#fff")) && {
                               borderWidth: 1,
                               borderColor: theme.border,
                             },
                           ]}
                         />
-                        <ThemedText style={[styles.extractedHexLabel, { color: theme.textSecondary }]}>
+                        <ThemedText
+                          style={[
+                            styles.extractedHexLabel,
+                            { color: theme.textSecondary },
+                          ]}
+                        >
                           {hex}
                         </ThemedText>
                       </View>
-                      {bySeries.map(({ seriesId, seriesName, matches }, seriesIndex) => (
-                        <View
-                          key={seriesId}
-                          style={[
-                            styles.seriesMatchesSection,
-                            seriesIndex > 0 && { borderTopWidth: 1, borderTopColor: theme.border },
-                          ]}
-                        >
-                          <ThemedText
-                            style={[styles.seriesMatchesLabel, { color: theme.textSecondary }]}
-                            numberOfLines={1}
+                      {bySeries.map(
+                        ({ seriesId, seriesName, matches }, seriesIndex) => (
+                          <View
+                            key={seriesId}
+                            style={[
+                              styles.seriesMatchesSection,
+                              seriesIndex > 0 && {
+                                borderTopWidth: 1,
+                                borderTopColor: theme.border,
+                              },
+                            ]}
                           >
-                            {seriesName}
-                          </ThemedText>
-                          {matches.map((match, matchIndex) => {
-                            const name = getColorDisplayName(match.catalogColor, i18n.language);
-                            const isSelected = selectedId === match.catalogColor.id;
-                            const isLastInSeries = matchIndex === matches.length - 1;
-                            return (
-                              <TouchableOpacity
-                                key={match.catalogColor.id}
-                                style={[
-                                  styles.similarRow,
-                                  isLastInSeries
-                                    ? { borderBottomWidth: 0 }
-                                    : { borderBottomWidth: 1, borderBottomColor: theme.border },
-                                  isSelected && { backgroundColor: theme.backgroundSecondary },
-                                ]}
-                                onPress={() =>
-                                  selectCatalogColorForHex(hex, isSelected ? null : match.catalogColor.id)
-                                }
-                                activeOpacity={0.7}
-                                accessibilityRole="radio"
-                                accessibilityState={{ checked: isSelected }}
-                              >
-                                <View
+                            <ThemedText
+                              style={[
+                                styles.seriesMatchesLabel,
+                                { color: theme.textSecondary },
+                              ]}
+                              numberOfLines={1}
+                            >
+                              {seriesName}
+                            </ThemedText>
+                            {matches.map((match, matchIndex) => {
+                              const name = getColorDisplayName(
+                                match.catalogColor,
+                                i18n.language,
+                              );
+                              const isSelected =
+                                selectedId === match.catalogColor.id;
+                              const isLastInSeries =
+                                matchIndex === matches.length - 1;
+                              return (
+                                <TouchableOpacity
+                                  key={match.catalogColor.id}
                                   style={[
-                                    styles.matchSwatch,
-                                    { backgroundColor: match.catalogColor.hex },
-                                    (match.catalogColor.hex === '#ffffff' ||
-                                      match.catalogColor.hex.startsWith('#fff')) && {
-                                      borderWidth: 1,
-                                      borderColor: theme.border,
+                                    styles.similarRow,
+                                    isLastInSeries
+                                      ? { borderBottomWidth: 0 }
+                                      : {
+                                          borderBottomWidth: 1,
+                                          borderBottomColor: theme.border,
+                                        },
+                                    isSelected && {
+                                      backgroundColor:
+                                        theme.backgroundSecondary,
                                     },
                                   ]}
-                                />
-                                <View style={styles.matchInfo}>
-                                  <ThemedText style={styles.matchName} numberOfLines={1}>
-                                    {name}
+                                  onPress={() =>
+                                    selectCatalogColorForHex(
+                                      hex,
+                                      isSelected ? null : match.catalogColor.id,
+                                    )
+                                  }
+                                  activeOpacity={0.7}
+                                  accessibilityRole="radio"
+                                  accessibilityState={{ checked: isSelected }}
+                                >
+                                  <View
+                                    style={[
+                                      styles.matchSwatch,
+                                      {
+                                        backgroundColor: match.catalogColor.hex,
+                                      },
+                                      (match.catalogColor.hex === "#ffffff" ||
+                                        match.catalogColor.hex.startsWith(
+                                          "#fff",
+                                        )) && {
+                                        borderWidth: 1,
+                                        borderColor: theme.border,
+                                      },
+                                    ]}
+                                  />
+                                  <View style={styles.matchInfo}>
+                                    <ThemedText
+                                      style={styles.matchName}
+                                      numberOfLines={1}
+                                    >
+                                      {name}
+                                    </ThemedText>
+                                    <ThemedText
+                                      style={[
+                                        styles.matchCode,
+                                        { color: theme.textSecondary },
+                                      ]}
+                                    >
+                                      {match.catalogColor.code}
+                                    </ThemedText>
+                                  </View>
+                                  <ThemedText
+                                    style={[
+                                      styles.similarity,
+                                      { color: theme.tint },
+                                    ]}
+                                  >
+                                    {match.similarity}%
                                   </ThemedText>
-                                  <ThemedText style={[styles.matchCode, { color: theme.textSecondary }]}>
-                                    {match.catalogColor.code}
-                                  </ThemedText>
-                                </View>
-                                <ThemedText style={[styles.similarity, { color: theme.tint }]}>
-                                  {match.similarity}%
-                                </ThemedText>
-                                {isSelected ? (
-                                  <IconSymbol name="checkmark.circle.fill" size={24} color={theme.tint} />
-                                ) : (
-                                  <IconSymbol name="circle" size={24} color={theme.icon} />
-                                )}
-                              </TouchableOpacity>
-                            );
-                          })}
-                        </View>
-                      ))}
+                                  {isSelected ? (
+                                    <IconSymbol
+                                      name="checkmark.circle.fill"
+                                      size={24}
+                                      color={theme.tint}
+                                    />
+                                  ) : (
+                                    <IconSymbol
+                                      name="circle"
+                                      size={24}
+                                      color={theme.icon}
+                                    />
+                                  )}
+                                </TouchableOpacity>
+                              );
+                            })}
+                          </View>
+                        ),
+                      )}
                     </View>
                   );
                 })}
@@ -466,7 +633,7 @@ export default function ImportFromImageScreen() {
                     onPress={handleSavePalette}
                     disabled={selectedColorsForPalette.length === 0}
                   >
-                    {t('palettes.savePalette')}
+                    {t("palettes.savePalette")}
                   </Button>
                 </View>
               </>
@@ -478,14 +645,14 @@ export default function ImportFromImageScreen() {
       <SaveNameModal
         visible={showNameModal}
         onRequestClose={() => setShowNameModal(false)}
-        title={t('palettes.nameYourPalette')}
-        placeholder={t('palettes.paletteNamePlaceholder')}
+        title={t("palettes.nameYourPalette")}
+        placeholder={t("palettes.paletteNamePlaceholder")}
         value={paletteName}
         onChangeText={setPaletteName}
         onCancel={() => setShowNameModal(false)}
         onConfirm={handleConfirmSave}
-        cancelLabel={t('common.cancel')}
-        saveLabel={t('common.save')}
+        cancelLabel={t("common.cancel")}
+        saveLabel={t("common.save")}
       />
     </ThemedView>
   );
@@ -507,16 +674,16 @@ const styles = StyleSheet.create({
   },
   pickSectionSubtitle: {
     fontSize: Typography.fontSize.sm,
-    textAlign: 'center',
+    textAlign: "center",
     marginBottom: Spacing.lg,
   },
   pickLoadingWrap: {
     minHeight: 140,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   pickButtonsRow: {
-    flexDirection: 'row',
+    flexDirection: "row",
     gap: Spacing.md,
   },
   pickOption: {
@@ -525,9 +692,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.md,
     borderRadius: BorderRadius.lg,
     borderWidth: 2,
-    borderStyle: 'dashed',
-    alignItems: 'center',
-    justifyContent: 'center',
+    borderStyle: "dashed",
+    alignItems: "center",
+    justifyContent: "center",
     minHeight: 140,
   },
   pickOptionIcon: {
@@ -536,7 +703,7 @@ const styles = StyleSheet.create({
   pickOptionTitle: {
     fontSize: Typography.fontSize.sm,
     fontWeight: Typography.fontWeight.semibold,
-    textAlign: 'center',
+    textAlign: "center",
   },
   error: {
     fontSize: Typography.fontSize.sm,
@@ -546,14 +713,14 @@ const styles = StyleSheet.create({
     marginBottom: Spacing.lg,
   },
   thumbnail: {
-    width: '100%',
+    width: "100%",
     height: 200,
     borderRadius: BorderRadius.lg,
     marginBottom: Spacing.sm,
   },
   swatchRow: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
+    flexDirection: "row",
+    flexWrap: "wrap",
     gap: 4,
   },
   miniSwatch: {
@@ -565,7 +732,7 @@ const styles = StyleSheet.create({
     fontSize: Typography.fontSize.sm,
     fontWeight: Typography.fontWeight.semibold,
     marginBottom: Spacing.sm,
-    textTransform: 'uppercase',
+    textTransform: "uppercase",
   },
   sectionSubtitle: {
     fontSize: Typography.fontSize.sm,
@@ -579,8 +746,8 @@ const styles = StyleSheet.create({
     marginBottom: Spacing.lg,
   },
   seriesRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     paddingVertical: Spacing.sm,
     borderBottomWidth: 1,
   },
@@ -600,12 +767,12 @@ const styles = StyleSheet.create({
   extractedColorBlock: {
     borderWidth: 1,
     borderRadius: BorderRadius.md,
-    overflow: 'hidden',
+    overflow: "hidden",
     marginBottom: Spacing.md,
   },
   extractedColorHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     paddingVertical: Spacing.sm,
     paddingHorizontal: Spacing.md,
     borderBottomWidth: 1,
@@ -618,7 +785,7 @@ const styles = StyleSheet.create({
   },
   extractedHexLabel: {
     fontSize: Typography.fontSize.sm,
-    fontFamily: 'monospace',
+    fontFamily: "monospace",
   },
   seriesMatchesSection: {},
   seriesMatchesLabel: {
@@ -629,16 +796,16 @@ const styles = StyleSheet.create({
     paddingBottom: Spacing.xs,
   },
   similarRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     paddingVertical: Spacing.sm,
     paddingHorizontal: Spacing.md,
     borderBottomWidth: 1,
     gap: Spacing.sm,
   },
   matchRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     paddingVertical: Spacing.sm,
     borderBottomWidth: 1,
     gap: Spacing.sm,
@@ -667,4 +834,3 @@ const styles = StyleSheet.create({
     gap: Spacing.sm,
   },
 });
-

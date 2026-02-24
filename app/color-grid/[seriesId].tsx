@@ -1,11 +1,5 @@
-import { useLocalSearchParams, useNavigation } from "expo-router";
-import React, {
-  useCallback,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import { useLocalSearchParams } from "expo-router";
+import React, { useCallback, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   Dimensions,
@@ -22,6 +16,7 @@ import {
   type ColorDetailParams,
 } from "@/components/color-detail-bottom-sheet";
 import { ColorGridCard } from "@/components/color-grid-card";
+import { HeaderBackButton } from "@/components/header-back-button";
 import { ThemedView } from "@/components/themed-view";
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { BorderRadius, Spacing, Typography } from "@/constants/theme";
@@ -45,7 +40,6 @@ const SWATCH_SIZE = CARD_WIDTH;
 
 export default function ColorGridScreen() {
   const { seriesId } = useLocalSearchParams<{ seriesId: string }>();
-  const navigation = useNavigation();
   const { t, i18n } = useTranslation();
   const { theme } = useTheme();
 
@@ -78,31 +72,6 @@ export default function ColorGridScreen() {
     i18n.language,
   ]);
 
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      ...(series ? { title: series.name } : {}),
-      headerRight: () => (
-        <Button
-          variant="ghost"
-          size="icon"
-          onPress={() => setShowOnlyFavorites((s) => !s)}
-          accessibilityLabel={
-            showOnlyFavorites
-              ? t("colors.showAllColors")
-              : t("colors.showOnlyFavorites")
-          }
-          icon={
-            <IconSymbol
-              name={showOnlyFavorites ? "star.fill" : "star"}
-              size={24}
-              color={showOnlyFavorites ? theme.tint : theme.icon}
-            />
-          }
-        />
-      ),
-    });
-  }, [navigation, series, showOnlyFavorites, theme.tint, theme.icon, t]);
-
   const toggleFavorite = useFavoritesStore((s) => s.toggleFavorite);
   const handleFavorite = useCallback(
     (color: Color) => {
@@ -131,8 +100,7 @@ export default function ColorGridScreen() {
       <View
         style={{
           width: CARD_WIDTH,
-          marginRight:
-            index % NUM_COLUMNS === NUM_COLUMNS - 1 ? 0 : GAP,
+          marginRight: index % NUM_COLUMNS === NUM_COLUMNS - 1 ? 0 : GAP,
         }}
       >
         <ColorGridCard
@@ -151,6 +119,28 @@ export default function ColorGridScreen() {
 
   return (
     <ThemedView style={styles.container}>
+      <HeaderBackButton
+        title={series?.name ?? t("colors.title")}
+        right={
+          <Button
+            variant="ghost"
+            size="icon"
+            onPress={() => setShowOnlyFavorites((s) => !s)}
+            accessibilityLabel={
+              showOnlyFavorites
+                ? t("colors.showAllColors")
+                : t("colors.showOnlyFavorites")
+            }
+            icon={
+              <IconSymbol
+                name={showOnlyFavorites ? "star.fill" : "star"}
+                size={24}
+                color={showOnlyFavorites ? theme.tint : theme.icon}
+              />
+            }
+          />
+        }
+      />
       <ColorDetailBottomSheet
         ref={detailSheetRef}
         color={detailParams}
@@ -215,6 +205,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: HORIZONTAL_PADDING,
+    paddingTop: Spacing.md,
   },
   searchWrap: {
     position: "relative",

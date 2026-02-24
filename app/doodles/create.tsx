@@ -1,11 +1,5 @@
-import { useLocalSearchParams, useNavigation, useRouter } from "expo-router";
-import React, {
-  useCallback,
-  useEffect,
-  useLayoutEffect,
-  useMemo,
-  useState,
-} from "react";
+import { useLocalSearchParams, useRouter } from "expo-router";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Image, StyleSheet, View } from "react-native";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
@@ -16,6 +10,7 @@ import Animated, {
 } from "react-native-reanimated";
 
 import { Button } from "@/components/button";
+import { HeaderBackButton } from "@/components/header-back-button";
 import { SaveNameModal } from "@/components/save-name-modal";
 import { Tabs } from "@/components/tabs";
 import { ThemedText } from "@/components/themed-text";
@@ -64,7 +59,6 @@ export default function DoodlesCreateScreen() {
   const params = useLocalSearchParams<{ doodleId?: string }>();
   const { theme } = useTheme();
   const router = useRouter();
-  const navigation = useNavigation();
   const getDoodle = useDoodlesStore((s) => s.getDoodle);
   const addDoodle = useDoodlesStore((s) => s.addDoodle);
   const updateDoodle = useDoodlesStore((s) => s.updateDoodle);
@@ -96,15 +90,11 @@ export default function DoodlesCreateScreen() {
     }
   }, [doodleId, getDoodle]);
 
-  useLayoutEffect(() => {
-    if (doodleId) {
-      const doodle = getDoodle(doodleId);
-      const title = doodle?.name?.trim() || t("doodles.defaultDoodleName");
-      navigation.setOptions({ title });
-    } else {
-      navigation.setOptions({ title: t("doodles.createDoodle") });
-    }
-  }, [doodleId, getDoodle, t, navigation]);
+  const headerTitle = useMemo(() => {
+    if (!doodleId) return t("doodles.createDoodle");
+    const doodle = getDoodle(doodleId);
+    return doodle?.name?.trim() || t("doodles.defaultDoodleName");
+  }, [doodleId, getDoodle, t]);
 
   const pickFromGallery = useCallback(
     (slot: ImageSlot) => {
@@ -484,6 +474,7 @@ export default function DoodlesCreateScreen() {
 
   return (
     <ThemedView style={styles.container} safeArea="bottom">
+      <HeaderBackButton title={headerTitle} />
       <Tabs
         value={activeTab}
         onChange={(v) => setActiveTab(v as TabId)}

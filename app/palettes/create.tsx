@@ -1,26 +1,19 @@
-import { useLocalSearchParams, useNavigation, useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import React, {
   useCallback,
   useEffect,
-  useLayoutEffect,
   useMemo,
   useRef,
   useState,
 } from "react";
 import { useTranslation } from "react-i18next";
-import {
-  Alert,
-  FlatList,
-  StyleSheet,
-  Switch,
-  View,
-} from "react-native";
+import { Alert, FlatList, StyleSheet, Switch, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { Button } from "@/components/button";
 import { ColorGridCard } from "@/components/color-grid-card";
-import { IconSymbol } from "@/components/ui/icon-symbol";
 import { ColorSearchInput } from "@/components/color-search-input";
+import { HeaderBackButton } from "@/components/header-back-button";
 import { SaveNameModal } from "@/components/save-name-modal";
 import {
   SeriesSelectBottomSheet,
@@ -28,14 +21,12 @@ import {
 } from "@/components/series-select-bottom-sheet";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
+import { IconSymbol } from "@/components/ui/icon-symbol";
 import { COLOR_GRID } from "@/constants/color-grid";
 import { Spacing, Typography } from "@/constants/theme";
 import { useSeriesColorSelection } from "@/hooks/use-series-color-selection";
 import { useTheme } from "@/hooks/use-theme";
-import {
-  filterColorsBySearch,
-  getColorDisplayName,
-} from "@/lib/color";
+import { filterColorsBySearch, getColorDisplayName } from "@/lib/color";
 import { usePalettesStore } from "@/stores/usePalettesStore";
 import type { Color } from "@/types";
 
@@ -47,7 +38,6 @@ export default function CreatePaletteScreen() {
     paletteId?: string;
     initialColorIds?: string;
   }>();
-  const navigation = useNavigation();
   const router = useRouter();
   const { t, i18n } = useTranslation();
   const { theme } = useTheme();
@@ -117,54 +107,11 @@ export default function CreatePaletteScreen() {
     );
   }, [paletteId, removePalette, router, t]);
 
-  useLayoutEffect(() => {
-    const palette = paletteId ? getPalette(paletteId) : undefined;
-    const title =
-      palette?.name?.trim() ||
-      t("palettes.exploreColorsTitle");
-    navigation.setOptions({
-      title,
-      headerRight: () => (
-        <View style={styles.headerRightRow}>
-          <Button
-            variant="ghost"
-            size="icon"
-            onPress={() => seriesFilterSheetRef.current?.present()}
-            accessibilityLabel={t("palettes.selectSeries")}
-            icon={
-              <IconSymbol
-                name="line.3.horizontal.decrease.circle.fill"
-                size={24}
-                color={theme.tint}
-              />
-            }
-          />
-          {paletteId ? (
-            <Button
-              variant="ghost"
-              size="icon"
-              onPress={handleDeletePalette}
-              accessibilityLabel={t("projects.remove")}
-              icon={
-                <IconSymbol
-                  name="trash"
-                  size={24}
-                  color={theme.tint}
-                />
-              }
-            />
-          ) : null}
-        </View>
-      ),
-    });
-  }, [
-    navigation,
-    t,
-    paletteId,
-    getPalette,
-    handleDeletePalette,
-    theme.tint,
-  ]);
+  const headerTitle = useMemo(() => {
+    if (!paletteId) return t("palettes.exploreColorsTitle");
+    const palette = getPalette(paletteId);
+    return palette?.name?.trim() || t("palettes.exploreColorsTitle");
+  }, [paletteId, getPalette, t]);
 
   const filteredColors = useMemo(
     () => filterColorsBySearch(allColors, searchQuery, i18n.language),
@@ -173,11 +120,7 @@ export default function CreatePaletteScreen() {
 
   const listData = useMemo(() => {
     if (showOnlySelected && selectedColors.length > 0) {
-      return filterColorsBySearch(
-        selectedColors,
-        searchQuery,
-        i18n.language,
-      );
+      return filterColorsBySearch(selectedColors, searchQuery, i18n.language);
     }
     return filteredColors;
   }, [
@@ -256,6 +199,35 @@ export default function CreatePaletteScreen() {
 
   return (
     <ThemedView style={styles.container}>
+      <HeaderBackButton
+        title={headerTitle}
+        right={
+          <View style={styles.headerRightRow}>
+            <Button
+              variant="ghost"
+              size="icon"
+              onPress={() => seriesFilterSheetRef.current?.present()}
+              accessibilityLabel={t("palettes.selectSeries")}
+              icon={
+                <IconSymbol
+                  name="line.3.horizontal.decrease.circle.fill"
+                  size={24}
+                  color={theme.tint}
+                />
+              }
+            />
+            {paletteId ? (
+              <Button
+                variant="ghost"
+                size="icon"
+                onPress={handleDeletePalette}
+                accessibilityLabel={t("projects.remove")}
+                icon={<IconSymbol name="trash" size={24} color={theme.tint} />}
+              />
+            ) : null}
+          </View>
+        }
+      />
       <SeriesSelectBottomSheet
         ref={seriesFilterSheetRef}
         series={allSeries}
@@ -372,4 +344,3 @@ const styles = StyleSheet.create({
     fontSize: Typography.fontSize.sm,
   },
 });
-
