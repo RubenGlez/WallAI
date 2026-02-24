@@ -92,7 +92,7 @@ export default function DoodlesIndexScreen() {
   const doodles = useDoodlesStore((s) => s.doodles);
 
   const handleNewDoodle = () => {
-    router.push('/(tabs)/doodles/create');
+    router.push('/doodles/create');
   };
 
   return (
@@ -121,7 +121,7 @@ export default function DoodlesIndexScreen() {
                 key={doodle.id}
                 doodle={doodle}
                 onPress={() => {
-                  router.push({ pathname: '/(tabs)/doodles/create', params: { doodleId: doodle.id } });
+                  router.push({ pathname: '/doodles/create', params: { doodleId: doodle.id } });
                 }}
               />
             ))}

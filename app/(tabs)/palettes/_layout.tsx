@@ -7,15 +7,6 @@ export default function PalettesLayout() {
     <Stack screenOptions={{ headerShown: false }}>
       <Stack.Screen name="index" />
       <Stack.Screen
-        name="create"
-        options={{
-          headerShown: true,
-          headerBackTitle: '',
-          headerShadowVisible: false,
-          headerLeft: () => <HeaderBackButton />,
-        }}
-      />
-      <Stack.Screen
         name="import"
         options={{
           headerShown: true,

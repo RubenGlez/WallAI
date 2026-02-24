@@ -118,7 +118,6 @@ export default function CreatePaletteScreen() {
   }, [paletteId, removePalette, router, t]);
 
   useLayoutEffect(() => {
-    navigation.getParent()?.setOptions({ tabBarStyle: { display: "none" } });
     const palette = paletteId ? getPalette(paletteId) : undefined;
     const title =
       palette?.name?.trim() ||
@@ -158,9 +157,6 @@ export default function CreatePaletteScreen() {
         </View>
       ),
     });
-    return () => {
-      navigation.getParent()?.setOptions({ tabBarStyle: undefined });
-    };
   }, [
     navigation,
     t,
@@ -376,3 +372,4 @@ const styles = StyleSheet.create({
     fontSize: Typography.fontSize.sm,
   },
 });
+

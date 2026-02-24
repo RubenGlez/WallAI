@@ -16,12 +16,12 @@ import Animated, {
 } from "react-native-reanimated";
 
 import { Button } from "@/components/button";
-import { Tabs } from "@/components/tabs";
-import { IconSymbol, type IconSymbolName } from "@/components/ui/icon-symbol";
-import { ThemedText } from "@/components/themed-text";
 import { SaveNameModal } from "@/components/save-name-modal";
+import { Tabs } from "@/components/tabs";
+import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { TransformToolbar } from "@/components/transform-toolbar";
+import { IconSymbol, type IconSymbolName } from "@/components/ui/icon-symbol";
 import { BorderRadius, Colors, Spacing, Typography } from "@/constants/theme";
 import { useImagePicker } from "@/hooks/use-image-picker";
 import { useTheme } from "@/hooks/use-theme";
@@ -45,9 +45,7 @@ type LayerTransformData = {
   opacity: number;
 };
 
-function isLayerTransformData(
-  v: unknown,
-): v is LayerTransformData {
+function isLayerTransformData(v: unknown): v is LayerTransformData {
   return (
     typeof v === "object" &&
     v !== null &&
@@ -106,12 +104,6 @@ export default function DoodlesCreateScreen() {
     } else {
       navigation.setOptions({ title: t("doodles.createDoodle") });
     }
-    navigation.getParent()?.setOptions({
-      tabBarStyle: { display: "none" },
-    });
-    return () => {
-      navigation.getParent()?.setOptions({ tabBarStyle: undefined });
-    };
   }, [doodleId, getDoodle, t, navigation]);
 
   const pickFromGallery = useCallback(
@@ -721,9 +713,7 @@ function PlaceholderSlot({
         <Button
           variant="secondary"
           size="md"
-          icon={
-            <IconSymbol name="camera.fill" size={24} color={theme.tint} />
-          }
+          icon={<IconSymbol name="camera.fill" size={24} color={theme.tint} />}
           style={[
             styles.placeholderBtn,
             { backgroundColor: theme.card, borderColor: theme.border },
@@ -739,7 +729,11 @@ function PlaceholderSlot({
           variant="secondary"
           size="md"
           icon={
-            <IconSymbol name="photo.on.rectangle.angled" size={24} color={theme.tint} />
+            <IconSymbol
+              name="photo.on.rectangle.angled"
+              size={24}
+              color={theme.tint}
+            />
           }
           style={[
             styles.placeholderBtn,

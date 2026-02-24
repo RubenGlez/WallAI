@@ -123,13 +123,13 @@ export default function PalettesIndexScreen() {
   const { pickFromGallery, takePhoto, loading: importLoading } = useImagePicker();
 
   const handleCreateNew = () => {
-    router.push("/(tabs)/palettes/create");
+    router.push("/palettes/create");
   };
 
   const handleOpenGallery = () => {
     pickFromGallery((uri) => {
       router.push({
-        pathname: "/(tabs)/palettes/import",
+        pathname: "/palettes/import",
         params: { imageUri: uri },
       });
     });
@@ -138,7 +138,7 @@ export default function PalettesIndexScreen() {
   const handleOpenCamera = () => {
     takePhoto((uri) => {
       router.push({
-        pathname: "/(tabs)/palettes/import",
+        pathname: "/palettes/import",
         params: { imageUri: uri },
       });
     });
@@ -171,7 +171,7 @@ export default function PalettesIndexScreen() {
                 palette={palette}
                 onPress={() => {
                   router.push({
-                    pathname: "/(tabs)/palettes/create",
+                    pathname: "/palettes/create",
                     params: { paletteId: palette.id },
                   });
                 }}

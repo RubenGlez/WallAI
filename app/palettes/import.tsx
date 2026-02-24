@@ -12,6 +12,7 @@ import {
   View,
 } from 'react-native';
 import { getColors } from 'react-native-image-colors';
+
 import { Button } from '@/components/button';
 import { IconSymbol } from '@/components/ui/icon-symbol';
 import { SaveNameModal } from '@/components/save-name-modal';
@@ -32,6 +33,7 @@ export default function ImportFromImageScreen() {
   const { imageUri: imageUriParam } = useLocalSearchParams<{ imageUri?: string }>();
   const { t, i18n } = useTranslation();
   const router = useRouter();
+  const navigation = useNavigation();
   const colorScheme = useColorScheme() ?? 'light';
   const theme = Colors[colorScheme];
   const addPalette = usePalettesStore((s) => s.addPalette);
@@ -59,9 +61,7 @@ export default function ImportFromImageScreen() {
     }
   }, [allSeries]);
 
-  const navigation = useNavigation();
   useLayoutEffect(() => {
-    navigation.getParent()?.setOptions({ tabBarStyle: { display: 'none' } });
     navigation.setOptions({
       title: t('palettes.importFromImage'),
       headerRight: () => (
@@ -74,9 +74,6 @@ export default function ImportFromImageScreen() {
         />
       ),
     });
-    return () => {
-      navigation.getParent()?.setOptions({ tabBarStyle: undefined });
-    };
   }, [navigation, t, theme.tint]);
 
   const processImageUri = useCallback(async (uri: string) => {
@@ -670,3 +667,4 @@ const styles = StyleSheet.create({
     gap: Spacing.sm,
   },
 });
+
