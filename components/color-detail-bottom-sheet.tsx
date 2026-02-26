@@ -2,16 +2,16 @@ import {
   BottomSheetBackdrop,
   BottomSheetModal,
   BottomSheetScrollView,
-} from '@gorhom/bottom-sheet';
-import React, { forwardRef, useCallback } from 'react';
-import { useTranslation } from 'react-i18next';
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
+} from "@gorhom/bottom-sheet";
+import React, { forwardRef, useCallback } from "react";
+import { useTranslation } from "react-i18next";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 
-import { ThemedText } from '@/components/themed-text';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { BorderRadius, Colors, Spacing, Typography } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
-import type { Color } from '@/types';
+import { ThemedText } from "@/components/themed-text";
+import { IconSymbol } from "@/components/ui/icon-symbol";
+import { BorderRadius, Colors, Spacing, Typography } from "@/constants/theme";
+import { useColorScheme } from "@/hooks/use-color-scheme";
+import type { Color } from "@/types";
 
 export type ColorDetailParams = {
   color: Color;
@@ -34,11 +34,11 @@ export function ColorDetailContent({
   onToggleFavorite,
 }: ContentProps) {
   const { t } = useTranslation();
-  const colorScheme = useColorScheme() ?? 'light';
+  const colorScheme = useColorScheme() ?? "light";
   const theme = Colors[colorScheme];
   const isLight =
-    color?.color.hex.toLowerCase() === '#ffffff' ||
-    color?.color.hex.toLowerCase().startsWith('#fff');
+    color?.color.hex.toLowerCase() === "#ffffff" ||
+    color?.color.hex.toLowerCase().startsWith("#fff");
 
   if (!color) return null;
 
@@ -58,16 +58,25 @@ export function ColorDetailContent({
         <TouchableOpacity
           style={styles.favoriteBtn}
           onPress={onToggleFavorite}
-          accessibilityLabel={isFavorite ? t('colors.removeFromFavorites') : t('colors.addToFavorites')}
+          accessibilityLabel={
+            isFavorite
+              ? t("colors.removeFromFavorites")
+              : t("colors.addToFavorites")
+          }
         >
           <IconSymbol
-            name={isFavorite ? 'star.fill' : 'star'}
+            name={isFavorite ? "star.fill" : "star"}
             size={24}
             color={isFavorite ? theme.warning : theme.icon}
           />
         </TouchableOpacity>
       </View>
-      <ThemedText type="title" style={styles.name} numberOfLines={1} ellipsizeMode="tail">
+      <ThemedText
+        type="title"
+        style={styles.name}
+        numberOfLines={1}
+        ellipsizeMode="tail"
+      >
         {color.displayName}
       </ThemedText>
       <ThemedText style={[styles.code, { color: theme.textSecondary }]}>
@@ -78,17 +87,17 @@ export function ColorDetailContent({
       </ThemedText>
 
       <ThemedText style={[styles.sectionTitle, { color: theme.textSecondary }]}>
-        {t('colors.colorDetail.similarInBrand')}
+        {t("colors.colorDetail.similarInBrand")}
       </ThemedText>
       <ThemedText style={[styles.placeholder, { color: theme.textSecondary }]}>
-        {t('colors.colorDetail.comingSoon')}
+        {t("colors.colorDetail.comingSoon")}
       </ThemedText>
 
       <ThemedText style={[styles.sectionTitle, { color: theme.textSecondary }]}>
-        {t('colors.colorDetail.similarOtherBrands')}
+        {t("colors.colorDetail.similarOtherBrands")}
       </ThemedText>
       <ThemedText style={[styles.placeholder, { color: theme.textSecondary }]}>
-        {t('colors.colorDetail.comingSoon')}
+        {t("colors.colorDetail.comingSoon")}
       </ThemedText>
     </BottomSheetScrollView>
   );
@@ -103,32 +112,32 @@ const styles = StyleSheet.create({
     paddingBottom: Spacing.xxl,
   },
   swatchWrap: {
-    position: 'relative',
+    position: "relative",
     marginBottom: Spacing.md,
   },
   swatch: {
-    width: '100%',
+    width: "100%",
     aspectRatio: 2.5,
     borderRadius: BorderRadius.xl,
   },
   favoriteBtn: {
-    position: 'absolute',
+    position: "absolute",
     top: Spacing.xs,
     right: Spacing.xs,
     padding: Spacing.xs,
     zIndex: 1,
   },
   name: {
-    textAlign: 'left',
+    textAlign: "left",
     marginBottom: Spacing.xs,
   },
   code: {
-    textAlign: 'left',
+    textAlign: "left",
     fontSize: Typography.fontSize.sm,
     marginBottom: Spacing.xs,
   },
   meta: {
-    textAlign: 'left',
+    textAlign: "left",
     fontSize: Typography.fontSize.sm,
     marginBottom: Spacing.lg,
   },
@@ -150,9 +159,9 @@ export const ColorDetailBottomSheet = forwardRef<
   BottomSheetProps
 >(function ColorDetailBottomSheet(
   { color, isFavorite, onToggleFavorite },
-  ref
+  ref,
 ) {
-  const colorScheme = useColorScheme() ?? 'light';
+  const colorScheme = useColorScheme() ?? "light";
   const theme = Colors[colorScheme];
 
   const renderBackdrop = useCallback(
@@ -164,7 +173,7 @@ export const ColorDetailBottomSheet = forwardRef<
         opacity={0.5}
       />
     ),
-    []
+    [],
   );
 
   return (
@@ -176,6 +185,7 @@ export const ColorDetailBottomSheet = forwardRef<
         borderTopRightRadius: 20,
       }}
       backdropComponent={renderBackdrop}
+      enableDynamicSizing
     >
       <ColorDetailContent
         color={color}

@@ -49,13 +49,13 @@ export const SeriesSelectBottomSheet = forwardRef<
   return (
     <BottomSheetModal
       ref={ref}
-      snapPoints={SNAP_POINTS}
       backgroundStyle={{
         backgroundColor: theme.background,
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
       }}
       backdropComponent={renderBackdrop}
+      enableDynamicSizing
     >
       <BottomSheetScrollView contentContainerStyle={styles.content}>
         <ThemedText
@@ -87,11 +87,7 @@ export const SeriesSelectBottomSheet = forwardRef<
                     color={theme.tint}
                   />
                 ) : (
-                  <IconSymbol
-                    name="square"
-                    size={24}
-                    color={theme.icon}
-                  />
+                  <IconSymbol name="square" size={24} color={theme.icon} />
                 )}
                 <View style={styles.seriesLabelWrap}>
                   <ThemedText
