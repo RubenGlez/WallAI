@@ -120,7 +120,13 @@
     "akaPlaceholder": "Graffiti-Name",
     "akaHint": "Wir nutzen ihn zur Begrüßung auf dem Startbildschirm.",
     "appearance": "Darstellung",
-    "darkMode": "Dunkelmodus"
+    "darkMode": "Dunkelmodus",
+    "language": "Sprache",
+    "lang_es": "Spanisch",
+    "lang_en": "Englisch",
+    "lang_de": "Deutsch",
+    "lang_fr": "Französisch",
+    "lang_pt": "Portugiesisch"
   },
   "filters": {
     "title": "Filter",

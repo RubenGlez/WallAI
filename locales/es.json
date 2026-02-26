@@ -120,7 +120,13 @@
     "akaPlaceholder": "Nombre de graffiti",
     "akaHint": "Lo usaremos para saludarte en la pantalla de inicio.",
     "appearance": "Apariencia",
-    "darkMode": "Modo oscuro"
+    "darkMode": "Modo oscuro",
+    "language": "Idioma",
+    "lang_es": "Español",
+    "lang_en": "Inglés",
+    "lang_de": "Alemán",
+    "lang_fr": "Francés",
+    "lang_pt": "Portugués"
   },
   "filters": {
     "title": "Filtros",

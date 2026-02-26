@@ -120,7 +120,13 @@
     "akaPlaceholder": "Graffiti name",
     "akaHint": "We'll use it to greet you on the home screen.",
     "appearance": "Appearance",
-    "darkMode": "Dark mode"
+    "darkMode": "Dark mode",
+    "language": "Language",
+    "lang_es": "Spanish",
+    "lang_en": "English",
+    "lang_de": "German",
+    "lang_fr": "French",
+    "lang_pt": "Portuguese"
   },
   "filters": {
     "title": "Filters",

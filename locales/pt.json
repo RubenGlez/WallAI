@@ -120,7 +120,13 @@
     "akaPlaceholder": "Nome de graffiti",
     "akaHint": "Usaremos para te cumprimentar na tela inicial.",
     "appearance": "Aparência",
-    "darkMode": "Modo escuro"
+    "darkMode": "Modo escuro",
+    "language": "Idioma",
+    "lang_es": "Espanhol",
+    "lang_en": "Inglês",
+    "lang_de": "Alemão",
+    "lang_fr": "Francês",
+    "lang_pt": "Português"
   },
   "filters": {
     "title": "Filtros",

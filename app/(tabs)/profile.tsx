@@ -1,74 +1,134 @@
-import { useTranslation } from 'react-i18next';
-import { StyleSheet, Switch, TextInput, View } from 'react-native';
+import { useTranslation } from "react-i18next";
+import { Pressable, StyleSheet, Switch, TextInput, View } from "react-native";
 
-import { ScreenHeader } from '@/components/screen-header';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { BorderRadius, Colors, Spacing, Typography } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
-import { useProfileStore } from '@/stores/useProfileStore';
-import { useThemeStore } from '@/stores/useThemeStore';
+import { Screen } from "@/components/screen";
+import { ScreenHeader } from "@/components/screen-header";
+import { ThemedText } from "@/components/themed-text";
+import { IconSymbol } from "@/components/ui/icon-symbol";
+import { BorderRadius, Colors, Spacing, Typography } from "@/constants/theme";
+import { useColorScheme } from "@/hooks/use-color-scheme";
+import {
+  SUPPORTED_LANGUAGES,
+  useLanguageStore,
+} from "@/stores/useLanguageStore";
+import { useProfileStore } from "@/stores/useProfileStore";
+import { useThemeStore } from "@/stores/useThemeStore";
+import type { LanguageCode } from "@/types";
 
 export default function ProfileScreen() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const colorScheme = useColorScheme();
   const theme = Colors[colorScheme];
   const aka = useProfileStore((s) => s.aka);
   const setAka = useProfileStore((s) => s.setAka);
   const setColorSchemeOverride = useThemeStore((s) => s.setColorSchemeOverride);
-  const isDark = colorScheme === 'dark';
+  const isDark = colorScheme === "dark";
+  const language = useLanguageStore((s) => s.language);
+  const setLanguage = useLanguageStore((s) => s.setLanguage);
+
+  const currentLang = language ?? i18n.language.split("-")[0];
+  const handleSelectLanguage = (code: LanguageCode) => {
+    setLanguage(code);
+    i18n.changeLanguage(code);
+  };
 
   return (
-    <ThemedView style={styles.container} safeArea="top">
-      <ScreenHeader title={t('tabs.profile')} />
+    <Screen>
+      <View style={styles.container}>
+        <ScreenHeader title={t("tabs.profile")} />
 
-      <View style={[styles.section, { borderTopColor: theme.border }]}>
-        <ThemedText style={[styles.sectionLabel, { color: theme.textSecondary }]}>
-          {t('profile.akaSection')}
-        </ThemedText>
-        <TextInput
-          style={[
-            styles.akaInput,
-            {
-              backgroundColor: theme.backgroundSecondary,
-              borderColor: theme.border,
-              color: theme.text,
-            },
-          ]}
-          placeholder={t('profile.akaPlaceholder')}
-          placeholderTextColor={theme.textSecondary}
-          value={aka}
-          onChangeText={setAka}
-          autoCapitalize="words"
-          autoCorrect={false}
-        />
-        <ThemedText style={[styles.akaHint, { color: theme.textSecondary }]}>
-          {t('profile.akaHint')}
-        </ThemedText>
-      </View>
-
-      <View style={[styles.section, { borderTopColor: theme.border }]}>
-        <ThemedText style={[styles.sectionLabel, { color: theme.textSecondary }]}>
-          {t('profile.appearance')}
-        </ThemedText>
-        <View style={[styles.row, { borderBottomColor: theme.border }]}>
-          <ThemedText style={styles.rowLabel}>{t('profile.darkMode')}</ThemedText>
-          <Switch
-            value={isDark}
-            onValueChange={(value) => setColorSchemeOverride(value ? 'dark' : 'light')}
-            trackColor={{ false: theme.border, true: theme.tint }}
-            thumbColor={theme.background}
+        <View style={[styles.section, { borderTopColor: theme.border }]}>
+          <ThemedText
+            style={[styles.sectionLabel, { color: theme.textSecondary }]}
+          >
+            {t("profile.akaSection")}
+          </ThemedText>
+          <TextInput
+            style={[
+              styles.akaInput,
+              {
+                backgroundColor: theme.backgroundSecondary,
+                borderColor: theme.border,
+                color: theme.text,
+              },
+            ]}
+            placeholder={t("profile.akaPlaceholder")}
+            placeholderTextColor={theme.textSecondary}
+            value={aka}
+            onChangeText={setAka}
+            autoCapitalize="words"
+            autoCorrect={false}
           />
+          <ThemedText style={[styles.akaHint, { color: theme.textSecondary }]}>
+            {t("profile.akaHint")}
+          </ThemedText>
+        </View>
+
+        <View style={[styles.section, { borderTopColor: theme.border }]}>
+          <ThemedText
+            style={[styles.sectionLabel, { color: theme.textSecondary }]}
+          >
+            {t("profile.language")}
+          </ThemedText>
+          {SUPPORTED_LANGUAGES.map((code) => {
+            const isSelected = currentLang === code;
+            return (
+              <Pressable
+                key={code}
+                style={({ pressed }) => [
+                  styles.row,
+                  styles.languageRow,
+                  {
+                    borderBottomColor: theme.border,
+                    opacity: pressed ? 0.7 : 1,
+                  },
+                ]}
+                onPress={() => handleSelectLanguage(code)}
+              >
+                <ThemedText style={styles.rowLabel}>
+                  {t(`profile.lang_${code}` as const)}
+                </ThemedText>
+                {isSelected && (
+                  <IconSymbol
+                    name="checkmark.circle.fill"
+                    size={22}
+                    color={theme.tint}
+                  />
+                )}
+              </Pressable>
+            );
+          })}
+        </View>
+
+        <View style={[styles.section, { borderTopColor: theme.border }]}>
+          <ThemedText
+            style={[styles.sectionLabel, { color: theme.textSecondary }]}
+          >
+            {t("profile.appearance")}
+          </ThemedText>
+          <View style={[styles.row, { borderBottomColor: theme.border }]}>
+            <ThemedText style={styles.rowLabel}>
+              {t("profile.darkMode")}
+            </ThemedText>
+            <Switch
+              value={isDark}
+              onValueChange={(value) =>
+                setColorSchemeOverride(value ? "dark" : "light")
+              }
+              trackColor={{ false: theme.border, true: theme.tint }}
+              thumbColor={theme.background}
+            />
+          </View>
         </View>
       </View>
-    </ThemedView>
+    </Screen>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: Spacing.md,
+    paddingHorizontal: Spacing.md,
   },
   section: {
     borderTopWidth: 1,
@@ -76,8 +136,8 @@ const styles = StyleSheet.create({
   },
   sectionLabel: {
     fontSize: 13,
-    fontWeight: '600',
-    textTransform: 'uppercase',
+    fontWeight: "600",
+    textTransform: "uppercase",
     marginBottom: Spacing.sm,
     letterSpacing: 0.5,
   },
@@ -94,11 +154,14 @@ const styles = StyleSheet.create({
     marginBottom: Spacing.md,
   },
   row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     paddingVertical: Spacing.md,
     borderBottomWidth: 1,
+  },
+  languageRow: {
+    paddingLeft: 0,
   },
   rowLabel: {
     fontSize: 16,

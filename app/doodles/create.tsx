@@ -12,9 +12,9 @@ import Animated, {
 import { Button } from "@/components/button";
 import { HeaderBackButton } from "@/components/header-back-button";
 import { SaveNameModal } from "@/components/save-name-modal";
+import { Screen } from "@/components/screen";
 import { Tabs } from "@/components/tabs";
 import { ThemedText } from "@/components/themed-text";
-import { ThemedView } from "@/components/themed-view";
 import { TransformToolbar } from "@/components/transform-toolbar";
 import { IconSymbol, type IconSymbolName } from "@/components/ui/icon-symbol";
 import { BorderRadius, Colors, Spacing, Typography } from "@/constants/theme";
@@ -473,8 +473,10 @@ export default function DoodlesCreateScreen() {
     : setSketchOpacityAmount;
 
   return (
-    <ThemedView style={styles.container} safeArea={true}>
-      <HeaderBackButton title={headerTitle} />
+    <Screen safeBottom>
+      <View style={styles.header}>
+        <HeaderBackButton title={headerTitle} />
+      </View>
       <Tabs
         value={activeTab}
         onChange={(v) => setActiveTab(v as TabId)}
@@ -560,7 +562,7 @@ export default function DoodlesCreateScreen() {
         cancelLabel={t("common.cancel")}
         saveLabel={t("common.save")}
       />
-    </ThemedView>
+    </Screen>
   );
 }
 
@@ -742,9 +744,6 @@ function PlaceholderSlot({
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   content: {
     flex: 1,
     padding: CONTENT_PADDING,
@@ -817,5 +816,8 @@ const styles = StyleSheet.create({
   contentWithOverlay: {
     flex: 1,
     position: "relative",
+  },
+  header: {
+    paddingHorizontal: Spacing.md,
   },
 });
