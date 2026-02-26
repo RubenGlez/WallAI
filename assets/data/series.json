@@ -5,7 +5,13 @@
     "brandId": "aka",
     "finishType": "matte",
     "pressureType": "low",
-    "description": "La serie AKA Writer es una pintura en spray híbrida acrílica diseñada específicamente para graffiti, caracterizada por su baja presión, acabado mate y gran control del trazo, lo que facilita líneas limpias y precisas. Destaca por su buena cobertura, secado rápido y alta resistencia a la radiación UV, además de una válvula modulable que permite adaptarse tanto a detalles como a rellenos con gran versatilidad."
+    "description": {
+      "es": "La serie AKA Writer es una pintura en spray híbrida acrílica diseñada específicamente para graffiti, caracterizada por su baja presión, acabado mate y gran control del trazo, lo que facilita líneas limpias y precisas. Destaca por su buena cobertura, secado rápido y alta resistencia a la radiación UV, además de una válvula modulable que permite adaptarse tanto a detalles como a rellenos con gran versatilidad.",
+      "en": "The AKA Writer series is a hybrid acrylic spray paint designed specifically for graffiti, characterised by its low pressure, matte finish and great stroke control for clean, precise lines. It offers good coverage, fast drying and high UV resistance, plus a modulable valve that adapts to both detail work and fills with great versatility.",
+      "de": "Die Serie AKA Writer ist eine hybrid-acrylbasierte Sprühfarbe speziell für Graffiti, mit niedrigem Druck, matter Oberfläche und guter Strichkontrolle für saubere, präzise Linien. Gute Deckkraft, schnelle Trocknung und hohe UV-Beständigkeit sowie ein modulierbares Ventil für Details und Flächen.",
+      "fr": "La série AKA Writer est une peinture aérosol acrylique hybride conçue pour le graffiti : basse pression, finition mate et bon contrôle du trait pour des lignes nettes et précises. Bonne couverture, séchage rapide et bonne résistance aux UV, avec une valve modulable pour le détail comme les remplissages.",
+      "pt": "A série AKA Writer é uma tinta em spray acrílica híbrida pensada para graffiti, com baixa pressão, acabamento mate e bom controlo do traço para linhas limpas e precisas. Boa cobertura, secagem rápida e resistência aos UV, além de uma válvula modulável para detalhe e preenchimentos."
+    }
   },
   {
     "id": "belton-premium",
@@ -13,7 +19,13 @@
     "brandId": "molotow",
     "finishType": "satin",
     "pressureType": "low",
-    "description": "Belton Premium (Molotow Premium) es una gama reconocida internacionalmente por su alta pigmentación, más de 250 colores y fórmula mate apta para casi cualquier superficie. Destaca por su cobertura uniforme desde la primera capa, secado rápido y precisión de aplicación, lo que la hace popular tanto entre writers como en bellas artes y trabajos más técnicos o de estudio."
+    "description": {
+      "es": "Belton Premium (Molotow Premium) es una gama reconocida internacionalmente por su alta pigmentación, más de 250 colores y fórmula mate apta para casi cualquier superficie. Destaca por su cobertura uniforme desde la primera capa, secado rápido y precisión de aplicación, lo que la hace popular tanto entre writers como en bellas artes y trabajos más técnicos o de estudio.",
+      "en": "Belton Premium (Molotow Premium) is internationally known for its high pigmentation, over 250 colours and matte formula suitable for almost any surface. Uniform coverage from the first coat, quick drying and precise application make it popular with writers as well as in fine arts and technical or studio work.",
+      "de": "Belton Premium (Molotow Premium) ist international bekannt für hohe Pigmentierung, über 250 Farben und matter Formel für fast jede Oberfläche. Gleichmäßige Deckkraft ab der ersten Schicht, schnelle Trocknung und präzise Anwendung – beliebt bei Writern sowie in der bildenden Kunst und im Atelier.",
+      "fr": "Belton Premium (Molotow Premium) est reconnue pour sa forte pigmentation, plus de 250 couleurs et une formule mate pour presque tous les supports. Couverture uniforme dès la première couche, séchage rapide et application précise, appréciée des writers comme en beaux-arts et en travail technique.",
+      "pt": "Belton Premium (Molotow Premium) é reconhecida internacionalmente pela alta pigmentação, mais de 250 cores e fórmula mate para quase qualquer superfície. Cobertura uniforme desde a primeira demão, secagem rápida e aplicação precisa, popular entre writers e em belas-artes ou trabalho técnico."
+    }
   },
   {
     "id": "flame-blue",
@@ -21,7 +33,13 @@
     "brandId": "molotow",
     "finishType": "matte",
     "pressureType": "low",
-    "description": "Flame Blue es un spray de baja presión desarrollado por Molotow dentro de la línea Flame, pensado para máximo control, precisión y trabajo detallado. Su acabado mate, buena opacidad y salida suave reducen el overspray y facilitan degradados y líneas finas, siendo especialmente recomendable para piezas detalladas o para artistas que buscan un spray más controlable."
+    "description": {
+      "es": "Flame Blue es un spray de baja presión desarrollado por Molotow dentro de la línea Flame, pensado para máximo control, precisión y trabajo detallado. Su acabado mate, buena opacidad y salida suave reducen el overspray y facilitan degradados y líneas finas, siendo especialmente recomendable para piezas detalladas o para artistas que buscan un spray más controlable.",
+      "en": "Flame Blue is a low-pressure spray by Molotow in the Flame line, designed for maximum control, precision and detail work. Its matte finish, good opacity and soft output reduce overspray and make gradients and fine lines easier, ideal for detailed pieces or artists who want a more controllable spray.",
+      "de": "Flame Blue ist eine Niederdruck-Sprühdose von Molotow aus der Flame-Linie für maximale Kontrolle, Präzision und Detailarbeit. Matter Finish, gute Deckkraft und weicher Ausstoß reduzieren Overspray und erleichtern Verläufe und feine Linien – ideal für detaillierte Pieces.",
+      "fr": "Flame Blue est un aérosol basse pression Molotow de la gamme Flame pour un contrôle et une précision maximaux. Finition mate, bonne opacité et sortie douce limitent le surpulvérisation et facilitent dégradés et traits fins, recommandé pour les pièces détaillées.",
+      "pt": "Flame Blue é um spray de baixa pressão da Molotow na linha Flame, pensado para máximo controlo, precisão e trabalho de pormenor. Acabamento mate, boa opacidade e saída suave reduzem o overspray e facilitam degradados e linhas finas, recomendado para peças detalhadas."
+    }
   },
   {
     "id": "flame-orange",
@@ -29,7 +47,13 @@
     "brandId": "molotow",
     "finishType": "matte",
     "pressureType": "high",
-    "description": "Flame Orange es la versión de alta presión y alto caudal dentro de la gama Flame, orientada a la rapidez y la cobertura de grandes superficies. Ofrece colores intensos, buen rendimiento y válvula potente que permite rellenos veloces, lo que lo convierte en un spray muy utilizado para bombing y piezas grandes donde la velocidad es prioritaria frente al control extremo."
+    "description": {
+      "es": "Flame Orange es la versión de alta presión y alto caudal dentro de la gama Flame, orientada a la rapidez y la cobertura de grandes superficies. Ofrece colores intensos, buen rendimiento y válvula potente que permite rellenos veloces, lo que lo convierte en un spray muy utilizado para bombing y piezas grandes donde la velocidad es prioritaria frente al control extremo.",
+      "en": "Flame Orange is the high-pressure, high-flow option in the Flame range, aimed at speed and covering large areas. Intense colours, good performance and a powerful valve for fast fills make it a popular choice for bombing and large pieces where speed matters more than fine control.",
+      "de": "Flame Orange ist die Hochdruck-Variante der Flame-Serie für Tempo und große Flächen. Intensive Farben, gute Leistung und starkes Ventil für schnelle Füllungen – beliebt beim Bombing und bei großen Pieces, wo Geschwindigkeit vor Feinkontrolle geht.",
+      "fr": "Flame Orange est la version haute pression et fort débit de la gamme Flame pour la rapidité et les grandes surfaces. Couleurs intenses, bon rendement et valve puissante pour des remplissages rapides, très utilisé en bombing et grandes pièces où la vitesse prime.",
+      "pt": "Flame Orange é a versão de alta pressão e alto caudal da gama Flame, orientada para rapidez e cobertura de grandes superfícies. Cores intensas, bom rendimento e válvula potente para preenchimentos rápidos, muito usado em bombing e peças grandes onde a velocidade é prioritária."
+    }
   },
   {
     "id": "hardcore",
@@ -37,7 +61,13 @@
     "brandId": "montana",
     "finishType": "gloss",
     "pressureType": "high",
-    "description": "La gama Montana Hardcore representa el enfoque opuesto al 94: se trata de un spray de alta presión y acabado brillante, orientado a la rapidez y la potencia de salida. Fue uno de los sprays más influyentes en el desarrollo del graffiti moderno, pensado para rellenos rápidos, bombing y acciones donde se necesita gran cobertura y velocidad de aplicación."
+    "description": {
+      "es": "La gama Montana Hardcore representa el enfoque opuesto al 94: se trata de un spray de alta presión y acabado brillante, orientado a la rapidez y la potencia de salida. Fue uno de los sprays más influyentes en el desarrollo del graffiti moderno, pensado para rellenos rápidos, bombing y acciones donde se necesita gran cobertura y velocidad de aplicación.",
+      "en": "Montana Hardcore is the opposite approach to the 94: a high-pressure, gloss-finish spray built for speed and output power. One of the most influential sprays in modern graffiti, it is made for quick fills, bombing and situations where heavy coverage and application speed are key.",
+      "de": "Montana Hardcore ist das Gegenteil zum 94: Hochdruck-Spray mit Glanzfinish für Tempo und Durchsatz. Einer der einflussreichsten Sprays im modernen Graffiti, gedacht für schnelle Füllungen, Bombing und Aktionen mit hoher Deckkraft und Anwendungsgeschwindigkeit.",
+      "fr": "La gamme Montana Hardcore s’oppose au 94 : aérosol haute pression à finition brillante pour la rapidité et la puissance. L’un des sprays les plus marquants du graffiti moderne, conçu pour les remplissages rapides, le bombing et les actions où couverture et vitesse comptent.",
+      "pt": "A gama Montana Hardcore é o oposto do 94: spray de alta pressão e acabamento brilhante, orientado para rapidez e potência de saída. Um dos sprays mais influentes no graffiti moderno, pensado para preenchimentos rápidos, bombing e ações com grande cobertura e velocidade."
+    }
   },
   {
     "id": "montana-94",
@@ -45,7 +75,13 @@
     "brandId": "montana",
     "finishType": "matte",
     "pressureType": "low",
-    "description": "Montana 94 (MTN 94) es una de las gamas más populares de Montana Colors, conocida por su acabado mate, baja presión y facilidad de manejo, lo que la convierte en un spray muy versátil para piezas detalladas y trabajos artísticos. Ofrece una amplia carta de colores, excelente cubrición y secado rápido, además de buena resistencia a rayaduras y a los rayos UV, lo que la hace adecuada tanto para muralismo como para graffiti técnico."
+    "description": {
+      "es": "Montana 94 (MTN 94) es una de las gamas más populares de Montana Colors, conocida por su acabado mate, baja presión y facilidad de manejo, lo que la convierte en un spray muy versátil para piezas detalladas y trabajos artísticos. Ofrece una amplia carta de colores, excelente cubrición y secado rápido, además de buena resistencia a rayaduras y a los rayos UV, lo que la hace adecuada tanto para muralismo como para graffiti técnico.",
+      "en": "Montana 94 (MTN 94) is one of Montana Colors’ most popular lines, known for its matte finish, low pressure and ease of use, making it a versatile spray for detailed pieces and artistic work. Wide colour range, excellent coverage and quick drying, plus good scratch and UV resistance, suitable for mural work as well as technical graffiti.",
+      "de": "Montana 94 (MTN 94) ist eine der bekanntesten Serien von Montana Colors: matter Finish, Niederdruck und leichte Handhabung für vielseitige Nutzung in detaillierten Pieces und künstlerischer Arbeit. Große Farbpalette, gute Deckkraft und schnelle Trocknung, kratz- und UV-beständig, für Murals und technisches Graffiti.",
+      "fr": "Montana 94 (MTN 94) est l’une des gammes les plus populaires de Montana Colors : finition mate, basse pression et facilité d’usage pour un spray polyvalent en pièces détaillées et travail artistique. Large nuancier, excellente couverture et séchage rapide, bonne résistance aux rayures et aux UV, pour muralisme et graffiti technique.",
+      "pt": "Montana 94 (MTN 94) é uma das gamas mais populares da Montana Colors, com acabamento mate, baixa pressão e fácil manejo, muito versátil para peças detalhadas e trabalho artístico. Ampla carta de cores, excelente cobertura e secagem rápida, boa resistência a riscos e UV, adequada a muralismo e graffiti técnico."
+    }
   },
   {
     "id": "vice",
@@ -53,6 +89,12 @@
     "brandId": "montana",
     "finishType": "satin",
     "pressureType": "mixed",
-    "description": "Montana Vice (MTN VICE) es una gama más reciente de Montana Colors que busca reforzar la identidad del graffiti puro de la marca, combinando acabado mate, amplia carta de colores y una filosofía orientada a la autenticidad y creatividad del writer. Se presenta como una línea moderna dentro del catálogo MTN, pensada para mantener el equilibrio entre rendimiento técnico y conexión con la cultura del graffiti."
+    "description": {
+      "es": "Montana Vice (MTN VICE) es una gama más reciente de Montana Colors que busca reforzar la identidad del graffiti puro de la marca, combinando acabado mate, amplia carta de colores y una filosofía orientada a la autenticidad y creatividad del writer. Se presenta como una línea moderna dentro del catálogo MTN, pensada para mantener el equilibrio entre rendimiento técnico y conexión con la cultura del graffiti.",
+      "en": "Montana Vice (MTN VICE) is a newer line from Montana Colors that reinforces the brand’s pure graffiti identity, combining matte finish, a wide colour chart and a focus on authenticity and writer creativity. A modern line in the MTN catalogue, balancing technical performance with connection to graffiti culture.",
+      "de": "Montana Vice (MTN VICE) ist eine neuere Serie von Montana Colors für die reine Graffiti-Identität der Marke: matter Finish, großes Farbsortiment und Fokus auf Authentizität und Kreativität. Moderne Linie im MTN-Katalog mit Balance zwischen technischer Leistung und Graffiti-Kultur.",
+      "fr": "Montana Vice (MTN VICE) est une gamme récente de Montana Colors qui renforce l’identité graffiti de la marque : finition mate, large nuancier et philosophie tournée vers l’authenticité et la créativité du writer. Ligne moderne du catalogue MTN, entre performance technique et lien avec la culture graffiti.",
+      "pt": "Montana Vice (MTN VICE) é uma gama mais recente da Montana Colors que reforça a identidade de graffiti puro da marca, com acabamento mate, ampla carta de cores e filosofia orientada à autenticidade e criatividade do writer. Linha moderna no catálogo MTN, entre desempenho técnico e ligação à cultura do graffiti."
+    }
   }
 ]

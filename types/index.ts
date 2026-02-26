@@ -11,7 +11,8 @@ export interface Brand {
   name: string;
   /** Asset path or require() for logo image */
   logo?: string | number | null;
-  description?: string;
+  /** Translations by language code (es, en, de, fr, pt) */
+  description?: Partial<Record<LanguageCode, string>>;
 }
 
 /** Spray pressure type (per series) */
@@ -25,7 +26,8 @@ export interface Series {
   id: string;
   name: string;
   brandId: string;
-  description?: string;
+  /** Translations by language code (es, en, de, fr, pt) */
+  description?: Partial<Record<LanguageCode, string>>;
   /** matte, gloss, metallic, etc. */
   finishType?: FinishType;
   /** low pressure, high pressure, etc. */

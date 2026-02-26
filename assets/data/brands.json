@@ -3,19 +3,48 @@
     "id": "montana",
     "name": "Montana Colors",
     "logo": null,
-    "description": "Montana Colors spray paint"
+    "description": {
+      "es": "Montana Colors (MTN) es una marca española fundada en Barcelona en 1994 y especializada en sprays para graffiti y arte urbano. Reconocida mundialmente por su innovación, amplia gama de colores y productos diseñados específicamente para writers, destaca por su calidad, secado rápido y durabilidad.",
+      "en": "Montana Colors (MTN) is a Spanish brand founded in Barcelona in 1994 specializing in spray paint for graffiti and urban art. Globally recognized for innovation, wide color range and writer-focused products, it stands out for quality, fast drying and durability.",
+      "de": "Montana Colors (MTN) ist eine spanische Marke aus Barcelona, gegründet 1994 und spezialisiert auf Sprühfarben für Graffiti und Urban Art. Weltweit bekannt für Innovation, große Farbauswahl und writer-orientierte Produkte mit schneller Trocknung und hoher Haltbarkeit.",
+      "fr": "Montana Colors (MTN) est une marque espagnole fondée à Barcelone en 1994 spécialisée dans les sprays pour graffiti et art urbain. Reconnue mondialement pour son innovation et sa large palette de couleurs, elle se distingue par sa qualité, son séchage rapide et sa durabilité.",
+      "pt": "Montana Colors (MTN) é uma marca espanhola fundada em Barcelona em 1994 especializada em sprays para graffiti e arte urbana. Reconhecida mundialmente pela inovação e ampla gama de cores, destaca-se pela qualidade, secagem rápida e durabilidade."
+    }
   },
-  { "id": "loop", "name": "Loop", "logo": null, "description": "Loop Colors" },
+  {
+    "id": "loop",
+    "name": "Loop",
+    "logo": null,
+    "description": {
+      "es": "Loop Colors es una marca italiana de spray enfocada en graffiti y street art, conocida por su acabado mate, buena cobertura y válvula equilibrada que permite tanto rellenos como detalles. Destaca por su gama moderna de colores y su excelente relación calidad-precio.",
+      "en": "Loop Colors is an Italian spray paint brand focused on graffiti and street art, known for its matte finish, solid coverage and balanced valve suitable for both fills and details. It stands out for its modern color palette and strong value for money.",
+      "de": "Loop Colors ist eine italienische Sprühfarbenmarke für Graffiti und Street Art, bekannt für mattes Finish, gute Deckkraft und ein ausgewogenes Ventil für Flächen und Details. Besonders geschätzt für moderne Farbtöne und ein starkes Preis-Leistungs-Verhältnis.",
+      "fr": "Loop Colors est une marque italienne de spray dédiée au graffiti et au street art, reconnue pour sa finition mate, sa bonne couvrance et sa valve équilibrée adaptée aux remplissages comme aux détails. Elle se distingue par sa palette moderne et son bon rapport qualité-prix.",
+      "pt": "Loop Colors é uma marca italiana de spray voltada para graffiti e street art, conhecida pelo acabamento fosco, boa cobertura e válvula equilibrada para preenchimentos e detalhes. Destaca-se pela paleta moderna e ótima relação custo-benefício."
+    }
+  },
   {
     "id": "molotow",
     "name": "Molotow",
     "logo": null,
-    "description": "Molotow Premium Spray"
+    "description": {
+      "es": "Molotow es una marca alemana referente en el graffiti profesional, famosa por su línea Belton Premium y su alta pigmentación. Sus sprays ofrecen precisión, fiabilidad y una amplia carta de colores, siendo muy utilizados en muralismo, ilustración y arte urbano.",
+      "en": "Molotow is a German brand highly respected in professional graffiti, especially known for its Belton Premium line and high pigmentation. Its sprays deliver precision, reliability and a wide color range used in murals, illustration and urban art.",
+      "de": "Molotow ist eine deutsche Marke und feste Größe im professionellen Graffiti, besonders bekannt für die Belton Premium Reihe und hohe Pigmentierung. Die Sprays bieten Präzision, Zuverlässigkeit und eine große Farbauswahl für Murals und Urban Art.",
+      "fr": "Molotow est une marque allemande de référence dans le graffiti professionnel, célèbre pour la gamme Belton Premium et sa forte pigmentation. Ses sprays offrent précision, fiabilité et une large palette utilisée en muralisme et art urbain.",
+      "pt": "Molotow é uma marca alemã de referência no graffiti profissional, famosa pela linha Belton Premium e alta pigmentação. Seus sprays oferecem precisão, confiabilidade e ampla gama de cores usadas em muralismo e arte urbana."
+    }
   },
   {
     "id": "aka",
     "name": "AKA",
     "logo": null,
-    "description": "AKA is a brand of spray colors"
+    "description": {
+      "es": "AKA Colors es una marca española desarrollada en Valencia especializada en sprays para graffiti de alto rendimiento. Sus pinturas destacan por la buena cobertura, secado rápido y una propuesta enfocada en ofrecer herramientas profesionales a un precio accesible.",
+      "en": "AKA Colors is a Spanish spray paint brand developed in Valencia focused on high-performance graffiti paint. Known for strong coverage, fast drying and a professional approach at an accessible price point.",
+      "de": "AKA Colors ist eine spanische Marke aus Valencia für leistungsstarke Graffiti-Sprühfarben. Bekannt für gute Deckkraft, schnelle Trocknung und einen professionellen Ansatz zu einem zugänglichen Preis.",
+      "fr": "AKA Colors est une marque espagnole développée à Valence spécialisée dans les sprays graffiti haute performance. Elle se distingue par sa bonne couvrance, son séchage rapide et son positionnement professionnel à prix accessible.",
+      "pt": "AKA Colors é uma marca espanhola desenvolvida em Valência focada em sprays de alto desempenho para graffiti. Destaca-se pela boa cobertura, secagem rápida e proposta profissional com preço acessível."
+    }
   }
 ]
