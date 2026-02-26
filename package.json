@@ -17,7 +17,8 @@
     "extract:flame-orange": "node scripts/extract-flame-orange-colors.cjs",
     "extract:hardcore": "node scripts/extract-hardcore-colors.cjs",
     "extract:montana-94": "node scripts/extract-montana-94-colors.cjs",
-    "extract:vice": "node scripts/extract-vice-colors.cjs"
+    "extract:vice": "node scripts/extract-vice-colors.cjs",
+    "colors:add-lab": "node scripts/add-lab-to-colors.cjs"
   },
   "dependencies": {
     "@expo/vector-icons": "^15.0.3",

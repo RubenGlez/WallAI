@@ -48,8 +48,7 @@ export interface Color {
   code: string;
   /** Translations by language code (es, en, de, fr, pt) */
   name: Partial<Record<LanguageCode, string>>;
-  /** null until hex-to-Lab generator exists */
-  lab?: { l: number; a: number; b: number } | null;
+  lab: { l: number; a: number; b: number };
 }
 
 // Overlay config for a single layer (background or sketch)

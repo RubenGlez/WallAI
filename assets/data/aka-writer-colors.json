@@ -9,6 +9,11 @@
       "es": "AMARILLO SALVATORE AKA",
       "fr": "JAUNE SALVATORE AKA",
       "pt": "AMARELO SALVATORE AKA"
+    },
+    "lab": {
+      "l": 74.14,
+      "a": 17.14,
+      "b": 76.81
     }
   },
   {
@@ -21,6 +26,11 @@
       "es": "MORADO KLEI",
       "fr": "VIOLET KLEI",
       "pt": "ROXO KLEI"
+    },
+    "lab": {
+      "l": 61.6,
+      "a": 15.55,
+      "b": -59.38
     }
   },
   {
@@ -33,6 +43,11 @@
       "es": "MORADO RAKE43",
       "fr": "VIOLET RAKE43",
       "pt": "ROXO RAKE43"
+    },
+    "lab": {
+      "l": 36.43,
+      "a": 61.66,
+      "b": -100.47
     }
   },
   {
@@ -45,6 +60,11 @@
       "es": "MORADO ARANDANO",
       "fr": "VIOLET ARANDANO",
       "pt": "ROXO ARANDANO"
+    },
+    "lab": {
+      "l": 15.66,
+      "a": 41.09,
+      "b": -71.91
     }
   },
   {
@@ -57,6 +77,11 @@
       "es": "MARRÓN HERVÁS",
       "fr": "BRUN HERVÁS",
       "pt": "MARROM HERVÁS"
+    },
+    "lab": {
+      "l": 47.83,
+      "a": 42.33,
+      "b": 58.04
     }
   },
   {
@@ -69,6 +94,11 @@
       "es": "MARRÓN MALAMADRE",
       "fr": "BRUN MALAMADRE",
       "pt": "MARROM MALAMADRE"
+    },
+    "lab": {
+      "l": 44.97,
+      "a": 36.53,
+      "b": 54.9
     }
   },
   {
@@ -81,6 +111,11 @@
       "es": "MARRÓN REC",
       "fr": "BRUN REC",
       "pt": "MARROM REC"
+    },
+    "lab": {
+      "l": 25.77,
+      "a": 27.44,
+      "b": 36.73
     }
   },
   {
@@ -93,6 +128,11 @@
       "es": "MARRÓN IGOR",
       "fr": "BRUN IGOR",
       "pt": "MARROM IGOR"
+    },
+    "lab": {
+      "l": 17.1,
+      "a": 27.3,
+      "b": 25.99
     }
   },
   {
@@ -105,6 +145,11 @@
       "es": "MARRÓN MOFI",
       "fr": "BRUN MOFI",
       "pt": "MARROM MOFI"
+    },
+    "lab": {
+      "l": 10.72,
+      "a": 20.07,
+      "b": 16.57
     }
   },
   {
@@ -117,6 +162,11 @@
       "es": "SKIN TOFFEE AKA",
       "fr": "PEAU TOFFEE AKA",
       "pt": "PELE TOFFEE AKA"
+    },
+    "lab": {
+      "l": 30.77,
+      "a": 29.08,
+      "b": 42.04
     }
   },
   {
@@ -129,6 +179,11 @@
       "es": "MORADO CRISTAL AKA",
       "fr": "VIOLET CRISTAL AKA",
       "pt": "ROXO CRISTAL AKA"
+    },
+    "lab": {
+      "l": 89.87,
+      "a": 10.41,
+      "b": -15.02
     }
   },
   {
@@ -141,6 +196,11 @@
       "es": "NEGRO",
       "fr": "NOIR",
       "pt": "PRETO"
+    },
+    "lab": {
+      "l": 0,
+      "a": 0,
+      "b": 0
     }
   },
   {
@@ -153,6 +213,11 @@
       "es": "BLANCO",
       "fr": "BLANC",
       "pt": "BRANCO"
+    },
+    "lab": {
+      "l": 100,
+      "a": 0,
+      "b": 0
     }
   },
   {
@@ -165,6 +230,11 @@
       "es": "AMARILLO CARNOTITA",
       "fr": "JAUNE CARNOTITE",
       "pt": "AMARELO CARNOTITA"
+    },
+    "lab": {
+      "l": 98.63,
+      "a": -8.23,
+      "b": 27.86
     }
   },
   {
@@ -177,6 +247,11 @@
       "es": "AMARILLO SUAVE",
       "fr": "JAUNE DOUX",
       "pt": "AMARELO SUAVE"
+    },
+    "lab": {
+      "l": 96.79,
+      "a": -10.32,
+      "b": 61.79
     }
   },
   {
@@ -189,6 +264,11 @@
       "es": "AMARILLO PAELLA",
       "fr": "JAUNE PAELLA",
       "pt": "AMARELO PAELLA"
+    },
+    "lab": {
+      "l": 96.47,
+      "a": -10.29,
+      "b": 64.87
     }
   },
   {
@@ -201,6 +281,11 @@
       "es": "AMARILLO SULFUROSO",
       "fr": "JAUNE SULFUREUX",
       "pt": "AMARELO SULFUROSO"
+    },
+    "lab": {
+      "l": 91.72,
+      "a": -8.24,
+      "b": 75.23
     }
   },
   {
@@ -213,6 +298,11 @@
       "es": "AMARILLO AZUFRE",
       "fr": "JAUNE SOUFRE",
       "pt": "AMARELO ENXOFRE"
+    },
+    "lab": {
+      "l": 93.85,
+      "a": -8.31,
+      "b": 83.34
     }
   },
   {
@@ -225,6 +315,11 @@
       "es": "AMARILLO ORO",
       "fr": "JAUNE OR ORO",
       "pt": "AMARELO OURO"
+    },
+    "lab": {
+      "l": 88.64,
+      "a": -13.24,
+      "b": 86.12
     }
   },
   {
@@ -237,6 +332,11 @@
       "es": "AMARILLO MOSTAZA",
       "fr": "JAUNE MOUTARDE",
       "pt": "AMARELO MOSTAZA"
+    },
+    "lab": {
+      "l": 79.65,
+      "a": -6.28,
+      "b": 79.21
     }
   },
   {
@@ -249,6 +349,11 @@
       "es": "AMARILLO VERDOSO",
       "fr": "JAUNE VERDOYANT",
       "pt": "AMARELO VERDOSO"
+    },
+    "lab": {
+      "l": 50.6,
+      "a": -5.36,
+      "b": 54.3
     }
   },
   {
@@ -261,6 +366,11 @@
       "es": "VERDE CAMUFLAJE",
       "fr": "VERT CAMOUFLAGE",
       "pt": "VERDE CAMUFLAGEM"
+    },
+    "lab": {
+      "l": 39.29,
+      "a": -13.14,
+      "b": 32.9
     }
   },
   {
@@ -273,6 +383,11 @@
       "es": "VERDE ESPERANZA",
       "fr": "VERT ESPÉRANCE",
       "pt": "VERDE ESPERANÇA"
+    },
+    "lab": {
+      "l": 85.75,
+      "a": -21.19,
+      "b": 39.47
     }
   },
   {
@@ -285,6 +400,11 @@
       "es": "VERDE CÉSPED",
       "fr": "VERT GAZON",
       "pt": "VERDE CÉSPED"
+    },
+    "lab": {
+      "l": 83.72,
+      "a": -24.87,
+      "b": 44.52
     }
   },
   {
@@ -297,6 +417,11 @@
       "es": "VERDE VENUS",
       "fr": "VERT VÉNUS",
       "pt": "VERDE VÊNUS"
+    },
+    "lab": {
+      "l": 80.26,
+      "a": -30.9,
+      "b": 52.57
     }
   },
   {
@@ -309,6 +434,11 @@
       "es": "VERDE PRIMAVERA",
       "fr": "VERT PRINTEMPS",
       "pt": "VERDE PRIMAVERA"
+    },
+    "lab": {
+      "l": 70.3,
+      "a": -40,
+      "b": 63.98
     }
   },
   {
@@ -321,6 +451,11 @@
       "es": "VERDE ESMERALDA",
       "fr": "VERT ESMERALDA",
       "pt": "VERDE ESMERALDA"
+    },
+    "lab": {
+      "l": 63.76,
+      "a": -50.34,
+      "b": 54.29
     }
   },
   {
@@ -333,6 +468,11 @@
       "es": "VERDE IMPERIAL",
       "fr": "VERT IMPERIAL",
       "pt": "VERDE IMPERIAL"
+    },
+    "lab": {
+      "l": 58.48,
+      "a": -40.27,
+      "b": 47.51
     }
   },
   {
@@ -345,6 +485,11 @@
       "es": "VERDE OLIVA",
       "fr": "VERT OLIVE",
       "pt": "VERDE OLIVA"
+    },
+    "lab": {
+      "l": 54.15,
+      "a": -50.45,
+      "b": 38.01
     }
   },
   {
@@ -357,6 +502,11 @@
       "es": "AMARILLO TUBASA",
       "fr": "JAUNE TUBASA",
       "pt": "AMARELO TUBASA"
+    },
+    "lab": {
+      "l": 88.39,
+      "a": 2.91,
+      "b": 61.23
     }
   },
   {
@@ -369,6 +519,11 @@
       "es": "AMARILLO MEDIO",
       "fr": "JAUNE MOYEN",
       "pt": "AMARELO MÉDIO"
+    },
+    "lab": {
+      "l": 85.9,
+      "a": 7.22,
+      "b": 72.96
     }
   },
   {
@@ -381,6 +536,11 @@
       "es": "VERDE TURMALINA",
       "fr": "VERT TURMALINE",
       "pt": "VERDE TURMALINA"
+    },
+    "lab": {
+      "l": 86.72,
+      "a": -23.03,
+      "b": 0.57
     }
   },
   {
@@ -393,6 +553,11 @@
       "es": "VERDE JADE",
       "fr": "VERT JADE",
       "pt": "VERDE JADE"
+    },
+    "lab": {
+      "l": 84.06,
+      "a": -30.27,
+      "b": 0.18
     }
   },
   {
@@ -405,6 +570,11 @@
       "es": "VERDE SELVA",
       "fr": "VERT SELVA",
       "pt": "VERDE SELVA"
+    },
+    "lab": {
+      "l": 76.32,
+      "a": -34.81,
+      "b": 4.73
     }
   },
   {
@@ -417,6 +587,11 @@
       "es": "VERDE GROENLANDIA",
       "fr": "VERT GROENLANDIA",
       "pt": "VERDE GROENLÂNDIA"
+    },
+    "lab": {
+      "l": 72.67,
+      "a": -53.63,
+      "b": 14.08
     }
   },
   {
@@ -429,6 +604,11 @@
       "es": "VERDE BRÓCOLI",
       "fr": "VERT BROCOLI",
       "pt": "VERDE BRÓCOLI"
+    },
+    "lab": {
+      "l": 64.81,
+      "a": -48.06,
+      "b": 10.68
     }
   },
   {
@@ -441,6 +621,11 @@
       "es": "VERDE CLOROFILA",
       "fr": "VERT CLOROPHYL",
       "pt": "VERDE CLOROFILA"
+    },
+    "lab": {
+      "l": 54.6,
+      "a": -45.66,
+      "b": 19.69
     }
   },
   {
@@ -453,6 +638,11 @@
       "es": "VERDE MALAQUITA",
       "fr": "VERT MALAQUITA",
       "pt": "VERDE MALAQUITA"
+    },
+    "lab": {
+      "l": 47.89,
+      "a": -42.26,
+      "b": 20.78
     }
   },
   {
@@ -465,6 +655,11 @@
       "es": "VERDE INTENSO",
       "fr": "VERT INTENSO",
       "pt": "VERDE INTENSO"
+    },
+    "lab": {
+      "l": 43.7,
+      "a": -38.72,
+      "b": 16.97
     }
   },
   {
@@ -477,6 +672,11 @@
       "es": "VERDE NAVARRO",
       "fr": "VERT NAVARRO",
       "pt": "VERDE NAVARRO"
+    },
+    "lab": {
+      "l": 24.9,
+      "a": -22.77,
+      "b": 1.54
     }
   },
   {
@@ -489,6 +689,11 @@
       "es": "VERDE VALENCIA",
       "fr": "VERT VALENCIA",
       "pt": "VERDE VALÊNCIA"
+    },
+    "lab": {
+      "l": 37.84,
+      "a": -31.38,
+      "b": 5.48
     }
   },
   {
@@ -501,6 +706,11 @@
       "es": "NARANJA SUAVE",
       "fr": "ORANGE DOUCE",
       "pt": "LARANJA SUAVE"
+    },
+    "lab": {
+      "l": 88.07,
+      "a": 12.24,
+      "b": 21.83
     }
   },
   {
@@ -513,6 +723,11 @@
       "es": "NARANJA MANDARINA",
       "fr": "ORANGE MANDARINE",
       "pt": "LARANJA MANDARINA"
+    },
+    "lab": {
+      "l": 77.58,
+      "a": 27.7,
+      "b": 41.36
     }
   },
   {
@@ -525,6 +740,11 @@
       "es": "NARANJA FUEGO",
       "fr": "ORANGE FEU",
       "pt": "LARANJA FOGO"
+    },
+    "lab": {
+      "l": 71.82,
+      "a": 38.49,
+      "b": 50.77
     }
   },
   {
@@ -537,6 +757,11 @@
       "es": "NARANJA KER",
       "fr": "ORANGE KER",
       "pt": "LARANJA KER"
+    },
+    "lab": {
+      "l": 64.89,
+      "a": 52.89,
+      "b": 69.94
     }
   },
   {
@@ -549,6 +774,11 @@
       "es": "NARANJA CORNALINA",
       "fr": "ORANGE CORNALINA",
       "pt": "LARANJA CORNALINA"
+    },
+    "lab": {
+      "l": 64.16,
+      "a": 54.51,
+      "b": 73.08
     }
   },
   {
@@ -561,6 +791,11 @@
       "es": "NARANJA PURO",
       "fr": "ORANGE PUR",
       "pt": "LARANJA PURO"
+    },
+    "lab": {
+      "l": 57.92,
+      "a": 58.05,
+      "b": 68.56
     }
   },
   {
@@ -573,6 +808,11 @@
       "es": "ROJO PASTEL",
       "fr": "ROUGE PASTEL",
       "pt": "VERMELHO PASTEL"
+    },
+    "lab": {
+      "l": 76.86,
+      "a": 36.6,
+      "b": 5.74
     }
   },
   {
@@ -585,6 +825,11 @@
       "es": "ROJO FUEGO",
       "fr": "ROUGE FEU",
       "pt": "VERMELHO FOGO"
+    },
+    "lab": {
+      "l": 61.58,
+      "a": 64.44,
+      "b": 34.26
     }
   },
   {
@@ -597,6 +842,11 @@
       "es": "ROJO KIMURA",
       "fr": "ROUGE KIMURA",
       "pt": "VERMELHO KIMURA"
+    },
+    "lab": {
+      "l": 59.56,
+      "a": 64.97,
+      "b": 17.46
     }
   },
   {
@@ -609,6 +859,11 @@
       "es": "ROJO DIRECTO",
       "fr": "ROUGE DIRECTO",
       "pt": "VERMELHO DIRETO"
+    },
+    "lab": {
+      "l": 48.77,
+      "a": 74.67,
+      "b": 46.88
     }
   },
   {
@@ -621,6 +876,11 @@
       "es": "ROSA CUARZO",
       "fr": "ROSE QUARTZ",
       "pt": "ROSA QUARTZO"
+    },
+    "lab": {
+      "l": 81.57,
+      "a": 19.72,
+      "b": -8.29
     }
   },
   {
@@ -633,6 +893,11 @@
       "es": "ROSA CHICLE",
       "fr": "ROSE CHICLE",
       "pt": "ROSA CHICLE"
+    },
+    "lab": {
+      "l": 77.03,
+      "a": 34.83,
+      "b": -12.69
     }
   },
   {
@@ -645,6 +910,11 @@
       "es": "ROJO FRAMBUESA",
       "fr": "ROUGE FRAMBOISE",
       "pt": "VERMELHO FRAMBOESA"
+    },
+    "lab": {
+      "l": 64.13,
+      "a": 55.31,
+      "b": -17.69
     }
   },
   {
@@ -657,6 +927,11 @@
       "es": "ROJO ESTIVAL",
       "fr": "ROUGE ESTIVAL",
       "pt": "VERMELHO ESTIVAL"
+    },
+    "lab": {
+      "l": 50.78,
+      "a": 74.42,
+      "b": 2.26
     }
   },
   {
@@ -669,6 +944,11 @@
       "es": "ROJO GORE",
       "fr": "ROUGE GORE",
       "pt": "VERMELHO GORE"
+    },
+    "lab": {
+      "l": 45.54,
+      "a": 70.2,
+      "b": 3.95
     }
   },
   {
@@ -681,6 +961,11 @@
       "es": "ROJO GRANATE",
       "fr": "ROUGE GRANAT",
       "pt": "VERMELHO GRANADA"
+    },
+    "lab": {
+      "l": 40.76,
+      "a": 65.48,
+      "b": 38.34
     }
   },
   {
@@ -693,6 +978,11 @@
       "es": "ROJO ESPECTRO",
       "fr": "ROUGE SPECTRE",
       "pt": "VERMELHO ESPECTRO"
+    },
+    "lab": {
+      "l": 86.83,
+      "a": 19.82,
+      "b": 1.76
     }
   },
   {
@@ -705,6 +995,11 @@
       "es": "ROJO SUERTE",
       "fr": "ROUGE CHANCE",
       "pt": "VERMELHO SORTE"
+    },
+    "lab": {
+      "l": 71.9,
+      "a": 45.53,
+      "b": 9.71
     }
   },
   {
@@ -717,6 +1012,11 @@
       "es": "ROJO VAN GOGH",
       "fr": "ROUGE VAN GOGH",
       "pt": "VERMELHO VAN GOGH"
+    },
+    "lab": {
+      "l": 45.22,
+      "a": 53.14,
+      "b": 35.27
     }
   },
   {
@@ -729,6 +1029,11 @@
       "es": "ROJO ARCILLA",
       "fr": "ROUGE ARCILLA",
       "pt": "VERMELHO ARCILA"
+    },
+    "lab": {
+      "l": 43.3,
+      "a": 68.3,
+      "b": 47.32
     }
   },
   {
@@ -741,6 +1046,11 @@
       "es": "ROJO MARTE",
       "fr": "ROUGE MARS",
       "pt": "VERMELHO MARTE"
+    },
+    "lab": {
+      "l": 35.25,
+      "a": 58.97,
+      "b": 45.26
     }
   },
   {
@@ -753,6 +1063,11 @@
       "es": "AZUL MEDITERRÁNEO",
       "fr": "BLEU MEDITERRANÉEN",
       "pt": "AZUL MEDITERRÂNEO"
+    },
+    "lab": {
+      "l": 81.99,
+      "a": -16.55,
+      "b": -16.45
     }
   },
   {
@@ -765,6 +1080,11 @@
       "es": "AZUL CLARO",
       "fr": "BLEU CLAIR",
       "pt": "AZUL CLARO"
+    },
+    "lab": {
+      "l": 75.2,
+      "a": -19.42,
+      "b": -25.83
     }
   },
   {
@@ -777,6 +1097,11 @@
       "es": "AZUL TURIA",
       "fr": "BLEU TURIA",
       "pt": "AZUL TURIA"
+    },
+    "lab": {
+      "l": 69.12,
+      "a": -22.01,
+      "b": -34.21
     }
   },
   {
@@ -789,6 +1114,11 @@
       "es": "AZUL NITRILO",
       "fr": "BLEU NITRILE",
       "pt": "AZUL NITRILO"
+    },
+    "lab": {
+      "l": 64.13,
+      "a": -22.6,
+      "b": -38.73
     }
   },
   {
@@ -801,6 +1131,11 @@
       "es": "AZUL COBALTO",
       "fr": "BLEU COBALTO",
       "pt": "AZUL COBALTO"
+    },
+    "lab": {
+      "l": 47.91,
+      "a": -4.4,
+      "b": -50.8
     }
   },
   {
@@ -813,6 +1148,11 @@
       "es": "AZUL CuSO4",
       "fr": "BLEU CuSO4",
       "pt": "AZUL CuSO4"
+    },
+    "lab": {
+      "l": 39.46,
+      "a": 4.67,
+      "b": -55.1
     }
   },
   {
@@ -825,6 +1165,11 @@
       "es": "AZUL ULTRAMAR",
       "fr": "BLEU ULTRAMAR",
       "pt": "AZUL ULTRAMAR"
+    },
+    "lab": {
+      "l": 30.67,
+      "a": -1.11,
+      "b": -39.9
     }
   },
   {
@@ -837,6 +1182,11 @@
       "es": "AZUL PROFUNDO",
       "fr": "BLEU PROFOND",
       "pt": "AZUL PROFUNDO"
+    },
+    "lab": {
+      "l": 19.83,
+      "a": 6.91,
+      "b": -40.35
     }
   },
   {
@@ -849,6 +1199,11 @@
       "es": "GRIS CLARO",
       "fr": "GRIS CLAIR",
       "pt": "CINZA CLARO"
+    },
+    "lab": {
+      "l": 90.02,
+      "a": -2.76,
+      "b": 1.71
     }
   },
   {
@@ -861,6 +1216,11 @@
       "es": "GRIS CEMENTO",
       "fr": "GRIS CIMENT",
       "pt": "CINZA CIMENTO"
+    },
+    "lab": {
+      "l": 77.67,
+      "a": -3.7,
+      "b": 2.02
     }
   },
   {
@@ -873,6 +1233,11 @@
       "es": "GRIS MARCASITA",
       "fr": "GRIS MARCASITA",
       "pt": "CINZA MARCASITA"
+    },
+    "lab": {
+      "l": 63.67,
+      "a": -3.34,
+      "b": 1.71
     }
   },
   {
@@ -885,6 +1250,11 @@
       "es": "GRIS GALENA",
       "fr": "GRIS GALÈNE",
       "pt": "CINZA GALENA"
+    },
+    "lab": {
+      "l": 50.77,
+      "a": -4.17,
+      "b": 2.76
     }
   },
   {
@@ -897,6 +1267,11 @@
       "es": "GRIS PIRITA",
       "fr": "GRIS PIRITA",
       "pt": "CINZA PIRITA"
+    },
+    "lab": {
+      "l": 42.13,
+      "a": -3.2,
+      "b": 2
     }
   },
   {
@@ -909,6 +1284,11 @@
       "es": "GUN METAL",
       "fr": "GUN METAL",
       "pt": "GUN METAL"
+    },
+    "lab": {
+      "l": 34.09,
+      "a": -3.9,
+      "b": 2.53
     }
   },
   {
@@ -921,6 +1301,11 @@
       "es": "GRIS ANTRACITA",
       "fr": "GRIS ANTHRACITE",
       "pt": "CINZA ANTRACITE"
+    },
+    "lab": {
+      "l": 30.86,
+      "a": -2.95,
+      "b": 2.26
     }
   },
   {
@@ -933,6 +1318,11 @@
       "es": "GRIS INVERNAL",
       "fr": "GRIS HIVERNAL",
       "pt": "CINZA INVERNAL"
+    },
+    "lab": {
+      "l": 26.51,
+      "a": -2.85,
+      "b": 1.7
     }
   },
   {
@@ -945,6 +1335,11 @@
       "es": "GRIS ETERNO",
       "fr": "GRIS ÉTERNEL",
       "pt": "CINZA ETERNO"
+    },
+    "lab": {
+      "l": 18.08,
+      "a": -1.92,
+      "b": 1.46
     }
   },
   {
@@ -957,6 +1352,11 @@
       "es": "MORADO CLARO",
       "fr": "VIOLET CLAIR",
       "pt": "ROXO CLARO"
+    },
+    "lab": {
+      "l": 83.9,
+      "a": 2.45,
+      "b": -7.31
     }
   },
   {
@@ -969,6 +1369,11 @@
       "es": "MORADO PLATI(ADN)",
       "fr": "VIOLET PLATI(ADN)",
       "pt": "ROXO PLATI(ADN)"
+    },
+    "lab": {
+      "l": 67.14,
+      "a": 14.3,
+      "b": -29.01
     }
   },
   {
@@ -981,6 +1386,11 @@
       "es": "MORADO REPÚBLICA",
       "fr": "VIOLET RÉPUBLIQUE",
       "pt": "ROXO REPÚBLICA"
+    },
+    "lab": {
+      "l": 52.17,
+      "a": 15.36,
+      "b": -34.49
     }
   },
   {
@@ -993,6 +1403,11 @@
       "es": "MORADO AMATISTA",
       "fr": "VIOLET AMÉTHYSTE",
       "pt": "ROXO AMATISTA"
+    },
+    "lab": {
+      "l": 39.65,
+      "a": 19.75,
+      "b": -42.76
     }
   },
   {
@@ -1005,6 +1420,11 @@
       "es": "VIOLETA LIGERO",
       "fr": "VIOLET LÉGER",
       "pt": "VIOLETA LIGEIRO"
+    },
+    "lab": {
+      "l": 64.08,
+      "a": 17.13,
+      "b": -12.43
     }
   },
   {
@@ -1017,6 +1437,11 @@
       "es": "VIOLETA SIGMA",
       "fr": "VIOLET SIGMA",
       "pt": "VIOLETA SIGMA"
+    },
+    "lab": {
+      "l": 48.33,
+      "a": 19.83,
+      "b": -14.62
     }
   },
   {
@@ -1029,6 +1454,11 @@
       "es": "VIOLETA TRIUNFO",
       "fr": "VIOLET TRIOMPHE",
       "pt": "VIOLETA TRIUNFO"
+    },
+    "lab": {
+      "l": 44.37,
+      "a": 21.59,
+      "b": -15.32
     }
   },
   {
@@ -1041,6 +1471,11 @@
       "es": "VIOLETA OSCURO",
       "fr": "VIOLET SOMBRE",
       "pt": "VIOLETA ESCURO"
+    },
+    "lab": {
+      "l": 32.86,
+      "a": 26.09,
+      "b": -17.13
     }
   },
   {
@@ -1053,6 +1488,11 @@
       "es": "MARRÓN CLARO",
       "fr": "BRUN CLAIR",
       "pt": "MARROM CLARO"
+    },
+    "lab": {
+      "l": 90.42,
+      "a": 1.31,
+      "b": 17.03
     }
   },
   {
@@ -1065,6 +1505,11 @@
       "es": "MARRÓN ARENISCA",
       "fr": "BRUN SABLE",
       "pt": "MARROM ARENISCA"
+    },
+    "lab": {
+      "l": 76.86,
+      "a": 7.06,
+      "b": 36.37
     }
   },
   {
@@ -1077,6 +1522,11 @@
       "es": "MARRÓN CASTILLA",
       "fr": "BRUN CASTILLE",
       "pt": "MARROM CASTILLA"
+    },
+    "lab": {
+      "l": 69.86,
+      "a": 9.97,
+      "b": 45.68
     }
   },
   {
@@ -1089,6 +1539,11 @@
       "es": "MARRÓN SÁHARA",
       "fr": "BRUN SÁHARA",
       "pt": "MARROM SÁHARA"
+    },
+    "lab": {
+      "l": 61.74,
+      "a": 15.29,
+      "b": 48.18
     }
   },
   {
@@ -1101,6 +1556,11 @@
       "es": "MARRÓN CARTÓN",
       "fr": "BRUN CARTON",
       "pt": "MARROM CARTÃO"
+    },
+    "lab": {
+      "l": 49.71,
+      "a": 18.62,
+      "b": 55.78
     }
   },
   {
@@ -1113,6 +1573,11 @@
       "es": "MARRÓN OXIDADO",
       "fr": "BRUN OXIDÉ",
       "pt": "MARROM OXIDADO"
+    },
+    "lab": {
+      "l": 30.18,
+      "a": 0.97,
+      "b": 19.07
     }
   },
   {
@@ -1125,6 +1590,11 @@
       "es": "MARRÓN GOLDMINE",
       "fr": "BRUN GOLDMINE",
       "pt": "MARROM GOLDMINE"
+    },
+    "lab": {
+      "l": 12.35,
+      "a": -7.37,
+      "b": 6.45
     }
   },
   {
@@ -1137,6 +1607,11 @@
       "es": "MARRÓN ROJIZO",
       "fr": "BRUN ROUGE",
       "pt": "MARROM AVERMELHADO"
+    },
+    "lab": {
+      "l": 11.62,
+      "a": 28.2,
+      "b": 16.63
     }
   },
   {
@@ -1149,6 +1624,11 @@
       "es": "MARRÓN ÉBANO",
       "fr": "BRUN ÉBANO",
       "pt": "MARROM ÉBANO"
+    },
+    "lab": {
+      "l": 9.87,
+      "a": 12.2,
+      "b": 15.02
     }
   },
   {
@@ -1161,6 +1641,11 @@
       "es": "MARRÓN OSCURO",
       "fr": "BRUN FONCÉ",
       "pt": "MARROM ESCURO"
+    },
+    "lab": {
+      "l": 2.81,
+      "a": 11.24,
+      "b": 4.44
     }
   },
   {
@@ -1173,6 +1658,11 @@
       "es": "AZUL DIMONI",
       "fr": "BLEU DIMONI",
       "pt": "AZUL DIMONI"
+    },
+    "lab": {
+      "l": 83.92,
+      "a": -20.65,
+      "b": -24.72
     }
   },
   {
@@ -1185,6 +1675,11 @@
       "es": "AZUL TURQUESA",
       "fr": "BLEU TURQUOISE",
       "pt": "AZUL TURQUESA"
+    },
+    "lab": {
+      "l": 65.28,
+      "a": -37.04,
+      "b": -14.43
     }
   },
   {
@@ -1197,6 +1692,11 @@
       "es": "AZUL NGS",
       "fr": "BLEU NGS",
       "pt": "AZUL NGS"
+    },
+    "lab": {
+      "l": 52.07,
+      "a": -30.95,
+      "b": -12.18
     }
   },
   {
@@ -1209,6 +1709,11 @@
       "es": "AZUL HYDRO",
       "fr": "BLEU HYDRO",
       "pt": "AZUL HYDRO"
+    },
+    "lab": {
+      "l": 39.87,
+      "a": -27.08,
+      "b": -6.72
     }
   },
   {
@@ -1221,6 +1726,11 @@
       "es": "AZUL UNIVERSO",
       "fr": "BLEU UNIVERSE",
       "pt": "AZUL UNIVERSO"
+    },
+    "lab": {
+      "l": 45.99,
+      "a": -27.8,
+      "b": -11.95
     }
   },
   {
@@ -1233,6 +1743,11 @@
       "es": "AZUL OCEANO",
       "fr": "BLEU OCÉAN",
       "pt": "AZUL OCEANO"
+    },
+    "lab": {
+      "l": 38.95,
+      "a": -24.69,
+      "b": -10.5
     }
   },
   {
@@ -1245,6 +1760,11 @@
       "es": "AZUL NOVA",
       "fr": "BLEU NOVA",
       "pt": "AZUL NOVA"
+    },
+    "lab": {
+      "l": 26.02,
+      "a": -16.52,
+      "b": -12.43
     }
   },
   {
@@ -1257,6 +1777,11 @@
       "es": "MORADO EL TEMPLO",
       "fr": "VIOLET LE TEMPLE",
       "pt": "ROXO O TEMPLO"
+    },
+    "lab": {
+      "l": 75.5,
+      "a": 3.35,
+      "b": -37.4
     }
   },
   {
@@ -1269,6 +1794,11 @@
       "es": "AZUL BIFRÖST",
       "fr": "BLEU BIFRÖST",
       "pt": "AZUL BIFRÖST"
+    },
+    "lab": {
+      "l": 97.07,
+      "a": -14.11,
+      "b": -0.57
     }
   },
   {
@@ -1281,6 +1811,11 @@
       "es": "AZUL PASARELA",
       "fr": "BLEU PASARELA",
       "pt": "AZUL PASARELA"
+    },
+    "lab": {
+      "l": 95.92,
+      "a": -19.78,
+      "b": -4.46
     }
   },
   {
@@ -1293,6 +1828,11 @@
       "es": "AZUL TERES",
       "fr": "BLEU TERES",
       "pt": "AZUL TERES"
+    },
+    "lab": {
+      "l": 74.26,
+      "a": -38.83,
+      "b": -20.54
     }
   },
   {
@@ -1305,6 +1845,11 @@
       "es": "AZUL WARE",
       "fr": "BLEU WARE",
       "pt": "AZUL WARE"
+    },
+    "lab": {
+      "l": 52.29,
+      "a": -22.72,
+      "b": -27.36
     }
   },
   {
@@ -1317,6 +1862,11 @@
       "es": "AZUL JOVI",
       "fr": "BLEU JOVI",
       "pt": "AZUL JOVI"
+    },
+    "lab": {
+      "l": 43.22,
+      "a": -21.73,
+      "b": -20.27
     }
   },
   {
@@ -1329,6 +1879,11 @@
       "es": "AZUL JÖTNAR",
       "fr": "BLEU JÖTNAR",
       "pt": "AZUL JÖTNAR"
+    },
+    "lab": {
+      "l": 22.94,
+      "a": -13.6,
+      "b": -14.51
     }
   },
   {
@@ -1341,6 +1896,11 @@
       "es": "AZUL ABISAL",
       "fr": "BLEU ABISAL",
       "pt": "AZUL ABISAL"
+    },
+    "lab": {
+      "l": 21.52,
+      "a": -14.6,
+      "b": -11.37
     }
   },
   {
@@ -1353,6 +1913,11 @@
       "es": "VIOLETA ASTRAL",
       "fr": "VIOLET ASTRAL",
       "pt": "VIOLETA ASTRAL"
+    },
+    "lab": {
+      "l": 91.07,
+      "a": 15.18,
+      "b": -13.09
     }
   },
   {
@@ -1365,6 +1930,11 @@
       "es": "VIOLETA DAYRE",
       "fr": "VIOLET DAYRE",
       "pt": "VIOLETA DAYRE"
+    },
+    "lab": {
+      "l": 77.12,
+      "a": 29.56,
+      "b": -34.41
     }
   },
   {
@@ -1377,6 +1947,11 @@
       "es": "VIOLETA ALCORISA",
       "fr": "VIOLET ALCORISA",
       "pt": "VIOLETA ALCORISA"
+    },
+    "lab": {
+      "l": 39.38,
+      "a": 71.59,
+      "b": -74.87
     }
   },
   {
@@ -1389,6 +1964,11 @@
       "es": "VIOLETA TAONE",
       "fr": "VIOLET TAONE",
       "pt": "VIOLETA TAONE"
+    },
+    "lab": {
+      "l": 40.46,
+      "a": 73.49,
+      "b": -79.95
     }
   },
   {
@@ -1401,6 +1981,11 @@
       "es": "VIOLETA KOSA",
       "fr": "VIOLET KOSA",
       "pt": "VIOLETA KOSA"
+    },
+    "lab": {
+      "l": 32.59,
+      "a": 64.11,
+      "b": -74.68
     }
   },
   {
@@ -1413,6 +1998,11 @@
       "es": "VIOLETA LEVI",
       "fr": "VIOLET LEVI",
       "pt": "VIOLETA LEVI"
+    },
+    "lab": {
+      "l": 20.62,
+      "a": 47.26,
+      "b": -48.92
     }
   },
   {
@@ -1425,6 +2015,11 @@
       "es": "VIOLETA INMORTAL",
       "fr": "VIOLET INMORTAL",
       "pt": "VIOLETA IMORTAL"
+    },
+    "lab": {
+      "l": 13.61,
+      "a": 37.87,
+      "b": -36.98
     }
   },
   {
@@ -1437,6 +2032,11 @@
       "es": "ROSA FURIA",
       "fr": "ROSE FURIA",
       "pt": "ROSA FÚRIA"
+    },
+    "lab": {
+      "l": 82.6,
+      "a": 31.52,
+      "b": -12.37
     }
   },
   {
@@ -1449,6 +2049,11 @@
       "es": "ROSA RODERICK",
       "fr": "ROSE RODERICK",
       "pt": "ROSA RODERICK"
+    },
+    "lab": {
+      "l": 71.77,
+      "a": 51.29,
+      "b": -10.98
     }
   },
   {
@@ -1461,6 +2066,11 @@
       "es": "ROSA SAKURA",
       "fr": "ROSE SAKURA",
       "pt": "ROSA SAKURA"
+    },
+    "lab": {
+      "l": 63.54,
+      "a": 67.23,
+      "b": -5.08
     }
   },
   {
@@ -1473,6 +2083,11 @@
       "es": "MAGENTA",
       "fr": "MAGENTA",
       "pt": "MAGENTA"
+    },
+    "lab": {
+      "l": 52.99,
+      "a": 80.66,
+      "b": 7.75
     }
   },
   {
@@ -1485,6 +2100,11 @@
       "es": "ROSA RACHEL",
       "fr": "ROSE RACHEL",
       "pt": "ROSA RACHEL"
+    },
+    "lab": {
+      "l": 45.5,
+      "a": 72.27,
+      "b": -1.66
     }
   },
   {
@@ -1497,6 +2117,11 @@
       "es": "ROJO DUKE103",
       "fr": "ROUGE DUKE103",
       "pt": "VERMELHO DUKE103"
+    },
+    "lab": {
+      "l": 46.52,
+      "a": 72.68,
+      "b": 18.77
     }
   },
   {
@@ -1509,6 +2134,11 @@
       "es": "ROJO MERCURIAL",
       "fr": "ROUGE MERCURIAL",
       "pt": "VERMELHO MERCURIAL"
+    },
+    "lab": {
+      "l": 25.69,
+      "a": 48.47,
+      "b": 12.55
     }
   },
   {
@@ -1521,6 +2151,11 @@
       "es": "SKIN NUDE",
       "fr": "PEAU NUDE",
       "pt": "PELE NUDE"
+    },
+    "lab": {
+      "l": 90.26,
+      "a": 11.66,
+      "b": 10.3
     }
   },
   {
@@ -1533,6 +2168,11 @@
       "es": "SKIN BEIGE MEDIO",
       "fr": "PEAU BEIGE MOYEN",
       "pt": "PELE BEGE MÉDIO"
+    },
+    "lab": {
+      "l": 77.73,
+      "a": 30.03,
+      "b": 26.9
     }
   },
   {
@@ -1545,6 +2185,11 @@
       "es": "SKIN BRONCE",
       "fr": "PEAU BRONZE",
       "pt": "PELE BRONZE"
+    },
+    "lab": {
+      "l": 75.42,
+      "a": 34.41,
+      "b": 28.14
     }
   },
   {
@@ -1557,6 +2202,11 @@
       "es": "SKIN VELVET",
       "fr": "PEAU VELVET",
       "pt": "PELE VELVET"
+    },
+    "lab": {
+      "l": 69.5,
+      "a": 44.75,
+      "b": 42.07
     }
   },
   {
@@ -1569,6 +2219,11 @@
       "es": "SKIN CHOCOLATE",
       "fr": "PEAU CHOCOLAT",
       "pt": "PELE CHOCOLATE"
+    },
+    "lab": {
+      "l": 40.91,
+      "a": 33.5,
+      "b": 51.16
     }
   },
   {
@@ -1581,6 +2236,11 @@
       "es": "MORADO POSY",
       "fr": "VIOLET POSY",
       "pt": "ROXO POSY"
+    },
+    "lab": {
+      "l": 94.61,
+      "a": 6,
+      "b": -7.93
     }
   },
   {
@@ -1593,6 +2253,11 @@
       "es": "MORADO SHORE",
       "fr": "VIOLET SHORE",
       "pt": "ROXO SHORE"
+    },
+    "lab": {
+      "l": 72.11,
+      "a": 28.41,
+      "b": -42.34
     }
   },
   {
@@ -1605,6 +2270,11 @@
       "es": "MORADO SOEZ",
       "fr": "VIOLET SOEZ",
       "pt": "ROXO SOEZ"
+    },
+    "lab": {
+      "l": 56.78,
+      "a": 48.69,
+      "b": -66.78
     }
   },
   {
@@ -1617,6 +2287,11 @@
       "es": "MORADO XTASY",
       "fr": "VIOLET XTASY",
       "pt": "ROXO XTASY"
+    },
+    "lab": {
+      "l": 53.64,
+      "a": 49.23,
+      "b": -71.93
     }
   },
   {
@@ -1629,6 +2304,11 @@
       "es": "MORADO LIBERTAD",
       "fr": "VIOLET LIBERTÉ",
       "pt": "ROXO LIBERDADE"
+    },
+    "lab": {
+      "l": 36.4,
+      "a": 69.77,
+      "b": -84.5
     }
   },
   {
@@ -1641,6 +2321,11 @@
       "es": "MORADO SKIFE",
       "fr": "VIOLET SKIFE",
       "pt": "ROXO SKIFE"
+    },
+    "lab": {
+      "l": 34.95,
+      "a": 67.87,
+      "b": -82.35
     }
   },
   {
@@ -1653,6 +2338,11 @@
       "es": "MORADO SMILE16",
       "fr": "VIOLET SMILE16",
       "pt": "ROXO SMILE16"
+    },
+    "lab": {
+      "l": 24.68,
+      "a": 53.16,
+      "b": -59.08
     }
   },
   {
@@ -1665,6 +2355,11 @@
       "es": "MORADAO KANS",
       "fr": "MORADAO KANS",
       "pt": "MORADAO KANS"
+    },
+    "lab": {
+      "l": 19.35,
+      "a": 46.16,
+      "b": -51.06
     }
   },
   {
@@ -1677,6 +2372,11 @@
       "es": "ROSA CIMA",
       "fr": "ROSE CIMA",
       "pt": "ROSA CIMA"
+    },
+    "lab": {
+      "l": 93.94,
+      "a": 8.47,
+      "b": 1.54
     }
   },
   {
@@ -1689,6 +2389,11 @@
       "es": "ROSA ANTARES",
       "fr": "ROSE ANTARES",
       "pt": "ROSA ANTARES"
+    },
+    "lab": {
+      "l": 85.19,
+      "a": 19.82,
+      "b": 11.58
     }
   },
   {
@@ -1701,6 +2406,11 @@
       "es": "ROSA TRIBUTO",
       "fr": "ROSE TRIBUTO",
       "pt": "ROSA TRIBUTO"
+    },
+    "lab": {
+      "l": 77.71,
+      "a": 33.04,
+      "b": 13.44
     }
   },
   {
@@ -1713,6 +2423,11 @@
       "es": "ROSA PALIDO",
       "fr": "ROSE PÂLE",
       "pt": "ROSA PÁLIDO"
+    },
+    "lab": {
+      "l": 74.98,
+      "a": 38.27,
+      "b": 14
     }
   },
   {
@@ -1725,6 +2440,11 @@
       "es": "ROJO ARIZONA",
       "fr": "ROUGE ARIZONA",
       "pt": "VERMELHO ARIZONA"
+    },
+    "lab": {
+      "l": 66.42,
+      "a": 54.13,
+      "b": 26.28
     }
   },
   {
@@ -1737,6 +2457,11 @@
       "es": "ROJO RUDIART",
       "fr": "ROUGE RUDIART",
       "pt": "VERMELHO RUDIART"
+    },
+    "lab": {
+      "l": 40.59,
+      "a": 65.09,
+      "b": 52.87
     }
   },
   {
@@ -1749,6 +2474,11 @@
       "es": "ROJO HANEM",
       "fr": "ROUGE HANEM",
       "pt": "VERMELHO HANEM"
+    },
+    "lab": {
+      "l": 32.47,
+      "a": 55.74,
+      "b": 46.55
     }
   },
   {
@@ -1761,6 +2491,11 @@
       "es": "ROJO FEEVER",
       "fr": "ROUGE FEEVER",
       "pt": "VERMELHO FEEVER"
+    },
+    "lab": {
+      "l": 21.4,
+      "a": 43.06,
+      "b": 29.68
     }
   },
   {
@@ -1773,6 +2508,11 @@
       "es": "VERDE URAN",
       "fr": "VERT URAN",
       "pt": "VERDE URAN"
+    },
+    "lab": {
+      "l": 95.37,
+      "a": -24.29,
+      "b": 15.18
     }
   },
   {
@@ -1785,6 +2525,11 @@
       "es": "VERDE WALK",
       "fr": "VERT MARCHER",
       "pt": "VERDE CAMINHO"
+    },
+    "lab": {
+      "l": 93.7,
+      "a": -33.9,
+      "b": 15.62
     }
   },
   {
@@ -1797,6 +2542,11 @@
       "es": "VERDE ROCHE",
       "fr": "VERT ROCHE",
       "pt": "VERDE ROCHE"
+    },
+    "lab": {
+      "l": 74.94,
+      "a": -58.53,
+      "b": 24.46
     }
   },
   {
@@ -1809,6 +2559,11 @@
       "es": "VERDE UGLIES",
       "fr": "VERT UGLIES",
       "pt": "VERDE UGLIES"
+    },
+    "lab": {
+      "l": 56.14,
+      "a": -48.63,
+      "b": 26.5
     }
   },
   {
@@ -1821,6 +2576,11 @@
       "es": "VERDE SAKAR",
       "fr": "VERT SAKAR",
       "pt": "VERDE SAKAR"
+    },
+    "lab": {
+      "l": 50.64,
+      "a": -44.71,
+      "b": 23.76
     }
   },
   {
@@ -1833,6 +2593,11 @@
       "es": "VERDE CRITICAL",
       "fr": "VERT CRITICAL",
       "pt": "VERDE CRÍTICO"
+    },
+    "lab": {
+      "l": 42.32,
+      "a": -41.16,
+      "b": 28.3
     }
   },
   {
@@ -1845,6 +2610,11 @@
       "es": "VERDE BILBO",
       "fr": "VERT BILBO",
       "pt": "VERDE BILBAO"
+    },
+    "lab": {
+      "l": 30.65,
+      "a": -31.51,
+      "b": 17.37
     }
   },
   {
@@ -1857,6 +2627,11 @@
       "es": "NARANJA BARCELONA",
       "fr": "ORANGE BARCELONA",
       "pt": "LARANJA BARCELONA"
+    },
+    "lab": {
+      "l": 92.37,
+      "a": 6.85,
+      "b": 15.32
     }
   },
   {
@@ -1869,6 +2644,11 @@
       "es": "NARANJA MELOCOTÓN",
       "fr": "ORANGE MELOCOTÓN",
       "pt": "LARANJA MELOCOTÃO"
+    },
+    "lab": {
+      "l": 82.53,
+      "a": 19.59,
+      "b": 33.15
     }
   },
   {
@@ -1881,6 +2661,11 @@
       "es": "NARANJA VANER",
       "fr": "ORANGE VANER",
       "pt": "LARANJA VANER"
+    },
+    "lab": {
+      "l": 78.4,
+      "a": 26.94,
+      "b": 36.19
     }
   },
   {
@@ -1893,6 +2678,11 @@
       "es": "NARANJA DINAMO",
       "fr": "ORANGE DINAMO",
       "pt": "LARANJA DINAMO"
+    },
+    "lab": {
+      "l": 74.88,
+      "a": 33.42,
+      "b": 40.14
     }
   },
   {
@@ -1905,6 +2695,11 @@
       "es": "NARANJA CALABAZA",
       "fr": "ORANGE CALABAZE",
       "pt": "LARANJA ABÓBORA"
+    },
+    "lab": {
+      "l": 69.58,
+      "a": 43.78,
+      "b": 48.33
     }
   },
   {
@@ -1917,6 +2712,11 @@
       "es": "NARANJA BLIKIZ",
       "fr": "ORANGE BLIKIZ",
       "pt": "LARANJA BLIKIZ"
+    },
+    "lab": {
+      "l": 65.63,
+      "a": 52.34,
+      "b": 54.06
     }
   },
   {
@@ -1929,6 +2729,11 @@
       "es": "NARANJA 1982",
       "fr": "ORANGE 1982",
       "pt": "LARANJA 1982"
+    },
+    "lab": {
+      "l": 60.37,
+      "a": 51.79,
+      "b": 69.6
     }
   },
   {
@@ -1941,6 +2746,11 @@
       "es": "NARANJA DUZLO",
       "fr": "ORANGE DUZLO",
       "pt": "LARANJA DUZLO"
+    },
+    "lab": {
+      "l": 53.66,
+      "a": 46.83,
+      "b": 63.43
     }
   },
   {
@@ -1953,6 +2763,11 @@
       "es": "MARRÓN ANARANJADO",
       "fr": "BRUN ORANGE",
       "pt": "MARROM LARANJA"
+    },
+    "lab": {
+      "l": 47.93,
+      "a": 38.89,
+      "b": 57.64
     }
   }
 ]
