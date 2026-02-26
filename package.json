@@ -10,7 +10,14 @@
     "web": "expo start --web",
     "lint": "expo lint",
     "type-check": "tsc --noEmit",
-    "check": "npm run type-check && npm run lint"
+    "check": "npm run type-check && npm run lint",
+    "extract:aka-writer": "node scripts/extract-aka-writer-colors.cjs",
+    "extract:belton-premium": "node scripts/extract-belton-premium-colors.cjs",
+    "extract:flame-blue": "node scripts/extract-flame-blue-colors.cjs",
+    "extract:flame-orange": "node scripts/extract-flame-orange-colors.cjs",
+    "extract:hardcore": "node scripts/extract-hardcore-colors.cjs",
+    "extract:montana-94": "node scripts/extract-montana-94-colors.cjs",
+    "extract:vice": "node scripts/extract-vice-colors.cjs"
   },
   "dependencies": {
     "@expo/vector-icons": "^15.0.3",

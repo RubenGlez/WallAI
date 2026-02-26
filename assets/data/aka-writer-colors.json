@@ -1,0 +1,1958 @@
+[
+  {
+    "id": "0dd87c67-1009-4af8-be0c-fabfeb90db94",
+    "seriesId": "aka-writter",
+    "hex": "#EBA900",
+    "code": "129",
+    "name": {
+      "de": "GELB SALVATORE AKA",
+      "es": "AMARILLO SALVATORE AKA",
+      "fr": "JAUNE SALVATORE AKA",
+      "pt": "AMARELO SALVATORE AKA"
+    }
+  },
+  {
+    "id": "0d038ca2-7dc6-4538-832b-0d077ce2c188",
+    "seriesId": "aka-writter",
+    "hex": "#788FFF",
+    "code": "251",
+    "name": {
+      "de": "LILA KLEI",
+      "es": "MORADO KLEI",
+      "fr": "VIOLET KLEI",
+      "pt": "ROXO KLEI"
+    }
+  },
+  {
+    "id": "35b1ac5e-4400-495c-9e65-785e70e38dfe",
+    "seriesId": "aka-writter",
+    "hex": "#4D28FF",
+    "code": "253",
+    "name": {
+      "de": "LILA RAKE43",
+      "es": "MORADO RAKE43",
+      "fr": "VIOLET RAKE43",
+      "pt": "ROXO RAKE43"
+    }
+  },
+  {
+    "id": "5e203f22-6d21-4500-8ba2-ea93225133ae",
+    "seriesId": "aka-writter",
+    "hex": "#000C93",
+    "code": "255",
+    "name": {
+      "de": "LILA ARANDANE",
+      "es": "MORADO ARANDANO",
+      "fr": "VIOLET ARANDANO",
+      "pt": "ROXO ARANDANO"
+    }
+  },
+  {
+    "id": "b8b66cdd-ca9b-49d0-9c1c-daf0bca656c3",
+    "seriesId": "aka-writter",
+    "hex": "#BB4F00",
+    "code": "260",
+    "name": {
+      "de": "BRAUN HERVÁS",
+      "es": "MARRÓN HERVÁS",
+      "fr": "BRUN HERVÁS",
+      "pt": "MARROM HERVÁS"
+    }
+  },
+  {
+    "id": "fe529969-9b25-4c34-8f83-54a2cdd367b7",
+    "seriesId": "aka-writter",
+    "hex": "#AB4E00",
+    "code": "261",
+    "name": {
+      "de": "BRAUN MALAMADRE",
+      "es": "MARRÓN MALAMADRE",
+      "fr": "BRUN MALAMADRE",
+      "pt": "MARROM MALAMADRE"
+    }
+  },
+  {
+    "id": "17968cf9-610b-4ade-b663-71792b229790",
+    "seriesId": "aka-writter",
+    "hex": "#682900",
+    "code": "263",
+    "name": {
+      "de": "BRAUN REC",
+      "es": "MARRÓN REC",
+      "fr": "BRUN REC",
+      "pt": "MARROM REC"
+    }
+  },
+  {
+    "id": "13e7350e-93c1-4f76-a669-8f235bea24d6",
+    "seriesId": "aka-writter",
+    "hex": "#501500",
+    "code": "264",
+    "name": {
+      "de": "BRAUN IGOR",
+      "es": "MARRÓN IGOR",
+      "fr": "BRUN IGOR",
+      "pt": "MARROM IGOR"
+    }
+  },
+  {
+    "id": "aee9e3d6-2561-4bfb-8e57-1f8f8e7d78aa",
+    "seriesId": "aka-writter",
+    "hex": "#380F00",
+    "code": "265",
+    "name": {
+      "de": "BRAUN MOFI",
+      "es": "MARRÓN MOFI",
+      "fr": "BRUN MOFI",
+      "pt": "MARROM MOFI"
+    }
+  },
+  {
+    "id": "baf35204-dd34-4ba6-949e-4a05e07be397",
+    "seriesId": "aka-writter",
+    "hex": "#783300",
+    "code": "429",
+    "name": {
+      "de": "HAUT TOFFEE AKA",
+      "es": "SKIN TOFFEE AKA",
+      "fr": "PEAU TOFFEE AKA",
+      "pt": "PELE TOFFEE AKA"
+    }
+  },
+  {
+    "id": "5d9417b0-2c60-4c18-8c84-61cef8c56cfb",
+    "seriesId": "aka-writter",
+    "hex": "#ECDCFF",
+    "code": "441",
+    "name": {
+      "de": "LILA KRISTALL AKA",
+      "es": "MORADO CRISTAL AKA",
+      "fr": "VIOLET CRISTAL AKA",
+      "pt": "ROXO CRISTAL AKA"
+    }
+  },
+  {
+    "id": "9cde2fde-d3c5-45bf-a30e-92e28b9c9f4a",
+    "seriesId": "aka-writter",
+    "hex": "#000000",
+    "code": "AKA100",
+    "name": {
+      "de": "SCHWARZ",
+      "es": "NEGRO",
+      "fr": "NOIR",
+      "pt": "PRETO"
+    }
+  },
+  {
+    "id": "a4600824-7b4b-4afa-a7ba-e527f8ca97f9",
+    "seriesId": "aka-writter",
+    "hex": "#FFFFFF",
+    "code": "AKA101",
+    "name": {
+      "de": "WEISS",
+      "es": "BLANCO",
+      "fr": "BLANC",
+      "pt": "BRANCO"
+    }
+  },
+  {
+    "id": "df00fd29-5770-464f-8c9b-b58bf2678051",
+    "seriesId": "aka-writter",
+    "hex": "#FBFFC4",
+    "code": "AKA110",
+    "name": {
+      "de": "GELB CARNOTITA",
+      "es": "AMARILLO CARNOTITA",
+      "fr": "JAUNE CARNOTITE",
+      "pt": "AMARELO CARNOTITA"
+    }
+  },
+  {
+    "id": "7e7b7f9c-9de4-43a1-9aac-48ffd769f842",
+    "seriesId": "aka-writter",
+    "hex": "#FFFA78",
+    "code": "AKA111",
+    "name": {
+      "de": "GELB SUAVE",
+      "es": "AMARILLO SUAVE",
+      "fr": "JAUNE DOUX",
+      "pt": "AMARELO SUAVE"
+    }
+  },
+  {
+    "id": "fdbd3458-6347-4124-9621-0193b6ec5ee7",
+    "seriesId": "aka-writter",
+    "hex": "#FFF970",
+    "code": "AKA112",
+    "name": {
+      "de": "GELB PAELLA",
+      "es": "AMARILLO PAELLA",
+      "fr": "JAUNE PAELLA",
+      "pt": "AMARELO PAELLA"
+    }
+  },
+  {
+    "id": "b778095c-c5de-4436-919b-af0813d66e99",
+    "seriesId": "aka-writter",
+    "hex": "#F7EA48",
+    "code": "AKA113",
+    "name": {
+      "de": "GELB SULFUROSO",
+      "es": "AMARILLO SULFUROSO",
+      "fr": "JAUNE SULFUREUX",
+      "pt": "AMARELO SULFUROSO"
+    }
+  },
+  {
+    "id": "4131ae9d-8f20-4636-b2c8-db3221a6659e",
+    "seriesId": "aka-writter",
+    "hex": "#FFF034",
+    "code": "AKA114",
+    "name": {
+      "de": "GELB SCHWEFEL",
+      "es": "AMARILLO AZUFRE",
+      "fr": "JAUNE SOUFRE",
+      "pt": "AMARELO ENXOFRE"
+    }
+  },
+  {
+    "id": "2f707e2e-36a9-4409-bde9-a3404f738949",
+    "seriesId": "aka-writter",
+    "hex": "#E7E400",
+    "code": "AKA115",
+    "name": {
+      "de": "GELB GOLD",
+      "es": "AMARILLO ORO",
+      "fr": "JAUNE OR ORO",
+      "pt": "AMARELO OURO"
+    }
+  },
+  {
+    "id": "57d25bda-e564-4957-8b3d-0e188147d205",
+    "seriesId": "aka-writter",
+    "hex": "#D7C700",
+    "code": "AKA116",
+    "name": {
+      "de": "GELB SENF",
+      "es": "AMARILLO MOSTAZA",
+      "fr": "JAUNE MOUTARDE",
+      "pt": "AMARELO MOSTAZA"
+    }
+  },
+  {
+    "id": "5ca75bcb-5f23-4111-a0d7-1b3c2969fad5",
+    "seriesId": "aka-writter",
+    "hex": "#827A04",
+    "code": "AKA117",
+    "name": {
+      "de": "GELB GRÜNLICH",
+      "es": "AMARILLO VERDOSO",
+      "fr": "JAUNE VERDOYANT",
+      "pt": "AMARELO VERDOSO"
+    }
+  },
+  {
+    "id": "14373339-65e0-4e00-84bd-a266662b8727",
+    "seriesId": "aka-writter",
+    "hex": "#546223",
+    "code": "AKA119",
+    "name": {
+      "de": "GRÜN CAMUFLAGE",
+      "es": "VERDE CAMUFLAJE",
+      "fr": "VERT CAMOUFLAGE",
+      "pt": "VERDE CAMUFLAGEM"
+    }
+  },
+  {
+    "id": "9ac66a89-abfb-48f4-b202-8d96e64865e2",
+    "seriesId": "aka-writter",
+    "hex": "#C2E189",
+    "code": "AKA120",
+    "name": {
+      "de": "GRÜN HOFFNUNG",
+      "es": "VERDE ESPERANZA",
+      "fr": "VERT ESPÉRANCE",
+      "pt": "VERDE ESPERANÇA"
+    }
+  },
+  {
+    "id": "612ea6e4-fa59-4250-afdd-9ca9ec07d901",
+    "seriesId": "aka-writter",
+    "hex": "#B7DD79",
+    "code": "AKA121",
+    "name": {
+      "de": "GRÜN RASEN",
+      "es": "VERDE CÉSPED",
+      "fr": "VERT GAZON",
+      "pt": "VERDE CÉSPED"
+    }
+  },
+  {
+    "id": "40d8090b-1218-406f-a161-2793445853df",
+    "seriesId": "aka-writter",
+    "hex": "#A4D65E",
+    "code": "AKA122",
+    "name": {
+      "de": "GRÜN VENUS",
+      "es": "VERDE VENUS",
+      "fr": "VERT VÉNUS",
+      "pt": "VERDE VÊNUS"
+    }
+  },
+  {
+    "id": "99c3eab9-a7be-4b69-a746-72603837f087",
+    "seriesId": "aka-writter",
+    "hex": "#78BE20",
+    "code": "AKA123",
+    "name": {
+      "de": "GRÜN FRÜHLING",
+      "es": "VERDE PRIMAVERA",
+      "fr": "VERT PRINTEMPS",
+      "pt": "VERDE PRIMAVERA"
+    }
+  },
+  {
+    "id": "1d1a1409-9cdc-4e55-8441-b6e6503d6659",
+    "seriesId": "aka-writter",
+    "hex": "#43B02A",
+    "code": "AKA124",
+    "name": {
+      "de": "GRÜN ESMERALDA",
+      "es": "VERDE ESMERALDA",
+      "fr": "VERT ESMERALDA",
+      "pt": "VERDE ESMERALDA"
+    }
+  },
+  {
+    "id": "36cbf58e-8336-4c56-aa86-20e40e894513",
+    "seriesId": "aka-writter",
+    "hex": "#509E2F",
+    "code": "AKA125",
+    "name": {
+      "de": "GRÜN IMPERIAL",
+      "es": "VERDE IMPERIAL",
+      "fr": "VERT IMPERIAL",
+      "pt": "VERDE IMPERIAL"
+    }
+  },
+  {
+    "id": "77c6f213-aef8-4802-b6ff-1cb91b052f60",
+    "seriesId": "aka-writter",
+    "hex": "#009639",
+    "code": "AKA126",
+    "name": {
+      "de": "GRÜN OLIVE",
+      "es": "VERDE OLIVA",
+      "fr": "VERT OLIVE",
+      "pt": "VERDE OLIVA"
+    }
+  },
+  {
+    "id": "f780b616-7cea-48fa-be5b-68d0ffea8551",
+    "seriesId": "aka-writter",
+    "hex": "#FDDA64",
+    "code": "AKA127",
+    "name": {
+      "de": "GELB TUBASA",
+      "es": "AMARILLO TUBASA",
+      "fr": "JAUNE TUBASA",
+      "pt": "AMARELO TUBASA"
+    }
+  },
+  {
+    "id": "8d739dee-b21d-4b93-b9f7-4bc47f37d9e7",
+    "seriesId": "aka-writter",
+    "hex": "#FFD040",
+    "code": "AKA128",
+    "name": {
+      "de": "GELB MITTE",
+      "es": "AMARILLO MEDIO",
+      "fr": "JAUNE MOYEN",
+      "pt": "AMARELO MÉDIO"
+    }
+  },
+  {
+    "id": "4221403e-09cd-4e26-bcff-f8efe2fe9957",
+    "seriesId": "aka-writter",
+    "hex": "#A7E6D7",
+    "code": "AKA130",
+    "name": {
+      "de": "GRÜN TURMALINA",
+      "es": "VERDE TURMALINA",
+      "fr": "VERT TURMALINE",
+      "pt": "VERDE TURMALINA"
+    }
+  },
+  {
+    "id": "8ab2a587-ed4d-4242-a675-d4bcae2b946e",
+    "seriesId": "aka-writter",
+    "hex": "#8CE2D0",
+    "code": "AKA131",
+    "name": {
+      "de": "GRÜN JADE",
+      "es": "VERDE JADE",
+      "fr": "VERT JADE",
+      "pt": "VERDE JADE"
+    }
+  },
+  {
+    "id": "eb421d7a-661e-45b8-9f98-6d25b33eed3c",
+    "seriesId": "aka-writter",
+    "hex": "#6ECEB2",
+    "code": "AKA132",
+    "name": {
+      "de": "GRÜN Dschungel",
+      "es": "VERDE SELVA",
+      "fr": "VERT SELVA",
+      "pt": "VERDE SELVA"
+    }
+  },
+  {
+    "id": "b813542e-bee5-48a5-91b7-f5d228872b01",
+    "seriesId": "aka-writter",
+    "hex": "#00CB96",
+    "code": "AKA133",
+    "name": {
+      "de": "GRÜN GRÖNLAND",
+      "es": "VERDE GROENLANDIA",
+      "fr": "VERT GROENLANDIA",
+      "pt": "VERDE GROENLÂNDIA"
+    }
+  },
+  {
+    "id": "ed35e6f8-6987-4b81-ac71-ddc9d9c7e1dd",
+    "seriesId": "aka-writter",
+    "hex": "#00B388",
+    "code": "AKA134",
+    "name": {
+      "de": "GRÜN BROKKOLI",
+      "es": "VERDE BRÓCOLI",
+      "fr": "VERT BROCOLI",
+      "pt": "VERDE BRÓCOLI"
+    }
+  },
+  {
+    "id": "f9d85a82-5b64-40ee-9510-0d13e0ae4b24",
+    "seriesId": "aka-writter",
+    "hex": "#00965E",
+    "code": "AKA135",
+    "name": {
+      "de": "GRÜN CHLOROPHYLL",
+      "es": "VERDE CLOROFILA",
+      "fr": "VERT CLOROPHYL",
+      "pt": "VERDE CLOROFILA"
+    }
+  },
+  {
+    "id": "875d03cf-5d83-47df-9d11-0d11da63414e",
+    "seriesId": "aka-writter",
+    "hex": "#00834C",
+    "code": "AKA136",
+    "name": {
+      "de": "GRÜN MALAQUITA",
+      "es": "VERDE MALAQUITA",
+      "fr": "VERT MALAQUITA",
+      "pt": "VERDE MALAQUITA"
+    }
+  },
+  {
+    "id": "77516bea-812e-46d8-b872-5b47a4eec1f1",
+    "seriesId": "aka-writter",
+    "hex": "#007749",
+    "code": "AKA137",
+    "name": {
+      "de": "GRÜN INTENSO",
+      "es": "VERDE INTENSO",
+      "fr": "VERT INTENSO",
+      "pt": "VERDE INTENSO"
+    }
+  },
+  {
+    "id": "e5556456-7244-4430-99b4-06bec728a73e",
+    "seriesId": "aka-writter",
+    "hex": "#004438",
+    "code": "AKA138",
+    "name": {
+      "de": "GRÜN NAVARRO",
+      "es": "VERDE NAVARRO",
+      "fr": "VERT NAVARRO",
+      "pt": "VERDE NAVARRO"
+    }
+  },
+  {
+    "id": "92baafff-ea9f-47be-a09c-aed8225dc4e3",
+    "seriesId": "aka-writter",
+    "hex": "#00664F",
+    "code": "AKA139",
+    "name": {
+      "de": "GRÜN VALENCIA",
+      "es": "VERDE VALENCIA",
+      "fr": "VERT VALENCIA",
+      "pt": "VERDE VALÊNCIA"
+    }
+  },
+  {
+    "id": "158114db-941e-4d04-b5fa-865d56da84f8",
+    "seriesId": "aka-writter",
+    "hex": "#FFD4B4",
+    "code": "AKA140",
+    "name": {
+      "de": "ORANGE SUAVE",
+      "es": "NARANJA SUAVE",
+      "fr": "ORANGE DOUCE",
+      "pt": "LARANJA SUAVE"
+    }
+  },
+  {
+    "id": "f76b6ffb-d89a-418e-b146-ffa247dd291b",
+    "seriesId": "aka-writter",
+    "hex": "#FFAB74",
+    "code": "AKA142",
+    "name": {
+      "de": "ORANGE MANDARINA",
+      "es": "NARANJA MANDARINA",
+      "fr": "ORANGE MANDARINE",
+      "pt": "LARANJA MANDARINA"
+    }
+  },
+  {
+    "id": "eb46bd4b-f346-4eb6-83cb-2040b2393b83",
+    "seriesId": "aka-writter",
+    "hex": "#FF9254",
+    "code": "AKA143",
+    "name": {
+      "de": "ORANGE FEUER",
+      "es": "NARANJA FUEGO",
+      "fr": "ORANGE FEU",
+      "pt": "LARANJA FOGO"
+    }
+  },
+  {
+    "id": "ea3b99c5-e6db-44c3-af21-2532c4377e17",
+    "seriesId": "aka-writter",
+    "hex": "#FF7014",
+    "code": "AKA144",
+    "name": {
+      "de": "ORANGE KER",
+      "es": "NARANJA KER",
+      "fr": "ORANGE KER",
+      "pt": "LARANJA KER"
+    }
+  },
+  {
+    "id": "b4b3b01f-e103-4643-8772-d3a960a0679a",
+    "seriesId": "aka-writter",
+    "hex": "#FF6C00",
+    "code": "AKA145",
+    "name": {
+      "de": "ORANGE CORNALINA",
+      "es": "NARANJA CORNALINA",
+      "fr": "ORANGE CORNALINA",
+      "pt": "LARANJA CORNALINA"
+    }
+  },
+  {
+    "id": "46492c8e-6035-4325-8496-564b7937f74b",
+    "seriesId": "aka-writter",
+    "hex": "#EF5600",
+    "code": "AKA146",
+    "name": {
+      "de": "ORANGE PUR",
+      "es": "NARANJA PURO",
+      "fr": "ORANGE PUR",
+      "pt": "LARANJA PURO"
+    }
+  },
+  {
+    "id": "59cda447-5c47-451b-af61-abf702996414",
+    "seriesId": "aka-writter",
+    "hex": "#FFA3B5",
+    "code": "AKA151",
+    "name": {
+      "de": "ROT PASTELL",
+      "es": "ROJO PASTEL",
+      "fr": "ROUGE PASTEL",
+      "pt": "VERMELHO PASTEL"
+    }
+  },
+  {
+    "id": "54094fc8-3258-4ac1-a91b-4477c7c509f8",
+    "seriesId": "aka-writter",
+    "hex": "#FF585D",
+    "code": "AKA153",
+    "name": {
+      "de": "ROT FEUER",
+      "es": "ROJO FUEGO",
+      "fr": "ROUGE FEU",
+      "pt": "VERMELHO FOGO"
+    }
+  },
+  {
+    "id": "5daa0f27-db0f-4197-93b0-e3ef1669d5b5",
+    "seriesId": "aka-writter",
+    "hex": "#F65275",
+    "code": "AKA154",
+    "name": {
+      "de": "ROT KIMURA",
+      "es": "ROJO KIMURA",
+      "fr": "ROUGE KIMURA",
+      "pt": "VERMELHO KIMURA"
+    }
+  },
+  {
+    "id": "19626731-3d61-40a6-a187-0d5372af666f",
+    "seriesId": "aka-writter",
+    "hex": "#E4002B",
+    "code": "AKA155",
+    "name": {
+      "de": "ROT DIREKT",
+      "es": "ROJO DIRECTO",
+      "fr": "ROUGE DIRECTO",
+      "pt": "VERMELHO DIRETO"
+    }
+  },
+  {
+    "id": "f1216470-0b6d-45ad-b1db-a86a035dd7ce",
+    "seriesId": "aka-writter",
+    "hex": "#EABEDB",
+    "code": "AKA160",
+    "name": {
+      "de": "ROSA QUARZ",
+      "es": "ROSA CUARZO",
+      "fr": "ROSE QUARTZ",
+      "pt": "ROSA QUARTZO"
+    }
+  },
+  {
+    "id": "17bffc7c-d9f2-44c0-9109-659ca6520fb5",
+    "seriesId": "aka-writter",
+    "hex": "#F4A6D7",
+    "code": "AKA161",
+    "name": {
+      "de": "ROSA KAUFGUMMI",
+      "es": "ROSA CHICLE",
+      "fr": "ROSE CHICLE",
+      "pt": "ROSA CHICLE"
+    }
+  },
+  {
+    "id": "1b032c26-0cd7-4c52-b330-e11a9579f905",
+    "seriesId": "aka-writter",
+    "hex": "#EB6FBD",
+    "code": "AKA163",
+    "name": {
+      "de": "ROT HIMBEERE",
+      "es": "ROJO FRAMBUESA",
+      "fr": "ROUGE FRAMBOISE",
+      "pt": "VERMELHO FRAMBOESA"
+    }
+  },
+  {
+    "id": "ff5a9929-3477-48a9-963c-67d257226438",
+    "seriesId": "aka-writter",
+    "hex": "#E31C79",
+    "code": "AKA164",
+    "name": {
+      "de": "ROT ESTIVAL",
+      "es": "ROJO ESTIVAL",
+      "fr": "ROUGE ESTIVAL",
+      "pt": "VERMELHO ESTIVAL"
+    }
+  },
+  {
+    "id": "4ea97d27-7e36-4801-90a5-0d4ac1f483d1",
+    "seriesId": "aka-writter",
+    "hex": "#CE0F69",
+    "code": "AKA165",
+    "name": {
+      "de": "ROT GORE",
+      "es": "ROJO GORE",
+      "fr": "ROUGE GORE",
+      "pt": "VERMELHO GORE"
+    }
+  },
+  {
+    "id": "e4c05581-e684-491d-a364-861b80d36dc8",
+    "seriesId": "aka-writter",
+    "hex": "#BF0027",
+    "code": "AKA166",
+    "name": {
+      "de": "ROT GRANAT",
+      "es": "ROJO GRANATE",
+      "fr": "ROUGE GRANAT",
+      "pt": "VERMELHO GRANADA"
+    }
+  },
+  {
+    "id": "a7649cb7-2998-4cf9-8330-f3acad36214e",
+    "seriesId": "aka-writter",
+    "hex": "#FFCCD7",
+    "code": "AKA170",
+    "name": {
+      "de": "ROT SPECTRUM",
+      "es": "ROJO ESPECTRO",
+      "fr": "ROUGE SPECTRE",
+      "pt": "VERMELHO ESPECTRO"
+    }
+  },
+  {
+    "id": "ce681b50-5f26-4d2f-be56-60ddca2bc39d",
+    "seriesId": "aka-writter",
+    "hex": "#FF8DA1",
+    "code": "AKA171",
+    "name": {
+      "de": "ROT GLÜCK",
+      "es": "ROJO SUERTE",
+      "fr": "ROUGE CHANCE",
+      "pt": "VERMELHO SORTE"
+    }
+  },
+  {
+    "id": "6c0450db-dde0-458f-a4d9-c65c6342effb",
+    "seriesId": "aka-writter",
+    "hex": "#BE3A34",
+    "code": "AKA172",
+    "name": {
+      "de": "ROT VAN GOGH",
+      "es": "ROJO VAN GOGH",
+      "fr": "ROUGE VAN GOGH",
+      "pt": "VERMELHO VAN GOGH"
+    }
+  },
+  {
+    "id": "98572cb8-68dd-4b6d-b15d-1ba0d63c96a6",
+    "seriesId": "aka-writter",
+    "hex": "#CB001D",
+    "code": "AKA174",
+    "name": {
+      "de": "ROT ARCILLA",
+      "es": "ROJO ARCILLA",
+      "fr": "ROUGE ARCILLA",
+      "pt": "VERMELHO ARCILA"
+    }
+  },
+  {
+    "id": "9d386d9f-0855-4695-af75-a28fa7164526",
+    "seriesId": "aka-writter",
+    "hex": "#A7000D",
+    "code": "AKA176",
+    "name": {
+      "de": "ROT MARTE",
+      "es": "ROJO MARTE",
+      "fr": "ROUGE MARS",
+      "pt": "VERMELHO MARTE"
+    }
+  },
+  {
+    "id": "7e6af7ee-4b91-4127-b151-b323ded84695",
+    "seriesId": "aka-writter",
+    "hex": "#99D6EA",
+    "code": "AKA181",
+    "name": {
+      "de": "BLAU MEDITERRANEA",
+      "es": "AZUL MEDITERRÁNEO",
+      "fr": "BLEU MEDITERRANÉEN",
+      "pt": "AZUL MEDITERRÂNEO"
+    }
+  },
+  {
+    "id": "2eea5f0d-174a-49b8-961a-8778eb0dd499",
+    "seriesId": "aka-writter",
+    "hex": "#71C5E8",
+    "code": "AKA182",
+    "name": {
+      "de": "BLAU KLAR",
+      "es": "AZUL CLARO",
+      "fr": "BLEU CLAIR",
+      "pt": "AZUL CLARO"
+    }
+  },
+  {
+    "id": "3ab76bc1-d86f-4b90-a9d2-e71738c65d16",
+    "seriesId": "aka-writter",
+    "hex": "#41B6E6",
+    "code": "AKA183",
+    "name": {
+      "de": "BLAU TURIA",
+      "es": "AZUL TURIA",
+      "fr": "BLEU TURIA",
+      "pt": "AZUL TURIA"
+    }
+  },
+  {
+    "id": "26bc6b11-9e57-40e3-9dd6-aefc55a28053",
+    "seriesId": "aka-writter",
+    "hex": "#00A9E0",
+    "code": "AKA184",
+    "name": {
+      "de": "BLAU NITRILO",
+      "es": "AZUL NITRILO",
+      "fr": "BLEU NITRILE",
+      "pt": "AZUL NITRILO"
+    }
+  },
+  {
+    "id": "8a053ad6-a15d-4e65-9d0e-90ff292f51e5",
+    "seriesId": "aka-writter",
+    "hex": "#0077C8",
+    "code": "AKA185",
+    "name": {
+      "de": "BLAU COBALTO",
+      "es": "AZUL COBALTO",
+      "fr": "BLEU COBALTO",
+      "pt": "AZUL COBALTO"
+    }
+  },
+  {
+    "id": "5a22c691-a59f-415c-b127-26eca36e989c",
+    "seriesId": "aka-writter",
+    "hex": "#005EB8",
+    "code": "AKA186",
+    "name": {
+      "de": "BLAU CuSO4",
+      "es": "AZUL CuSO4",
+      "fr": "BLEU CuSO4",
+      "pt": "AZUL CuSO4"
+    }
+  },
+  {
+    "id": "2b457ab1-fff7-4bff-9411-5f3d584ad019",
+    "seriesId": "aka-writter",
+    "hex": "#004B87",
+    "code": "AKA187",
+    "name": {
+      "de": "BLAU ULTRAMAR",
+      "es": "AZUL ULTRAMAR",
+      "fr": "BLEU ULTRAMAR",
+      "pt": "AZUL ULTRAMAR"
+    }
+  },
+  {
+    "id": "9f9e24a0-787b-453c-980b-de9951c08d44",
+    "seriesId": "aka-writter",
+    "hex": "#002F6C",
+    "code": "AKA188",
+    "name": {
+      "de": "BLAU PROFUNDO",
+      "es": "AZUL PROFUNDO",
+      "fr": "BLEU PROFOND",
+      "pt": "AZUL PROFUNDO"
+    }
+  },
+  {
+    "id": "ce1f50aa-b68e-4db5-a1f4-e99802469927",
+    "seriesId": "aka-writter",
+    "hex": "#DEE4DF",
+    "code": "AKA190",
+    "name": {
+      "de": "GRAU KLAR",
+      "es": "GRIS CLARO",
+      "fr": "GRIS CLAIR",
+      "pt": "CINZA CLARO"
+    }
+  },
+  {
+    "id": "ef9d9ea8-5d14-49cf-8489-9cc6948fe044",
+    "seriesId": "aka-writter",
+    "hex": "#BAC2BC",
+    "code": "AKA191",
+    "name": {
+      "de": "GRAU ZEMENT",
+      "es": "GRIS CEMENTO",
+      "fr": "GRIS CIMENT",
+      "pt": "CINZA CIMENTO"
+    }
+  },
+  {
+    "id": "1f9fc45a-34ba-4fdf-8e73-7b96df4954ff",
+    "seriesId": "aka-writter",
+    "hex": "#959C97",
+    "code": "AKA192",
+    "name": {
+      "de": "GRAU MARCASITA",
+      "es": "GRIS MARCASITA",
+      "fr": "GRIS MARCASITA",
+      "pt": "CINZA MARCASITA"
+    }
+  },
+  {
+    "id": "9418b62c-c33c-4f25-868d-bbca62e15cc0",
+    "seriesId": "aka-writter",
+    "hex": "#737B74",
+    "code": "AKA193",
+    "name": {
+      "de": "GRAU GALENA",
+      "es": "GRIS GALENA",
+      "fr": "GRIS GALÈNE",
+      "pt": "CINZA GALENA"
+    }
+  },
+  {
+    "id": "2bbb3da9-237f-4c44-ab3d-3eede9ce4d0f",
+    "seriesId": "aka-writter",
+    "hex": "#5F6560",
+    "code": "AKA194",
+    "name": {
+      "de": "GRAU PIRITA",
+      "es": "GRIS PIRITA",
+      "fr": "GRIS PIRITA",
+      "pt": "CINZA PIRITA"
+    }
+  },
+  {
+    "id": "483f6bc7-11e8-4539-88c7-d2da9d5b608f",
+    "seriesId": "aka-writter",
+    "hex": "#4B524C",
+    "code": "AKA195",
+    "name": {
+      "de": "GUN METAL",
+      "es": "GUN METAL",
+      "fr": "GUN METAL",
+      "pt": "GUN METAL"
+    }
+  },
+  {
+    "id": "8e33a7b7-705d-40cc-a48b-2e4ccc65a4db",
+    "seriesId": "aka-writter",
+    "hex": "#454A45",
+    "code": "AKA196",
+    "name": {
+      "de": "GRAU ANTHRAZIT",
+      "es": "GRIS ANTRACITA",
+      "fr": "GRIS ANTHRACITE",
+      "pt": "CINZA ANTRACITE"
+    }
+  },
+  {
+    "id": "dcc086e9-d68b-4e22-bf6f-c131b1bbef07",
+    "seriesId": "aka-writter",
+    "hex": "#3B403C",
+    "code": "AKA197",
+    "name": {
+      "de": "GRAU WINTER",
+      "es": "GRIS INVERNAL",
+      "fr": "GRIS HIVERNAL",
+      "pt": "CINZA INVERNAL"
+    }
+  },
+  {
+    "id": "019f48aa-4aa2-4d72-89bb-2fe45860785d",
+    "seriesId": "aka-writter",
+    "hex": "#2A2D2A",
+    "code": "AKA199",
+    "name": {
+      "de": "GRAU ETERNO",
+      "es": "GRIS ETERNO",
+      "fr": "GRIS ÉTERNEL",
+      "pt": "CINZA ETERNO"
+    }
+  },
+  {
+    "id": "1fa460b8-4904-4608-acea-3b7a90045a0a",
+    "seriesId": "aka-writter",
+    "hex": "#D1D0DF",
+    "code": "AKA200",
+    "name": {
+      "de": "LILA KLAR",
+      "es": "MORADO CLARO",
+      "fr": "VIOLET CLAIR",
+      "pt": "ROXO CLARO"
+    }
+  },
+  {
+    "id": "65507847-48b7-42d9-9b61-1375f0999d14",
+    "seriesId": "aka-writter",
+    "hex": "#A99CD8",
+    "code": "AKA202",
+    "name": {
+      "de": "LILA PLATI(ADN)",
+      "es": "MORADO PLATI(ADN)",
+      "fr": "VIOLET PLATI(ADN)",
+      "pt": "ROXO PLATI(ADN)"
+    }
+  },
+  {
+    "id": "34700409-aefb-4e77-8a00-89a77ef3a1f4",
+    "seriesId": "aka-writter",
+    "hex": "#7E75B8",
+    "code": "AKA203",
+    "name": {
+      "de": "LILA REPUBLIK",
+      "es": "MORADO REPÚBLICA",
+      "fr": "VIOLET RÉPUBLIQUE",
+      "pt": "ROXO REPÚBLICA"
+    }
+  },
+  {
+    "id": "076e0da3-691b-4e06-9dbf-ff02fcaa9962",
+    "seriesId": "aka-writter",
+    "hex": "#5D54A4",
+    "code": "AKA204",
+    "name": {
+      "de": "LILA AMATISTE",
+      "es": "MORADO AMATISTA",
+      "fr": "VIOLET AMÉTHYSTE",
+      "pt": "ROXO AMATISTA"
+    }
+  },
+  {
+    "id": "ba36e8b7-f8b4-45ff-82f1-3f0f7ce4c5ec",
+    "seriesId": "aka-writter",
+    "hex": "#B291B2",
+    "code": "AKA210",
+    "name": {
+      "de": "VIOLETT LEICHT",
+      "es": "VIOLETA LIGERO",
+      "fr": "VIOLET LÉGER",
+      "pt": "VIOLETA LIGEIRO"
+    }
+  },
+  {
+    "id": "71be9371-f66c-4f42-95ff-07b1e9a5e821",
+    "seriesId": "aka-writter",
+    "hex": "#8B678C",
+    "code": "AKA212",
+    "name": {
+      "de": "VIOLETT SIGMA",
+      "es": "VIOLETA SIGMA",
+      "fr": "VIOLET SIGMA",
+      "pt": "VIOLETA SIGMA"
+    }
+  },
+  {
+    "id": "3c7dc208-6a8a-479f-95e4-8131f4dcd2f0",
+    "seriesId": "aka-writter",
+    "hex": "#835C83",
+    "code": "AKA213",
+    "name": {
+      "de": "VIOLETT TRIUNFO",
+      "es": "VIOLETA TRIUNFO",
+      "fr": "VIOLET TRIOMPHE",
+      "pt": "VIOLETA TRIUNFO"
+    }
+  },
+  {
+    "id": "5d365529-5cbf-489d-a10a-505df1a5f2db",
+    "seriesId": "aka-writter",
+    "hex": "#6B3D69",
+    "code": "AKA215",
+    "name": {
+      "de": "VIOLETT DUNKEL",
+      "es": "VIOLETA OSCURO",
+      "fr": "VIOLET SOMBRE",
+      "pt": "VIOLETA ESCURO"
+    }
+  },
+  {
+    "id": "8032e209-6a26-46e3-9029-0739f60df9b7",
+    "seriesId": "aka-writter",
+    "hex": "#F0E2C3",
+    "code": "AKA220",
+    "name": {
+      "de": "BRAUN KLAR",
+      "es": "MARRÓN CLARO",
+      "fr": "BRUN CLAIR",
+      "pt": "MARROM CLARO"
+    }
+  },
+  {
+    "id": "77ad12fc-7289-441a-9b3c-0de3cceffbd8",
+    "seriesId": "aka-writter",
+    "hex": "#DBB87A",
+    "code": "AKA222",
+    "name": {
+      "de": "BRAUN SANDSTEIN",
+      "es": "MARRÓN ARENISCA",
+      "fr": "BRUN SABLE",
+      "pt": "MARROM ARENISCA"
+    }
+  },
+  {
+    "id": "2f78a704-a85b-4cfe-886d-c8691bf7d65e",
+    "seriesId": "aka-writter",
+    "hex": "#CEA356",
+    "code": "AKA223",
+    "name": {
+      "de": "BRAUN CASTILLA",
+      "es": "MARRÓN CASTILLA",
+      "fr": "BRUN CASTILLE",
+      "pt": "MARROM CASTILLA"
+    }
+  },
+  {
+    "id": "23a0bcc6-c85c-4bfd-9ca6-5d24bd3d10a6",
+    "seriesId": "aka-writter",
+    "hex": "#BF8A3D",
+    "code": "AKA224",
+    "name": {
+      "de": "BRAUN SÁHARA",
+      "es": "MARRÓN SÁHARA",
+      "fr": "BRUN SÁHARA",
+      "pt": "MARROM SÁHARA"
+    }
+  },
+  {
+    "id": "404e314a-5863-48ff-9480-9ef17da677e4",
+    "seriesId": "aka-writter",
+    "hex": "#A26904",
+    "code": "AKA225",
+    "name": {
+      "de": "BRAUN PAPIER",
+      "es": "MARRÓN CARTÓN",
+      "fr": "BRUN CARTON",
+      "pt": "MARROM CARTÃO"
+    }
+  },
+  {
+    "id": "5a30fa06-8522-4e79-943a-261dec3258f5",
+    "seriesId": "aka-writter",
+    "hex": "#504629",
+    "code": "AKA226",
+    "name": {
+      "de": "BRAUN OXIDIERTER",
+      "es": "MARRÓN OXIDADO",
+      "fr": "BRUN OXIDÉ",
+      "pt": "MARROM OXIDADO"
+    }
+  },
+  {
+    "id": "9ca08b90-f25f-4bbc-a938-aa949608b4ec",
+    "seriesId": "aka-writter",
+    "hex": "#182317",
+    "code": "AKA228",
+    "name": {
+      "de": "BRAUN GOLDMINE",
+      "es": "MARRÓN GOLDMINE",
+      "fr": "BRUN GOLDMINE",
+      "pt": "MARROM GOLDMINE"
+    }
+  },
+  {
+    "id": "03bb2cd1-9bbd-4ecd-bb1e-0b20aae7f374",
+    "seriesId": "aka-writter",
+    "hex": "#420604",
+    "code": "AKA230",
+    "name": {
+      "de": "BRAUN RÖTLICH",
+      "es": "MARRÓN ROJIZO",
+      "fr": "BRUN ROUGE",
+      "pt": "MARROM AVERMELHADO"
+    }
+  },
+  {
+    "id": "b8a2d735-ed1d-493f-9021-36d2988b28e6",
+    "seriesId": "aka-writter",
+    "hex": "#2E1400",
+    "code": "AKA231",
+    "name": {
+      "de": "BRAUN EBENHOLZ",
+      "es": "MARRÓN ÉBANO",
+      "fr": "BRUN ÉBANO",
+      "pt": "MARROM ÉBANO"
+    }
+  },
+  {
+    "id": "4e544896-a6f9-429d-83b4-1d66fdfd6934",
+    "seriesId": "aka-writter",
+    "hex": "#1E0100",
+    "code": "AKA232",
+    "name": {
+      "de": "BRAUN DUNKEL",
+      "es": "MARRÓN OSCURO",
+      "fr": "BRUN FONCÉ",
+      "pt": "MARROM ESCURO"
+    }
+  },
+  {
+    "id": "c5b28d5e-a1ab-4871-a742-ba0054bfe88d",
+    "seriesId": "aka-writter",
+    "hex": "#88DEFF",
+    "code": "AKA239",
+    "name": {
+      "de": "BLAU DIMONI",
+      "es": "AZUL DIMONI",
+      "fr": "BLEU DIMONI",
+      "pt": "AZUL DIMONI"
+    }
+  },
+  {
+    "id": "b5e91247-cbc7-4522-a49c-6e8afbb66960",
+    "seriesId": "aka-writter",
+    "hex": "#01B1B7",
+    "code": "AKA240",
+    "name": {
+      "de": "BLAU TÜRKIS",
+      "es": "AZUL TURQUESA",
+      "fr": "BLEU TURQUOISE",
+      "pt": "AZUL TURQUESA"
+    }
+  },
+  {
+    "id": "98d4c931-03de-4b05-b1c6-dc51a01534d8",
+    "seriesId": "aka-writter",
+    "hex": "#018B90",
+    "code": "AKA242",
+    "name": {
+      "de": "BLAU NGS",
+      "es": "AZUL NGS",
+      "fr": "BLEU NGS",
+      "pt": "AZUL NGS"
+    }
+  },
+  {
+    "id": "b77c8164-480a-4357-9b77-76248acbf8f1",
+    "seriesId": "aka-writter",
+    "hex": "#006A68",
+    "code": "AKA244",
+    "name": {
+      "de": "BLAU HYDRO",
+      "es": "AZUL HYDRO",
+      "fr": "BLEU HYDRO",
+      "pt": "AZUL HYDRO"
+    }
+  },
+  {
+    "id": "50c7de27-7848-40ef-a499-c6f2aab27437",
+    "seriesId": "aka-writter",
+    "hex": "#007A80",
+    "code": "AKA246",
+    "name": {
+      "de": "BLAU UNIVERSE",
+      "es": "AZUL UNIVERSO",
+      "fr": "BLEU UNIVERSE",
+      "pt": "AZUL UNIVERSO"
+    }
+  },
+  {
+    "id": "eb158882-c685-49cd-91e6-bf5aa61c2790",
+    "seriesId": "aka-writter",
+    "hex": "#00676C",
+    "code": "AKA247",
+    "name": {
+      "de": "BLAU OZEAN",
+      "es": "AZUL OCEANO",
+      "fr": "BLEU OCÉAN",
+      "pt": "AZUL OCEANO"
+    }
+  },
+  {
+    "id": "db3dd1cc-2fe5-4ccc-a11b-3e90f904d35a",
+    "seriesId": "aka-writter",
+    "hex": "#004550",
+    "code": "AKA248",
+    "name": {
+      "de": "BLAU NOVA",
+      "es": "AZUL NOVA",
+      "fr": "BLEU NOVA",
+      "pt": "AZUL NOVA"
+    }
+  },
+  {
+    "id": "1ec1a997-d421-4088-af43-22e634a3d539",
+    "seriesId": "aka-writter",
+    "hex": "#A0BAFF",
+    "code": "AKA250",
+    "name": {
+      "de": "LILA DER TEMPEL",
+      "es": "MORADO EL TEMPLO",
+      "fr": "VIOLET LE TEMPLE",
+      "pt": "ROXO O TEMPLO"
+    }
+  },
+  {
+    "id": "0f608b15-cdfc-4ac7-b505-48f22295fb4c",
+    "seriesId": "aka-writter",
+    "hex": "#D8FFF7",
+    "code": "AKA270",
+    "name": {
+      "de": "BLAU BIFRÖST",
+      "es": "AZUL BIFRÖST",
+      "fr": "BLEU BIFRÖST",
+      "pt": "AZUL BIFRÖST"
+    }
+  },
+  {
+    "id": "37ace4c7-cb93-4098-ae42-87918ac33101",
+    "seriesId": "aka-writter",
+    "hex": "#C4FFFB",
+    "code": "AKA271",
+    "name": {
+      "de": "BLAU PASARELA",
+      "es": "AZUL PASARELA",
+      "fr": "BLEU PASARELA",
+      "pt": "AZUL PASARELA"
+    }
+  },
+  {
+    "id": "c238d6cd-952a-4a06-88a5-69041bbc282b",
+    "seriesId": "aka-writter",
+    "hex": "#00CBDB",
+    "code": "AKA272",
+    "name": {
+      "de": "BLAU TERES",
+      "es": "AZUL TERES",
+      "fr": "BLEU TERES",
+      "pt": "AZUL TERES"
+    }
+  },
+  {
+    "id": "40a015ec-9d80-4af9-9fcd-229e5d2766c0",
+    "seriesId": "aka-writter",
+    "hex": "#0089AB",
+    "code": "AKA274",
+    "name": {
+      "de": "BLAU WARE",
+      "es": "AZUL WARE",
+      "fr": "BLEU WARE",
+      "pt": "AZUL WARE"
+    }
+  },
+  {
+    "id": "acf673b8-76d0-4282-b421-0ab913aba173",
+    "seriesId": "aka-writter",
+    "hex": "#007187",
+    "code": "AKA276",
+    "name": {
+      "de": "BLAU JOVI",
+      "es": "AZUL JOVI",
+      "fr": "BLEU JOVI",
+      "pt": "AZUL JOVI"
+    }
+  },
+  {
+    "id": "548f42bb-efa4-477a-afb6-976b51677454",
+    "seriesId": "aka-writter",
+    "hex": "#003D4C",
+    "code": "AKA278",
+    "name": {
+      "de": "BLAU JÖTNAR",
+      "es": "AZUL JÖTNAR",
+      "fr": "BLEU JÖTNAR",
+      "pt": "AZUL JÖTNAR"
+    }
+  },
+  {
+    "id": "301738fa-d029-4ee6-bb01-d12b8a87e529",
+    "seriesId": "aka-writter",
+    "hex": "#003A44",
+    "code": "AKA279",
+    "name": {
+      "de": "BLAU ABISAL",
+      "es": "AZUL ABISAL",
+      "fr": "BLEU ABISAL",
+      "pt": "AZUL ABISAL"
+    }
+  },
+  {
+    "id": "2281366c-34a7-4012-ac34-c3ad7b8bedab",
+    "seriesId": "aka-writter",
+    "hex": "#FADCFF",
+    "code": "AKA280",
+    "name": {
+      "de": "VIOLETT ASTRAL",
+      "es": "VIOLETA ASTRAL",
+      "fr": "VIOLET ASTRAL",
+      "pt": "VIOLETA ASTRAL"
+    }
+  },
+  {
+    "id": "1b6ccd21-70ce-4cfa-9c37-962873d966c9",
+    "seriesId": "aka-writter",
+    "hex": "#DDACFF",
+    "code": "AKA282",
+    "name": {
+      "de": "VIOLETT TAG DAYRE",
+      "es": "VIOLETA DAYRE",
+      "fr": "VIOLET DAYRE",
+      "pt": "VIOLETA DAYRE"
+    }
+  },
+  {
+    "id": "8b695074-925d-4419-b79f-795d05a27447",
+    "seriesId": "aka-writter",
+    "hex": "#9400DB",
+    "code": "AKA284",
+    "name": {
+      "de": "VIOLETT ALCORISA",
+      "es": "VIOLETA ALCORISA",
+      "fr": "VIOLET ALCORISA",
+      "pt": "VIOLETA ALCORISA"
+    }
+  },
+  {
+    "id": "f70d6c58-7dde-4228-80e6-021112147e43",
+    "seriesId": "aka-writter",
+    "hex": "#9500E7",
+    "code": "AKA285",
+    "name": {
+      "de": "VIOLETT TAONE",
+      "es": "VIOLETA TAONE",
+      "fr": "VIOLET TAONE",
+      "pt": "VIOLETA TAONE"
+    }
+  },
+  {
+    "id": "2f28546a-abac-4c81-8a54-3fe0510e30b8",
+    "seriesId": "aka-writter",
+    "hex": "#7400C7",
+    "code": "AKA286",
+    "name": {
+      "de": "VIOLETT KOSA",
+      "es": "VIOLETA KOSA",
+      "fr": "VIOLET KOSA",
+      "pt": "VIOLETA KOSA"
+    }
+  },
+  {
+    "id": "4cd38e76-fb86-4b88-96f2-b1be585991de",
+    "seriesId": "aka-writter",
+    "hex": "#53007C",
+    "code": "AKA287",
+    "name": {
+      "de": "VIOLETT LEVI",
+      "es": "VIOLETA LEVI",
+      "fr": "VIOLET LEVI",
+      "pt": "VIOLETA LEVI"
+    }
+  },
+  {
+    "id": "80b01d5e-bb3c-4fb8-b34b-f479035f73bd",
+    "seriesId": "aka-writter",
+    "hex": "#3E0058",
+    "code": "AKA288",
+    "name": {
+      "de": "VIOLETT UNSTERBLICH",
+      "es": "VIOLETA INMORTAL",
+      "fr": "VIOLET INMORTAL",
+      "pt": "VIOLETA IMORTAL"
+    }
+  },
+  {
+    "id": "64cb667e-ef0e-459e-af11-c371425b4904",
+    "seriesId": "aka-writter",
+    "hex": "#FFB8E6",
+    "code": "AKA291",
+    "name": {
+      "de": "ROSA FURIA",
+      "es": "ROSA FURIA",
+      "fr": "ROSE FURIA",
+      "pt": "ROSA FÚRIA"
+    }
+  },
+  {
+    "id": "86b57172-e844-4ca1-a271-0becdbe17ccc",
+    "seriesId": "aka-writter",
+    "hex": "#FF88C6",
+    "code": "AKA293",
+    "name": {
+      "de": "ROSA RODERICK",
+      "es": "ROSA RODERICK",
+      "fr": "ROSE RODERICK",
+      "pt": "ROSA RODERICK"
+    }
+  },
+  {
+    "id": "1e3445f3-35f9-4eb3-8263-cddee9015134",
+    "seriesId": "aka-writter",
+    "hex": "#FF5CA6",
+    "code": "AKA294",
+    "name": {
+      "de": "ROSA SAKURA",
+      "es": "ROSA SAKURA",
+      "fr": "ROSE SAKURA",
+      "pt": "ROSA SAKURA"
+    }
+  },
+  {
+    "id": "d67bd248-9f70-4aee-87c2-4340d58b179e",
+    "seriesId": "aka-writter",
+    "hex": "#F30076",
+    "code": "AKA295",
+    "name": {
+      "de": "MAGENTA",
+      "es": "MAGENTA",
+      "fr": "MAGENTA",
+      "pt": "MAGENTA"
+    }
+  },
+  {
+    "id": "dbfbac75-1f1f-4da3-b169-4b11e5784854",
+    "seriesId": "aka-writter",
+    "hex": "#CF0072",
+    "code": "AKA296",
+    "name": {
+      "de": "ROSA RACHEL",
+      "es": "ROSA RACHEL",
+      "fr": "ROSE RACHEL",
+      "pt": "ROSA RACHEL"
+    }
+  },
+  {
+    "id": "7e997484-34cb-4874-a8ec-6948df460c38",
+    "seriesId": "aka-writter",
+    "hex": "#D70054",
+    "code": "AKA298",
+    "name": {
+      "de": "ROT DUKE103",
+      "es": "ROJO DUKE103",
+      "fr": "ROUGE DUKE103",
+      "pt": "VERMELHO DUKE103"
+    }
+  },
+  {
+    "id": "18c767a3-3c52-4bdd-b709-2d7c18306017",
+    "seriesId": "aka-writter",
+    "hex": "#7C002D",
+    "code": "AKA300",
+    "name": {
+      "de": "ROT MERCURIAL",
+      "es": "ROJO MERCURIAL",
+      "fr": "ROUGE MERCURIAL",
+      "pt": "VERMELHO MERCURIAL"
+    }
+  },
+  {
+    "id": "bb78ddfd-fab7-4b27-9ab3-66ac51797cc0",
+    "seriesId": "aka-writter",
+    "hex": "#FFDBD0",
+    "code": "AKA422",
+    "name": {
+      "de": "HAUT NUDE",
+      "es": "SKIN NUDE",
+      "fr": "PEAU NUDE",
+      "pt": "PELE NUDE"
+    }
+  },
+  {
+    "id": "6af9932f-6a95-48ff-b7a9-d5e43bad2364",
+    "seriesId": "aka-writter",
+    "hex": "#FFAA90",
+    "code": "AKA424",
+    "name": {
+      "de": "HAUT BEIGE MITTEL",
+      "es": "SKIN BEIGE MEDIO",
+      "fr": "PEAU BEIGE MOYEN",
+      "pt": "PELE BEGE MÉDIO"
+    }
+  },
+  {
+    "id": "dcf916a3-5664-457b-b41b-18424062dc22",
+    "seriesId": "aka-writter",
+    "hex": "#FFA088",
+    "code": "AKA425",
+    "name": {
+      "de": "HAUT BRONZE",
+      "es": "SKIN BRONCE",
+      "fr": "PEAU BRONZE",
+      "pt": "PELE BRONZE"
+    }
+  },
+  {
+    "id": "c76cdba6-3eb8-422b-972b-49e391f746be",
+    "seriesId": "aka-writter",
+    "hex": "#FF8660",
+    "code": "AKA426",
+    "name": {
+      "de": "HAUT VELVET",
+      "es": "SKIN VELVET",
+      "fr": "PEAU VELVET",
+      "pt": "PELE VELVET"
+    }
+  },
+  {
+    "id": "6122dea6-524c-4ef0-94d8-e25ec5cb4bfe",
+    "seriesId": "aka-writter",
+    "hex": "#9B4700",
+    "code": "AKA428",
+    "name": {
+      "de": "HAUT SCHOKOLADE",
+      "es": "SKIN CHOCOLATE",
+      "fr": "PEAU CHOCOLAT",
+      "pt": "PELE CHOCOLATE"
+    }
+  },
+  {
+    "id": "eb387c81-5d54-4204-af52-d42fc30ea143",
+    "seriesId": "aka-writter",
+    "hex": "#F6ECFF",
+    "code": "AKA440",
+    "name": {
+      "de": "LILA POSY",
+      "es": "MORADO POSY",
+      "fr": "VIOLET POSY",
+      "pt": "ROXO POSY"
+    }
+  },
+  {
+    "id": "d3ca2478-f882-4610-9e13-3834bf5b4a98",
+    "seriesId": "aka-writter",
+    "hex": "#C6A0FF",
+    "code": "AKA443",
+    "name": {
+      "de": "LILA SHORE",
+      "es": "MORADO SHORE",
+      "fr": "VIOLET SHORE",
+      "pt": "ROXO SHORE"
+    }
+  },
+  {
+    "id": "8e6dec26-2178-43f5-b03c-e4a0290e9c92",
+    "seriesId": "aka-writter",
+    "hex": "#A868FF",
+    "code": "AKA445",
+    "name": {
+      "de": "LILA SOEZ",
+      "es": "MORADO SOEZ",
+      "fr": "VIOLET SOEZ",
+      "pt": "ROXO SOEZ"
+    }
+  },
+  {
+    "id": "fa2126d7-59aa-4ee5-84a4-89318dcf6869",
+    "seriesId": "aka-writter",
+    "hex": "#9A60FF",
+    "code": "AKA446",
+    "name": {
+      "de": "LILA XTASY",
+      "es": "MORADO XTASY",
+      "fr": "VIOLET XTASY",
+      "pt": "ROXO XTASY"
+    }
+  },
+  {
+    "id": "8f04bfd5-1164-419b-83ab-9eca4837befc",
+    "seriesId": "aka-writter",
+    "hex": "#7D00E3",
+    "code": "AKA447",
+    "name": {
+      "de": "LILA FREIHEIT",
+      "es": "MORADO LIBERTAD",
+      "fr": "VIOLET LIBERTÉ",
+      "pt": "ROXO LIBERDADE"
+    }
+  },
+  {
+    "id": "c4209f8e-6733-497a-9439-4ac4091f0024",
+    "seriesId": "aka-writter",
+    "hex": "#7800DB",
+    "code": "AKA448",
+    "name": {
+      "de": "LILA SKIFE",
+      "es": "MORADO SKIFE",
+      "fr": "VIOLET SKIFE",
+      "pt": "ROXO SKIFE"
+    }
+  },
+  {
+    "id": "c39ffb73-8c6b-44fe-9237-02128ecdffec",
+    "seriesId": "aka-writter",
+    "hex": "#5D0097",
+    "code": "AKA449",
+    "name": {
+      "de": "LILA SMILE16",
+      "es": "MORADO SMILE16",
+      "fr": "VIOLET SMILE16",
+      "pt": "ROXO SMILE16"
+    }
+  },
+  {
+    "id": "07c2f676-a379-4fa8-a17c-409f7b6a5877",
+    "seriesId": "aka-writter",
+    "hex": "#4C007C",
+    "code": "AKA450",
+    "name": {
+      "de": "MORADAO KANS",
+      "es": "MORADAO KANS",
+      "fr": "MORADAO KANS",
+      "pt": "MORADAO KANS"
+    }
+  },
+  {
+    "id": "16b0b655-52e0-4164-8a7b-6a2e63e21051",
+    "seriesId": "aka-writter",
+    "hex": "#FFE8EB",
+    "code": "AKA460",
+    "name": {
+      "de": "ROSA CIMA",
+      "es": "ROSA CIMA",
+      "fr": "ROSE CIMA",
+      "pt": "ROSA CIMA"
+    }
+  },
+  {
+    "id": "88c41726-b77a-4ca4-ad91-8b809fd7917e",
+    "seriesId": "aka-writter",
+    "hex": "#FFC7C0",
+    "code": "AKA461",
+    "name": {
+      "de": "ROSA ANTARES",
+      "es": "ROSA ANTARES",
+      "fr": "ROSE ANTARES",
+      "pt": "ROSA ANTARES"
+    }
+  },
+  {
+    "id": "24f31cbb-abdb-49f0-a539-dcd423ca0c0e",
+    "seriesId": "aka-writter",
+    "hex": "#FFA8A9",
+    "code": "AKA462",
+    "name": {
+      "de": "ROSA TRIBUT",
+      "es": "ROSA TRIBUTO",
+      "fr": "ROSE TRIBUTO",
+      "pt": "ROSA TRIBUTO"
+    }
+  },
+  {
+    "id": "31af79df-310c-4297-89b6-133c5389492c",
+    "seriesId": "aka-writter",
+    "hex": "#FF9CA1",
+    "code": "AKA463",
+    "name": {
+      "de": "ROSA PALIDOR",
+      "es": "ROSA PALIDO",
+      "fr": "ROSE PÂLE",
+      "pt": "ROSA PÁLIDO"
+    }
+  },
+  {
+    "id": "de74d63e-66f2-48c5-8c9f-017c74f36694",
+    "seriesId": "aka-writter",
+    "hex": "#FF7476",
+    "code": "AKA465",
+    "name": {
+      "de": "ROT ARIZONA",
+      "es": "ROJO ARIZONA",
+      "fr": "ROUGE ARIZONA",
+      "pt": "VERMELHO ARIZONA"
+    }
+  },
+  {
+    "id": "97b53f36-0311-4e4e-b568-364b1c6d9076",
+    "seriesId": "aka-writter",
+    "hex": "#BF0009",
+    "code": "AKA467",
+    "name": {
+      "de": "ROT RUDIART",
+      "es": "ROJO RUDIART",
+      "fr": "ROUGE RUDIART",
+      "pt": "VERMELHO RUDIART"
+    }
+  },
+  {
+    "id": "d3019576-e4b5-4620-a935-5f26c9998ca0",
+    "seriesId": "aka-writter",
+    "hex": "#9B0002",
+    "code": "AKA468",
+    "name": {
+      "de": "ROT HANEM",
+      "es": "ROJO HANEM",
+      "fr": "ROUGE HANEM",
+      "pt": "VERMELHO HANEM"
+    }
+  },
+  {
+    "id": "6238784f-0931-4d6e-830b-799d5fefc9ce",
+    "seriesId": "aka-writter",
+    "hex": "#6C0008",
+    "code": "AKA470",
+    "name": {
+      "de": "ROT FEEVER",
+      "es": "ROJO FEEVER",
+      "fr": "ROUGE FEEVER",
+      "pt": "VERMELHO FEEVER"
+    }
+  },
+  {
+    "id": "f5421777-21d6-4cb6-937c-658ae80c09af",
+    "seriesId": "aka-writter",
+    "hex": "#C8FFD3",
+    "code": "AKA483",
+    "name": {
+      "de": "GRÜN URAN",
+      "es": "VERDE URAN",
+      "fr": "VERT URAN",
+      "pt": "VERDE URAN"
+    }
+  },
+  {
+    "id": "78575dc0-1014-431d-9949-67b286eedbaa",
+    "seriesId": "aka-writter",
+    "hex": "#ACFFCD",
+    "code": "AKA485",
+    "name": {
+      "de": "GRÜN WALK",
+      "es": "VERDE WALK",
+      "fr": "VERT MARCHER",
+      "pt": "VERDE CAMINHO"
+    }
+  },
+  {
+    "id": "932139fb-076a-498a-bdf2-bf55f83ae077",
+    "seriesId": "aka-writter",
+    "hex": "#00D388",
+    "code": "AKA487",
+    "name": {
+      "de": "GRÜN GESTEIN",
+      "es": "VERDE ROCHE",
+      "fr": "VERT ROCHE",
+      "pt": "VERDE ROCHE"
+    }
+  },
+  {
+    "id": "572ac1dc-6660-4434-8061-fa5453f6ba7e",
+    "seriesId": "aka-writter",
+    "hex": "#009B55",
+    "code": "AKA489",
+    "name": {
+      "de": "GRÜN UGLIES",
+      "es": "VERDE UGLIES",
+      "fr": "VERT UGLIES",
+      "pt": "VERDE UGLIES"
+    }
+  },
+  {
+    "id": "9b13dff3-68b1-4347-99ae-021e5caff7da",
+    "seriesId": "aka-writter",
+    "hex": "#008B4D",
+    "code": "AKA490",
+    "name": {
+      "de": "GRÜN SAKAR",
+      "es": "VERDE SAKAR",
+      "fr": "VERT SAKAR",
+      "pt": "VERDE SAKAR"
+    }
+  },
+  {
+    "id": "e7ac38d8-0c22-4552-ab70-e2c44964d55b",
+    "seriesId": "aka-writter",
+    "hex": "#007431",
+    "code": "AKA491",
+    "name": {
+      "de": "GRÜN KRIITISCH",
+      "es": "VERDE CRITICAL",
+      "fr": "VERT CRITICAL",
+      "pt": "VERDE CRÍTICO"
+    }
+  },
+  {
+    "id": "982ba05c-14e4-4463-ab6d-348997ddb89f",
+    "seriesId": "aka-writter",
+    "hex": "#00542B",
+    "code": "AKA492",
+    "name": {
+      "de": "GRÜN BILBO",
+      "es": "VERDE BILBO",
+      "fr": "VERT BILBO",
+      "pt": "VERDE BILBAO"
+    }
+  },
+  {
+    "id": "6ce18425-284e-4fd1-b801-8fdd4b1a0b14",
+    "seriesId": "aka-writter",
+    "hex": "#FFE4CC",
+    "code": "AKA521",
+    "name": {
+      "de": "ORANGE BARCELONA",
+      "es": "NARANJA BARCELONA",
+      "fr": "ORANGE BARCELONA",
+      "pt": "LARANJA BARCELONA"
+    }
+  },
+  {
+    "id": "a268f1ef-a88a-40f7-86de-0f21e557879f",
+    "seriesId": "aka-writter",
+    "hex": "#FFBF90",
+    "code": "AKA523",
+    "name": {
+      "de": "ORANGE Pfirsich",
+      "es": "NARANJA MELOCOTÓN",
+      "fr": "ORANGE MELOCOTÓN",
+      "pt": "LARANJA MELOCOTÃO"
+    }
+  },
+  {
+    "id": "3f5b809c-0231-4850-905d-dddea96e5d4d",
+    "seriesId": "aka-writter",
+    "hex": "#FFAE80",
+    "code": "AKA524",
+    "name": {
+      "de": "ORANGE VANER",
+      "es": "NARANJA VANER",
+      "fr": "ORANGE VANER",
+      "pt": "LARANJA VANER"
+    }
+  },
+  {
+    "id": "d4e6aa2f-0081-4441-ad9c-ccea05322ca0",
+    "seriesId": "aka-writter",
+    "hex": "#FF9F70",
+    "code": "AKA525",
+    "name": {
+      "de": "ORANGE DINAMO",
+      "es": "NARANJA DINAMO",
+      "fr": "ORANGE DINAMO",
+      "pt": "LARANJA DINAMO"
+    }
+  },
+  {
+    "id": "3ae2ca1f-6069-4be2-b3c0-d6fa73579d1b",
+    "seriesId": "aka-writter",
+    "hex": "#FF8754",
+    "code": "AKA526",
+    "name": {
+      "de": "ORANGE KÜRBIS",
+      "es": "NARANJA CALABAZA",
+      "fr": "ORANGE CALABAZE",
+      "pt": "LARANJA ABÓBORA"
+    }
+  },
+  {
+    "id": "0c27a75a-b9e2-498d-a6f6-9875f444c6bd",
+    "seriesId": "aka-writter",
+    "hex": "#FF7340",
+    "code": "AKA527",
+    "name": {
+      "de": "ORANGE BLIKIZ",
+      "es": "NARANJA BLIKIZ",
+      "fr": "ORANGE BLIKIZ",
+      "pt": "LARANJA BLIKIZ"
+    }
+  },
+  {
+    "id": "37dbaab4-8b6c-448a-87a0-6f7241d3d802",
+    "seriesId": "aka-writter",
+    "hex": "#EF6500",
+    "code": "AKA528",
+    "name": {
+      "de": "ORANGE 1982",
+      "es": "NARANJA 1982",
+      "fr": "ORANGE 1982",
+      "pt": "LARANJA 1982"
+    }
+  },
+  {
+    "id": "2f5af576-3fd7-4415-9490-c5e4196ff4b6",
+    "seriesId": "aka-writter",
+    "hex": "#D35900",
+    "code": "AKA529",
+    "name": {
+      "de": "ORANGE DUZLO",
+      "es": "NARANJA DUZLO",
+      "fr": "ORANGE DUZLO",
+      "pt": "LARANJA DUZLO"
+    }
+  },
+  {
+    "id": "84101db4-b54b-4122-8fcf-6253a772514b",
+    "seriesId": "aka-writter",
+    "hex": "#B75300",
+    "code": "AKA530",
+    "name": {
+      "de": "BRAUN ORANGE",
+      "es": "MARRÓN ANARANJADO",
+      "fr": "BRUN ORANGE",
+      "pt": "MARROM LARANJA"
+    }
+  }
+]

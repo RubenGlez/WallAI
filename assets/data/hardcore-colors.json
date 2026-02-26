@@ -1,0 +1,1226 @@
+[
+  {
+    "id": "f6c2dab0-9e67-4dc1-8a54-824869036eda",
+    "seriesId": "hardcore",
+    "hex": "#FFFFFF",
+    "code": "Matt",
+    "name": {
+      "en": "Black"
+    }
+  },
+  {
+    "id": "ae597e8c-35e4-45af-aeb7-88a0af644083",
+    "seriesId": "hardcore",
+    "hex": "#7B7C7E",
+    "code": "R-7040",
+    "name": {
+      "en": "Pearl Grey"
+    }
+  },
+  {
+    "id": "ac1b386f-21cd-4c4e-b3a1-3d26b549947b",
+    "seriesId": "hardcore",
+    "hex": "#F4ADC5",
+    "code": "RV-",
+    "name": {
+      "en": "5021 Caribbean Blue"
+    }
+  },
+  {
+    "id": "f33f9f19-ebd8-4580-9749-a1cc4e9892c6",
+    "seriesId": "hardcore",
+    "hex": "#574A96",
+    "code": "RV-3",
+    "name": {
+      "en": "Blue Violet"
+    }
+  },
+  {
+    "id": "17bc2a45-886a-4c0f-b59c-5222702ef067",
+    "seriesId": "hardcore",
+    "hex": "#74B957",
+    "code": "RV-4",
+    "name": {
+      "en": "Light Green"
+    }
+  },
+  {
+    "id": "1e8b47b6-46d3-4f98-810d-3a7e69229fb4",
+    "seriesId": "hardcore",
+    "hex": "#005900",
+    "code": "RV-5",
+    "name": {
+      "en": "Lutecia Green"
+    }
+  },
+  {
+    "id": "11f80f75-6368-4058-957d-0bb628533a45",
+    "seriesId": "hardcore",
+    "hex": "#E1E2E2",
+    "code": "RV-6",
+    "name": {
+      "en": "Light Grey"
+    }
+  },
+  {
+    "id": "4c08865f-b554-4bcf-b353-7c2df642405e",
+    "seriesId": "hardcore",
+    "hex": "#FFF7B6",
+    "code": "RV-7",
+    "name": {
+      "en": "Cream"
+    }
+  },
+  {
+    "id": "55aa1ac0-beca-4e5f-a05d-359f7ca293f7",
+    "seriesId": "hardcore",
+    "hex": "#60C5E7",
+    "code": "RV-8",
+    "name": {
+      "en": "Carlota Light Blue"
+    }
+  },
+  {
+    "id": "c3a62de3-f088-4dd1-871d-c61248cf817a",
+    "seriesId": "hardcore",
+    "hex": "#FAC294",
+    "code": "RV-9",
+    "name": {
+      "en": "Apricot"
+    }
+  },
+  {
+    "id": "99b507d8-00ab-44c4-a9bd-b385c634c9fb",
+    "seriesId": "hardcore",
+    "hex": "#C8A10A",
+    "code": "RV-11",
+    "name": {
+      "en": "Ganges Yellow"
+    }
+  },
+  {
+    "id": "99faee80-03da-4d68-90d9-7032cb9b1e6c",
+    "seriesId": "hardcore",
+    "hex": "#97E6FF",
+    "code": "RV-13",
+    "name": {
+      "en": "Himalayan Blue"
+    }
+  },
+  {
+    "id": "fc1e216e-c536-4b43-a59c-083af5ad9392",
+    "seriesId": "hardcore",
+    "hex": "#008098",
+    "code": "RV-14",
+    "name": {
+      "en": "Planet Blue"
+    }
+  },
+  {
+    "id": "3d03782c-9340-424b-abbc-0215112d45b2",
+    "seriesId": "hardcore",
+    "hex": "#ACB681",
+    "code": "RV-15",
+    "name": {
+      "en": "Apple Green"
+    }
+  },
+  {
+    "id": "63b62a3e-056f-4f5a-81b1-4c0a7e6809bf",
+    "seriesId": "hardcore",
+    "hex": "#B0C643",
+    "code": "RV-16",
+    "name": {
+      "en": "Pistachio Green"
+    }
+  },
+  {
+    "id": "a15db3c1-be67-4fee-933c-725eb8c140e5",
+    "seriesId": "hardcore",
+    "hex": "#6D2601",
+    "code": "RV-18",
+    "name": {
+      "en": "Rust Red"
+    }
+  },
+  {
+    "id": "96a876ed-0f84-4ec0-b853-a752097e79de",
+    "seriesId": "hardcore",
+    "hex": "#FFF048",
+    "code": "RV-20",
+    "name": {
+      "en": "Party Yellow"
+    }
+  },
+  {
+    "id": "d7f08fbd-3cf3-4084-9d3a-4e9350c832bc",
+    "seriesId": "hardcore",
+    "hex": "#009473",
+    "code": "RV-21",
+    "name": {
+      "en": "Surgical Green"
+    }
+  },
+  {
+    "id": "7a51fd48-fb58-4406-83b1-d0ef048f94d6",
+    "seriesId": "hardcore",
+    "hex": "#9CCD9A",
+    "code": "RV-24",
+    "name": {
+      "en": "Golden Green"
+    }
+  },
+  {
+    "id": "415659fa-12fd-4424-b2bd-a46a882f37eb",
+    "seriesId": "hardcore",
+    "hex": "#00084D",
+    "code": "RV-27",
+    "name": {
+      "en": "Vampire Violet"
+    }
+  },
+  {
+    "id": "1e7973c8-843c-4550-9f66-3c0e4f52bc29",
+    "seriesId": "hardcore",
+    "hex": "#6BDCFF",
+    "code": "RV-29",
+    "name": {
+      "en": "Arctic Blue"
+    }
+  },
+  {
+    "id": "e13603f4-6130-45e6-bc16-c8a9dfc7e5da",
+    "seriesId": "hardcore",
+    "hex": "#007FC4",
+    "code": "RV-30",
+    "name": {
+      "en": "Electric Blue"
+    }
+  },
+  {
+    "id": "1370df8a-2e4c-4ae6-ad78-cff74029fc4d",
+    "seriesId": "hardcore",
+    "hex": "#213A8F",
+    "code": "RV-32",
+    "name": {
+      "en": "Lewis Blue"
+    }
+  },
+  {
+    "id": "79365d81-f6ed-4394-8724-237c96e4c1e9",
+    "seriesId": "hardcore",
+    "hex": "#E74F45",
+    "code": "RV-33",
+    "name": {
+      "en": "Colorado Red"
+    }
+  },
+  {
+    "id": "c953ab3d-156e-47a7-a876-78ec773bc01f",
+    "seriesId": "hardcore",
+    "hex": "#88B14F",
+    "code": "RV-34",
+    "name": {
+      "en": "Guacamole Green"
+    }
+  },
+  {
+    "id": "f47807e6-28ac-46bf-891e-9e6ea980fea7",
+    "seriesId": "hardcore",
+    "hex": "#4D2200",
+    "code": "RV-35",
+    "name": {
+      "en": "Chocolate Brown"
+    }
+  },
+  {
+    "id": "89140815-9e7c-4cf4-be46-958a850fa72b",
+    "seriesId": "hardcore",
+    "hex": "#7E7F82",
+    "code": "RV-39",
+    "name": {
+      "en": "Ripley Grey"
+    }
+  },
+  {
+    "id": "e398739f-afeb-4f73-8e08-0bfad57d7241",
+    "seriesId": "hardcore",
+    "hex": "#928782",
+    "code": "RV-40",
+    "name": {
+      "en": "Nazgul Grey"
+    }
+  },
+  {
+    "id": "fa5ba3b5-ea5c-4704-ae67-bb7c5e50f3cd",
+    "seriesId": "hardcore",
+    "hex": "#B7A794",
+    "code": "RV-42",
+    "name": {
+      "en": "Regina Grey"
+    }
+  },
+  {
+    "id": "464d092d-ebc3-4858-90a5-31c41e367970",
+    "seriesId": "hardcore",
+    "hex": "#EBE6D6",
+    "code": "RV-55",
+    "name": {
+      "en": "Arkalis Grey"
+    }
+  },
+  {
+    "id": "be397cc8-1d4c-4627-9878-68522b229725",
+    "seriesId": "hardcore",
+    "hex": "#CABDB0",
+    "code": "RV-57",
+    "name": {
+      "en": "City Grey"
+    }
+  },
+  {
+    "id": "3e9c096e-c7dc-4d0a-8d02-e15a9e2d0242",
+    "seriesId": "hardcore",
+    "hex": "#C8D3ED",
+    "code": "RV-73",
+    "name": {
+      "en": "Aurora Blue"
+    }
+  },
+  {
+    "id": "f728b134-2960-4cbf-a78a-21db2c4697dd",
+    "seriesId": "hardcore",
+    "hex": "#94BFE5",
+    "code": "RV-74",
+    "name": {
+      "en": "Costa Brava Blue"
+    }
+  },
+  {
+    "id": "c0c4b345-41bb-4745-ba55-f1f529a7a596",
+    "seriesId": "hardcore",
+    "hex": "#020E37",
+    "code": "RV-75",
+    "name": {
+      "en": "Nostromo Blue"
+    }
+  },
+  {
+    "id": "eef5324e-c9f7-4882-9ce5-e3ecb297d52d",
+    "seriesId": "hardcore",
+    "hex": "#FBCB8C",
+    "code": "RV-206",
+    "name": {
+      "en": "Atacama Yellow"
+    }
+  },
+  {
+    "id": "d7d52551-629b-4109-bfd2-e9cfb44c4587",
+    "seriesId": "hardcore",
+    "hex": "#E77A19",
+    "code": "RV-207",
+    "name": {
+      "en": "Mango"
+    }
+  },
+  {
+    "id": "716f2537-b102-40ca-9e7e-e0967ba2b21f",
+    "seriesId": "hardcore",
+    "hex": "#F6AD6B",
+    "code": "RV-208",
+    "name": {
+      "en": "Pumpkin"
+    }
+  },
+  {
+    "id": "04ad7045-33b8-4ced-b67e-f86f3f96361e",
+    "seriesId": "hardcore",
+    "hex": "#DC4126",
+    "code": "RV-209",
+    "name": {
+      "en": "Calcutta Orange"
+    }
+  },
+  {
+    "id": "0436ad22-78cc-47f6-8b09-6e77379399d9",
+    "seriesId": "hardcore",
+    "hex": "#910E14",
+    "code": "RV-210",
+    "name": {
+      "en": "Prometheus Orange"
+    }
+  },
+  {
+    "id": "87d8e018-9d8f-49e1-b7c8-96c500191cff",
+    "seriesId": "hardcore",
+    "hex": "#EE87AD",
+    "code": "RV-211",
+    "name": {
+      "en": "Love Pink"
+    }
+  },
+  {
+    "id": "04d777f7-0a40-4797-a8f3-a0bb8682fbce",
+    "seriesId": "hardcore",
+    "hex": "#C50041",
+    "code": "RV-212",
+    "name": {
+      "en": "Akari Red"
+    }
+  },
+  {
+    "id": "248406e0-dc42-49c4-9e47-4141861b79ec",
+    "seriesId": "hardcore",
+    "hex": "#762A3D",
+    "code": "RV-213",
+    "name": {
+      "en": "Merlot Red"
+    }
+  },
+  {
+    "id": "e84007c0-a31d-4f81-b523-87698f9e14f9",
+    "seriesId": "hardcore",
+    "hex": "#9993C3",
+    "code": "RV-214",
+    "name": {
+      "en": "Violet"
+    }
+  },
+  {
+    "id": "ac3d4265-d76b-4376-baa6-47bf33aeb81c",
+    "seriesId": "hardcore",
+    "hex": "#6D63A5",
+    "code": "RV-215",
+    "name": {
+      "en": "Prophet Violet"
+    }
+  },
+  {
+    "id": "5ed5142e-d70e-48dc-a8f2-5af4476aa476",
+    "seriesId": "hardcore",
+    "hex": "#45347A",
+    "code": "RV-216",
+    "name": {
+      "en": "Anonymous Violet"
+    }
+  },
+  {
+    "id": "bdb58124-98e9-44e6-b423-9762a67f795d",
+    "seriesId": "hardcore",
+    "hex": "#00A2DD",
+    "code": "RV-217",
+    "name": {
+      "en": "Avatar Blue"
+    }
+  },
+  {
+    "id": "1da45015-e1c4-47a7-b009-07642677a445",
+    "seriesId": "hardcore",
+    "hex": "#004578",
+    "code": "RV-218",
+    "name": {
+      "en": "Neptune Blue"
+    }
+  },
+  {
+    "id": "864ab733-aa18-405f-96fe-04b8bcaa74ba",
+    "seriesId": "hardcore",
+    "hex": "#8BC8AA",
+    "code": "RV-219",
+    "name": {
+      "en": "Paris Green"
+    }
+  },
+  {
+    "id": "81e7caed-c053-4b48-aa7a-a61f9de5d2ca",
+    "seriesId": "hardcore",
+    "hex": "#5BB89E",
+    "code": "RV-220",
+    "name": {
+      "en": "UFO Green"
+    }
+  },
+  {
+    "id": "46bc87b1-d5b4-469e-b72b-75e52851ec9e",
+    "seriesId": "hardcore",
+    "hex": "#005231",
+    "code": "RV-221",
+    "name": {
+      "en": "Persephone Green"
+    }
+  },
+  {
+    "id": "b61cc93c-1a60-4faf-b1ae-d29a5a11c71b",
+    "seriesId": "hardcore",
+    "hex": "#FFF386",
+    "code": "RV-222",
+    "name": {
+      "en": "Beach Yellow"
+    }
+  },
+  {
+    "id": "76aa879f-757a-4654-a77b-8f5f3efb4542",
+    "seriesId": "hardcore",
+    "hex": "#C8739F",
+    "code": "RV-224",
+    "name": {
+      "en": "Witch Violet"
+    }
+  },
+  {
+    "id": "7dae0d4d-6206-403c-8738-07c0919d78cc",
+    "seriesId": "hardcore",
+    "hex": "#C15C92",
+    "code": "RV-225",
+    "name": {
+      "en": "Geisha Violet"
+    }
+  },
+  {
+    "id": "571dafe4-2633-4756-a0e9-ae88c20ea06d",
+    "seriesId": "hardcore",
+    "hex": "#7C3F60",
+    "code": "RV-226",
+    "name": {
+      "en": "Tube Violet"
+    }
+  },
+  {
+    "id": "81037fc0-4d1f-4d38-89bd-4a23f9e395fd",
+    "seriesId": "hardcore",
+    "hex": "#6F9FD0",
+    "code": "RV-227",
+    "name": {
+      "en": "Waimea Blue"
+    }
+  },
+  {
+    "id": "532ec8cc-b88f-4a2b-ad1b-983411168957",
+    "seriesId": "hardcore",
+    "hex": "#4875B3",
+    "code": "RV-228",
+    "name": {
+      "en": "Zeppelin Blue"
+    }
+  },
+  {
+    "id": "9d106dbd-5e63-4213-a292-95bf49c2a620",
+    "seriesId": "hardcore",
+    "hex": "#465499",
+    "code": "RV-229",
+    "name": {
+      "en": "Andromeda Blue"
+    }
+  },
+  {
+    "id": "7c7dd4da-9521-40d7-8e98-28672cf06988",
+    "seriesId": "hardcore",
+    "hex": "#0D0F49",
+    "code": "RV-230",
+    "name": {
+      "en": "Leviathan Blue"
+    }
+  },
+  {
+    "id": "67c679fa-ed37-4fca-b980-1c0d25a5c2af",
+    "seriesId": "hardcore",
+    "hex": "#1BB2C4",
+    "code": "RV-231",
+    "name": {
+      "en": "Cousteau Blue"
+    }
+  },
+  {
+    "id": "0efb48aa-9ae6-4aa4-98f5-41f7cdfec7d6",
+    "seriesId": "hardcore",
+    "hex": "#009CAB",
+    "code": "RV-232",
+    "name": {
+      "en": "Glacier Blue"
+    }
+  },
+  {
+    "id": "9fbd0c50-779f-4bfb-962d-271167135eac",
+    "seriesId": "hardcore",
+    "hex": "#006675",
+    "code": "RV-233",
+    "name": {
+      "en": "Christiania Blue"
+    }
+  },
+  {
+    "id": "2a70e454-765f-46dd-8c78-ea421cbca600",
+    "seriesId": "hardcore",
+    "hex": "#004750",
+    "code": "RV-234",
+    "name": {
+      "en": "Indigo Blue"
+    }
+  },
+  {
+    "id": "6926dcf6-ec53-4650-8ee3-ad1b19c5158d",
+    "seriesId": "hardcore",
+    "hex": "#DEDD3A",
+    "code": "RV-235",
+    "name": {
+      "en": "Poison Green"
+    }
+  },
+  {
+    "id": "5ea9e072-6a76-4b1b-9a6b-125309564906",
+    "seriesId": "hardcore",
+    "hex": "#CED50A",
+    "code": "RV-236",
+    "name": {
+      "en": "Mojito Green"
+    }
+  },
+  {
+    "id": "70a5077f-3062-4241-b9f3-b9cda29f2543",
+    "seriesId": "hardcore",
+    "hex": "#6A8515",
+    "code": "RV-237",
+    "name": {
+      "en": "Cologno N. Green"
+    }
+  },
+  {
+    "id": "43ba9608-2026-4d1b-ac12-17daa3c473fa",
+    "seriesId": "hardcore",
+    "hex": "#FAB700",
+    "code": "RV-239",
+    "name": {
+      "en": "Luxor Yellow"
+    }
+  },
+  {
+    "id": "47ba9e2d-e1e5-4e7e-91ba-57eee6de37b7",
+    "seriesId": "hardcore",
+    "hex": "#C52332",
+    "code": "RV-241",
+    "name": {
+      "en": "Madrid Red"
+    }
+  },
+  {
+    "id": "e80b8f49-f33a-44a1-94a7-662f28159bfa",
+    "seriesId": "hardcore",
+    "hex": "#8D0000",
+    "code": "RV-242",
+    "name": {
+      "en": "Soviet Red"
+    }
+  },
+  {
+    "id": "7bb29aeb-a923-4b35-8e22-75bfd510e223",
+    "seriesId": "hardcore",
+    "hex": "#3D5588",
+    "code": "RV-243",
+    "name": {
+      "en": "Babylon Blue"
+    }
+  },
+  {
+    "id": "7c29a96c-fb5b-400a-9401-892f89b5d725",
+    "seriesId": "hardcore",
+    "hex": "#EECF99",
+    "code": "RV-246",
+    "name": {
+      "en": "Druide Brown"
+    }
+  },
+  {
+    "id": "c3e9d1eb-7d5c-4c78-bdad-4409da68e5e5",
+    "seriesId": "hardcore",
+    "hex": "#DEB276",
+    "code": "RV-247",
+    "name": {
+      "en": "Tepuy Brown"
+    }
+  },
+  {
+    "id": "fd3e59ed-0c30-4fc3-a855-2cc6dd7ac86c",
+    "seriesId": "hardcore",
+    "hex": "#CC9456",
+    "code": "RV-248",
+    "name": {
+      "en": "Baobab Brown"
+    }
+  },
+  {
+    "id": "e978812b-c035-4fb8-a291-f75ec57903d2",
+    "seriesId": "hardcore",
+    "hex": "#B0763F",
+    "code": "RV-249",
+    "name": {
+      "en": "Greyhound Brown"
+    }
+  },
+  {
+    "id": "6451643e-5d4c-440d-88ed-3ff21f5685ac",
+    "seriesId": "hardcore",
+    "hex": "#8F995B",
+    "code": "RV-250",
+    "name": {
+      "en": "Rambo Green"
+    }
+  },
+  {
+    "id": "22daad05-ebbc-4243-a5a1-c73ff1e27891",
+    "seriesId": "hardcore",
+    "hex": "#46502C",
+    "code": "RV-251",
+    "name": {
+      "en": "Forest Green"
+    }
+  },
+  {
+    "id": "70325ec0-008a-4afc-a1d2-8378c163f904",
+    "seriesId": "hardcore",
+    "hex": "#FFFFBF",
+    "code": "RV-252",
+    "name": {
+      "en": "Unicorn Yellow"
+    }
+  },
+  {
+    "id": "e8a25168-d3e3-48b4-a39e-9aa1d09b211f",
+    "seriesId": "hardcore",
+    "hex": "#C5CC8F",
+    "code": "RV-253",
+    "name": {
+      "en": "Element Green"
+    }
+  },
+  {
+    "id": "d99a91ed-e954-478c-9389-9cddb0ff23f2",
+    "seriesId": "hardcore",
+    "hex": "#9FE5C2",
+    "code": "RV-254",
+    "name": {
+      "en": "Max Green"
+    }
+  },
+  {
+    "id": "8f2b92bc-3837-45c7-a40a-aead90e523d9",
+    "seriesId": "hardcore",
+    "hex": "#83CCDF",
+    "code": "RV-255",
+    "name": {
+      "en": "Patagonia Blue"
+    }
+  },
+  {
+    "id": "11f9eacf-d4a7-4d25-b816-873c13371263",
+    "seriesId": "hardcore",
+    "hex": "#ACA6D1",
+    "code": "RV-256",
+    "name": {
+      "en": "Malva"
+    }
+  },
+  {
+    "id": "778538c6-5619-4b75-ae5c-85b66d904346",
+    "seriesId": "hardcore",
+    "hex": "#CA87B6",
+    "code": "RV-257",
+    "name": {
+      "en": "Princess Violet"
+    }
+  },
+  {
+    "id": "7ab1ef2c-8be1-4d8f-904d-44f8129cd34f",
+    "seriesId": "hardcore",
+    "hex": "#FFA2CA",
+    "code": "RV-258",
+    "name": {
+      "en": "Manga Pink"
+    }
+  },
+  {
+    "id": "9bd674f1-f7f7-4bcb-8d44-81af811495b0",
+    "seriesId": "hardcore",
+    "hex": "#FF958E",
+    "code": "RV-259",
+    "name": {
+      "en": "Flamingo"
+    }
+  },
+  {
+    "id": "05233121-b5b5-479e-a5f6-9f6f8a86dddb",
+    "seriesId": "hardcore",
+    "hex": "#5E0000",
+    "code": "RV-260",
+    "name": {
+      "en": "Iroko Red"
+    }
+  },
+  {
+    "id": "8dc62271-7c94-485b-9f7c-b4897f5ff4a2",
+    "seriesId": "hardcore",
+    "hex": "#933B00",
+    "code": "RV-261",
+    "name": {
+      "en": "Pangea Brown"
+    }
+  },
+  {
+    "id": "a234c75e-891c-49bb-8431-a54756d39cbf",
+    "seriesId": "hardcore",
+    "hex": "#7B7B7B",
+    "code": "RV-262",
+    "name": {
+      "en": "Matter Grey"
+    }
+  },
+  {
+    "id": "1cf26c7d-663f-4346-a61c-4798993bac00",
+    "seriesId": "hardcore",
+    "hex": "#575757",
+    "code": "RV-263",
+    "name": {
+      "en": "Sputnik Grey"
+    }
+  },
+  {
+    "id": "c0fc996b-c3c7-4911-9eaf-e38f86333752",
+    "seriesId": "hardcore",
+    "hex": "#2F2280",
+    "code": "RV-264",
+    "name": {
+      "en": "Galaxy Violet"
+    }
+  },
+  {
+    "id": "61bd9731-9b2e-46d2-b2ad-557b202e94fb",
+    "seriesId": "hardcore",
+    "hex": "#60B565",
+    "code": "RV-272",
+    "name": {
+      "en": "Mint Green"
+    }
+  },
+  {
+    "id": "619747fc-0a1a-4557-bee7-2be0690c9c92",
+    "seriesId": "hardcore",
+    "hex": "#F6B8D0",
+    "code": "RV-349",
+    "name": {
+      "en": "Violet Treze"
+    }
+  },
+  {
+    "id": "fb61e0e9-5878-4ec9-aecd-295faca13b28",
+    "seriesId": "hardcore",
+    "hex": "#8F154B",
+    "code": "RV-350",
+    "name": {
+      "en": "Pure Purple"
+    }
+  },
+  {
+    "id": "11e2f3c1-41b8-4bcc-973c-090c03df8535",
+    "seriesId": "hardcore",
+    "hex": "#889ED1",
+    "code": "RV-351",
+    "name": {
+      "en": "Hortensia Blue"
+    }
+  },
+  {
+    "id": "0841ed75-7715-44ec-9fab-bdf33ff97fbc",
+    "seriesId": "hardcore",
+    "hex": "#5D78BA",
+    "code": "RV-352",
+    "name": {
+      "en": "Gala Blue"
+    }
+  },
+  {
+    "id": "ad9b6646-3769-40fd-8c6b-588d51b6921a",
+    "seriesId": "hardcore",
+    "hex": "#40549F",
+    "code": "RV-353",
+    "name": {
+      "en": "Julione Blue"
+    }
+  },
+  {
+    "id": "308bdde4-a1a7-4e66-a926-fde2213e76ba",
+    "seriesId": "hardcore",
+    "hex": "#0F2354",
+    "code": "RV-354",
+    "name": {
+      "en": "Universe Blue"
+    }
+  },
+  {
+    "id": "f475cfb1-f41c-4459-8b88-bfe333929f06",
+    "seriesId": "hardcore",
+    "hex": "#8ECFD3",
+    "code": "RV-355",
+    "name": {
+      "en": "Fukushima Blue"
+    }
+  },
+  {
+    "id": "71ed03d3-131b-4c57-964b-14b231fbf43e",
+    "seriesId": "hardcore",
+    "hex": "#97D2D0",
+    "code": "RV-356",
+    "name": {
+      "en": "Vintage Blue"
+    }
+  },
+  {
+    "id": "d288380a-ebbd-4c1b-a03e-a33301bc8c4d",
+    "seriesId": "hardcore",
+    "hex": "#6EC3BF",
+    "code": "RV-357",
+    "name": {
+      "en": "Iceberg Blue"
+    }
+  },
+  {
+    "id": "5cd6313b-e60e-4f40-901f-27c9c73d7748",
+    "seriesId": "hardcore",
+    "hex": "#60B3AC",
+    "code": "RV-358",
+    "name": {
+      "en": "Water Lily Blue"
+    }
+  },
+  {
+    "id": "f995e0d0-e657-439e-9650-48e19bfa6c55",
+    "seriesId": "hardcore",
+    "hex": "#008C8D",
+    "code": "RV-359",
+    "name": {
+      "en": "Mururoa Blue"
+    }
+  },
+  {
+    "id": "eb54c1da-4206-4d5d-b367-0eef0c589051",
+    "seriesId": "hardcore",
+    "hex": "#1F6363",
+    "code": "RV-360",
+    "name": {
+      "en": "Major Blue"
+    }
+  },
+  {
+    "id": "411078e7-7457-47fe-a6d4-f21625f8dc64",
+    "seriesId": "hardcore",
+    "hex": "#C5EFDA",
+    "code": "RV-361",
+    "name": {
+      "en": "Potosi Green"
+    }
+  },
+  {
+    "id": "35551a82-c62c-482e-990d-53584997d444",
+    "seriesId": "hardcore",
+    "hex": "#78BE7A",
+    "code": "RV-362",
+    "name": {
+      "en": "Mantis Green"
+    }
+  },
+  {
+    "id": "fabce640-2468-4a43-bba4-3549c5a3e26f",
+    "seriesId": "hardcore",
+    "hex": "#00964F",
+    "code": "RV-363",
+    "name": {
+      "en": "Natura Green"
+    }
+  },
+  {
+    "id": "5526230b-315d-4ed3-a16b-f5f0d278fc6c",
+    "seriesId": "hardcore",
+    "hex": "#006942",
+    "code": "RV-364",
+    "name": {
+      "en": "Reggae Green"
+    }
+  },
+  {
+    "id": "99af8341-ff21-4f0e-ab98-206598366694",
+    "seriesId": "hardcore",
+    "hex": "#F9F7EA",
+    "code": "RV-365",
+    "name": {
+      "en": "Puchineli White"
+    }
+  },
+  {
+    "id": "06cb645f-5095-4633-943a-831184bc56ac",
+    "seriesId": "hardcore",
+    "hex": "#C4C5C6",
+    "code": "RV-366",
+    "name": {
+      "en": "Squatter Grey"
+    }
+  },
+  {
+    "id": "a3639d96-9c0f-4345-bc86-4498158dff4d",
+    "seriesId": "hardcore",
+    "hex": "#F3EFD6",
+    "code": "RV-1013",
+    "name": {
+      "en": "Bone white"
+    }
+  },
+  {
+    "id": "dbfb2b3e-4f86-4af0-9ca3-13d2a7f0894d",
+    "seriesId": "hardcore",
+    "hex": "#F9BA57",
+    "code": "RV-1017",
+    "name": {
+      "en": "Peach"
+    }
+  },
+  {
+    "id": "2ab2c485-ee68-4b71-b326-55ecbaaae812",
+    "seriesId": "hardcore",
+    "hex": "#FFE100",
+    "code": "RV-1021",
+    "name": {
+      "en": "Light Yellow"
+    }
+  },
+  {
+    "id": "0f278701-e924-4151-84d3-ee2016c7d1fd",
+    "seriesId": "hardcore",
+    "hex": "#F6A800",
+    "code": "RV-1028",
+    "name": {
+      "en": "Medium Yellow"
+    }
+  },
+  {
+    "id": "3dd1dfef-ad58-423d-ba3b-24f7224b369a",
+    "seriesId": "hardcore",
+    "hex": "#EC753B",
+    "code": "RV-2003",
+    "name": {
+      "en": "Pastel Orange"
+    }
+  },
+  {
+    "id": "afdcdc62-c6a0-441f-a498-ab743ec77edc",
+    "seriesId": "hardcore",
+    "hex": "#E95E0F",
+    "code": "RV-2004",
+    "name": {
+      "en": "Kalani Orange"
+    }
+  },
+  {
+    "id": "43801835-be56-46c7-a66d-759f9e127c89",
+    "seriesId": "hardcore",
+    "hex": "#C90019",
+    "code": "RV-3001",
+    "name": {
+      "en": "Vivid Red"
+    }
+  },
+  {
+    "id": "574fa679-75c3-4093-9953-520c02540735",
+    "seriesId": "hardcore",
+    "hex": "#82131D",
+    "code": "RV-3004",
+    "name": {
+      "en": "Bordeaux Red"
+    }
+  },
+  {
+    "id": "eb9c6af6-782b-412f-903a-eec07c4c35f0",
+    "seriesId": "hardcore",
+    "hex": "#E5352D",
+    "code": "RV-3020",
+    "name": {
+      "en": "Light Red"
+    }
+  },
+  {
+    "id": "fdd2c2e5-a6df-43d7-acc1-948b519da797",
+    "seriesId": "hardcore",
+    "hex": "#DE336B",
+    "code": "RV-4003",
+    "name": {
+      "en": "Erika"
+    }
+  },
+  {
+    "id": "ec8bc5cf-3c2e-4b36-b47f-5f0fb16c113d",
+    "seriesId": "hardcore",
+    "hex": "#582741",
+    "code": "RV-4007",
+    "name": {
+      "en": "Cherry"
+    }
+  },
+  {
+    "id": "9e74ef9f-f32a-4e83-bdd0-ac8a626ec8c5",
+    "seriesId": "hardcore",
+    "hex": "#DD1D5A",
+    "code": "RV-4010",
+    "name": {
+      "en": "Magenta"
+    }
+  },
+  {
+    "id": "50c09029-8077-4794-8316-5ad0573b63ae",
+    "seriesId": "hardcore",
+    "hex": "#37306A",
+    "code": "RV-5002",
+    "name": {
+      "en": "Ultramarine Blue"
+    }
+  },
+  {
+    "id": "cfd20013-d5c7-4fad-9995-e9600fec66be",
+    "seriesId": "hardcore",
+    "hex": "#00659D",
+    "code": "RV-5005",
+    "name": {
+      "en": "Dark Blue"
+    }
+  },
+  {
+    "id": "2dbdcc0c-5140-4859-9b10-7c1184269e03",
+    "seriesId": "hardcore",
+    "hex": "#00454E",
+    "code": "RV-5020",
+    "name": {
+      "en": "Ocean Blue"
+    }
+  },
+  {
+    "id": "06324cff-76b9-4820-8ab1-981ba03388e0",
+    "seriesId": "hardcore",
+    "hex": "#60683D",
+    "code": "RV-6003",
+    "name": {
+      "en": "Olive Green"
+    }
+  },
+  {
+    "id": "fb809fd4-e457-4706-8881-52e506174e55",
+    "seriesId": "hardcore",
+    "hex": "#0F2405",
+    "code": "RV-6009",
+    "name": {
+      "en": "Amazonas Green"
+    }
+  },
+  {
+    "id": "ad07c01a-e829-40b1-af3e-2c4d020e0b4f",
+    "seriesId": "hardcore",
+    "hex": "#727E48",
+    "code": "RV-6013",
+    "name": {
+      "en": "Khaki Green"
+    }
+  },
+  {
+    "id": "bea38627-7461-446d-bf83-d59493d98f8a",
+    "seriesId": "hardcore",
+    "hex": "#008352",
+    "code": "RV-6016",
+    "name": {
+      "en": "Dark Green"
+    }
+  },
+  {
+    "id": "4d8e447f-4bf1-4abb-917e-a25b17e02c1d",
+    "seriesId": "hardcore",
+    "hex": "#6A9720",
+    "code": "RV-6018",
+    "name": {
+      "en": "Valley Green"
+    }
+  },
+  {
+    "id": "d045d6bb-ee78-40dd-9c7d-80ef7e675b24",
+    "seriesId": "hardcore",
+    "hex": "#CCE0AC",
+    "code": "RV-6019",
+    "name": {
+      "en": "Pale Green"
+    }
+  },
+  {
+    "id": "1b52ba30-b609-4a00-80fe-bfd5218a4d8f",
+    "seriesId": "hardcore",
+    "hex": "#464648",
+    "code": "RV-7016",
+    "name": {
+      "en": "Anthracite Grey"
+    }
+  },
+  {
+    "id": "ff6686a2-abf3-4875-9d0f-d047ab368849",
+    "seriesId": "hardcore",
+    "hex": "#616264",
+    "code": "RV-7031",
+    "name": {
+      "en": "Dark Grey"
+    }
+  },
+  {
+    "id": "77098cce-7312-4ef2-bad8-9156cdabe4a8",
+    "seriesId": "hardcore",
+    "hex": "#8A5531",
+    "code": "RV-8002",
+    "name": {
+      "en": "Toasted Brown"
+    }
+  },
+  {
+    "id": "9be1bd41-2996-4721-a2d9-67e5e977e409",
+    "seriesId": "hardcore",
+    "hex": "#402009",
+    "code": "RV-8017",
+    "name": {
+      "en": "Tobacco Brown"
+    }
+  },
+  {
+    "id": "5e9172ea-a867-43c3-904a-d2f86b5cf9c0",
+    "seriesId": "hardcore",
+    "hex": "#B9501A",
+    "code": "RV-8023",
+    "name": {
+      "en": "Mustard"
+    }
+  },
+  {
+    "id": "4bbdc740-5bf3-4ada-8396-c910b91c1e87",
+    "seriesId": "hardcore",
+    "hex": "#FFFFFF",
+    "code": "RV-9010",
+    "name": {
+      "en": "Divinity White"
+    }
+  },
+  {
+    "id": "10b64763-49b9-465d-ae5b-a6f602910f8b",
+    "seriesId": "hardcore",
+    "hex": "#000000",
+    "code": "RV-9011",
+    "name": {
+      "en": "Gloss Black"
+    }
+  },
+  {
+    "id": "aaa977c4-0c89-4616-a6b8-fe811318232e",
+    "seriesId": "hardcore",
+    "hex": "#FFFFFF",
+    "code": "Satin",
+    "name": {
+      "en": "Black"
+    }
+  }
+]

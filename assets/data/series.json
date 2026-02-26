@@ -1,4 +1,58 @@
 [
-  {"id": "aka-writter", "name": "AKA Writter", "brandId": "aka", "finishType": "matte", "pressureType": "low", "description": "AKA Writter paint series"},
-  {"id": "flame-orange", "name": "FLAME Orange", "brandId": "flame", "finishType": "matte", "pressureType": "low", "description": "FLAME Orange paint series"}
+  {
+    "id": "aka-writter",
+    "name": "AKA Writter",
+    "brandId": "aka",
+    "finishType": "matte",
+    "pressureType": "low",
+    "description": "AKA Writter paint series"
+  },
+  {
+    "id": "belton-premium",
+    "name": "Belton Premium",
+    "brandId": "molotow",
+    "finishType": "matte",
+    "pressureType": "low",
+    "description": "Belton Premium paint series"
+  },
+  {
+    "id": "flame-blue",
+    "name": "FLAME Blue",
+    "brandId": "molotow",
+    "finishType": "matte",
+    "pressureType": "low",
+    "description": "FLAME Blue paint series"
+  },
+  {
+    "id": "flame-orange",
+    "name": "FLAME Orange",
+    "brandId": "molotow",
+    "finishType": "matte",
+    "pressureType": "low",
+    "description": "FLAME Orange paint series"
+  },
+  {
+    "id": "hardcore",
+    "name": "Hardcore",
+    "brandId": "montana",
+    "finishType": "matte",
+    "pressureType": "low",
+    "description": "Hardcore paint series"
+  },
+  {
+    "id": "montana-94",
+    "name": "Montana 94",
+    "brandId": "montana",
+    "finishType": "matte",
+    "pressureType": "low",
+    "description": "Montana 94 paint series"
+  },
+  {
+    "id": "vice",
+    "name": "Vice",
+    "brandId": "montana",
+    "finishType": "matte",
+    "pressureType": "low",
+    "description": "Vice paint series"
+  }
 ]

@@ -1,0 +1,1208 @@
+[
+  {
+    "id": "01f94f3d-3815-4fb4-82c3-72e4597f6c86",
+    "seriesId": "flame-orange",
+    "hex": "#F0E082",
+    "code": "FO-100",
+    "name": {
+      "en": "vanilla"
+    }
+  },
+  {
+    "id": "279fda4c-e37a-4465-9f50-dc5880a7b022",
+    "seriesId": "flame-orange",
+    "hex": "#FEDD3B",
+    "code": "FO-102",
+    "name": {
+      "en": "zinc yellow"
+    }
+  },
+  {
+    "id": "3ec6e621-1baa-4a93-89ab-2de47b531928",
+    "seriesId": "flame-orange",
+    "hex": "#FAD820",
+    "code": "FO-104",
+    "name": {
+      "en": "cadmium yellow"
+    }
+  },
+  {
+    "id": "39772228-b48c-432a-8bf9-801883dd92ad",
+    "seriesId": "flame-orange",
+    "hex": "#F5CC04",
+    "code": "FO-106",
+    "name": {
+      "en": "signal yellow"
+    }
+  },
+  {
+    "id": "cc0eecdb-6fa1-4eab-982e-95487a27e8a7",
+    "seriesId": "flame-orange",
+    "hex": "#F9B40C",
+    "code": "FO-107",
+    "name": {
+      "en": "melon light"
+    }
+  },
+  {
+    "id": "bebfbf8a-a216-454d-817e-d6ad5538dcc8",
+    "seriesId": "flame-orange",
+    "hex": "#F6BB00",
+    "code": "FO-110",
+    "name": {
+      "en": "melon yellow"
+    }
+  },
+  {
+    "id": "22496572-e87a-401f-9997-d1179c72e90b",
+    "seriesId": "flame-orange",
+    "hex": "#F7AC00",
+    "code": "FO-111",
+    "name": {
+      "en": "melon dark"
+    }
+  },
+  {
+    "id": "9ee7d306-7c48-4dd5-a9d5-01a05bb4aa03",
+    "seriesId": "flame-orange",
+    "hex": "#F69D15",
+    "code": "FO-113",
+    "name": {
+      "en": "curry"
+    }
+  },
+  {
+    "id": "a8ff1ca2-e928-403f-8b62-7ec927b6677d",
+    "seriesId": "flame-orange",
+    "hex": "#FFC093",
+    "code": "FO-198",
+    "name": {
+      "en": "NEW peach middle"
+    }
+  },
+  {
+    "id": "08552119-767c-4911-9dcf-cfc0f282da16",
+    "seriesId": "flame-orange",
+    "hex": "#FCB576",
+    "code": "FO-200",
+    "name": {
+      "en": "peach"
+    }
+  },
+  {
+    "id": "c29c98de-cd3c-4db6-be89-8a0924ea33c9",
+    "seriesId": "flame-orange",
+    "hex": "#FA9027",
+    "code": "FO-202",
+    "name": {
+      "en": "pastel orange"
+    }
+  },
+  {
+    "id": "b5df07b1-9770-438e-94ee-c40130d3f401",
+    "seriesId": "flame-orange",
+    "hex": "#E97300",
+    "code": "FO-204",
+    "name": {
+      "en": "light orange"
+    }
+  },
+  {
+    "id": "0bd91575-c4ba-4af5-8a76-1f11b54845e1",
+    "seriesId": "flame-orange",
+    "hex": "#F1D5B6",
+    "code": "FO-208",
+    "name": {
+      "en": "cold peach"
+    }
+  },
+  {
+    "id": "9373cc8a-4b98-4d35-8fbf-862841974f61",
+    "seriesId": "flame-orange",
+    "hex": "#F28749",
+    "code": "FO-210",
+    "name": {
+      "en": "apricot"
+    }
+  },
+  {
+    "id": "634a1f50-667c-4b0b-8aa6-1508a727c1a5",
+    "seriesId": "flame-orange",
+    "hex": "#D65627",
+    "code": "FO-212",
+    "name": {
+      "en": "orange"
+    }
+  },
+  {
+    "id": "360c229b-91bf-4197-b51c-48cd797268eb",
+    "seriesId": "flame-orange",
+    "hex": "#D3461E",
+    "code": "FO-214",
+    "name": {
+      "en": "red orange"
+    }
+  },
+  {
+    "id": "2e8fdb16-feca-43c9-8e94-f5348c70f3b4",
+    "seriesId": "flame-orange",
+    "hex": "#E73C42",
+    "code": "FO-303",
+    "name": {
+      "en": "NEW pastel red"
+    }
+  },
+  {
+    "id": "be2b563e-62ff-4743-8bea-4994630b1712",
+    "seriesId": "flame-orange",
+    "hex": "#D83331",
+    "code": "FO-304",
+    "name": {
+      "en": "signal red"
+    }
+  },
+  {
+    "id": "bcfc76d4-d707-4d31-aefa-1b4b9f8f7211",
+    "seriesId": "flame-orange",
+    "hex": "#E04D4D",
+    "code": "FO-305",
+    "name": {
+      "en": "NEW coral red"
+    }
+  },
+  {
+    "id": "d583defe-cc8f-4e9d-9a85-9e08b0f7b304",
+    "seriesId": "flame-orange",
+    "hex": "#852731",
+    "code": "FO-306",
+    "name": {
+      "en": "ruby red"
+    }
+  },
+  {
+    "id": "fba4f09c-9a36-4092-822e-6057daeb973b",
+    "seriesId": "flame-orange",
+    "hex": "#E76966",
+    "code": "FO-307",
+    "name": {
+      "en": "coral"
+    }
+  },
+  {
+    "id": "2b1f626e-d54b-485d-a92b-661bb5a5bae3",
+    "seriesId": "flame-orange",
+    "hex": "#ED9CAD",
+    "code": "FO-308",
+    "name": {
+      "en": "piglet pink light"
+    }
+  },
+  {
+    "id": "59b99a8c-8711-4478-897a-f132ee893803",
+    "seriesId": "flame-orange",
+    "hex": "#E3647D",
+    "code": "FO-309",
+    "name": {
+      "en": "piglet pink middle"
+    }
+  },
+  {
+    "id": "972b313a-b531-46ff-a755-3ef3289a21d1",
+    "seriesId": "flame-orange",
+    "hex": "#E64461",
+    "code": "FO-310",
+    "name": {
+      "en": "piglet pink"
+    }
+  },
+  {
+    "id": "3e806f57-150e-4884-a9e0-36b5340249a3",
+    "seriesId": "flame-orange",
+    "hex": "#BB2038",
+    "code": "FO-311",
+    "name": {
+      "en": "crazy cherry"
+    }
+  },
+  {
+    "id": "5375a511-d61c-41b5-bf22-b3fc6ebd7602",
+    "seriesId": "flame-orange",
+    "hex": "#C03431",
+    "code": "FO-312",
+    "name": {
+      "en": "fire red"
+    }
+  },
+  {
+    "id": "8e159a75-d7ba-49ce-9484-0cb6850475a5",
+    "seriesId": "flame-orange",
+    "hex": "#9C052D",
+    "code": "FO-313",
+    "name": {
+      "en": "cherry dark"
+    }
+  },
+  {
+    "id": "8cd2c9f7-0d9f-4a15-b168-c23712e4f2cb",
+    "seriesId": "flame-orange",
+    "hex": "#C40A34",
+    "code": "FO-314",
+    "name": {
+      "en": "piglet pink dark"
+    }
+  },
+  {
+    "id": "11fd498b-144c-41b3-ab7f-a92752e18ff5",
+    "seriesId": "flame-orange",
+    "hex": "#47233C",
+    "code": "FO-318",
+    "name": {
+      "en": "traffic purple dark"
+    }
+  },
+  {
+    "id": "92553f53-ef35-460e-ab7d-a0c8e3c836d2",
+    "seriesId": "flame-orange",
+    "hex": "#AA0028",
+    "code": "FO-320",
+    "name": {
+      "en": "burgundy"
+    }
+  },
+  {
+    "id": "17fda603-54b4-4015-a37d-860d844bcfa9",
+    "seriesId": "flame-orange",
+    "hex": "#512831",
+    "code": "FO-322",
+    "name": {
+      "en": "aubergine"
+    }
+  },
+  {
+    "id": "44333710-b1fa-415b-ae1a-0fa64c4be33e",
+    "seriesId": "flame-orange",
+    "hex": "#2D2127",
+    "code": "FO-323",
+    "name": {
+      "en": "aubergine dark"
+    }
+  },
+  {
+    "id": "3e754f74-3fa0-4846-8e60-b8849260ea58",
+    "seriesId": "flame-orange",
+    "hex": "#9F5D9C",
+    "code": "FO-396",
+    "name": {
+      "en": "violet"
+    }
+  },
+  {
+    "id": "f00cf970-08b9-4f3f-93dc-c94d8a1e031d",
+    "seriesId": "flame-orange",
+    "hex": "#81487C",
+    "code": "FO-397",
+    "name": {
+      "en": "crazy violet"
+    }
+  },
+  {
+    "id": "265a8dcc-d531-4f1b-91f5-e064e3ec958d",
+    "seriesId": "flame-orange",
+    "hex": "#684679",
+    "code": "FO-398",
+    "name": {
+      "en": "deep violet"
+    }
+  },
+  {
+    "id": "f4feaa92-7da8-48bc-99b5-4adc2060fec3",
+    "seriesId": "flame-orange",
+    "hex": "#DCA7C8",
+    "code": "FO-399",
+    "name": {
+      "en": "erica violet light"
+    }
+  },
+  {
+    "id": "5641b8fc-d2dc-4ec3-8f0a-0a85df01d12a",
+    "seriesId": "flame-orange",
+    "hex": "#DD6A9B",
+    "code": "FO-400",
+    "name": {
+      "en": "erica violet"
+    }
+  },
+  {
+    "id": "494be270-33a3-4d9e-806d-4d7065b7f7d6",
+    "seriesId": "flame-orange",
+    "hex": "#E1BDCC",
+    "code": "FO-401",
+    "name": {
+      "en": "erica pastel"
+    }
+  },
+  {
+    "id": "9b20a48a-f5c3-4ec9-842d-d858e2823fd1",
+    "seriesId": "flame-orange",
+    "hex": "#D8326D",
+    "code": "FO-402",
+    "name": {
+      "en": "telemagenta"
+    }
+  },
+  {
+    "id": "60b1c015-c578-47d1-9b44-7c2a9896d91b",
+    "seriesId": "flame-orange",
+    "hex": "#4A284E",
+    "code": "FO-403",
+    "name": {
+      "en": "deep violet dark"
+    }
+  },
+  {
+    "id": "d9bb2f38-17e3-42fb-aec3-0608d8c2117b",
+    "seriesId": "flame-orange",
+    "hex": "#8A1478",
+    "code": "FO-404",
+    "name": {
+      "en": "traffic purple"
+    }
+  },
+  {
+    "id": "0d3abedb-7f3b-4d20-a9a2-98cd4ef7316a",
+    "seriesId": "flame-orange",
+    "hex": "#CA94AC",
+    "code": "FO-405",
+    "name": {
+      "en": "erica pastel middle"
+    }
+  },
+  {
+    "id": "15885d8b-5164-459b-ba03-b17781d8f9d9",
+    "seriesId": "flame-orange",
+    "hex": "#BE628F",
+    "code": "FO-407",
+    "name": {
+      "en": "erica violet middle"
+    }
+  },
+  {
+    "id": "2005785e-e530-4154-898e-b10ae41733e9",
+    "seriesId": "flame-orange",
+    "hex": "#9466A2",
+    "code": "FO-408",
+    "name": {
+      "en": "grape"
+    }
+  },
+  {
+    "id": "9c2c3fd6-1834-42b4-8f03-202df68b46b2",
+    "seriesId": "flame-orange",
+    "hex": "#DFACC2",
+    "code": "FO-409",
+    "name": {
+      "en": "NEW erica pink"
+    }
+  },
+  {
+    "id": "c5d5198d-351e-40df-86fd-74036322f828",
+    "seriesId": "flame-orange",
+    "hex": "#6C427C",
+    "code": "FO-410",
+    "name": {
+      "en": "blackberry"
+    }
+  },
+  {
+    "id": "08852d09-5579-4eb0-ae94-8743e3689899",
+    "seriesId": "flame-orange",
+    "hex": "#4F3159",
+    "code": "FO-412",
+    "name": {
+      "en": "currant"
+    }
+  },
+  {
+    "id": "ccd9edf9-c610-4350-991a-dde2bc1c8c49",
+    "seriesId": "flame-orange",
+    "hex": "#B4A5DC",
+    "code": "FO-415",
+    "name": {
+      "en": "NEW crocus"
+    }
+  },
+  {
+    "id": "a9d6ca49-b4f4-430e-aa16-f90c1b67c25b",
+    "seriesId": "flame-orange",
+    "hex": "#B9B6E9",
+    "code": "FO-416",
+    "name": {
+      "en": "viola light"
+    }
+  },
+  {
+    "id": "1df2768d-89f1-4cf3-a770-6bab13575fc5",
+    "seriesId": "flame-orange",
+    "hex": "#6166A2",
+    "code": "FO-418",
+    "name": {
+      "en": "viola"
+    }
+  },
+  {
+    "id": "e21e91a3-6a11-4019-abab-1470f881b95a",
+    "seriesId": "flame-orange",
+    "hex": "#243C81",
+    "code": "FO-420",
+    "name": {
+      "en": "viola dark"
+    }
+  },
+  {
+    "id": "2f124529-fbff-4006-90cf-4c4d4e471f7f",
+    "seriesId": "flame-orange",
+    "hex": "#9DA8DE",
+    "code": "FO-422",
+    "name": {
+      "en": "NEW cosmos blue pastel"
+    }
+  },
+  {
+    "id": "ca998a2a-55c5-4ed8-9fe7-cee70d85465d",
+    "seriesId": "flame-orange",
+    "hex": "#243C81",
+    "code": "FO-424",
+    "name": {
+      "en": "cosmos blue light"
+    }
+  },
+  {
+    "id": "fe34f5fe-dc30-498e-9f53-06b358cdfd32",
+    "seriesId": "flame-orange",
+    "hex": "#374A9C",
+    "code": "FO-426",
+    "name": {
+      "en": "cosmos blue"
+    }
+  },
+  {
+    "id": "cda4ae47-b3b1-4679-8cf4-f473a1c78c4a",
+    "seriesId": "flame-orange",
+    "hex": "#001F60",
+    "code": "FO-428",
+    "name": {
+      "en": "cosmos blue dark"
+    }
+  },
+  {
+    "id": "1941e79e-9db9-4f8a-805e-03710e96e4cc",
+    "seriesId": "flame-orange",
+    "hex": "#70C7E7",
+    "code": "FO-502",
+    "name": {
+      "en": "lighting blue"
+    }
+  },
+  {
+    "id": "49235bce-08cd-4a7b-8d09-c50cad3b6fbc",
+    "seriesId": "flame-orange",
+    "hex": "#92C5E4",
+    "code": "FO-504",
+    "name": {
+      "en": "light blue light"
+    }
+  },
+  {
+    "id": "9c486992-e608-438e-8985-5161a3fc7430",
+    "seriesId": "flame-orange",
+    "hex": "#4497D1",
+    "code": "FO-508",
+    "name": {
+      "en": "light blue"
+    }
+  },
+  {
+    "id": "c7451b4a-a49c-4306-befb-dbdefd4b06fa",
+    "seriesId": "flame-orange",
+    "hex": "#006CB3",
+    "code": "FO-510",
+    "name": {
+      "en": "sky blue"
+    }
+  },
+  {
+    "id": "88c27d10-969b-4bb5-800b-8c787cbc11cf",
+    "seriesId": "flame-orange",
+    "hex": "#0089BF",
+    "code": "FO-511",
+    "name": {
+      "en": "crazy blue"
+    }
+  },
+  {
+    "id": "4d72bc2c-dcae-493b-841b-aeb12146646b",
+    "seriesId": "flame-orange",
+    "hex": "#075095",
+    "code": "FO-512",
+    "name": {
+      "en": "signal blue"
+    }
+  },
+  {
+    "id": "b7cd720a-f8c7-4757-938b-f557d8bf5567",
+    "seriesId": "flame-orange",
+    "hex": "#1B4888",
+    "code": "FO-514",
+    "name": {
+      "en": "true blue"
+    }
+  },
+  {
+    "id": "79aab50a-6687-4ebe-a937-96710a79cfb4",
+    "seriesId": "flame-orange",
+    "hex": "#002D5C",
+    "code": "FO-515",
+    "name": {
+      "en": "ultramarine blue"
+    }
+  },
+  {
+    "id": "c378161a-2a70-442c-8d2a-dd00bafbeb86",
+    "seriesId": "flame-orange",
+    "hex": "#7FA8C5",
+    "code": "FO-516",
+    "name": {
+      "en": "cream blue light"
+    }
+  },
+  {
+    "id": "88a7ea53-0a42-4cb0-855b-cf23e42a4f3e",
+    "seriesId": "flame-orange",
+    "hex": "#2085C5",
+    "code": "FO-518",
+    "name": {
+      "en": "cream blue"
+    }
+  },
+  {
+    "id": "5cf2a2a2-2edb-436a-a992-d89b89ecd75f",
+    "seriesId": "flame-orange",
+    "hex": "#075B8E",
+    "code": "FO-520",
+    "name": {
+      "en": "cream blue dark"
+    }
+  },
+  {
+    "id": "90c332b5-6b84-4f53-879c-03ce7cf60252",
+    "seriesId": "flame-orange",
+    "hex": "#0B2B59",
+    "code": "FO-522",
+    "name": {
+      "en": "sapphire blue"
+    }
+  },
+  {
+    "id": "abba99d7-c70c-4e8f-9865-7d8ce2306548",
+    "seriesId": "flame-orange",
+    "hex": "#232A3C",
+    "code": "FO-523",
+    "name": {
+      "en": "sapphire blue dark"
+    }
+  },
+  {
+    "id": "5d556bb6-8aba-4e96-8048-863778a10d86",
+    "seriesId": "flame-orange",
+    "hex": "#8CB9B7",
+    "code": "FO-531",
+    "name": {
+      "en": "verdigris light"
+    }
+  },
+  {
+    "id": "21244669-7f39-4579-9bc8-3b9a2724fbc1",
+    "seriesId": "flame-orange",
+    "hex": "#7CA6A5",
+    "code": "FO-532",
+    "name": {
+      "en": "verdigris middle"
+    }
+  },
+  {
+    "id": "e06902b0-4135-40c4-aa0f-35f474f0f963",
+    "seriesId": "flame-orange",
+    "hex": "#668E8E",
+    "code": "FO-533",
+    "name": {
+      "en": "verdigris"
+    }
+  },
+  {
+    "id": "ffe0b420-7b9e-48c2-8922-9c2c7e96cb5c",
+    "seriesId": "flame-orange",
+    "hex": "#48B79E",
+    "code": "FO-601",
+    "name": {
+      "en": "crazy riviera"
+    }
+  },
+  {
+    "id": "f4294fe7-b910-48de-928b-529987989bb9",
+    "seriesId": "flame-orange",
+    "hex": "#5CC9BA",
+    "code": "FO-602",
+    "name": {
+      "en": "riviera"
+    }
+  },
+  {
+    "id": "bb4e3366-4a6c-4610-aa4c-064f34450b89",
+    "seriesId": "flame-orange",
+    "hex": "#00A391",
+    "code": "FO-604",
+    "name": {
+      "en": "lagoon blue"
+    }
+  },
+  {
+    "id": "373b63a6-e81c-4539-ad0f-f32b813d008b",
+    "seriesId": "flame-orange",
+    "hex": "#009C8E",
+    "code": "FO-605",
+    "name": {
+      "en": "NEW lagoon blue dark"
+    }
+  },
+  {
+    "id": "30ee4199-d057-4b0c-9611-a3b8be659133",
+    "seriesId": "flame-orange",
+    "hex": "#007375",
+    "code": "FO-606",
+    "name": {
+      "en": "ocean blue"
+    }
+  },
+  {
+    "id": "0d40b200-7bef-4951-861d-2f7f6d89a8f3",
+    "seriesId": "flame-orange",
+    "hex": "#98ACA1",
+    "code": "FO-608",
+    "name": {
+      "en": "sage middle"
+    }
+  },
+  {
+    "id": "1ae2887e-0597-44c5-891a-4e6635a44248",
+    "seriesId": "flame-orange",
+    "hex": "#7DA48F",
+    "code": "FO-609",
+    "name": {
+      "en": "sage"
+    }
+  },
+  {
+    "id": "563c76c2-fb38-4338-9acf-56680d55410d",
+    "seriesId": "flame-orange",
+    "hex": "#517765",
+    "code": "FO-610",
+    "name": {
+      "en": "sage dark"
+    }
+  },
+  {
+    "id": "ab063a42-d805-4308-b143-fe55f2f2aa34",
+    "seriesId": "flame-orange",
+    "hex": "#B7E8DE",
+    "code": "FO-613",
+    "name": {
+      "en": "aqua pastel light"
+    }
+  },
+  {
+    "id": "a45bac23-eb9f-4882-b5d5-430c3e3a32d0",
+    "seriesId": "flame-orange",
+    "hex": "#8DDECC",
+    "code": "FO-614",
+    "name": {
+      "en": "aqua pastel"
+    }
+  },
+  {
+    "id": "10c544d8-d975-4659-88cf-a8bafb3203fc",
+    "seriesId": "flame-orange",
+    "hex": "#0BB6CB",
+    "code": "FO-615",
+    "name": {
+      "en": "NEW crazy aqua"
+    }
+  },
+  {
+    "id": "83f8a5fe-48b8-4eb8-b431-ff901b304a43",
+    "seriesId": "flame-orange",
+    "hex": "#3398B6",
+    "code": "FO-616",
+    "name": {
+      "en": "aqua light"
+    }
+  },
+  {
+    "id": "2a73b9a8-01fe-4f25-973e-e52961dd3628",
+    "seriesId": "flame-orange",
+    "hex": "#004E5A",
+    "code": "FO-618",
+    "name": {
+      "en": "aqua"
+    }
+  },
+  {
+    "id": "609839b0-7534-4953-9060-50fa33e64c54",
+    "seriesId": "flame-orange",
+    "hex": "#EABC00",
+    "code": "FO-621",
+    "name": {
+      "en": "NEW mustard middle"
+    }
+  },
+  {
+    "id": "64aee6ec-0be3-439e-8bb5-45c7f906866b",
+    "seriesId": "flame-orange",
+    "hex": "#F0BB01",
+    "code": "FO-622",
+    "name": {
+      "en": "mustard light"
+    }
+  },
+  {
+    "id": "be6ec160-4cc0-44db-bbfe-9996f0179ecf",
+    "seriesId": "flame-orange",
+    "hex": "#DEDD2E",
+    "code": "FO-623",
+    "name": {
+      "en": "crazy green"
+    }
+  },
+  {
+    "id": "70baca88-2552-47ab-ba2a-bef121023887",
+    "seriesId": "flame-orange",
+    "hex": "#D7D43F",
+    "code": "FO-624",
+    "name": {
+      "en": "pistachio light"
+    }
+  },
+  {
+    "id": "771cca1a-c772-4477-8707-fc7108b786b1",
+    "seriesId": "flame-orange",
+    "hex": "#C7A322",
+    "code": "FO-625",
+    "name": {
+      "en": "mustard"
+    }
+  },
+  {
+    "id": "6d5d78b5-13e3-476b-9caa-b11b2af245fd",
+    "seriesId": "flame-orange",
+    "hex": "#95B922",
+    "code": "FO-627",
+    "name": {
+      "en": "crazy grass"
+    }
+  },
+  {
+    "id": "cc557ead-0aad-4ca6-9654-38488ffa4b21",
+    "seriesId": "flame-orange",
+    "hex": "#8AA945",
+    "code": "FO-628",
+    "name": {
+      "en": "grass green"
+    }
+  },
+  {
+    "id": "9c259371-77c9-4ffa-8582-68fc7e798b85",
+    "seriesId": "flame-orange",
+    "hex": "#008834",
+    "code": "FO-629",
+    "name": {
+      "en": "juice green"
+    }
+  },
+  {
+    "id": "b102ee03-cbcf-4b1e-aef0-604a64edda85",
+    "seriesId": "flame-orange",
+    "hex": "#A37F13",
+    "code": "FO-631",
+    "name": {
+      "en": "mustard dark"
+    }
+  },
+  {
+    "id": "119ae105-f4e2-4f1c-84f9-fc8efde40f74",
+    "seriesId": "flame-orange",
+    "hex": "#4E8746",
+    "code": "FO-632",
+    "name": {
+      "en": "leaf green"
+    }
+  },
+  {
+    "id": "7b5ac2e2-25d4-4217-82ac-3c8b6cca8756",
+    "seriesId": "flame-orange",
+    "hex": "#836829",
+    "code": "FO-633",
+    "name": {
+      "en": "khaki green"
+    }
+  },
+  {
+    "id": "bcee5f65-c6fa-49c6-b1b7-b9ca9cd02615",
+    "seriesId": "flame-orange",
+    "hex": "#245C4E",
+    "code": "FO-636",
+    "name": {
+      "en": "fir green"
+    }
+  },
+  {
+    "id": "910c8568-9d51-4418-954d-fbe1c10d9727",
+    "seriesId": "flame-orange",
+    "hex": "#C0A927",
+    "code": "FO-637",
+    "name": {
+      "en": "NEW pear light"
+    }
+  },
+  {
+    "id": "994ba35c-5ddd-4f71-85bd-3083db522d0b",
+    "seriesId": "flame-orange",
+    "hex": "#9F8C13",
+    "code": "FO-639",
+    "name": {
+      "en": "NEW pear"
+    }
+  },
+  {
+    "id": "062504d0-d274-4380-a977-c5ef39ed5c0a",
+    "seriesId": "flame-orange",
+    "hex": "#BAD64A",
+    "code": "FO-640",
+    "name": {
+      "en": "kiwi light"
+    }
+  },
+  {
+    "id": "407a5893-675c-49ac-a04a-a0f132cd569c",
+    "seriesId": "flame-orange",
+    "hex": "#786522",
+    "code": "FO-641",
+    "name": {
+      "en": "NEW pear dark"
+    }
+  },
+  {
+    "id": "2460a444-deba-4d05-a367-ae5992394253",
+    "seriesId": "flame-orange",
+    "hex": "#7BBD2A",
+    "code": "FO-642",
+    "name": {
+      "en": "kiwi"
+    }
+  },
+  {
+    "id": "d4c72c5f-bdd9-4ebc-a7b9-711fa46d6850",
+    "seriesId": "flame-orange",
+    "hex": "#649116",
+    "code": "FO-644",
+    "name": {
+      "en": "kiwi dark"
+    }
+  },
+  {
+    "id": "fa210ea0-eda4-4b55-bf68-1de4f783e56a",
+    "seriesId": "flame-orange",
+    "hex": "#97DDA8",
+    "code": "FO-663",
+    "name": {
+      "en": "NEW mint"
+    }
+  },
+  {
+    "id": "8db9363f-36d1-49ac-9c8b-a8c0eb3bd30f",
+    "seriesId": "flame-orange",
+    "hex": "#8BE1B1",
+    "code": "FO-664",
+    "name": {
+      "en": "menthol light"
+    }
+  },
+  {
+    "id": "22989037-832c-4ba0-b340-f153b7d3d7a9",
+    "seriesId": "flame-orange",
+    "hex": "#6DCB99",
+    "code": "FO-666",
+    "name": {
+      "en": "menthol"
+    }
+  },
+  {
+    "id": "e2af94d1-66ae-4bce-ae9e-d54ba01dbb77",
+    "seriesId": "flame-orange",
+    "hex": "#6BB66C",
+    "code": "FO-667",
+    "name": {
+      "en": "crazy menthol"
+    }
+  },
+  {
+    "id": "ce8c6f2c-9b46-49de-b006-6ac5d0f857e2",
+    "seriesId": "flame-orange",
+    "hex": "#23A37C",
+    "code": "FO-670",
+    "name": {
+      "en": "turquoise light"
+    }
+  },
+  {
+    "id": "010eadf0-0567-4c33-b023-840867da1d4f",
+    "seriesId": "flame-orange",
+    "hex": "#008B5A",
+    "code": "FO-672",
+    "name": {
+      "en": "turquoise"
+    }
+  },
+  {
+    "id": "4436bd43-8d8f-4f03-b321-ec8619de742d",
+    "seriesId": "flame-orange",
+    "hex": "#005F3C",
+    "code": "FO-675",
+    "name": {
+      "en": "NEW emerald green"
+    }
+  },
+  {
+    "id": "ea5fd0be-eb5e-4324-b5d1-a95c919cce19",
+    "seriesId": "flame-orange",
+    "hex": "#D17F79",
+    "code": "FO-697",
+    "name": {
+      "en": "cocoa light"
+    }
+  },
+  {
+    "id": "fcf816dd-587a-432c-9303-e799edc6991f",
+    "seriesId": "flame-orange",
+    "hex": "#9D504B",
+    "code": "FO-698",
+    "name": {
+      "en": "cocoa"
+    }
+  },
+  {
+    "id": "08851e5d-520d-42ea-8217-e5a2ba880cea",
+    "seriesId": "flame-orange",
+    "hex": "#882626",
+    "code": "FO-699",
+    "name": {
+      "en": "brown red"
+    }
+  },
+  {
+    "id": "9be74d58-6990-477b-8c0e-fa00d1d8b599",
+    "seriesId": "flame-orange",
+    "hex": "#EDDFB6",
+    "code": "FO-702",
+    "name": {
+      "en": "ivory light"
+    }
+  },
+  {
+    "id": "b5650180-7174-4368-8261-2a145743dbfd",
+    "seriesId": "flame-orange",
+    "hex": "#D7B38A",
+    "code": "FO-703",
+    "name": {
+      "en": "NEW milk coffee"
+    }
+  },
+  {
+    "id": "f8d4acb9-b7ae-41cc-ab44-b3c7868e3038",
+    "seriesId": "flame-orange",
+    "hex": "#BF9A5C",
+    "code": "FO-704",
+    "name": {
+      "en": "beige brown"
+    }
+  },
+  {
+    "id": "52c21a8f-7bcb-4348-97b4-3f2916aa34ab",
+    "seriesId": "flame-orange",
+    "hex": "#9D682F",
+    "code": "FO-706",
+    "name": {
+      "en": "ocher"
+    }
+  },
+  {
+    "id": "21c35595-87ce-411c-8fdc-21a0c76cbcd8",
+    "seriesId": "flame-orange",
+    "hex": "#4C2800",
+    "code": "FO-708",
+    "name": {
+      "en": "nut"
+    }
+  },
+  {
+    "id": "35e14cb0-0753-46b9-8745-6629c7a1cd4b",
+    "seriesId": "flame-orange",
+    "hex": "#2B1104",
+    "code": "FO-710",
+    "name": {
+      "en": "chocolate"
+    }
+  },
+  {
+    "id": "d3d105c6-7170-4cb9-9a11-e249803c2f35",
+    "seriesId": "flame-orange",
+    "hex": "#B4A485",
+    "code": "FO-732",
+    "name": {
+      "en": "grey beige light"
+    }
+  },
+  {
+    "id": "b99e320a-3f4a-4c91-bd59-0b5364b4e983",
+    "seriesId": "flame-orange",
+    "hex": "#A18B62",
+    "code": "FO-734",
+    "name": {
+      "en": "grey beige"
+    }
+  },
+  {
+    "id": "923ff96e-3cfa-4bfc-aa8c-a161ef7180fb",
+    "seriesId": "flame-orange",
+    "hex": "#6F5B39",
+    "code": "FO-736",
+    "name": {
+      "en": "khaki grey"
+    }
+  },
+  {
+    "id": "f2c9d98a-165e-452c-93f4-05a6b7ec6948",
+    "seriesId": "flame-orange",
+    "hex": "#C8C8B5",
+    "code": "FO-830",
+    "name": {
+      "en": "stone grey light"
+    }
+  },
+  {
+    "id": "1d0dac0d-f959-4945-b5ba-0ebbc8f1f78f",
+    "seriesId": "flame-orange",
+    "hex": "#989887",
+    "code": "FO-831",
+    "name": {
+      "en": "stone grey middle"
+    }
+  },
+  {
+    "id": "7b623d8f-68fe-47c3-a0e7-36acea788081",
+    "seriesId": "flame-orange",
+    "hex": "#737165",
+    "code": "FO-832",
+    "name": {
+      "en": "stone grey"
+    }
+  },
+  {
+    "id": "7ccd25c6-dac8-44b1-9b4b-49426cc75047",
+    "seriesId": "flame-orange",
+    "hex": "#403E35",
+    "code": "FO-833",
+    "name": {
+      "en": "stone grey dark"
+    }
+  },
+  {
+    "id": "65d118c7-9dc1-4390-830b-f5202231fa35",
+    "seriesId": "flame-orange",
+    "hex": "#DAD3CC",
+    "code": "FO-834",
+    "name": {
+      "en": "light grey neutral"
+    }
+  },
+  {
+    "id": "a6621a92-c2d4-41af-b768-f1bfe364b85c",
+    "seriesId": "flame-orange",
+    "hex": "#B0ADAC",
+    "code": "FO-836",
+    "name": {
+      "en": "middle grey neutral"
+    }
+  },
+  {
+    "id": "95fb9405-9cb5-4472-86db-56259dceaa40",
+    "seriesId": "flame-orange",
+    "hex": "#84807F",
+    "code": "FO-840",
+    "name": {
+      "en": "dark grey neutral"
+    }
+  },
+  {
+    "id": "4674b71e-74cd-41ad-9c8f-32bdca67d592",
+    "seriesId": "flame-orange",
+    "hex": "#4A4B4E",
+    "code": "FO-844",
+    "name": {
+      "en": "anthracite grey"
+    }
+  },
+  {
+    "id": "20e37f1b-0093-4f88-99d8-11190fe70285",
+    "seriesId": "flame-orange",
+    "hex": "#FFFFFF",
+    "code": "FO-900",
+    "name": {
+      "en": "pure white"
+    }
+  },
+  {
+    "id": "b7e41b64-1513-48f6-887a-ef67519a51c1",
+    "seriesId": "flame-orange",
+    "hex": "#000000",
+    "code": "FO-901",
+    "name": {
+      "en": "thick black"
+    }
+  },
+  {
+    "id": "935551a8-4aff-43d1-a55a-78b21c156fdc",
+    "seriesId": "flame-orange",
+    "hex": "#D0D5D9",
+    "code": "FO-902",
+    "name": {
+      "en": "ultra chrome"
+    }
+  },
+  {
+    "id": "5d7a2b5b-5808-432d-a380-efc09f587c76",
+    "seriesId": "flame-orange",
+    "hex": "#000000",
+    "code": "FO-904",
+    "name": {
+      "en": "deep black"
+    }
+  },
+  {
+    "id": "0b2ab14a-cc69-40f1-9b8a-8b0c685f4c1c",
+    "seriesId": "flame-orange",
+    "hex": "#D2B454",
+    "code": "FO-906",
+    "name": {
+      "en": "gold"
+    }
+  }
+]
