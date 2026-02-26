@@ -66,6 +66,7 @@
     "finishType_matte": "Mat",
     "finishType_gloss": "Brillant",
     "finishType_metallic": "Métallisé",
+    "finishType_satin": "Satiné",
     "finishType_other": "Autre",
     "gridTitle": "Grille de couleurs",
     "gridPlaceholder": "Écran 3 — à venir.",

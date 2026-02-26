@@ -1,19 +1,19 @@
 [
   {
     "id": "aka-writter",
-    "name": "AKA Writter",
+    "name": "AKA Writer",
     "brandId": "aka",
     "finishType": "matte",
     "pressureType": "low",
-    "description": "AKA Writter paint series"
+    "description": "La serie AKA Writer es una pintura en spray híbrida acrílica diseñada específicamente para graffiti, caracterizada por su baja presión, acabado mate y gran control del trazo, lo que facilita líneas limpias y precisas. Destaca por su buena cobertura, secado rápido y alta resistencia a la radiación UV, además de una válvula modulable que permite adaptarse tanto a detalles como a rellenos con gran versatilidad."
   },
   {
     "id": "belton-premium",
     "name": "Belton Premium",
     "brandId": "molotow",
-    "finishType": "matte",
+    "finishType": "satin",
     "pressureType": "low",
-    "description": "Belton Premium paint series"
+    "description": "Belton Premium (Molotow Premium) es una gama reconocida internacionalmente por su alta pigmentación, más de 250 colores y fórmula mate apta para casi cualquier superficie. Destaca por su cobertura uniforme desde la primera capa, secado rápido y precisión de aplicación, lo que la hace popular tanto entre writers como en bellas artes y trabajos más técnicos o de estudio."
   },
   {
     "id": "flame-blue",
@@ -21,23 +21,23 @@
     "brandId": "molotow",
     "finishType": "matte",
     "pressureType": "low",
-    "description": "FLAME Blue paint series"
+    "description": "Flame Blue es un spray de baja presión desarrollado por Molotow dentro de la línea Flame, pensado para máximo control, precisión y trabajo detallado. Su acabado mate, buena opacidad y salida suave reducen el overspray y facilitan degradados y líneas finas, siendo especialmente recomendable para piezas detalladas o para artistas que buscan un spray más controlable."
   },
   {
     "id": "flame-orange",
     "name": "FLAME Orange",
     "brandId": "molotow",
     "finishType": "matte",
-    "pressureType": "low",
-    "description": "FLAME Orange paint series"
+    "pressureType": "high",
+    "description": "Flame Orange es la versión de alta presión y alto caudal dentro de la gama Flame, orientada a la rapidez y la cobertura de grandes superficies. Ofrece colores intensos, buen rendimiento y válvula potente que permite rellenos veloces, lo que lo convierte en un spray muy utilizado para bombing y piezas grandes donde la velocidad es prioritaria frente al control extremo."
   },
   {
     "id": "hardcore",
     "name": "Hardcore",
     "brandId": "montana",
-    "finishType": "matte",
-    "pressureType": "low",
-    "description": "Hardcore paint series"
+    "finishType": "gloss",
+    "pressureType": "high",
+    "description": "La gama Montana Hardcore representa el enfoque opuesto al 94: se trata de un spray de alta presión y acabado brillante, orientado a la rapidez y la potencia de salida. Fue uno de los sprays más influyentes en el desarrollo del graffiti moderno, pensado para rellenos rápidos, bombing y acciones donde se necesita gran cobertura y velocidad de aplicación."
   },
   {
     "id": "montana-94",
@@ -45,14 +45,14 @@
     "brandId": "montana",
     "finishType": "matte",
     "pressureType": "low",
-    "description": "Montana 94 paint series"
+    "description": "Montana 94 (MTN 94) es una de las gamas más populares de Montana Colors, conocida por su acabado mate, baja presión y facilidad de manejo, lo que la convierte en un spray muy versátil para piezas detalladas y trabajos artísticos. Ofrece una amplia carta de colores, excelente cubrición y secado rápido, además de buena resistencia a rayaduras y a los rayos UV, lo que la hace adecuada tanto para muralismo como para graffiti técnico."
   },
   {
     "id": "vice",
-    "name": "Vice",
+    "name": "Montana Vice",
     "brandId": "montana",
-    "finishType": "matte",
-    "pressureType": "low",
-    "description": "Vice paint series"
+    "finishType": "satin",
+    "pressureType": "mixed",
+    "description": "Montana Vice (MTN VICE) es una gama más reciente de Montana Colors que busca reforzar la identidad del graffiti puro de la marca, combinando acabado mate, amplia carta de colores y una filosofía orientada a la autenticidad y creatividad del writer. Se presenta como una línea moderna dentro del catálogo MTN, pensada para mantener el equilibrio entre rendimiento técnico y conexión con la cultura del graffiti."
   }
 ]

@@ -17,8 +17,8 @@ export interface Brand {
 /** Spray pressure type (per series) */
 export type PressureType = "low" | "high" | "mixed";
 
-/** Finish type (matte, gloss, metallic, etc.) */
-export type FinishType = "matte" | "gloss" | "metallic" | "other";
+/** Finish type (matte, gloss, metallic, satin, etc.) */
+export type FinishType = "matte" | "gloss" | "metallic" | "satin" | "other";
 
 /** Series entity — Screen 2: Brand series */
 export interface Series {

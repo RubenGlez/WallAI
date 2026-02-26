@@ -66,6 +66,7 @@
     "finishType_matte": "Matte",
     "finishType_gloss": "Gloss",
     "finishType_metallic": "Metallic",
+    "finishType_satin": "Satin",
     "finishType_other": "Other",
     "gridTitle": "Color grid",
     "gridPlaceholder": "Screen 3 — coming soon.",

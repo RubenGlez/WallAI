@@ -66,6 +66,7 @@
     "finishType_matte": "Matt",
     "finishType_gloss": "Glänzend",
     "finishType_metallic": "Metallic",
+    "finishType_satin": "Seidenmatt",
     "finishType_other": "Sonstige",
     "gridTitle": "Farbraster",
     "gridPlaceholder": "Bildschirm 3 — in Kürze.",
