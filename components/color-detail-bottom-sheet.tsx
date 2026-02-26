@@ -3,14 +3,26 @@ import {
   BottomSheetModal,
   BottomSheetScrollView,
 } from "@gorhom/bottom-sheet";
-import React, { forwardRef, useCallback } from "react";
+import React, { forwardRef, useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+import {
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 import { ThemedText } from "@/components/themed-text";
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { BorderRadius, Colors, Spacing, Typography } from "@/constants/theme";
 import { useColorScheme } from "@/hooks/use-color-scheme";
+import { findClosestColors } from "@/lib/colorMatch";
+import { getColorDisplayName } from "@/lib/color";
+import {
+  getAllSeriesWithCount,
+  getColorsBySeriesId,
+  getSeriesById,
+} from "@/stores/useCatalogStore";
 import type { Color } from "@/types";
 
 export type ColorDetailParams = {
@@ -26,19 +38,53 @@ type ContentProps = {
   color: ColorDetailParams | null;
   isFavorite: boolean;
   onToggleFavorite: () => void;
+  /** When provided, similar color cards open this color's detail (same sheet, new content). */
+  onOpenColor?: (color: Color) => void;
 };
+
+const SIMILAR_IN_SERIES_LIMIT = 6;
+const SIMILAR_OTHER_SERIES_LIMIT = 8;
+const SIMILAR_CARD_WIDTH = 88;
+const SIMILAR_SWATCH_SIZE = 56;
 
 export function ColorDetailContent({
   color,
   isFavorite,
   onToggleFavorite,
+  onOpenColor,
 }: ContentProps) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const colorScheme = useColorScheme() ?? "light";
   const theme = Colors[colorScheme];
   const isLight =
     color?.color.hex.toLowerCase() === "#ffffff" ||
     color?.color.hex.toLowerCase().startsWith("#fff");
+
+  const sameSeriesMatches = useMemo(() => {
+    if (!color) return [];
+    const seriesColors = getColorsBySeriesId(color.color.seriesId).filter(
+      (c) => c.id !== color.color.id,
+    );
+    return findClosestColors(
+      color.color.hex,
+      seriesColors,
+      SIMILAR_IN_SERIES_LIMIT,
+    );
+  }, [color]);
+
+  const otherSeriesMatches = useMemo(() => {
+    if (!color) return [];
+    const allSeries = getAllSeriesWithCount();
+    const otherIds = allSeries
+      .filter((s) => s.id !== color.color.seriesId)
+      .map((s) => s.id);
+    const otherColors = otherIds.flatMap((id) => getColorsBySeriesId(id));
+    return findClosestColors(
+      color.color.hex,
+      otherColors,
+      SIMILAR_OTHER_SERIES_LIMIT,
+    );
+  }, [color]);
 
   if (!color) return null;
 
@@ -87,19 +133,116 @@ export function ColorDetailContent({
       </ThemedText>
 
       <ThemedText style={[styles.sectionTitle, { color: theme.textSecondary }]}>
-        {t("colors.colorDetail.similarInBrand")}
+        {t("colors.colorDetail.similarInSeries")}
       </ThemedText>
-      <ThemedText style={[styles.placeholder, { color: theme.textSecondary }]}>
-        {t("colors.colorDetail.comingSoon")}
-      </ThemedText>
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.similarRow}
+      >
+        {sameSeriesMatches.map((match) => (
+          <SimilarColorCard
+            key={match.catalogColor.id}
+            color={match.catalogColor}
+            displayName={getColorDisplayName(
+              match.catalogColor,
+              i18n.language,
+            )}
+            similarity={match.similarity}
+            theme={theme}
+            onPress={() => onOpenColor?.(match.catalogColor)}
+          />
+        ))}
+      </ScrollView>
 
       <ThemedText style={[styles.sectionTitle, { color: theme.textSecondary }]}>
-        {t("colors.colorDetail.similarOtherBrands")}
+        {t("colors.colorDetail.similarInOtherSeries")}
       </ThemedText>
-      <ThemedText style={[styles.placeholder, { color: theme.textSecondary }]}>
-        {t("colors.colorDetail.comingSoon")}
-      </ThemedText>
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.similarRow}
+      >
+        {otherSeriesMatches.map((match) => {
+          const series = getSeriesById(match.catalogColor.seriesId);
+          const subtitle = series?.name ?? match.catalogColor.code;
+          return (
+            <SimilarColorCard
+              key={match.catalogColor.id}
+              color={match.catalogColor}
+              displayName={getColorDisplayName(
+                match.catalogColor,
+                i18n.language,
+              )}
+              subtitle={subtitle}
+              similarity={match.similarity}
+              theme={theme}
+              onPress={() => onOpenColor?.(match.catalogColor)}
+            />
+          );
+        })}
+      </ScrollView>
     </BottomSheetScrollView>
+  );
+}
+
+type SimilarColorCardProps = {
+  color: Color;
+  displayName: string;
+  subtitle?: string;
+  similarity: number;
+  theme: (typeof Colors)["light"];
+  onPress: () => void;
+};
+
+function SimilarColorCard({
+  color,
+  displayName,
+  subtitle,
+  similarity,
+  theme,
+  onPress,
+}: SimilarColorCardProps) {
+  const isVeryLight =
+    color.hex.toLowerCase() === "#ffffff" ||
+    color.hex.toLowerCase().startsWith("#fff");
+  return (
+    <TouchableOpacity
+      style={[styles.similarCard, { marginRight: Spacing.sm }]}
+      onPress={onPress}
+      activeOpacity={0.7}
+      accessibilityLabel={`${displayName}, ${similarity}% similar`}
+      accessibilityRole="button"
+    >
+      <View
+        style={[
+          styles.similarSwatch,
+          { backgroundColor: color.hex },
+          isVeryLight && { borderWidth: 1, borderColor: theme.border },
+        ]}
+      />
+      <ThemedText
+        style={[styles.similarLabel, { color: theme.text }]}
+        numberOfLines={1}
+        ellipsizeMode="tail"
+      >
+        {displayName}
+      </ThemedText>
+      {subtitle != null && (
+        <ThemedText
+          style={[styles.similarSubtitle, { color: theme.textSecondary }]}
+          numberOfLines={1}
+          ellipsizeMode="tail"
+        >
+          {subtitle}
+        </ThemedText>
+      )}
+      <ThemedText
+        style={[styles.similarPct, { color: theme.textSecondary }]}
+      >
+        {similarity}%
+      </ThemedText>
+    </TouchableOpacity>
   );
 }
 
@@ -146,9 +289,34 @@ const styles = StyleSheet.create({
     fontWeight: Typography.fontWeight.semibold,
     marginBottom: Spacing.xs,
   },
-  placeholder: {
-    fontSize: Typography.fontSize.sm,
-    marginBottom: Spacing.md,
+  similarRow: {
+    paddingBottom: Spacing.md,
+    gap: Spacing.sm,
+  },
+  similarCard: {
+    width: SIMILAR_CARD_WIDTH,
+    alignItems: "center",
+  },
+  similarSwatch: {
+    width: SIMILAR_SWATCH_SIZE,
+    height: SIMILAR_SWATCH_SIZE,
+    borderRadius: BorderRadius.md,
+    marginBottom: Spacing.xs,
+  },
+  similarLabel: {
+    fontSize: Typography.fontSize.xs,
+    textAlign: "center",
+    maxWidth: SIMILAR_CARD_WIDTH,
+  },
+  similarSubtitle: {
+    fontSize: Typography.fontSize.xs,
+    textAlign: "center",
+    maxWidth: SIMILAR_CARD_WIDTH,
+    marginTop: 2,
+  },
+  similarPct: {
+    fontSize: Typography.fontSize.xs,
+    marginTop: 2,
   },
 });
 
@@ -158,7 +326,7 @@ export const ColorDetailBottomSheet = forwardRef<
   ColorDetailBottomSheetRef,
   BottomSheetProps
 >(function ColorDetailBottomSheet(
-  { color, isFavorite, onToggleFavorite },
+  { color, isFavorite, onToggleFavorite, onOpenColor },
   ref,
 ) {
   const colorScheme = useColorScheme() ?? "light";
@@ -191,6 +359,7 @@ export const ColorDetailBottomSheet = forwardRef<
         color={color}
         isFavorite={isFavorite}
         onToggleFavorite={onToggleFavorite}
+        onOpenColor={onOpenColor}
       />
     </BottomSheetModal>
   );

@@ -75,9 +75,8 @@
     "showOnlyFavorites": "Afficher uniquement les favoris",
     "showAllColors": "Afficher toutes les couleurs",
     "colorDetail": {
-      "similarInBrand": "Similaires dans la marque",
-      "similarOtherBrands": "Similaires dans d'autres marques",
-      "comingSoon": "Bientôt (quand les données LAB seront disponibles)."
+      "similarInSeries": "Similaire dans la série",
+      "similarInOtherSeries": "Similaire dans d'autres séries"
     },
     "placeholder": "Explorateur de sprays — bientôt."
   },

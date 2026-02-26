@@ -152,6 +152,7 @@ export default function ColorGridScreen() {
         onToggleFavorite={() =>
           detailParams && handleFavorite(detailParams.color)
         }
+        onOpenColor={openDetailSheet}
       />
 
       <View style={styles.searchWrap}>

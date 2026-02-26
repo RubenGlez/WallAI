@@ -75,9 +75,8 @@
     "showOnlyFavorites": "Nur Favoriten anzeigen",
     "showAllColors": "Alle Farben anzeigen",
     "colorDetail": {
-      "similarInBrand": "Ähnliche in der Marke",
-      "similarOtherBrands": "Ähnliche in anderen Marken",
-      "comingSoon": "Demnächst (wenn LAB-Daten vorhanden sind)."
+      "similarInSeries": "Ähnlich in der Serie",
+      "similarInOtherSeries": "Ähnlich in anderen Serien"
     },
     "placeholder": "Spray-Explorer — demnächst."
   },

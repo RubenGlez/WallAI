@@ -175,6 +175,7 @@ export default function CatalogScreen() {
         onToggleFavorite={() =>
           detailParams && handleFavorite(detailParams.color)
         }
+        onOpenColor={openDetailSheet}
       />
 
       <SeriesSelectBottomSheet
