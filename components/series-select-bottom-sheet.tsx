@@ -13,8 +13,6 @@ import { Colors, Spacing, Typography } from "@/constants/theme";
 import { useColorScheme } from "@/hooks/use-color-scheme";
 import type { SeriesWithCountAndBrand } from "@/types";
 
-const SNAP_POINTS = ["60%", "90%"];
-
 export type SeriesSelectBottomSheetRef = BottomSheetModal;
 
 type Props = {

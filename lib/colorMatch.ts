@@ -1,6 +1,6 @@
-import { colord, extend } from 'colord';
-import labPlugin from 'colord/plugins/lab';
-import type { Color } from '@/types';
+import type { Color } from "@/types";
+import { colord, extend } from "colord";
+import labPlugin from "colord/plugins/lab";
 
 extend([labPlugin]);
 
@@ -23,23 +23,28 @@ export function extractHexPalette(result: {
 }): string[] {
   const hexes: string[] = [];
   const keys = [
-    'dominant',
-    'primary',
-    'secondary',
-    'vibrant',
-    'darkVibrant',
-    'lightVibrant',
-    'muted',
-    'darkMuted',
-    'lightMuted',
-    'average',
-    'background',
-    'detail',
+    "dominant",
+    "primary",
+    "secondary",
+    "vibrant",
+    "darkVibrant",
+    "lightVibrant",
+    "muted",
+    "darkMuted",
+    "lightMuted",
+    "average",
+    "background",
+    "detail",
   ] as const;
   const seen = new Set<string>();
   for (const k of keys) {
     const v = result[k];
-    if (v && typeof v === 'string' && /^#([0-9a-f]{3}){1,2}$/i.test(v) && !seen.has(v.toLowerCase())) {
+    if (
+      v &&
+      typeof v === "string" &&
+      /^#([0-9a-f]{3}){1,2}$/i.test(v) &&
+      !seen.has(v.toLowerCase())
+    ) {
       seen.add(v.toLowerCase());
       hexes.push(v);
       if (hexes.length >= 8) break;
@@ -48,7 +53,7 @@ export function extractHexPalette(result: {
   return hexes;
 }
 
-export type Lab = { l: number; a: number; b: number };
+type Lab = { l: number; a: number; b: number };
 
 function getLab(hex: string): Lab {
   const c = colord(hex);
@@ -74,7 +79,9 @@ function deltaE00(lab1: Lab, lab2: Lab): number {
   const C1 = Math.sqrt(a1 * a1 + b1 * b1);
   const C2 = Math.sqrt(a2 * a2 + b2 * b2);
   const Cbar = (C1 + C2) / 2;
-  const G = 0.5 * (1 - Math.sqrt(Math.pow(Cbar, 7) / (Math.pow(Cbar, 7) + Math.pow(25, 7))));
+  const G =
+    0.5 *
+    (1 - Math.sqrt(Math.pow(Cbar, 7) / (Math.pow(Cbar, 7) + Math.pow(25, 7))));
   const a1_ = a1 * (1 + G);
   const a2_ = a2 * (1 + G);
   const C1_ = Math.sqrt(a1_ * a1_ + b1 * b1);
@@ -88,7 +95,8 @@ function deltaE00(lab1: Lab, lab2: Lab): number {
   if (H2_ < 0) H2_ += 360;
   const dH_ = H2_ - H1_;
   const dH = Math.abs(dH_) <= 180 ? dH_ : dH_ > 0 ? dH_ - 360 : dH_ + 360;
-  const Hbar = Math.abs(H1_ - H2_) <= 180 ? (H1_ + H2_) / 2 : (H1_ + H2_ + 360) / 2;
+  const Hbar =
+    Math.abs(H1_ - H2_) <= 180 ? (H1_ + H2_) / 2 : (H1_ + H2_ + 360) / 2;
   const T =
     1 -
     0.17 * Math.cos(deg * (Hbar - 30)) +
@@ -99,14 +107,20 @@ function deltaE00(lab1: Lab, lab2: Lab): number {
   const dC_ = C2_ - C1_;
   const dH__ = 2 * Math.sqrt(C1_ * C2_) * Math.sin((deg * dH) / 2);
   const Lbar = (L1 + L2) / 2;
-  const SL = 1 + (0.015 * Math.pow(Lbar - 50, 2)) / Math.sqrt(20 + Math.pow(Lbar - 50, 2));
+  const SL =
+    1 +
+    (0.015 * Math.pow(Lbar - 50, 2)) / Math.sqrt(20 + Math.pow(Lbar - 50, 2));
   const SC = 1 + 0.045 * Cbar_;
   const SH = 1 + 0.015 * Cbar_ * T;
   const dTheta = 30 * Math.exp(-Math.pow((Hbar - 275) / 25, 2));
-  const RC = 2 * Math.sqrt(Math.pow(Cbar_, 7) / (Math.pow(Cbar_, 7) + Math.pow(25, 7)));
+  const RC =
+    2 * Math.sqrt(Math.pow(Cbar_, 7) / (Math.pow(Cbar_, 7) + Math.pow(25, 7)));
   const RT = -RC * Math.sin(deg * 2 * dTheta);
   const dE = Math.sqrt(
-    Math.pow(dL_ / SL, 2) + Math.pow(dC_ / SC, 2) + Math.pow(dH__ / SH, 2) + (RT * dC_ * dH__) / (SC * SH)
+    Math.pow(dL_ / SL, 2) +
+      Math.pow(dC_ / SC, 2) +
+      Math.pow(dH__ / SH, 2) +
+      (RT * dC_ * dH__) / (SC * SH),
   );
   return Math.round((dE / 100) * 1000) / 1000; // colord uses dE/100 for [0,1], 3 decimals
 }
@@ -119,7 +133,7 @@ function deltaToSimilarity(delta: number): number {
   return Math.round(Math.max(0, Math.min(100, (1 - delta) * 100)));
 }
 
-export type ColorMatch = {
+type ColorMatch = {
   originalHex: string;
   catalogColor: Color;
   similarity: number;
@@ -136,7 +150,10 @@ function getDelta(queryLab: Lab, c: Color): number {
 /**
  * Find the closest catalog color to the given hex (by LAB delta E).
  */
-export function findClosestColor(hex: string, catalogColors: Color[]): ColorMatch | null {
+export function findClosestColor(
+  hex: string,
+  catalogColors: Color[],
+): ColorMatch | null {
   if (catalogColors.length === 0) return null;
   const queryLab = getLab(hex);
   let best: { color: Color; delta: number } | null = null;
@@ -163,27 +180,20 @@ const DEFAULT_TOP_N = 8;
 export function findClosestColors(
   hex: string,
   catalogColors: Color[],
-  limit: number = DEFAULT_TOP_N
+  limit: number = DEFAULT_TOP_N,
 ): ColorMatch[] {
   if (catalogColors.length === 0) return [];
   const queryLab = getLab(hex);
-  const withDelta: { color: Color; delta: number }[] = catalogColors.map((c) => ({
-    color: c,
-    delta: getDelta(queryLab, c),
-  }));
+  const withDelta: { color: Color; delta: number }[] = catalogColors.map(
+    (c) => ({
+      color: c,
+      delta: getDelta(queryLab, c),
+    }),
+  );
   withDelta.sort((a, b) => a.delta - b.delta);
   return withDelta.slice(0, limit).map(({ color, delta }) => ({
     originalHex: hex,
     catalogColor: color,
     similarity: deltaToSimilarity(delta),
   }));
-}
-
-/**
- * For each hex, find closest color in catalog; return in same order.
- */
-export function matchPaletteToBrand(hexes: string[], catalogColors: Color[]): ColorMatch[] {
-  return hexes
-    .map((hex) => findClosestColor(hex, catalogColors))
-    .filter((m): m is ColorMatch => m != null);
 }
