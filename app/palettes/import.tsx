@@ -69,11 +69,11 @@ export default function ImportFromImageScreen() {
   const hasInitializedSeriesSelection = useRef(false);
   const hasProcessedParamImage = useRef(false);
 
-  /** Default: all series selected once catalog is available. */
+  /** Default: only the first series selected once catalog is available. */
   useEffect(() => {
     if (allSeries.length > 0 && !hasInitializedSeriesSelection.current) {
       hasInitializedSeriesSelection.current = true;
-      setSelectedSeriesIds(new Set(allSeries.map((s) => s.id)));
+      setSelectedSeriesIds(new Set([allSeries[0].id]));
     }
   }, [allSeries]);
 
@@ -85,7 +85,9 @@ export default function ImportFromImageScreen() {
     );
     setExtractedHexes(hexes);
     const series = getAllSeriesWithCount();
-    setSelectedSeriesIds(new Set(series.map((s) => s.id)));
+    setSelectedSeriesIds(
+      new Set(series.length > 0 ? [series[0].id] : []),
+    );
     setSelectedCatalogColorByHex({});
   }, []);
 

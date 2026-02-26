@@ -763,7 +763,6 @@ const styles = StyleSheet.create({
     marginBottom: Spacing.lg,
   },
   placeholderButtons: {
-    flexDirection: "row",
     gap: Spacing.md,
   },
   placeholderBtn: {
