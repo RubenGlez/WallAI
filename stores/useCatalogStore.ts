@@ -12,22 +12,37 @@ import type {
 const brandsData = require('@/assets/data/brands.json') as Brand[];
 // eslint-disable-next-line @typescript-eslint/no-require-imports
 const seriesData = require('@/assets/data/series.json') as Series[];
+
+/** Colors loaded per series (one file per series). Add new series here when you add a *-colors.json. */
 // eslint-disable-next-line @typescript-eslint/no-require-imports
-const colorsData = require('@/assets/data/colors.json') as Color[];
+const colorsBySeriesId: Record<string, Color[]> = {
+  'aka-writter': require('@/assets/data/aka-writer-colors.json') as Color[],
+  'belton-premium': require('@/assets/data/belton-premium-colors.json') as Color[],
+  'flame-blue': require('@/assets/data/flame-blue-colors.json') as Color[],
+  'flame-orange': require('@/assets/data/flame-orange-colors.json') as Color[],
+  hardcore: require('@/assets/data/hardcore-colors.json') as Color[],
+  'montana-94': require('@/assets/data/montana-94-colors.json') as Color[],
+  vice: require('@/assets/data/vice-colors.json') as Color[],
+};
+
+/** Flattened list for code that expects all colors (e.g. getColorsByBrandId). */
+const colorsData: Color[] = seriesData.flatMap(
+  (s) => colorsBySeriesId[s.id] ?? [],
+);
 
 /** Count colors per series (seriesId -> count) */
 const colorCountBySeriesId: Record<string, number> = {};
-for (const c of colorsData) {
-  colorCountBySeriesId[c.seriesId] = (colorCountBySeriesId[c.seriesId] ?? 0) + 1;
+for (const s of seriesData) {
+  const list = colorsBySeriesId[s.id] ?? [];
+  colorCountBySeriesId[s.id] = list.length;
 }
 
 /**
  * Returns colors for a series. lab is null until we have a generator script.
  */
 export function getColorsBySeriesId(seriesId: string): Color[] {
-  return colorsData
-    .filter((c) => c.seriesId === seriesId)
-    .map((c) => ({ ...c, lab: c.lab ?? null }));
+  const list = colorsBySeriesId[seriesId] ?? [];
+  return list.map((c) => ({ ...c, lab: c.lab ?? null }));
 }
 
 /** Count colors per brand (brandId -> count) */
