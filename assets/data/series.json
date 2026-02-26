@@ -1,5 +1,33 @@
 [
   {
+    "id": "montana-94",
+    "name": "Montana 94",
+    "brandId": "montana",
+    "finishType": "matte",
+    "pressureType": "low",
+    "description": {
+      "es": "Montana 94 (MTN 94) es una de las gamas más populares de Montana Colors, conocida por su acabado mate, baja presión y facilidad de manejo, lo que la convierte en un spray muy versátil para piezas detalladas y trabajos artísticos. Ofrece una amplia carta de colores, excelente cubrición y secado rápido, además de buena resistencia a rayaduras y a los rayos UV, lo que la hace adecuada tanto para muralismo como para graffiti técnico.",
+      "en": "Montana 94 (MTN 94) is one of Montana Colors’ most popular lines, known for its matte finish, low pressure and ease of use, making it a versatile spray for detailed pieces and artistic work. Wide colour range, excellent coverage and quick drying, plus good scratch and UV resistance, suitable for mural work as well as technical graffiti.",
+      "de": "Montana 94 (MTN 94) ist eine der bekanntesten Serien von Montana Colors: matter Finish, Niederdruck und leichte Handhabung für vielseitige Nutzung in detaillierten Pieces und künstlerischer Arbeit. Große Farbpalette, gute Deckkraft und schnelle Trocknung, kratz- und UV-beständig, für Murals und technisches Graffiti.",
+      "fr": "Montana 94 (MTN 94) est l’une des gammes les plus populaires de Montana Colors : finition mate, basse pression et facilité d’usage pour un spray polyvalent en pièces détaillées et travail artistique. Large nuancier, excellente couverture et séchage rapide, bonne résistance aux rayures et aux UV, pour muralisme et graffiti technique.",
+      "pt": "Montana 94 (MTN 94) é uma das gamas mais populares da Montana Colors, com acabamento mate, baixa pressão e fácil manejo, muito versátil para peças detalhadas e trabalho artístico. Ampla carta de cores, excelente cobertura e secagem rápida, boa resistência a riscos e UV, adequada a muralismo e graffiti técnico."
+    }
+  },
+  {
+    "id": "flame-blue",
+    "name": "FLAME Blue",
+    "brandId": "molotow",
+    "finishType": "matte",
+    "pressureType": "low",
+    "description": {
+      "es": "Flame Blue es un spray de baja presión desarrollado por Molotow dentro de la línea Flame, pensado para máximo control, precisión y trabajo detallado. Su acabado mate, buena opacidad y salida suave reducen el overspray y facilitan degradados y líneas finas, siendo especialmente recomendable para piezas detalladas o para artistas que buscan un spray más controlable.",
+      "en": "Flame Blue is a low-pressure spray by Molotow in the Flame line, designed for maximum control, precision and detail work. Its matte finish, good opacity and soft output reduce overspray and make gradients and fine lines easier, ideal for detailed pieces or artists who want a more controllable spray.",
+      "de": "Flame Blue ist eine Niederdruck-Sprühdose von Molotow aus der Flame-Linie für maximale Kontrolle, Präzision und Detailarbeit. Matter Finish, gute Deckkraft und weicher Ausstoß reduzieren Overspray und erleichtern Verläufe und feine Linien – ideal für detaillierte Pieces.",
+      "fr": "Flame Blue est un aérosol basse pression Molotow de la gamme Flame pour un contrôle et une précision maximaux. Finition mate, bonne opacité et sortie douce limitent le surpulvérisation et facilitent dégradés et traits fins, recommandé pour les pièces détaillées.",
+      "pt": "Flame Blue é um spray de baixa pressão da Molotow na linha Flame, pensado para máximo controlo, precisão e trabalho de pormenor. Acabamento mate, boa opacidade e saída suave reduzem o overspray e facilitam degradados e linhas finas, recomendado para peças detalhadas."
+    }
+  },
+  {
     "id": "aka-writter",
     "name": "AKA Writer",
     "brandId": "aka",
@@ -28,20 +56,6 @@
     }
   },
   {
-    "id": "flame-blue",
-    "name": "FLAME Blue",
-    "brandId": "molotow",
-    "finishType": "matte",
-    "pressureType": "low",
-    "description": {
-      "es": "Flame Blue es un spray de baja presión desarrollado por Molotow dentro de la línea Flame, pensado para máximo control, precisión y trabajo detallado. Su acabado mate, buena opacidad y salida suave reducen el overspray y facilitan degradados y líneas finas, siendo especialmente recomendable para piezas detalladas o para artistas que buscan un spray más controlable.",
-      "en": "Flame Blue is a low-pressure spray by Molotow in the Flame line, designed for maximum control, precision and detail work. Its matte finish, good opacity and soft output reduce overspray and make gradients and fine lines easier, ideal for detailed pieces or artists who want a more controllable spray.",
-      "de": "Flame Blue ist eine Niederdruck-Sprühdose von Molotow aus der Flame-Linie für maximale Kontrolle, Präzision und Detailarbeit. Matter Finish, gute Deckkraft und weicher Ausstoß reduzieren Overspray und erleichtern Verläufe und feine Linien – ideal für detaillierte Pieces.",
-      "fr": "Flame Blue est un aérosol basse pression Molotow de la gamme Flame pour un contrôle et une précision maximaux. Finition mate, bonne opacité et sortie douce limitent le surpulvérisation et facilitent dégradés et traits fins, recommandé pour les pièces détaillées.",
-      "pt": "Flame Blue é um spray de baixa pressão da Molotow na linha Flame, pensado para máximo controlo, precisão e trabalho de pormenor. Acabamento mate, boa opacidade e saída suave reduzem o overspray e facilitam degradados e linhas finas, recomendado para peças detalhadas."
-    }
-  },
-  {
     "id": "flame-orange",
     "name": "FLAME Orange",
     "brandId": "molotow",
@@ -67,20 +81,6 @@
       "de": "Montana Hardcore ist das Gegenteil zum 94: Hochdruck-Spray mit Glanzfinish für Tempo und Durchsatz. Einer der einflussreichsten Sprays im modernen Graffiti, gedacht für schnelle Füllungen, Bombing und Aktionen mit hoher Deckkraft und Anwendungsgeschwindigkeit.",
       "fr": "La gamme Montana Hardcore s’oppose au 94 : aérosol haute pression à finition brillante pour la rapidité et la puissance. L’un des sprays les plus marquants du graffiti moderne, conçu pour les remplissages rapides, le bombing et les actions où couverture et vitesse comptent.",
       "pt": "A gama Montana Hardcore é o oposto do 94: spray de alta pressão e acabamento brilhante, orientado para rapidez e potência de saída. Um dos sprays mais influentes no graffiti moderno, pensado para preenchimentos rápidos, bombing e ações com grande cobertura e velocidade."
-    }
-  },
-  {
-    "id": "montana-94",
-    "name": "Montana 94",
-    "brandId": "montana",
-    "finishType": "matte",
-    "pressureType": "low",
-    "description": {
-      "es": "Montana 94 (MTN 94) es una de las gamas más populares de Montana Colors, conocida por su acabado mate, baja presión y facilidad de manejo, lo que la convierte en un spray muy versátil para piezas detalladas y trabajos artísticos. Ofrece una amplia carta de colores, excelente cubrición y secado rápido, además de buena resistencia a rayaduras y a los rayos UV, lo que la hace adecuada tanto para muralismo como para graffiti técnico.",
-      "en": "Montana 94 (MTN 94) is one of Montana Colors’ most popular lines, known for its matte finish, low pressure and ease of use, making it a versatile spray for detailed pieces and artistic work. Wide colour range, excellent coverage and quick drying, plus good scratch and UV resistance, suitable for mural work as well as technical graffiti.",
-      "de": "Montana 94 (MTN 94) ist eine der bekanntesten Serien von Montana Colors: matter Finish, Niederdruck und leichte Handhabung für vielseitige Nutzung in detaillierten Pieces und künstlerischer Arbeit. Große Farbpalette, gute Deckkraft und schnelle Trocknung, kratz- und UV-beständig, für Murals und technisches Graffiti.",
-      "fr": "Montana 94 (MTN 94) est l’une des gammes les plus populaires de Montana Colors : finition mate, basse pression et facilité d’usage pour un spray polyvalent en pièces détaillées et travail artistique. Large nuancier, excellente couverture et séchage rapide, bonne résistance aux rayures et aux UV, pour muralisme et graffiti technique.",
-      "pt": "Montana 94 (MTN 94) é uma das gamas mais populares da Montana Colors, com acabamento mate, baixa pressão e fácil manejo, muito versátil para peças detalhadas e trabalho artístico. Ampla carta de cores, excelente cobertura e secagem rápida, boa resistência a riscos e UV, adequada a muralismo e graffiti técnico."
     }
   },
   {
