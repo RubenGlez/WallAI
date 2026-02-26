@@ -10,12 +10,12 @@ import {
 } from "@/components/color-detail-bottom-sheet";
 import { ColorGridCard } from "@/components/color-grid-card";
 import { ColorSearchInput } from "@/components/color-search-input";
+import { Screen } from "@/components/screen";
 import { ScreenHeader } from "@/components/screen-header";
 import {
   SeriesSelectBottomSheet,
   type SeriesSelectBottomSheetRef,
 } from "@/components/series-select-bottom-sheet";
-import { ThemedView } from "@/components/themed-view";
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { COLOR_GRID } from "@/constants/color-grid";
 import { Spacing } from "@/constants/theme";
@@ -104,7 +104,66 @@ export default function CatalogScreen() {
   );
 
   return (
-    <ThemedView style={styles.container} safeArea="top">
+    <>
+      <Screen>
+        <View style={styles.container}>
+          <ScreenHeader
+            title={t("catalog.overviewTitle")}
+            right={
+              <View style={styles.headerRightRow}>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onPress={() => setShowOnlyFavorites((s) => !s)}
+                  accessibilityLabel={
+                    showOnlyFavorites
+                      ? t("catalog.showAllColors")
+                      : t("catalog.showOnlyFavorites")
+                  }
+                  icon={
+                    <IconSymbol
+                      name={showOnlyFavorites ? "star.fill" : "star"}
+                      size={24}
+                      color={showOnlyFavorites ? theme.tint : theme.icon}
+                    />
+                  }
+                />
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onPress={() => seriesFilterSheetRef.current?.present()}
+                  accessibilityLabel={t("palettes.selectSeries")}
+                  icon={
+                    <IconSymbol
+                      name="line.3.horizontal.decrease.circle.fill"
+                      size={24}
+                      color={theme.tint}
+                    />
+                  }
+                />
+              </View>
+            }
+          />
+
+          <ColorSearchInput
+            value={searchQuery}
+            onChangeText={setSearchQuery}
+            placeholder={t("catalog.searchPlaceholder")}
+            clearAccessibilityLabel={t("common.clear")}
+          />
+
+          <FlatList
+            data={filteredColors}
+            keyExtractor={(item) => item.id}
+            renderItem={renderItem}
+            numColumns={NUM_COLUMNS}
+            columnWrapperStyle={styles.row}
+            contentContainerStyle={styles.listContent}
+            showsVerticalScrollIndicator={false}
+          />
+        </View>
+      </Screen>
+
       <ColorDetailBottomSheet
         ref={detailSheetRef}
         color={detailParams}
@@ -124,80 +183,24 @@ export default function CatalogScreen() {
         selectedSeriesIds={selectedSeriesIds}
         onToggleSeries={toggleSeriesSelection}
       />
-
-      <ScreenHeader
-        title={t("catalog.overviewTitle")}
-        right={
-          <View style={styles.headerRightRow}>
-            <Button
-              variant="ghost"
-              size="icon"
-              onPress={() => setShowOnlyFavorites((s) => !s)}
-              accessibilityLabel={
-                showOnlyFavorites
-                  ? t("catalog.showAllColors")
-                  : t("catalog.showOnlyFavorites")
-              }
-              icon={
-                <IconSymbol
-                  name={showOnlyFavorites ? "star.fill" : "star"}
-                  size={24}
-                  color={showOnlyFavorites ? theme.tint : theme.icon}
-                />
-              }
-            />
-            <Button
-              variant="ghost"
-              size="icon"
-              onPress={() => seriesFilterSheetRef.current?.present()}
-              accessibilityLabel={t("palettes.selectSeries")}
-              icon={
-                <IconSymbol
-                  name="line.3.horizontal.decrease.circle.fill"
-                  size={24}
-                  color={theme.tint}
-                />
-              }
-            />
-          </View>
-        }
-      />
-
-      <ColorSearchInput
-        value={searchQuery}
-        onChangeText={setSearchQuery}
-        placeholder={t("catalog.searchPlaceholder")}
-        clearAccessibilityLabel={t("common.clear")}
-      />
-
-      <FlatList
-        data={filteredColors}
-        keyExtractor={(item) => item.id}
-        renderItem={renderItem}
-        numColumns={NUM_COLUMNS}
-        columnWrapperStyle={styles.row}
-        contentContainerStyle={styles.listContent}
-        showsVerticalScrollIndicator={false}
-      />
-    </ThemedView>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: COLOR_GRID.HORIZONTAL_PADDING,
+    paddingHorizontal: Spacing.md,
   },
   headerRightRow: {
     flexDirection: "row",
     alignItems: "center",
   },
   listContent: {
-    paddingTop: GAP,
-    paddingBottom: Spacing.xl,
+    flexGrow: 1,
+    paddingBottom: Spacing.md,
   },
   row: {
-    flexDirection: "row",
-    marginBottom: GAP,
+    marginBottom: Spacing.sm,
   },
 });

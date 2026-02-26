@@ -11,23 +11,13 @@ import {
 
 import { Button } from "@/components/button";
 import { EmptyStateCard } from "@/components/empty-state-card";
-import { IconSymbol } from "@/components/ui/icon-symbol";
+import { FloatingActionButton } from "@/components/floating-action-button";
+import { Screen } from "@/components/screen";
 import { ScreenHeader } from "@/components/screen-header";
 import { ThemedText } from "@/components/themed-text";
-import { ThemedView } from "@/components/themed-view";
-import {
-  getListCardWidth,
-  LIST_FAB_SIZE,
-  LIST_FAB_SIZE_SECONDARY,
-  LIST_GAP,
-  SCROLL_PADDING_BOTTOM_WITH_FAB_GROUP,
-} from "@/constants/list-layout";
-import {
-  BorderRadius,
-  Shadows,
-  Spacing,
-  Typography,
-} from "@/constants/theme";
+import { IconSymbol } from "@/components/ui/icon-symbol";
+import { getListCardWidth, LIST_GAP } from "@/constants/list-layout";
+import { BorderRadius, Shadows, Spacing, Typography } from "@/constants/theme";
 import { useImagePicker } from "@/hooks/use-image-picker";
 import { useTheme } from "@/hooks/use-theme";
 import { usePalettesStore } from "@/stores/usePalettesStore";
@@ -120,7 +110,11 @@ export default function PalettesIndexScreen() {
   const router = useRouter();
   const { theme } = useTheme();
   const palettes = usePalettesStore((s) => s.palettes);
-  const { pickFromGallery, takePhoto, loading: importLoading } = useImagePicker();
+  const {
+    pickFromGallery,
+    takePhoto,
+    loading: importLoading,
+  } = useImagePicker();
 
   const handleCreateNew = () => {
     router.push("/palettes/create");
@@ -145,94 +139,88 @@ export default function PalettesIndexScreen() {
   };
 
   return (
-    <ThemedView style={styles.container} safeArea="top">
-      <ScrollView
-        style={styles.scroll}
-        contentContainerStyle={styles.scrollContent}
-        showsVerticalScrollIndicator={false}
-      >
+    <Screen>
+      <View style={styles.container}>
         <ScreenHeader
           title={t("palettes.myPalettes")}
           subtitle={t("palettes.subtitle")}
-        />
-
-        {palettes.length === 0 ? (
-          <EmptyStateCard
-            icon="swatchpalette"
-            title={t("palettes.emptyTitle")}
-            subtitle={t("palettes.emptyHint")}
-            onPress={handleCreateNew}
-          />
-        ) : (
-          <View style={styles.grid}>
-            {palettes.map((palette) => (
-              <PaletteCard
-                key={palette.id}
-                palette={palette}
-                onPress={() => {
-                  router.push({
-                    pathname: "/palettes/create",
-                    params: { paletteId: palette.id },
-                  });
-                }}
+          right={
+            <View style={styles.headerRightRow}>
+              <Button
+                variant="ghost"
+                size="icon"
+                onPress={handleOpenGallery}
+                disabled={importLoading !== null}
+                accessibilityLabel={t("palettes.selectFromGallery")}
+                icon={
+                  importLoading === "gallery" ? (
+                    <ActivityIndicator size="small" color={theme.tint} />
+                  ) : (
+                    <IconSymbol
+                      name="photo.on.rectangle.angled"
+                      size={24}
+                      color={theme.tint}
+                    />
+                  )
+                }
               />
-            ))}
-          </View>
-        )}
-      </ScrollView>
+              <Button
+                variant="ghost"
+                size="icon"
+                onPress={handleOpenCamera}
+                disabled={importLoading !== null}
+                accessibilityLabel={t("palettes.takePhoto")}
+                icon={
+                  importLoading === "camera" ? (
+                    <ActivityIndicator size="small" color={theme.tint} />
+                  ) : (
+                    <IconSymbol
+                      name="camera.fill"
+                      size={24}
+                      color={theme.tint}
+                    />
+                  )
+                }
+              />
+            </View>
+          }
+        />
 
-      <View
-        style={[styles.fabContainer, { bottom: Spacing.md }]}
-        pointerEvents="box-none"
-      >
-        <Button
-          variant="secondary"
-          size="icon"
-          style={[
-            styles.fab,
-            styles.fabSecondary,
-            { backgroundColor: theme.card, borderColor: theme.border },
-          ]}
-          onPress={handleOpenGallery}
-          disabled={importLoading !== null}
-          accessibilityLabel={t("palettes.selectFromGallery")}
-          icon={
-            importLoading === "gallery" ? (
-              <ActivityIndicator size="small" color={theme.tint} />
-            ) : (
-              <IconSymbol name="photo.on.rectangle.angled" size={24} color={theme.tint} />
-            )
-          }
-        />
-        <Button
-          variant="secondary"
-          size="icon"
-          style={[
-            styles.fab,
-            styles.fabSecondary,
-            { backgroundColor: theme.card, borderColor: theme.border },
-          ]}
-          onPress={handleOpenCamera}
-          disabled={importLoading !== null}
-          accessibilityLabel={t("palettes.takePhoto")}
-          icon={
-            importLoading === "camera" ? (
-              <ActivityIndicator size="small" color={theme.tint} />
-            ) : (
-              <IconSymbol name="camera.fill" size={24} color={theme.tint} />
-            )
-          }
-        />
-        <Button
+        <ScrollView showsVerticalScrollIndicator={false}>
+          {palettes.length === 0 ? (
+            <EmptyStateCard
+              icon="swatchpalette"
+              title={t("palettes.emptyTitle")}
+              subtitle={t("palettes.emptyHint")}
+              onPress={handleCreateNew}
+            />
+          ) : (
+            <View style={styles.grid}>
+              {palettes.map((palette) => (
+                <PaletteCard
+                  key={palette.id}
+                  palette={palette}
+                  onPress={() => {
+                    router.push({
+                      pathname: "/palettes/create",
+                      params: { paletteId: palette.id },
+                    });
+                  }}
+                />
+              ))}
+            </View>
+          )}
+        </ScrollView>
+
+        <FloatingActionButton
           variant="primary"
-          size="icon"
-          style={[styles.fab, styles.fabPrimary]}
+          style={styles.fab}
           onPress={handleCreateNew}
           accessibilityLabel={t("palettes.createNew")}
           icon={<IconSymbol name="plus" size={28} color={theme.background} />}
         />
       </View>
-    </ThemedView>
+    </Screen>
   );
 }
 
@@ -240,37 +228,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: Spacing.md,
+    gap: Spacing.md,
   },
-  scroll: {
-    flex: 1,
-  },
-  scrollContent: {
-    paddingBottom: SCROLL_PADDING_BOTTOM_WITH_FAB_GROUP,
-  },
-  fabContainer: {
-    position: "absolute",
-    right: Spacing.md,
-    flexDirection: "column",
+  headerRightRow: {
+    flexDirection: "row",
     alignItems: "center",
-    gap: Spacing.sm,
+    gap: Spacing.xs,
   },
   fab: {
-    width: LIST_FAB_SIZE,
-    height: LIST_FAB_SIZE,
-    borderRadius: LIST_FAB_SIZE / 2,
-    alignItems: "center",
-    justifyContent: "center",
-    ...Shadows.lg,
-  },
-  fabPrimary: {
-    width: LIST_FAB_SIZE,
-    height: LIST_FAB_SIZE,
-  },
-  fabSecondary: {
-    width: LIST_FAB_SIZE_SECONDARY,
-    height: LIST_FAB_SIZE_SECONDARY,
-    borderRadius: LIST_FAB_SIZE_SECONDARY / 2,
-    borderWidth: 1,
+    position: "absolute",
+    bottom: Spacing.md,
+    right: Spacing.md,
   },
   grid: {
     flexDirection: "row",

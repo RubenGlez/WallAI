@@ -1,9 +1,9 @@
-import type { ReactNode } from 'react';
-import { StyleSheet, View } from 'react-native';
+import type { ReactNode } from "react";
+import { StyleSheet, View } from "react-native";
 
-import { ThemedText } from '@/components/themed-text';
-import { Colors, Spacing, Typography } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
+import { ThemedText } from "@/components/themed-text";
+import { Spacing } from "@/constants/theme";
+import { useTheme } from "@/hooks/use-theme";
 
 type ScreenHeaderProps = {
   title: ReactNode;
@@ -12,59 +12,32 @@ type ScreenHeaderProps = {
 };
 
 export function ScreenHeader({ title, subtitle, right }: ScreenHeaderProps) {
-  const colorScheme = useColorScheme() ?? 'light';
-  const theme = Colors[colorScheme];
+  const { theme } = useTheme();
 
   return (
     <View style={styles.wrapper}>
-      <View style={styles.row}>
-        <View style={styles.textContainer}>
-          <ThemedText
-            type="title"
-            style={subtitle ? styles.titleWithSubtitle : styles.titleOnly}
-          >
-            {title}
-          </ThemedText>
-          {subtitle != null && (
-            <ThemedText
-              style={[styles.subtitle, { color: theme.textSecondary }]}
-            >
-              {subtitle}
-            </ThemedText>
-          )}
-        </View>
-        {right ? <View style={styles.right}>{right}</View> : null}
+      <View style={styles.titleContainer}>
+        <ThemedText type="title">{title}</ThemedText>
+        {right != null && <View>{right}</View>}
       </View>
+
+      {subtitle != null && (
+        <ThemedText type="default" style={{ color: theme.textSecondary }}>
+          {subtitle}
+        </ThemedText>
+      )}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   wrapper: {
-    marginBottom: Spacing.lg,
+    gap: Spacing.sm,
   },
-  row: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    justifyContent: 'space-between',
-    gap: Spacing.md,
-  },
-  textContainer: {
-    flex: 1,
-  },
-  right: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  titleWithSubtitle: {
-    marginBottom: Spacing.sm,
-  },
-  titleOnly: {
-    marginBottom: 0,
-  },
-  subtitle: {
-    fontSize: Typography.fontSize.md,
-    lineHeight: 24,
-    opacity: 0.9,
+  titleContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: Spacing.sm,
   },
 });

@@ -3,28 +3,22 @@ import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { ScrollView, StyleSheet, View } from "react-native";
 
+import { Screen } from "@/components/screen";
 import { ScreenHeader } from "@/components/screen-header";
 import { SeriesCard } from "@/components/series-card";
-import { IconSymbol } from "@/components/ui/icon-symbol";
 import { ThemedText } from "@/components/themed-text";
-import { ThemedView } from "@/components/themed-view";
-import {
-  BorderRadius,
-  Colors,
-  Spacing,
-  Typography
-} from "@/constants/theme";
-import { useColorScheme } from "@/hooks/use-color-scheme";
+import { IconSymbol } from "@/components/ui/icon-symbol";
+import { BorderRadius, Spacing, Typography } from "@/constants/theme";
+import { useTheme } from "@/hooks/use-theme";
 import { getAllSeriesWithCount } from "@/stores/useCatalogStore";
-import type { SeriesWithCountAndBrand } from "@/types";
 import { useFavoritesStore } from "@/stores/useFavoritesStore";
 import { useProfileStore } from "@/stores/useProfileStore";
+import type { SeriesWithCountAndBrand } from "@/types";
 
 export default function HomeScreen() {
   const { t } = useTranslation();
   const router = useRouter();
-  const colorScheme = useColorScheme() ?? "light";
-  const theme = Colors[colorScheme];
+  const { theme } = useTheme();
   const aka = useProfileStore((s) => s.aka);
 
   const favoriteSeriesIds = useFavoritesStore((s) => s.favoriteSeriesIds);
@@ -37,9 +31,8 @@ export default function HomeScreen() {
   );
 
   return (
-    <ThemedView style={styles.container} safeArea="top">
+    <Screen>
       <ScrollView
-        style={styles.scroll}
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
@@ -52,93 +45,85 @@ export default function HomeScreen() {
           subtitle={t("home.subtitle")}
         />
 
-        <ThemedText
-          style={[
-            styles.sectionTitle,
-            styles.sectionTitleSpaced,
-            { color: theme.textSecondary },
-          ]}
-        >
-          {t("colors.favoriteSeries")}
-        </ThemedText>
-        {favoriteSeries.length === 0 ? (
-          <View
-            style={[
-              styles.emptyCard,
-              {
-                backgroundColor: theme.backgroundSecondary,
-                borderColor: theme.border,
-              },
-            ]}
+        <View>
+          <ThemedText
+            style={[styles.sectionTitle, { color: theme.textSecondary }]}
           >
+            {t("colors.favoriteSeries")}
+          </ThemedText>
+          {favoriteSeries.length === 0 ? (
             <View
-              style={[styles.emptyIconWrap, { backgroundColor: theme.card }]}
+              style={[
+                styles.emptyCard,
+                {
+                  backgroundColor: theme.backgroundSecondary,
+                  borderColor: theme.border,
+                },
+              ]}
             >
-              <IconSymbol name="swatchpalette" size={20} color={theme.tint} />
+              <View
+                style={[styles.emptyIconWrap, { backgroundColor: theme.card }]}
+              >
+                <IconSymbol name="swatchpalette" size={20} color={theme.tint} />
+              </View>
+              <ThemedText
+                style={[styles.emptyTitle, { color: theme.text }]}
+                numberOfLines={2}
+              >
+                {t("colors.emptySeriesTitle")}
+              </ThemedText>
             </View>
-            <ThemedText
-              style={[styles.emptyTitle, { color: theme.text }]}
-              numberOfLines={2}
-            >
-              {t("colors.emptySeriesTitle")}
-            </ThemedText>
-          </View>
-        ) : (
+          ) : (
+            <View style={styles.sectionGrid}>
+              {favoriteSeries.map((series: SeriesWithCountAndBrand) => (
+                <SeriesCard
+                  key={series.id}
+                  series={series}
+                  isFavorite
+                  onPress={() => router.push(`/color-grid/${series.id}`)}
+                  onFavorite={() => toggleFavoriteSeries(series.id)}
+                />
+              ))}
+            </View>
+          )}
+        </View>
+
+        <View>
+          <ThemedText
+            style={[styles.sectionTitle, { color: theme.textSecondary }]}
+          >
+            {t("colors.allSeriesTitle")}
+          </ThemedText>
           <View style={styles.sectionGrid}>
-            {favoriteSeries.map((series: SeriesWithCountAndBrand) => (
+            {allSeries.map((series: SeriesWithCountAndBrand) => (
               <SeriesCard
                 key={series.id}
                 series={series}
-                isFavorite
+                isFavorite={favoriteSeriesIds.includes(series.id)}
                 onPress={() => router.push(`/color-grid/${series.id}`)}
                 onFavorite={() => toggleFavoriteSeries(series.id)}
               />
             ))}
           </View>
-        )}
-
-        <ThemedText
-          style={[
-            styles.sectionTitle,
-            styles.sectionTitleSpaced,
-            { color: theme.textSecondary },
-          ]}
-        >
-          {t("colors.allSeriesTitle")}
-        </ThemedText>
-        <View style={styles.sectionGrid}>
-          {allSeries.map((series: SeriesWithCountAndBrand) => (
-            <SeriesCard
-              key={series.id}
-              series={series}
-              isFavorite={favoriteSeriesIds.includes(series.id)}
-              onPress={() => router.push(`/color-grid/${series.id}`)}
-              onFavorite={() => toggleFavoriteSeries(series.id)}
-            />
-          ))}
         </View>
       </ScrollView>
-    </ThemedView>
+    </Screen>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingHorizontal: Spacing.md,
-  },
-  scroll: {
+  safeArea: {
     flex: 1,
   },
   scrollContent: {
     paddingBottom: Spacing.xxl,
+    paddingHorizontal: Spacing.md,
+    gap: Spacing.lg,
   },
   sectionTitle: {
     fontSize: Typography.fontSize.sm,
     fontWeight: Typography.fontWeight.semibold,
     textTransform: "uppercase",
-  },
-  sectionTitleSpaced: {
     marginBottom: Spacing.sm,
   },
   emptyCard: {
@@ -147,7 +132,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     padding: Spacing.md,
-    marginBottom: Spacing.sm,
     borderRadius: BorderRadius.lg,
     borderWidth: 1.5,
     borderStyle: "dashed",
@@ -170,6 +154,5 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between",
-    marginBottom: Spacing.lg,
   },
 });

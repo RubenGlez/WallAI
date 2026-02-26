@@ -1,36 +1,26 @@
-import { useRouter } from 'expo-router';
-import React from 'react';
-import { useTranslation } from 'react-i18next';
+import { useRouter } from "expo-router";
+import React from "react";
+import { useTranslation } from "react-i18next";
 import {
   Image,
   ScrollView,
   StyleSheet,
   TouchableOpacity,
   View,
-} from 'react-native';
+} from "react-native";
 
-import { Button } from '@/components/button';
-import { EmptyStateCard } from '@/components/empty-state-card';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { ScreenHeader } from '@/components/screen-header';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import {
-  getListCardWidth,
-  LIST_FAB_SIZE,
-  LIST_GAP,
-  SCROLL_PADDING_BOTTOM_WITH_FAB,
-} from '@/constants/list-layout';
-import {
-  BorderRadius,
-  Shadows,
-  Spacing,
-  Typography,
-} from '@/constants/theme';
-import { useTheme } from '@/hooks/use-theme';
-import { formatRelativeDate } from '@/lib/date';
-import { useDoodlesStore } from '@/stores/useDoodlesStore';
-import type { Doodle } from '@/types';
+import { EmptyStateCard } from "@/components/empty-state-card";
+import { FloatingActionButton } from "@/components/floating-action-button";
+import { Screen } from "@/components/screen";
+import { ScreenHeader } from "@/components/screen-header";
+import { ThemedText } from "@/components/themed-text";
+import { IconSymbol } from "@/components/ui/icon-symbol";
+import { getListCardWidth, LIST_GAP } from "@/constants/list-layout";
+import { BorderRadius, Shadows, Spacing, Typography } from "@/constants/theme";
+import { useTheme } from "@/hooks/use-theme";
+import { formatRelativeDate } from "@/lib/date";
+import { useDoodlesStore } from "@/stores/useDoodlesStore";
+import type { Doodle } from "@/types";
 
 const CARD_WIDTH = getListCardWidth();
 const CARD_PADDING = Spacing.md;
@@ -47,7 +37,10 @@ function DoodleCard({
   const { t } = useTranslation();
   const { theme } = useTheme();
   const thumbnailUri =
-    doodle.thumbnailUri ?? doodle.exportImageUri ?? doodle.sketchImageUri ?? doodle.wallImageUri;
+    doodle.thumbnailUri ??
+    doodle.exportImageUri ??
+    doodle.sketchImageUri ??
+    doodle.wallImageUri;
 
   return (
     <TouchableOpacity
@@ -58,7 +51,12 @@ function DoodleCard({
       onPress={onPress}
       activeOpacity={0.7}
     >
-      <View style={[styles.thumbnailWrap, { backgroundColor: theme.backgroundSecondary }]}>
+      <View
+        style={[
+          styles.thumbnailWrap,
+          { backgroundColor: theme.backgroundSecondary },
+        ]}
+      >
         {thumbnailUri ? (
           <Image
             source={{ uri: thumbnailUri }}
@@ -76,7 +74,7 @@ function DoodleCard({
         )}
       </View>
       <ThemedText style={styles.cardTitle} numberOfLines={1}>
-        {doodle.name || t('common.untitled')}
+        {doodle.name || t("common.untitled")}
       </ThemedText>
       <ThemedText style={[styles.cardDate, { color: theme.textSecondary }]}>
         {formatRelativeDate(doodle.createdAt)}
@@ -92,57 +90,51 @@ export default function DoodlesIndexScreen() {
   const doodles = useDoodlesStore((s) => s.doodles);
 
   const handleNewDoodle = () => {
-    router.push('/doodles/create');
+    router.push("/doodles/create");
   };
 
   return (
-    <ThemedView style={styles.container} safeArea="top">
-      <ScrollView
-        style={styles.scroll}
-        contentContainerStyle={styles.scrollContent}
-        showsVerticalScrollIndicator={false}
-      >
+    <Screen>
+      <View style={styles.container}>
         <ScreenHeader
-          title={t('doodles.myDoodles')}
-          subtitle={t('doodles.subtitle')}
+          title={t("doodles.myDoodles")}
+          subtitle={t("doodles.subtitle")}
         />
+        <ScrollView showsVerticalScrollIndicator={false}>
+          {doodles.length === 0 ? (
+            <EmptyStateCard
+              icon="paintbrush"
+              title={t("doodles.emptyTitle")}
+              subtitle={t("doodles.emptyHint")}
+              onPress={handleNewDoodle}
+            />
+          ) : (
+            <View style={styles.grid}>
+              {doodles.map((doodle) => (
+                <DoodleCard
+                  key={doodle.id}
+                  doodle={doodle}
+                  onPress={() => {
+                    router.push({
+                      pathname: "/doodles/create",
+                      params: { doodleId: doodle.id },
+                    });
+                  }}
+                />
+              ))}
+            </View>
+          )}
+        </ScrollView>
 
-        {doodles.length === 0 ? (
-          <EmptyStateCard
-            icon="paintbrush"
-            title={t('doodles.emptyTitle')}
-            subtitle={t('doodles.emptyHint')}
-            onPress={handleNewDoodle}
-          />
-        ) : (
-          <View style={styles.grid}>
-            {doodles.map((doodle) => (
-              <DoodleCard
-                key={doodle.id}
-                doodle={doodle}
-                onPress={() => {
-                  router.push({ pathname: '/doodles/create', params: { doodleId: doodle.id } });
-                }}
-              />
-            ))}
-          </View>
-        )}
-      </ScrollView>
-
-      <View
-        style={[styles.fabContainer, { bottom: Spacing.md }]}
-        pointerEvents="box-none"
-      >
-        <Button
+        <FloatingActionButton
           variant="primary"
-          size="icon"
-          style={[styles.fab, { backgroundColor: theme.tint }]}
+          style={styles.fab}
           onPress={handleNewDoodle}
-          accessibilityLabel={t('doodles.newDoodle')}
+          accessibilityLabel={t("doodles.newDoodle")}
           icon={<IconSymbol name="plus" size={28} color={theme.background} />}
         />
       </View>
-    </ThemedView>
+    </Screen>
   );
 }
 
@@ -150,31 +142,17 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: Spacing.md,
-  },
-  scroll: {
-    flex: 1,
-  },
-  scrollContent: {
-    paddingBottom: SCROLL_PADDING_BOTTOM_WITH_FAB,
-  },
-  fabContainer: {
-    position: 'absolute',
-    right: Spacing.md,
-    alignItems: 'center',
-    justifyContent: 'center',
+    gap: Spacing.md,
   },
   fab: {
-    width: LIST_FAB_SIZE,
-    height: LIST_FAB_SIZE,
-    borderRadius: LIST_FAB_SIZE / 2,
-    alignItems: 'center',
-    justifyContent: 'center',
-    ...Shadows.lg,
+    position: "absolute",
+    bottom: Spacing.md,
+    right: Spacing.md,
   },
   grid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between',
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
   },
   card: {
     width: CARD_WIDTH,
@@ -188,18 +166,18 @@ const styles = StyleSheet.create({
     width: CARD_WIDTH - CARD_PADDING * 2,
     height: THUMBNAIL_HEIGHT,
     borderRadius: BorderRadius.md,
-    overflow: 'hidden',
+    overflow: "hidden",
     marginBottom: Spacing.sm,
   },
   thumbnail: {
-    width: '100%',
-    height: '100%',
+    width: "100%",
+    height: "100%",
   },
   thumbnailPlaceholder: {
-    width: '100%',
-    height: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
+    width: "100%",
+    height: "100%",
+    alignItems: "center",
+    justifyContent: "center",
   },
   cardTitle: {
     fontSize: Typography.fontSize.md,
