@@ -12,7 +12,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { Button } from "@/components/button";
 import { ColorGridCard } from "@/components/color-grid-card";
-import { ColorSearchInput } from "@/components/color-search-input";
+import { SearchInput } from "@/components/search-input";
 import { HeaderBackButton } from "@/components/header-back-button";
 import { SaveNameModal } from "@/components/save-name-modal";
 import {
@@ -235,7 +235,7 @@ export default function CreatePaletteScreen() {
         onToggleSeries={toggleSeriesSelection}
       />
 
-      <ColorSearchInput
+      <SearchInput
         value={searchQuery}
         onChangeText={setSearchQuery}
         placeholder={t("colors.searchPlaceholder")}

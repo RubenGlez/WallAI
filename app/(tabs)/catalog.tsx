@@ -9,7 +9,7 @@ import {
   type ColorDetailParams,
 } from "@/components/color-detail-bottom-sheet";
 import { ColorGridCard } from "@/components/color-grid-card";
-import { ColorSearchInput } from "@/components/color-search-input";
+import { SearchInput } from "@/components/search-input";
 import { Screen } from "@/components/screen";
 import { ScreenHeader } from "@/components/screen-header";
 import {
@@ -145,7 +145,7 @@ export default function CatalogScreen() {
             }
           />
 
-          <ColorSearchInput
+          <SearchInput
             value={searchQuery}
             onChangeText={setSearchQuery}
             placeholder={t("catalog.searchPlaceholder")}

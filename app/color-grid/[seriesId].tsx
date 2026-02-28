@@ -1,13 +1,7 @@
 import { useLocalSearchParams } from "expo-router";
 import React, { useCallback, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import {
-  Dimensions,
-  FlatList,
-  StyleSheet,
-  TextInput,
-  View,
-} from "react-native";
+import { Dimensions, FlatList, StyleSheet, View } from "react-native";
 
 import { Button } from "@/components/button";
 import {
@@ -17,9 +11,10 @@ import {
 } from "@/components/color-detail-bottom-sheet";
 import { ColorGridCard } from "@/components/color-grid-card";
 import { HeaderBackButton } from "@/components/header-back-button";
-import { ThemedView } from "@/components/themed-view";
+import { Screen } from "@/components/screen";
+import { SearchInput } from "@/components/search-input";
 import { IconSymbol } from "@/components/ui/icon-symbol";
-import { BorderRadius, Spacing, Typography } from "@/constants/theme";
+import { Spacing } from "@/constants/theme";
 import { useTheme } from "@/hooks/use-theme";
 import { filterColorsBySearch, getColorDisplayName } from "@/lib/color";
 import {
@@ -118,114 +113,69 @@ export default function ColorGridScreen() {
   );
 
   return (
-    <ThemedView style={styles.container} safeArea="top">
-      <HeaderBackButton
-        title={series?.name ?? t("colors.title")}
-        right={
-          <Button
-            variant="ghost"
-            size="icon"
-            onPress={() => setShowOnlyFavorites((s) => !s)}
-            accessibilityLabel={
-              showOnlyFavorites
-                ? t("colors.showAllColors")
-                : t("colors.showOnlyFavorites")
-            }
-            icon={
-              <IconSymbol
-                name={showOnlyFavorites ? "star.fill" : "star"}
-                size={24}
-                color={showOnlyFavorites ? theme.tint : theme.icon}
-              />
-            }
-          />
-        }
-      />
-      <ColorDetailBottomSheet
-        ref={detailSheetRef}
-        color={detailParams}
-        isFavorite={
-          detailParams
-            ? favoriteColorIds.includes(detailParams.color.id)
-            : false
-        }
-        onToggleFavorite={() =>
-          detailParams && handleFavorite(detailParams.color)
-        }
-        onOpenColor={openDetailSheet}
-      />
+    <Screen>
+      <View style={styles.container}>
+        <HeaderBackButton
+          title={series?.name ?? t("colors.title")}
+          right={
+            <Button
+              variant="ghost"
+              size="icon"
+              onPress={() => setShowOnlyFavorites((s) => !s)}
+              accessibilityLabel={
+                showOnlyFavorites
+                  ? t("colors.showAllColors")
+                  : t("colors.showOnlyFavorites")
+              }
+              icon={
+                <IconSymbol
+                  name={showOnlyFavorites ? "star.fill" : "star"}
+                  size={24}
+                  color={showOnlyFavorites ? theme.tint : theme.icon}
+                />
+              }
+            />
+          }
+        />
+        <ColorDetailBottomSheet
+          ref={detailSheetRef}
+          color={detailParams}
+          isFavorite={
+            detailParams
+              ? favoriteColorIds.includes(detailParams.color.id)
+              : false
+          }
+          onToggleFavorite={() =>
+            detailParams && handleFavorite(detailParams.color)
+          }
+          onOpenColor={openDetailSheet}
+        />
 
-      <View style={styles.searchWrap}>
-        <TextInput
-          style={[
-            styles.searchInput,
-            {
-              backgroundColor: theme.backgroundSecondary,
-              borderColor: theme.border,
-              color: theme.text,
-            },
-          ]}
-          placeholder={t("colors.searchPlaceholder")}
-          placeholderTextColor={theme.textSecondary}
+        <SearchInput
           value={searchQuery}
           onChangeText={setSearchQuery}
-          returnKeyType="search"
+          placeholder={t("colors.searchPlaceholder")}
+          clearAccessibilityLabel={t("common.clear")}
         />
-        {searchQuery.length > 0 && (
-          <Button
-            variant="ghost"
-            size="icon"
-            style={styles.searchClearBtn}
-            onPress={() => setSearchQuery("")}
-            accessibilityLabel={t("common.clear")}
-            icon={
-              <IconSymbol
-                name="xmark.circle.fill"
-                size={22}
-                color={theme.textSecondary}
-              />
-            }
-          />
-        )}
-      </View>
 
-      <FlatList
-        data={filteredColors}
-        keyExtractor={(item) => item.id}
-        renderItem={renderItem}
-        numColumns={NUM_COLUMNS}
-        columnWrapperStyle={styles.row}
-        contentContainerStyle={styles.listContent}
-        showsVerticalScrollIndicator={false}
-      />
-    </ThemedView>
+        <FlatList
+          data={filteredColors}
+          keyExtractor={(item) => item.id}
+          renderItem={renderItem}
+          numColumns={NUM_COLUMNS}
+          columnWrapperStyle={styles.row}
+          contentContainerStyle={styles.listContent}
+          showsVerticalScrollIndicator={false}
+        />
+      </View>
+    </Screen>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: HORIZONTAL_PADDING,
-  },
-  searchWrap: {
-    position: "relative",
-    marginBottom: Spacing.md,
-  },
-  searchInput: {
-    height: 44,
     paddingHorizontal: Spacing.md,
-    paddingRight: 44,
-    borderRadius: BorderRadius.md,
-    borderWidth: 1,
-    fontSize: Typography.fontSize.md,
-  },
-  searchClearBtn: {
-    position: "absolute",
-    right: Spacing.sm,
-    top: 0,
-    bottom: 0,
-    justifyContent: "center",
-    padding: Spacing.xs,
   },
   listContent: {
     paddingTop: GAP,

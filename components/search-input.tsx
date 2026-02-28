@@ -6,19 +6,19 @@ import { IconSymbol } from "@/components/ui/icon-symbol";
 import { BorderRadius, Colors, Spacing, Typography } from "@/constants/theme";
 import { useColorScheme } from "@/hooks/use-color-scheme";
 
-export type ColorSearchInputProps = {
+export type SearchInputProps = {
   value: string;
   onChangeText: (text: string) => void;
   placeholder: string;
   clearAccessibilityLabel: string;
 };
 
-export function ColorSearchInput({
+export function SearchInput({
   value,
   onChangeText,
   placeholder,
   clearAccessibilityLabel,
-}: ColorSearchInputProps) {
+}: SearchInputProps) {
   const colorScheme = useColorScheme() ?? "light";
   const theme = Colors[colorScheme];
 
