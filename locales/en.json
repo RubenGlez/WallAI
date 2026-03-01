@@ -112,7 +112,17 @@
     "toolbarFlipH": "Flip H",
     "toolbarFlipV": "Flip V",
     "toolbarOpacity": "Opacity",
-    "toolbarBack": "Back"
+    "toolbarBack": "Back",
+    "shareDoodle": "Share doodle",
+    "shareTitle": "Share result",
+    "shareDownload": "Save to photos",
+    "shareViaSystem": "Share…",
+    "shareViaWhatsApp": "Send via WhatsApp",
+    "shareSuccess": "Image saved",
+    "shareError": "Could not complete",
+    "deleteDoodle": "Delete doodle",
+    "deleteDoodleTitle": "Delete doodle?",
+    "deleteDoodleMessage": "This doodle will be deleted. This cannot be undone."
   },
   "profile": {
     "placeholder": "Settings and favorites — coming soon.",

@@ -112,7 +112,17 @@
     "toolbarFlipH": "Retourner H",
     "toolbarFlipV": "Retourner V",
     "toolbarOpacity": "Opacité",
-    "toolbarBack": "Retour"
+    "toolbarBack": "Retour",
+    "shareDoodle": "Partager le doodle",
+    "shareTitle": "Partager le résultat",
+    "shareDownload": "Enregistrer dans les photos",
+    "shareViaSystem": "Partager…",
+    "shareViaWhatsApp": "Envoyer par WhatsApp",
+    "shareSuccess": "Image enregistrée",
+    "shareError": "Impossible de terminer",
+    "deleteDoodle": "Supprimer le doodle",
+    "deleteDoodleTitle": "Supprimer le doodle ?",
+    "deleteDoodleMessage": "Ce doodle sera supprimé. Cette action est irréversible."
   },
   "profile": {
     "placeholder": "Réglages et favoris — bientôt.",

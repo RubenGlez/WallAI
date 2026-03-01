@@ -12,9 +12,9 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { Button } from "@/components/button";
 import { ColorGridCard } from "@/components/color-grid-card";
-import { SearchInput } from "@/components/search-input";
 import { HeaderBackButton } from "@/components/header-back-button";
 import { SaveNameModal } from "@/components/save-name-modal";
+import { SearchInput } from "@/components/search-input";
 import {
   SeriesSelectBottomSheet,
   type SeriesSelectBottomSheetRef,
@@ -203,6 +203,15 @@ export default function CreatePaletteScreen() {
         title={headerTitle}
         right={
           <View style={styles.headerRightRow}>
+            {paletteId ? (
+              <Button
+                variant="ghost"
+                size="icon"
+                onPress={handleDeletePalette}
+                accessibilityLabel={t("projects.remove")}
+                icon={<IconSymbol name="trash" size={24} color={theme.tint} />}
+              />
+            ) : null}
             <Button
               variant="ghost"
               size="icon"
@@ -216,15 +225,6 @@ export default function CreatePaletteScreen() {
                 />
               }
             />
-            {paletteId ? (
-              <Button
-                variant="ghost"
-                size="icon"
-                onPress={handleDeletePalette}
-                accessibilityLabel={t("projects.remove")}
-                icon={<IconSymbol name="trash" size={24} color={theme.tint} />}
-              />
-            ) : null}
           </View>
         }
       />

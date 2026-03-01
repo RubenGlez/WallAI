@@ -112,7 +112,17 @@
     "toolbarFlipH": "H spiegeln",
     "toolbarFlipV": "V spiegeln",
     "toolbarOpacity": "Deckkraft",
-    "toolbarBack": "Zurück"
+    "toolbarBack": "Zurück",
+    "shareDoodle": "Doodle teilen",
+    "shareTitle": "Ergebnis teilen",
+    "shareDownload": "In Fotos speichern",
+    "shareViaSystem": "Teilen…",
+    "shareViaWhatsApp": "Per WhatsApp senden",
+    "shareSuccess": "Bild gespeichert",
+    "shareError": "Aktion fehlgeschlagen",
+    "deleteDoodle": "Doodle löschen",
+    "deleteDoodleTitle": "Doodle löschen?",
+    "deleteDoodleMessage": "Dieser Doodle wird gelöscht. Das kann nicht rückgängig gemacht werden."
   },
   "profile": {
     "placeholder": "Einstellungen und Favoriten — demnächst.",

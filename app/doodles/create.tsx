@@ -1,15 +1,26 @@
 import { useLocalSearchParams, useRouter } from "expo-router";
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { useTranslation } from "react-i18next";
-import { Image, StyleSheet, View } from "react-native";
+import { Alert, Image, StyleSheet, View } from "react-native";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import Animated, {
   type SharedValue,
   useAnimatedStyle,
   useSharedValue,
 } from "react-native-reanimated";
+import { captureRef } from "react-native-view-shot";
 
 import { Button } from "@/components/button";
+import {
+  DoodleShareBottomSheet,
+  type DoodleShareBottomSheetRef,
+} from "@/components/doodle-share-bottom-sheet";
 import { HeaderBackButton } from "@/components/header-back-button";
 import { SaveNameModal } from "@/components/save-name-modal";
 import { Screen } from "@/components/screen";
@@ -62,6 +73,7 @@ export default function DoodlesCreateScreen() {
   const getDoodle = useDoodlesStore((s) => s.getDoodle);
   const addDoodle = useDoodlesStore((s) => s.addDoodle);
   const updateDoodle = useDoodlesStore((s) => s.updateDoodle);
+  const removeDoodle = useDoodlesStore((s) => s.removeDoodle);
   const {
     pickFromGallery: pickFromGalleryFromHook,
     takePhoto: takePhotoFromHook,
@@ -73,8 +85,11 @@ export default function DoodlesCreateScreen() {
   const [sketchUri, setSketchUri] = useState<string | null>(null);
   const [loadingSlot, setLoadingSlot] = useState<ImageSlot | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [sharedImageUri, setSharedImageUri] = useState<string | null>(null);
 
   const doodleId = params.doodleId ?? undefined;
+  const montageRef = useRef<View>(null);
+  const shareSheetRef = useRef<DoodleShareBottomSheetRef>(null);
 
   useEffect(() => {
     if (!pickerLoading) setLoadingSlot(null);
@@ -282,6 +297,41 @@ export default function DoodlesCreateScreen() {
     setShowNameModal(true);
   }, [wallUri, sketchUri, doodleId, getDoodle]);
 
+  const handleSharePress = useCallback(() => {
+    if (!bothLoaded || !montageRef.current) return;
+    captureRef(montageRef, {
+      result: "tmpfile",
+      format: "png",
+      quality: 1,
+    })
+      .then((uri) => {
+        setSharedImageUri(uri);
+        shareSheetRef.current?.present();
+      })
+      .catch(() => {
+        setError(t("doodles.shareError"));
+      });
+  }, [bothLoaded, t]);
+
+  const handleDeleteDoodle = useCallback(() => {
+    if (!doodleId) return;
+    Alert.alert(
+      t("doodles.deleteDoodleTitle"),
+      t("doodles.deleteDoodleMessage"),
+      [
+        { text: t("common.cancel"), style: "cancel" },
+        {
+          text: t("common.delete"),
+          style: "destructive",
+          onPress: () => {
+            removeDoodle(doodleId);
+            router.back();
+          },
+        },
+      ],
+    );
+  }, [doodleId, t, removeDoodle, router]);
+
   const handleConfirmSave = useCallback(() => {
     if (!wallUri || !sketchUri) return;
     const name = doodleName.trim() || t("doodles.defaultDoodleName");
@@ -351,7 +401,11 @@ export default function DoodlesCreateScreen() {
   const contentArea = (() => {
     if (bothLoaded) {
       return (
-        <View style={styles.superpositionWrap}>
+        <View
+          ref={montageRef}
+          style={styles.superpositionWrap}
+          collapsable={false}
+        >
           <TransformableLayer
             imageUri={wallUri!}
             offsetX={wallOffsetX}
@@ -475,7 +529,41 @@ export default function DoodlesCreateScreen() {
   return (
     <Screen safeBottom>
       <View style={styles.header}>
-        <HeaderBackButton title={headerTitle} />
+        <HeaderBackButton
+          title={headerTitle}
+          right={
+            bothLoaded || doodleId ? (
+              <View style={styles.headerRightRow}>
+                {doodleId ? (
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onPress={handleDeleteDoodle}
+                    accessibilityLabel={t("doodles.deleteDoodle")}
+                    icon={
+                      <IconSymbol name="trash" size={24} color={theme.tint} />
+                    }
+                  />
+                ) : null}
+                {bothLoaded ? (
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    onPress={handleSharePress}
+                    accessibilityLabel={t("doodles.shareDoodle")}
+                    icon={
+                      <IconSymbol
+                        name="square.and.arrow.up"
+                        size={24}
+                        color={theme.tint}
+                      />
+                    }
+                  />
+                ) : null}
+              </View>
+            ) : null
+          }
+        />
       </View>
       <Tabs
         value={activeTab}
@@ -561,6 +649,13 @@ export default function DoodlesCreateScreen() {
         onConfirm={handleConfirmSave}
         cancelLabel={t("common.cancel")}
         saveLabel={t("common.save")}
+      />
+
+      <DoodleShareBottomSheet
+        ref={shareSheetRef}
+        imageUri={sharedImageUri}
+        onSaveToPhotos={() => shareSheetRef.current?.dismiss()}
+        onShare={() => shareSheetRef.current?.dismiss()}
       />
     </Screen>
   );
@@ -819,5 +914,10 @@ const styles = StyleSheet.create({
   },
   header: {
     paddingHorizontal: Spacing.md,
+  },
+  headerRightRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: Spacing.xs,
   },
 });

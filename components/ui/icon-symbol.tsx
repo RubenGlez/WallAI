@@ -58,8 +58,10 @@ const MAPPING = {
   'square': 'check-box-outline-blank',
   'arrow.left.and.right': 'flip',
   'square.and.arrow.down': 'save',
+  'square.and.arrow.up': 'share',
   'arrow.clockwise': 'restart-alt',
   'photo.fill.on.rectangle.fill': 'wallpaper',
+  'message': 'chat',
 } as IconMapping;
 
 export type IconSymbolName = keyof typeof MAPPING;
