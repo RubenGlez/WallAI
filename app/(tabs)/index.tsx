@@ -38,9 +38,9 @@ export default function HomeScreen() {
       >
         <ScreenHeader
           title={
-            aka.trim()
+            (aka.trim()
               ? t("home.titleWithName", { name: aka.trim() })
-              : t("home.title")
+              : t("home.title")) + " 👋"
           }
           subtitle={t("home.subtitle")}
         />

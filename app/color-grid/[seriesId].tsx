@@ -24,6 +24,7 @@ import {
 } from "@/stores/useCatalogStore";
 import { useFavoritesStore } from "@/stores/useFavoritesStore";
 import type { Color } from "@/types";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const { width } = Dimensions.get("window");
 const NUM_COLUMNS = 3;
@@ -112,6 +113,8 @@ export default function ColorGridScreen() {
     [i18n.language, favoriteColorIds, openDetailSheet, handleFavorite],
   );
 
+  const inset = useSafeAreaInsets();
+
   return (
     <Screen>
       <View style={styles.container}>
@@ -164,7 +167,7 @@ export default function ColorGridScreen() {
           renderItem={renderItem}
           numColumns={NUM_COLUMNS}
           columnWrapperStyle={styles.row}
-          contentContainerStyle={styles.listContent}
+          contentContainerStyle={{ paddingBottom: inset.bottom }}
           showsVerticalScrollIndicator={false}
         />
       </View>
@@ -176,10 +179,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: Spacing.md,
-  },
-  listContent: {
-    paddingTop: GAP,
-    paddingBottom: Spacing.xl,
   },
   row: {
     flexDirection: "row",

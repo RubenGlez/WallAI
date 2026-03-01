@@ -33,6 +33,7 @@ export function ScreenHeader({ title, subtitle, right }: ScreenHeaderProps) {
 const styles = StyleSheet.create({
   wrapper: {
     gap: Spacing.sm,
+    paddingVertical: Spacing.sm,
   },
   titleContainer: {
     flexDirection: "row",

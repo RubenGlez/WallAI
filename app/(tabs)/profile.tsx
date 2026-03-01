@@ -1,16 +1,18 @@
+import { useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Pressable, StyleSheet, Switch, TextInput, View } from "react-native";
 
+import {
+  LanguageSelectBottomSheet,
+  type LanguageSelectBottomSheetRef,
+} from "@/components/language-select-bottom-sheet";
 import { Screen } from "@/components/screen";
 import { ScreenHeader } from "@/components/screen-header";
 import { ThemedText } from "@/components/themed-text";
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { BorderRadius, Colors, Spacing, Typography } from "@/constants/theme";
 import { useColorScheme } from "@/hooks/use-color-scheme";
-import {
-  SUPPORTED_LANGUAGES,
-  useLanguageStore,
-} from "@/stores/useLanguageStore";
+import { useLanguageStore } from "@/stores/useLanguageStore";
 import { useProfileStore } from "@/stores/useProfileStore";
 import { useThemeStore } from "@/stores/useThemeStore";
 import type { LanguageCode } from "@/types";
@@ -25,11 +27,13 @@ export default function ProfileScreen() {
   const isDark = colorScheme === "dark";
   const language = useLanguageStore((s) => s.language);
   const setLanguage = useLanguageStore((s) => s.setLanguage);
+  const languageSheetRef = useRef<LanguageSelectBottomSheetRef>(null);
 
   const currentLang = language ?? i18n.language.split("-")[0];
   const handleSelectLanguage = (code: LanguageCode) => {
     setLanguage(code);
     i18n.changeLanguage(code);
+    languageSheetRef.current?.dismiss();
   };
 
   return (
@@ -37,7 +41,7 @@ export default function ProfileScreen() {
       <View style={styles.container}>
         <ScreenHeader title={t("tabs.profile")} />
 
-        <View style={[styles.section, { borderTopColor: theme.border }]}>
+        <View style={[styles.section, { borderTopWidth: 0 }]}>
           <ThemedText
             style={[styles.sectionLabel, { color: theme.textSecondary }]}
           >
@@ -70,35 +74,29 @@ export default function ProfileScreen() {
           >
             {t("profile.language")}
           </ThemedText>
-          {SUPPORTED_LANGUAGES.map((code) => {
-            const isSelected = currentLang === code;
-            return (
-              <Pressable
-                key={code}
-                style={({ pressed }) => [
-                  styles.row,
-                  styles.languageRow,
-                  {
-                    borderBottomColor: theme.border,
-                    opacity: pressed ? 0.7 : 1,
-                  },
-                ]}
-                onPress={() => handleSelectLanguage(code)}
-              >
-                <ThemedText style={styles.rowLabel}>
-                  {t(`profile.lang_${code}` as const)}
-                </ThemedText>
-                {isSelected && (
-                  <IconSymbol
-                    name="checkmark.circle.fill"
-                    size={22}
-                    color={theme.tint}
-                  />
-                )}
-              </Pressable>
-            );
-          })}
+          <Pressable
+            style={({ pressed }) => [
+              styles.languageRow,
+              { opacity: pressed ? 0.7 : 1 },
+            ]}
+            onPress={() => languageSheetRef.current?.present()}
+          >
+            <ThemedText style={styles.rowLabel}>
+              {t(`profile.lang_${currentLang}` as const)}
+            </ThemedText>
+            <IconSymbol
+              name="chevron.right"
+              size={20}
+              color={theme.textSecondary}
+            />
+          </Pressable>
         </View>
+
+        <LanguageSelectBottomSheet
+          ref={languageSheetRef}
+          currentLanguage={currentLang}
+          onSelectLanguage={handleSelectLanguage}
+        />
 
         <View style={[styles.section, { borderTopColor: theme.border }]}>
           <ThemedText
@@ -160,10 +158,13 @@ const styles = StyleSheet.create({
     paddingVertical: Spacing.md,
     borderBottomWidth: 1,
   },
-  languageRow: {
-    paddingLeft: 0,
-  },
   rowLabel: {
     fontSize: 16,
+  },
+  languageRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingVertical: Spacing.md,
   },
 });

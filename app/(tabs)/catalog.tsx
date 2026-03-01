@@ -9,9 +9,9 @@ import {
   type ColorDetailParams,
 } from "@/components/color-detail-bottom-sheet";
 import { ColorGridCard } from "@/components/color-grid-card";
-import { SearchInput } from "@/components/search-input";
 import { Screen } from "@/components/screen";
 import { ScreenHeader } from "@/components/screen-header";
+import { SearchInput } from "@/components/search-input";
 import {
   SeriesSelectBottomSheet,
   type SeriesSelectBottomSheetRef,
@@ -199,7 +199,7 @@ const styles = StyleSheet.create({
   },
   listContent: {
     flexGrow: 1,
-    paddingBottom: Spacing.md,
+    paddingBottom: Spacing.sm,
   },
   row: {
     marginBottom: Spacing.sm,
