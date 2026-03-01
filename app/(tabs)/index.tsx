@@ -1,15 +1,10 @@
 import { useRouter } from "expo-router";
 import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import {
-  Image,
-  ScrollView,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 
 import { Button } from "@/components/button";
+import { DoodleCard } from "@/components/doodle-card";
 import { PaletteCard } from "@/components/palette-card";
 import { Screen } from "@/components/screen";
 import { ScreenHeader } from "@/components/screen-header";
@@ -123,74 +118,25 @@ export default function HomeScreen() {
           {t("home.exploreColors")}
         </Button>
 
-        {/* Continue last doodle */}
+        {/* Continuar último doodle */}
         {lastDoodle && (
           <View style={styles.section}>
-            <TouchableOpacity
-              style={[
-                styles.continueDoodleCard,
-                {
-                  backgroundColor: theme.card,
-                  borderColor: theme.border,
-                },
-              ]}
-              onPress={() =>
-                router.push({
-                  pathname: "/doodles/create",
-                  params: { doodleId: lastDoodle.id },
-                })
-              }
-              activeOpacity={0.7}
+            <ThemedText
+              style={[styles.sectionTitle, { color: theme.textSecondary }]}
             >
-              {lastDoodle.thumbnailUri ||
-              lastDoodle.exportImageUri ||
-              lastDoodle.sketchImageUri ||
-              lastDoodle.wallImageUri ? (
-                <Image
-                  source={{
-                    uri:
-                      lastDoodle.thumbnailUri ??
-                      lastDoodle.exportImageUri ??
-                      lastDoodle.sketchImageUri ??
-                      lastDoodle.wallImageUri,
-                  }}
-                  style={styles.continueDoodleThumb}
-                  resizeMode="cover"
-                />
-              ) : (
-                <View
-                  style={[
-                    styles.continueDoodlePlaceholder,
-                    { backgroundColor: theme.backgroundSecondary },
-                  ]}
-                >
-                  <IconSymbol
-                    name="square.stack.3d.up"
-                    size={28}
-                    color={theme.textSecondary}
-                  />
-                </View>
-              )}
-              <View style={styles.continueDoodleTextWrap}>
-                <ThemedText style={styles.continueDoodleLabel}>
-                  {t("home.continueLastDoodle")}
-                </ThemedText>
-                <ThemedText
-                  style={[
-                    styles.continueDoodleName,
-                    { color: theme.textSecondary },
-                  ]}
-                  numberOfLines={1}
-                >
-                  {lastDoodle.name || t("common.untitled")}
-                </ThemedText>
-              </View>
-              <IconSymbol
-                name="chevron.right"
-                size={20}
-                color={theme.textSecondary}
+              {t("home.continueLastDoodle")}
+            </ThemedText>
+            <View style={styles.doodlesGrid}>
+              <DoodleCard
+                doodle={lastDoodle}
+                onPress={() =>
+                  router.push({
+                    pathname: "/doodles/create",
+                    params: { doodleId: lastDoodle.id },
+                  })
+                }
               />
-            </TouchableOpacity>
+            </View>
           </View>
         )}
 
@@ -288,37 +234,10 @@ const styles = StyleSheet.create({
     fontWeight: Typography.fontWeight.semibold,
     textTransform: "uppercase",
   },
-  continueDoodleCard: {
+  doodlesGrid: {
     flexDirection: "row",
-    alignItems: "center",
-    padding: Spacing.sm,
-    borderRadius: BorderRadius.lg,
-    borderWidth: 1,
-    gap: Spacing.md,
-  },
-  continueDoodleThumb: {
-    width: 56,
-    height: 56,
-    borderRadius: BorderRadius.md,
-  },
-  continueDoodlePlaceholder: {
-    width: 56,
-    height: 56,
-    borderRadius: BorderRadius.md,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  continueDoodleTextWrap: {
-    flex: 1,
-    minWidth: 0,
-  },
-  continueDoodleLabel: {
-    fontSize: Typography.fontSize.sm,
-    fontWeight: Typography.fontWeight.semibold,
-  },
-  continueDoodleName: {
-    fontSize: Typography.fontSize.xs,
-    marginTop: 2,
+    flexWrap: "wrap",
+    justifyContent: "space-between",
   },
   palettesGrid: {
     flexDirection: "row",
