@@ -21,13 +21,15 @@ type Props = {
   series: SeriesWithCountAndBrand[];
   selectedSeriesIds: Set<string>;
   onToggleSeries: (seriesId: string) => void;
+  onSelectAll?: () => void;
+  onClear?: () => void;
 };
 
 export const SeriesSelectBottomSheet = forwardRef<
   SeriesSelectBottomSheetRef,
   Props
 >(function SeriesSelectBottomSheet(
-  { series, selectedSeriesIds, onToggleSeries },
+  { series, selectedSeriesIds, onToggleSeries, onSelectAll, onClear },
   ref,
 ) {
   const { t } = useTranslation();
@@ -71,6 +73,63 @@ export const SeriesSelectBottomSheet = forwardRef<
           {t("palettes.selectSeriesSubtitle")}
         </ThemedText>
         <View style={styles.seriesList}>
+          {(onSelectAll != null || onClear != null) && (
+            <View
+              style={[
+                styles.seriesRow,
+                styles.selectAllRow,
+                { borderBottomColor: theme.border },
+              ]}
+            >
+              {onSelectAll != null ? (
+                <TouchableOpacity
+                  style={styles.selectAllLeft}
+                  onPress={onSelectAll}
+                  activeOpacity={0.7}
+                  accessibilityRole="checkbox"
+                  accessibilityState={{
+                    checked:
+                      series.length > 0 &&
+                      selectedSeriesIds.size === series.length,
+                  }}
+                  accessibilityLabel={t("palettes.selectAll")}
+                >
+                  {series.length > 0 &&
+                  selectedSeriesIds.size === series.length ? (
+                    <IconSymbol
+                      name="checkmark.square.fill"
+                      size={24}
+                      color={theme.tint}
+                    />
+                  ) : (
+                    <IconSymbol name="square" size={24} color={theme.icon} />
+                  )}
+                  <View style={styles.seriesLabelWrap}>
+                    <ThemedText style={styles.seriesName} numberOfLines={1}>
+                      {t("palettes.selectAll")}
+                    </ThemedText>
+                  </View>
+                </TouchableOpacity>
+              ) : (
+                <View style={styles.seriesLabelWrap} />
+              )}
+              {onClear != null && (
+                <TouchableOpacity
+                  onPress={onClear}
+                  activeOpacity={0.7}
+                  style={styles.clearBtn}
+                  accessibilityLabel={t("palettes.clearSelection")}
+                >
+                  <ThemedText
+                    style={[styles.clearLabel, { color: theme.tint }]}
+                    numberOfLines={1}
+                  >
+                    {t("palettes.clearSelection")}
+                  </ThemedText>
+                </TouchableOpacity>
+              )}
+            </View>
+          )}
           {series.map((s) => {
             const isSelected = selectedSeriesIds.has(s.id);
             return (
@@ -158,6 +217,25 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingVertical: Spacing.sm,
     borderBottomWidth: 1,
+  },
+  selectAllRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  selectAllLeft: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    minWidth: 0,
+  },
+  clearBtn: {
+    paddingVertical: Spacing.xs,
+    paddingLeft: Spacing.sm,
+  },
+  clearLabel: {
+    fontSize: Typography.fontSize.md,
+    fontWeight: Typography.fontWeight.medium,
   },
   seriesLabelWrap: {
     flex: 1,

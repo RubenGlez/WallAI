@@ -233,6 +233,10 @@ export default function CreatePaletteScreen() {
         series={allSeries}
         selectedSeriesIds={selectedSeriesIds}
         onToggleSeries={toggleSeriesSelection}
+        onSelectAll={() =>
+          setSelectedSeriesIds(new Set(allSeries.map((s) => s.id)))
+        }
+        onClear={() => setSelectedSeriesIds(new Set())}
       />
 
       <SearchInput

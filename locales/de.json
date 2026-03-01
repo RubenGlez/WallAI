@@ -240,6 +240,8 @@
     "selectBrandsSubtitle": "Wähle, aus welchen Marken oder Serien du Farben wählen möchtest.",
     "selectSeries": "Serien auswählen",
     "selectSeriesSubtitle": "Wähle, aus welchen Serien du Farben wählen möchtest.",
+    "selectAll": "Alle auswählen",
+    "clearSelection": "Leeren",
     "continue": "Weiter",
     "selectedSeriesCount_one": "{{count}} Serie ausgewählt",
     "selectedSeriesCount_other": "{{count}} Serien ausgewählt",

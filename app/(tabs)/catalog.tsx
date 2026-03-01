@@ -31,8 +31,13 @@ const { NUM_COLUMNS, GAP, CARD_WIDTH, SWATCH_SIZE } = COLOR_GRID;
 export default function CatalogScreen() {
   const { t, i18n } = useTranslation();
   const { theme } = useTheme();
-  const { allSeries, selectedSeriesIds, toggleSeriesSelection, allColors } =
-    useSeriesColorSelection();
+  const {
+    allSeries,
+    selectedSeriesIds,
+    setSelectedSeriesIds,
+    toggleSeriesSelection,
+    allColors,
+  } = useSeriesColorSelection();
 
   const [searchQuery, setSearchQuery] = useState("");
   const [showOnlyFavorites, setShowOnlyFavorites] = useState(false);
@@ -183,6 +188,10 @@ export default function CatalogScreen() {
         series={allSeries}
         selectedSeriesIds={selectedSeriesIds}
         onToggleSeries={toggleSeriesSelection}
+        onSelectAll={() =>
+          setSelectedSeriesIds(new Set(allSeries.map((s) => s.id)))
+        }
+        onClear={() => setSelectedSeriesIds(new Set())}
       />
     </>
   );
