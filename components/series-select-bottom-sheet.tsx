@@ -11,6 +11,7 @@ import { ThemedText } from "@/components/themed-text";
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { Colors, Spacing, Typography } from "@/constants/theme";
 import { useColorScheme } from "@/hooks/use-color-scheme";
+import { useFavoritesStore } from "@/stores/useFavoritesStore";
 import type { SeriesWithCountAndBrand } from "@/types";
 
 export type SeriesSelectBottomSheetRef = BottomSheetModal;
@@ -31,6 +32,8 @@ export const SeriesSelectBottomSheet = forwardRef<
   const { t } = useTranslation();
   const colorScheme = useColorScheme() ?? "light";
   const theme = Colors[colorScheme];
+  const favoriteSeriesIds = useFavoritesStore((s) => s.favoriteSeriesIds);
+  const toggleFavoriteSeries = useFavoritesStore((s) => s.toggleFavoriteSeries);
 
   const renderBackdrop = useCallback(
     (props: React.ComponentProps<typeof BottomSheetBackdrop>) => (
@@ -104,6 +107,31 @@ export const SeriesSelectBottomSheet = forwardRef<
                     {t("colors.colorCount", { count: s.colorCount })}
                   </ThemedText>
                 </View>
+                <TouchableOpacity
+                  style={styles.favoriteBtn}
+                  onPress={(e) => {
+                    e.stopPropagation();
+                    toggleFavoriteSeries(s.id);
+                  }}
+                  accessibilityLabel={
+                    favoriteSeriesIds.includes(s.id)
+                      ? t("colors.removeFromFavorites")
+                      : t("colors.addToFavorites")
+                  }
+                  accessibilityRole="button"
+                >
+                  <IconSymbol
+                    name={
+                      favoriteSeriesIds.includes(s.id) ? "star.fill" : "star"
+                    }
+                    size={22}
+                    color={
+                      favoriteSeriesIds.includes(s.id)
+                        ? theme.warning
+                        : theme.icon
+                    }
+                  />
+                </TouchableOpacity>
               </TouchableOpacity>
             );
           })}
@@ -149,5 +177,9 @@ const styles = StyleSheet.create({
   seriesMeta: {
     fontSize: Typography.fontSize.sm,
     marginTop: 2,
+  },
+  favoriteBtn: {
+    padding: Spacing.sm,
+    marginLeft: Spacing.xs,
   },
 });
