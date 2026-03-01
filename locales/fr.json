@@ -29,7 +29,12 @@
     "titleWithName": "Hey {{name}} !",
     "subtitle": "Qu'est-ce qu'on peint aujourd'hui ?",
     "tagline": "De l'esquisse au mur, guidé par l'IA",
-    "placeholder": "Écran d'accueil — bientôt disponible."
+    "placeholder": "Écran d'accueil — bientôt disponible.",
+    "exploreColors": "Explorer les couleurs",
+    "createPalette": "Créer une palette",
+    "newDoodle": "Nouveau doodle",
+    "continueLastDoodle": "Continuer le dernier doodle",
+    "recentPalettes": "Palettes récentes"
   },
   "catalog": {
     "overviewTitle": "Catalogue",

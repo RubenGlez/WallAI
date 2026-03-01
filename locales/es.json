@@ -29,7 +29,12 @@
     "titleWithName": "¡Hey {{name}}!",
     "subtitle": "¿Qué pintamos hoy?",
     "tagline": "Del boceto al muro, guiado por IA",
-    "placeholder": "Pantalla de inicio — próximamente."
+    "placeholder": "Pantalla de inicio — próximamente.",
+    "exploreColors": "Explorar colores",
+    "createPalette": "Crear paleta",
+    "newDoodle": "Nuevo doodle",
+    "continueLastDoodle": "Continuar último doodle",
+    "recentPalettes": "Paletas recientes"
   },
   "catalog": {
     "overviewTitle": "Catálogo",

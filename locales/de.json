@@ -29,7 +29,12 @@
     "titleWithName": "Hey {{name}}!",
     "subtitle": "Was malen wir heute?",
     "tagline": "Von der Skizze zur Wand, geleitet von KI",
-    "placeholder": "Startbildschirm — in Kürze."
+    "placeholder": "Startbildschirm — in Kürze.",
+    "exploreColors": "Farben erkunden",
+    "createPalette": "Palette erstellen",
+    "newDoodle": "Neues Doodle",
+    "continueLastDoodle": "Letztes Doodle fortsetzen",
+    "recentPalettes": "Letzte Paletten"
   },
   "catalog": {
     "overviewTitle": "Katalog",

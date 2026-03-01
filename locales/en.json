@@ -29,7 +29,12 @@
     "titleWithName": "Hey {{name}}!",
     "subtitle": "What are we painting today?",
     "tagline": "From sketch to wall, guided by AI",
-    "placeholder": "Home screen — coming soon."
+    "placeholder": "Home screen — coming soon.",
+    "exploreColors": "Explore colors",
+    "createPalette": "Create palette",
+    "newDoodle": "New doodle",
+    "continueLastDoodle": "Continue last doodle",
+    "recentPalettes": "Recent palettes"
   },
   "catalog": {
     "overviewTitle": "Catalog",
