@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
+import { FavoriteIcon } from "@/components/favorite-icon";
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { BorderRadius, Colors, Spacing, Typography } from "@/constants/theme";
 import { useColorScheme } from "@/hooks/use-color-scheme";
@@ -112,10 +113,10 @@ export function ColorGridCard({
               isFavorite ? "Remove from favorites" : "Add to favorites"
             }
           >
-            <IconSymbol
-              name={isFavorite ? "star.fill" : "star"}
+            <FavoriteIcon
+              isFavorite={isFavorite ?? false}
               size={18}
-              color={isFavorite ? theme.warning : textColor}
+              color={textColor}
             />
           </TouchableOpacity>
         )}

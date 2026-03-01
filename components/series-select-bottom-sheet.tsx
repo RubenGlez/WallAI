@@ -7,6 +7,7 @@ import React, { forwardRef, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 
+import { FavoriteIcon } from "@/components/favorite-icon";
 import { ThemedText } from "@/components/themed-text";
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { Colors, Spacing, Typography } from "@/constants/theme";
@@ -120,16 +121,9 @@ export const SeriesSelectBottomSheet = forwardRef<
                   }
                   accessibilityRole="button"
                 >
-                  <IconSymbol
-                    name={
-                      favoriteSeriesIds.includes(s.id) ? "star.fill" : "star"
-                    }
+                  <FavoriteIcon
+                    isFavorite={favoriteSeriesIds.includes(s.id)}
                     size={22}
-                    color={
-                      favoriteSeriesIds.includes(s.id)
-                        ? theme.warning
-                        : theme.icon
-                    }
                   />
                 </TouchableOpacity>
               </TouchableOpacity>

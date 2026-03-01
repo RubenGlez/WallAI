@@ -12,6 +12,7 @@ import {
   View,
 } from "react-native";
 
+import { FavoriteIcon } from "@/components/favorite-icon";
 import { ThemedText } from "@/components/themed-text";
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { BorderRadius, Colors, Spacing, Typography } from "@/constants/theme";
@@ -110,11 +111,7 @@ export function ColorDetailContent({
               : t("colors.addToFavorites")
           }
         >
-          <IconSymbol
-            name={isFavorite ? "star.fill" : "star"}
-            size={24}
-            color={isFavorite ? theme.warning : theme.icon}
-          />
+          <FavoriteIcon isFavorite={isFavorite} size={24} />
         </TouchableOpacity>
       </View>
       <ThemedText

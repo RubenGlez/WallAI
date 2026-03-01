@@ -1,8 +1,8 @@
 import { useTranslation } from "react-i18next";
 import { StyleSheet, TouchableOpacity } from "react-native";
 
+import { FavoriteIcon } from "@/components/favorite-icon";
 import { ThemedText } from "@/components/themed-text";
-import { IconSymbol } from "@/components/ui/icon-symbol";
 import {
   BorderRadius,
   Colors,
@@ -46,11 +46,7 @@ export function SeriesCard({
             : t("colors.addToFavorites")
         }
       >
-        <IconSymbol
-          name={isFavorite ? "star.fill" : "star"}
-          size={22}
-          color={isFavorite ? theme.warning : theme.icon}
-        />
+        <FavoriteIcon isFavorite={isFavorite} size={22} />
       </TouchableOpacity>
       <ThemedText style={styles.cardTitle} numberOfLines={2}>
         {series.name}
