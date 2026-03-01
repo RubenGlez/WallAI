@@ -11,7 +11,7 @@ import { ScreenHeader } from "@/components/screen-header";
 import { SeriesCard } from "@/components/series-card";
 import { ThemedText } from "@/components/themed-text";
 import { IconSymbol } from "@/components/ui/icon-symbol";
-import { BorderRadius, Spacing, Typography } from "@/constants/theme";
+import { Spacing, Typography } from "@/constants/theme";
 import { useTheme } from "@/hooks/use-theme";
 import { getAllSeriesWithCount } from "@/stores/useCatalogStore";
 import { useDoodlesStore } from "@/stores/useDoodlesStore";
@@ -165,36 +165,14 @@ export default function HomeScreen() {
           </View>
         )}
 
-        {/* Favorite series (preview) */}
-        <View style={styles.section}>
-          <ThemedText
-            style={[styles.sectionTitle, { color: theme.textSecondary }]}
-          >
-            {t("colors.favoriteSeries")}
-          </ThemedText>
-          {favoriteSeriesPreview.length === 0 ? (
-            <View
-              style={[
-                styles.emptyCard,
-                {
-                  backgroundColor: theme.backgroundSecondary,
-                  borderColor: theme.border,
-                },
-              ]}
+        {/* Favorite series (preview) — only show when there are favorites */}
+        {favoriteSeriesPreview.length > 0 && (
+          <View style={styles.section}>
+            <ThemedText
+              style={[styles.sectionTitle, { color: theme.textSecondary }]}
             >
-              <View
-                style={[styles.emptyIconWrap, { backgroundColor: theme.card }]}
-              >
-                <IconSymbol name="swatchpalette" size={20} color={theme.tint} />
-              </View>
-              <ThemedText
-                style={[styles.emptyTitle, { color: theme.text }]}
-                numberOfLines={2}
-              >
-                {t("colors.emptySeriesTitle")}
-              </ThemedText>
-            </View>
-          ) : (
+              {t("colors.favoriteSeries")}
+            </ThemedText>
             <View style={styles.sectionGrid}>
               {favoriteSeriesPreview.map((series: SeriesWithCountAndBrand) => (
                 <SeriesCard
@@ -206,8 +184,8 @@ export default function HomeScreen() {
                 />
               ))}
             </View>
-          )}
-        </View>
+          </View>
+        )}
       </ScrollView>
     </Screen>
   );
@@ -243,30 +221,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between",
-  },
-  emptyCard: {
-    width: "100%",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    padding: Spacing.md,
-    borderRadius: BorderRadius.lg,
-    borderWidth: 1.5,
-    borderStyle: "dashed",
-  },
-  emptyIconWrap: {
-    width: 36,
-    height: 36,
-    borderRadius: 18,
-    alignItems: "center",
-    justifyContent: "center",
-    marginBottom: Spacing.sm,
-  },
-  emptyTitle: {
-    width: "100%",
-    fontSize: Typography.fontSize.md,
-    fontWeight: Typography.fontWeight.semibold,
-    textAlign: "center",
   },
   sectionGrid: {
     flexDirection: "row",
