@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 
@@ -6,6 +7,7 @@ import { IconSymbol } from "@/components/ui/icon-symbol";
 import { getListCardWidth, LIST_GAP } from "@/constants/list-layout";
 import { BorderRadius, Shadows, Spacing, Typography } from "@/constants/theme";
 import { useTheme } from "@/hooks/use-theme";
+import { getSeriesById } from "@/stores/useCatalogStore";
 import type { Color, Palette } from "@/types";
 
 const CARD_WIDTH = getListCardWidth();
@@ -29,6 +31,26 @@ export function PaletteCard({
       : 0;
   const isLight = (hex: string) =>
     hex.toLowerCase() === "#ffffff" || hex.toLowerCase().startsWith("#fff");
+
+  const mainSeries = useMemo(() => {
+    if (!palette.colors.length) return null;
+
+    const counts: Record<string, number> = {};
+    for (const c of palette.colors) {
+      counts[c.seriesId] = (counts[c.seriesId] ?? 0) + 1;
+    }
+
+    let bestId: string | null = null;
+    let bestCount = 0;
+    for (const [id, count] of Object.entries(counts)) {
+      if (count > bestCount) {
+        bestCount = count;
+        bestId = id;
+      }
+    }
+
+    return bestId ? getSeriesById(bestId) ?? null : null;
+  }, [palette.colors]);
 
   return (
     <TouchableOpacity
@@ -83,6 +105,14 @@ export function PaletteCard({
           </View>
         )}
       </View>
+      {mainSeries?.name ? (
+        <ThemedText
+          style={[styles.seriesLabel, { color: theme.textSecondary }]}
+          numberOfLines={1}
+        >
+          {mainSeries.name}
+        </ThemedText>
+      ) : null}
       <ThemedText style={styles.cardTitle} numberOfLines={1}>
         {palette.name || t("common.untitled")}
       </ThemedText>
@@ -127,6 +157,10 @@ const styles = StyleSheet.create({
   swatchMoreText: {
     fontSize: Typography.fontSize.xs,
     fontWeight: Typography.fontWeight.semibold,
+  },
+  seriesLabel: {
+    fontSize: Typography.fontSize.sm,
+    marginBottom: 2,
   },
   cardTitle: {
     fontSize: Typography.fontSize.md,
