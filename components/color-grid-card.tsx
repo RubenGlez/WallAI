@@ -101,7 +101,7 @@ export function ColorGridCard({
             <IconSymbol
               name="checkmark.circle.fill"
               size={20}
-              color={theme.tint}
+              color={textColor}
             />
           </View>
         )}
