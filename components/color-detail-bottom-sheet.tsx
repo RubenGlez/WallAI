@@ -53,8 +53,7 @@ type ContentProps = {
 
 const SIMILAR_IN_SERIES_LIMIT = 6;
 const SIMILAR_OTHER_SERIES_LIMIT = 8;
-/** Wide enough for two-line labels; trailing scroll padding balances the row vs sheet edge */
-const SIMILAR_CARD_WIDTH = 96;
+const SIMILAR_CARD_WIDTH = 88;
 const SIMILAR_SWATCH_SIZE = 56;
 
 export function ColorDetailContent({
@@ -140,15 +139,38 @@ export function ColorDetailContent({
       <ThemedText type="overline" style={styles.sectionTitle}>
         {t("colors.colorDetail.similarInSeries")}
       </ThemedText>
-      <View style={styles.similarRowViewport}>
-        <ScrollView
-          horizontal
-          nestedScrollEnabled
-          showsHorizontalScrollIndicator={false}
-          style={styles.similarRowScroll}
-          contentContainerStyle={styles.similarRow}
-        >
-          {sameSeriesMatches.map((match, index, arr) => (
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.similarRow}
+      >
+        {sameSeriesMatches.map((match) => (
+          <SimilarColorCard
+            key={match.catalogColor.id}
+            color={match.catalogColor}
+            displayName={getColorDisplayName(
+              match.catalogColor,
+              i18n.language,
+            )}
+            similarity={match.similarity}
+            theme={theme}
+            onPress={() => onOpenColor?.(match.catalogColor)}
+          />
+        ))}
+      </ScrollView>
+
+      <ThemedText type="overline" style={styles.sectionTitle}>
+        {t("colors.colorDetail.similarInOtherSeries")}
+      </ThemedText>
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.similarRow}
+      >
+        {otherSeriesMatches.map((match) => {
+          const series = getSeriesById(match.catalogColor.seriesId);
+          const subtitle = series?.name ?? match.catalogColor.code;
+          return (
             <SimilarColorCard
               key={match.catalogColor.id}
               color={match.catalogColor}
@@ -156,47 +178,14 @@ export function ColorDetailContent({
                 match.catalogColor,
                 i18n.language,
               )}
+              subtitle={subtitle}
               similarity={match.similarity}
               theme={theme}
-              isLast={index === arr.length - 1}
               onPress={() => onOpenColor?.(match.catalogColor)}
             />
-          ))}
-        </ScrollView>
-      </View>
-
-      <ThemedText type="overline" style={styles.sectionTitle}>
-        {t("colors.colorDetail.similarInOtherSeries")}
-      </ThemedText>
-      <View style={styles.similarRowViewport}>
-        <ScrollView
-          horizontal
-          nestedScrollEnabled
-          showsHorizontalScrollIndicator={false}
-          style={styles.similarRowScroll}
-          contentContainerStyle={styles.similarRow}
-        >
-          {otherSeriesMatches.map((match, index, arr) => {
-            const series = getSeriesById(match.catalogColor.seriesId);
-            const subtitle = series?.name ?? match.catalogColor.code;
-            return (
-              <SimilarColorCard
-                key={match.catalogColor.id}
-                color={match.catalogColor}
-                displayName={getColorDisplayName(
-                  match.catalogColor,
-                  i18n.language,
-                )}
-                subtitle={subtitle}
-                similarity={match.similarity}
-                theme={theme}
-                isLast={index === arr.length - 1}
-                onPress={() => onOpenColor?.(match.catalogColor)}
-              />
-            );
-          })}
-        </ScrollView>
-      </View>
+          );
+        })}
+      </ScrollView>
     </BottomSheetScrollView>
   );
 }
@@ -208,7 +197,6 @@ type SimilarColorCardProps = {
   similarity: number;
   theme: SemanticColorPalette;
   onPress: () => void;
-  isLast?: boolean;
 };
 
 function SimilarColorCard({
@@ -218,17 +206,13 @@ function SimilarColorCard({
   similarity,
   theme,
   onPress,
-  isLast,
 }: SimilarColorCardProps) {
   const isVeryLight =
     color.hex.toLowerCase() === "#ffffff" ||
     color.hex.toLowerCase().startsWith("#fff");
   return (
     <TouchableOpacity
-      style={[
-        styles.similarCard,
-        !isLast && styles.similarCardSpacing,
-      ]}
+      style={[styles.similarCard, { marginRight: Spacing.sm }]}
       onPress={onPress}
       activeOpacity={0.7}
       accessibilityLabel={`${displayName}, ${similarity}% similar`}
@@ -244,7 +228,7 @@ function SimilarColorCard({
       <ThemedText
         type="caption"
         style={[styles.similarLabel, { color: theme.text }]}
-        numberOfLines={2}
+        numberOfLines={1}
         ellipsizeMode="tail"
       >
         {displayName}
@@ -253,7 +237,7 @@ function SimilarColorCard({
         <ThemedText
           type="caption"
           style={styles.similarSubtitle}
-          numberOfLines={2}
+          numberOfLines={1}
           ellipsizeMode="tail"
         >
           {subtitle}
@@ -307,32 +291,13 @@ const styles = StyleSheet.create({
   sectionTitle: {
     marginBottom: Spacing.xs,
   },
-  /** Bounds nested horizontal ScrollView so row content cannot paint past sheet padding */
-  similarRowViewport: {
-    width: "100%",
-    maxWidth: "100%",
-    overflow: "hidden",
-    minHeight: SIMILAR_SWATCH_SIZE + 80,
-  },
-  similarRowScroll: {
-    width: "100%",
-    flexGrow: 0,
-  },
   similarRow: {
-    flexDirection: "row",
-    flexWrap: "nowrap",
-    alignItems: "flex-start",
     paddingBottom: Spacing.md,
-    paddingRight: Spacing.md,
+    gap: Spacing.sm,
   },
   similarCard: {
     width: SIMILAR_CARD_WIDTH,
-    maxWidth: SIMILAR_CARD_WIDTH,
     alignItems: "center",
-    overflow: "hidden",
-  },
-  similarCardSpacing: {
-    marginRight: Spacing.sm,
   },
   similarSwatch: {
     width: SIMILAR_SWATCH_SIZE,
@@ -341,26 +306,18 @@ const styles = StyleSheet.create({
     marginBottom: Spacing.xs,
   },
   similarLabel: {
-    width: SIMILAR_CARD_WIDTH,
-    maxWidth: SIMILAR_CARD_WIDTH,
     fontSize: Typography.fontSize.xs,
     textAlign: "center",
-    alignSelf: "center",
+    maxWidth: SIMILAR_CARD_WIDTH,
   },
   similarSubtitle: {
-    width: SIMILAR_CARD_WIDTH,
-    maxWidth: SIMILAR_CARD_WIDTH,
     fontSize: Typography.fontSize.xs,
     textAlign: "center",
-    alignSelf: "center",
+    maxWidth: SIMILAR_CARD_WIDTH,
     marginTop: 2,
   },
   similarPct: {
-    width: SIMILAR_CARD_WIDTH,
-    maxWidth: SIMILAR_CARD_WIDTH,
     fontSize: Typography.fontSize.xs,
-    textAlign: "center",
-    alignSelf: "center",
     marginTop: 2,
   },
 });
