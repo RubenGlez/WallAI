@@ -3,7 +3,7 @@ import React from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 
 import { IconSymbol } from "@/components/ui/icon-symbol";
-import { Accent, Glass, Shadows, Spacing, Surface } from "@/constants/theme";
+import { Accent, BorderRadius, Glass, Shadows, Spacing, Surface } from "@/constants/theme";
 
 const TOOLBAR_ICON_SIZE = 40;
 const TOOLBAR_GAP = Spacing.sm;
