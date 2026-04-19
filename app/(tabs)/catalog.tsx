@@ -1,3 +1,4 @@
+import { LinearGradient } from "expo-linear-gradient";
 import React, { useCallback, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
@@ -101,35 +102,51 @@ export default function CatalogScreen() {
         placeholder={t("catalog.searchPlaceholder")}
         clearAccessibilityLabel={t("common.clear")}
       />
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        style={styles.chipScroll}
-        contentContainerStyle={styles.chipContent}
-      >
-        <BrandChip
-          label="All"
-          active={activeBrandId === ALL_BRAND_ID}
-          onPress={() => handleBrandChip(ALL_BRAND_ID)}
-        />
-        {brands.map((brand) => (
-          <BrandChip
-            key={brand.id}
-            label={brand.name}
-            active={activeBrandId === brand.id}
-            onPress={() => handleBrandChip(brand.id)}
+      <View style={styles.chipRow}>
+        <View style={styles.chipScrollWrap}>
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={styles.chipContent}
+          >
+            <BrandChip
+              label="All"
+              active={activeBrandId === ALL_BRAND_ID}
+              onPress={() => handleBrandChip(ALL_BRAND_ID)}
+            />
+            {brands.map((brand) => (
+              <BrandChip
+                key={brand.id}
+                label={brand.name}
+                active={activeBrandId === brand.id}
+                onPress={() => handleBrandChip(brand.id)}
+              />
+            ))}
+          </ScrollView>
+          <LinearGradient
+            colors={["transparent", Surface.lowest]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 0 }}
+            style={styles.chipFade}
+            pointerEvents="none"
           />
-        ))}
+        </View>
         <TouchableOpacity
-          style={styles.filterChip}
+          style={[styles.filterChip, activeCount < totalCount && styles.filterChipActive]}
           onPress={() => seriesFilterSheetRef.current?.present()}
+          accessibilityLabel={t("catalog.filterSeries")}
+          hitSlop={{ top: 8, bottom: 8, left: 4, right: 8 }}
         >
-          <IconSymbol name="slider.horizontal.3" size={14} color={Accent.onSurfaceMuted} />
-          <ThemedText style={styles.filterChipText}>
+          <IconSymbol
+            name="slider.horizontal.3"
+            size={15}
+            color={activeCount < totalCount ? Accent.primary : Accent.onSurfaceMuted}
+          />
+          <ThemedText style={[styles.filterChipText, activeCount < totalCount && styles.filterChipTextActive]}>
             {activeCount}/{totalCount}
           </ThemedText>
         </TouchableOpacity>
-      </ScrollView>
+      </View>
     </View>
   );
 
@@ -205,12 +222,26 @@ const styles = StyleSheet.create({
   favBtn: {
     padding: Spacing.xs,
   },
-  chipScroll: {
+  chipRow: {
+    flexDirection: "row",
+    alignItems: "center",
     marginBottom: Spacing.sm,
+    gap: Spacing.xs,
+  },
+  chipScrollWrap: {
+    flex: 1,
+    position: "relative",
   },
   chipContent: {
     gap: Spacing.sm,
     paddingVertical: Spacing.xs,
+  },
+  chipFade: {
+    position: "absolute",
+    right: 0,
+    top: 0,
+    bottom: 0,
+    width: 32,
   },
   chip: {
     paddingHorizontal: Spacing.md,
@@ -238,10 +269,16 @@ const styles = StyleSheet.create({
     borderRadius: BorderRadius.full,
     backgroundColor: Surface.high,
   },
+  filterChipActive: {
+    backgroundColor: `${Accent.primary}22`,
+  },
   filterChipText: {
     fontSize: Typography.fontSize.xs,
     color: Accent.onSurfaceMuted,
     fontFamily: FontFamily.displayMedium,
+  },
+  filterChipTextActive: {
+    color: Accent.primary,
   },
   listContent: {
     paddingTop: COLOR_GRID.GAP,
