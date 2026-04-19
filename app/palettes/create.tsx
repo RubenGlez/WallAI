@@ -23,6 +23,8 @@ import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { COLOR_GRID } from "@/constants/color-grid";
+import { LinearGradient } from "expo-linear-gradient";
+
 import { Accent, Spacing, Surface, Typography } from "@/constants/theme";
 import { useSeriesColorSelection } from "@/hooks/use-series-color-selection";
 import { filterColorsBySearch, getColorDisplayName } from "@/lib/color";
@@ -254,35 +256,39 @@ export default function CreatePaletteScreen() {
         showsVerticalScrollIndicator={false}
       />
 
-      <View
-        style={[
-          styles.footer,
-          { backgroundColor: Surface.low, paddingBottom: Spacing.md + insets.bottom },
-        ]}
+      <LinearGradient
+        colors={["transparent", Surface.lowest]}
+        style={styles.footerGradient}
+        pointerEvents="box-none"
       >
-        <View style={styles.footerActionsRow}>
-          <View style={styles.switchWrap}>
-            <Switch
-              value={showOnlySelected}
-              onValueChange={setShowOnlySelected}
-              trackColor={{ false: Accent.outlineVariant, true: `${Accent.primary}60` }}
-              thumbColor={showOnlySelected ? Accent.primary : Accent.onSurfaceMuted}
-            />
-            <ThemedText style={[styles.switchLabel, { color: Accent.onSurfaceMuted }]}>
-              {t("colors.colorCount", { count: selectedColors.length })}
-            </ThemedText>
+        <View
+          style={[styles.footerContent, { paddingBottom: Spacing.md + insets.bottom }]}
+          pointerEvents="box-none"
+        >
+          <View style={styles.footerActionsRow}>
+            <View style={styles.switchWrap}>
+              <Switch
+                value={showOnlySelected}
+                onValueChange={setShowOnlySelected}
+                trackColor={{ false: Accent.outlineVariant, true: `${Accent.primary}60` }}
+                thumbColor={showOnlySelected ? Accent.primary : Accent.onSurfaceMuted}
+              />
+              <ThemedText style={[styles.switchLabel, { color: Accent.onSurfaceMuted }]}>
+                {t("colors.colorCount", { count: selectedColors.length })}
+              </ThemedText>
+            </View>
+            <Button
+              variant="primary"
+              size="md"
+              fullWidth
+              onPress={handleSave}
+              disabled={selectedColors.length === 0}
+            >
+              {t("palettes.savePalette")}
+            </Button>
           </View>
-          <Button
-            variant="primary"
-            size="md"
-            fullWidth
-            onPress={handleSave}
-            disabled={selectedColors.length === 0}
-          >
-            {t("palettes.savePalette")}
-          </Button>
         </View>
-      </View>
+      </LinearGradient>
 
       <SaveNameModal
         visible={showNameModal}
@@ -317,12 +323,16 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginBottom: GAP,
   },
-  footer: {
+  footerGradient: {
     position: "absolute",
     left: 0,
     right: 0,
     bottom: 0,
-    padding: Spacing.md,
+    paddingTop: Spacing.xxl,
+  },
+  footerContent: {
+    paddingHorizontal: Spacing.md,
+    paddingTop: Spacing.sm,
   },
   footerActionsRow: {
     flexDirection: "row",

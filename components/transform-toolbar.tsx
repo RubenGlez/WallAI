@@ -3,7 +3,7 @@ import React from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 
 import { IconSymbol } from "@/components/ui/icon-symbol";
-import { Accent, Shadows, Spacing, Surface } from "@/constants/theme";
+import { Accent, Glass, Shadows, Spacing, Surface } from "@/constants/theme";
 
 const TOOLBAR_ICON_SIZE = 40;
 const TOOLBAR_GAP = Spacing.sm;
@@ -56,8 +56,7 @@ export function TransformToolbar({
           styles.pill,
           {
             width: TOOLBAR_PILL_WIDTH,
-            backgroundColor: Surface.high,
-            shadowColor: Accent.onSurface,
+            backgroundColor: `${Glass.backgroundColor}99`,
           },
         ]}
       >

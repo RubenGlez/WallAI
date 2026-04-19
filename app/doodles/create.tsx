@@ -7,7 +7,17 @@ import React, {
   useState,
 } from "react";
 import { useTranslation } from "react-i18next";
-import { Alert, Image, StyleSheet, View } from "react-native";
+import { useKeepAwake } from "expo-keep-awake";
+import {
+  Alert,
+  Image,
+  Modal,
+  Pressable,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import Animated, {
   type SharedValue,
@@ -167,6 +177,7 @@ export default function DoodlesCreateScreen() {
     DEFAULT_SKETCH_OPACITY,
   );
   const [toolbarView, setToolbarView] = useState<"icons" | "opacity">("icons");
+  const [isPreviewMode, setIsPreviewMode] = useState(false);
   const [showNameModal, setShowNameModal] = useState(false);
   const [doodleName, setDoodleName] = useState("");
   const [pendingThumbnailUri, setPendingThumbnailUri] = useState<string | null>(null);
@@ -547,19 +558,34 @@ export default function DoodlesCreateScreen() {
                   />
                 ) : null}
                 {bothLoaded ? (
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    onPress={handleSharePress}
-                    accessibilityLabel={t("doodles.shareDoodle")}
-                    icon={
-                      <IconSymbol
-                        name="square.and.arrow.up"
-                        size={24}
-                        color={Accent.primary}
-                      />
-                    }
-                  />
+                  <>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onPress={() => setIsPreviewMode(true)}
+                      accessibilityLabel={t("doodles.previewDoodle")}
+                      icon={
+                        <IconSymbol
+                          name="eye.fill"
+                          size={24}
+                          color={Accent.primary}
+                        />
+                      }
+                    />
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      onPress={handleSharePress}
+                      accessibilityLabel={t("doodles.shareDoodle")}
+                      icon={
+                        <IconSymbol
+                          name="square.and.arrow.up"
+                          size={24}
+                          color={Accent.primary}
+                        />
+                      }
+                    />
+                  </>
                 ) : null}
               </View>
             ) : null
@@ -658,6 +684,40 @@ export default function DoodlesCreateScreen() {
         onSaveToPhotos={() => shareSheetRef.current?.dismiss()}
         onShare={() => shareSheetRef.current?.dismiss()}
       />
+
+      {isPreviewMode && bothLoaded && (
+        <DoodlePreviewModal
+          wallUri={wallUri!}
+          sketchUri={sketchUri!}
+          wallTransform={{
+            offsetX: wallOffsetX,
+            offsetY: wallOffsetY,
+            savedOffsetX: wallSavedOffsetX,
+            savedOffsetY: wallSavedOffsetY,
+            scale: wallScale,
+            savedScale: wallSavedScale,
+            rotation: wallRotation,
+            savedRotation: wallSavedRotation,
+            flipX: wallFlipX,
+            flipY: wallFlipY,
+            opacity: wallOpacity,
+          }}
+          sketchTransform={{
+            offsetX: sketchOffsetX,
+            offsetY: sketchOffsetY,
+            savedOffsetX: sketchSavedOffsetX,
+            savedOffsetY: sketchSavedOffsetY,
+            scale: sketchScale,
+            savedScale: sketchSavedScale,
+            rotation: sketchRotation,
+            savedRotation: sketchSavedRotation,
+            flipX: sketchFlipX,
+            flipY: sketchFlipY,
+            opacity: sketchOpacity,
+          }}
+          onClose={() => setIsPreviewMode(false)}
+        />
+      )}
     </Screen>
   );
 }
@@ -823,6 +883,100 @@ function PlaceholderSlot({
     </View>
   );
 }
+
+type DoodlePreviewModalProps = {
+  wallUri: string;
+  sketchUri: string;
+  wallTransform: TransformShared;
+  sketchTransform: TransformShared;
+  onClose: () => void;
+};
+
+function DoodlePreviewModal({
+  wallUri,
+  sketchUri,
+  wallTransform,
+  sketchTransform,
+  onClose,
+}: DoodlePreviewModalProps) {
+  useKeepAwake();
+  const [showControls, setShowControls] = useState(true);
+  const hideTimer = useRef<ReturnType<typeof setTimeout>>();
+
+  const resetTimer = useCallback(() => {
+    if (hideTimer.current) clearTimeout(hideTimer.current);
+    setShowControls(true);
+    hideTimer.current = setTimeout(() => setShowControls(false), 3000);
+  }, []);
+
+  useEffect(() => {
+    resetTimer();
+    return () => {
+      if (hideTimer.current) clearTimeout(hideTimer.current);
+    };
+  }, [resetTimer]);
+
+  return (
+    <Modal
+      visible
+      animationType="fade"
+      statusBarTranslucent
+      onRequestClose={onClose}
+    >
+      <Pressable style={previewStyles.container} onPress={resetTimer}>
+        <TransformableLayer
+          imageUri={wallUri}
+          {...wallTransform}
+          isActive={false}
+        />
+        <TransformableLayer
+          imageUri={sketchUri}
+          {...sketchTransform}
+          isActive={false}
+        />
+        {showControls && (
+          <TouchableOpacity
+            style={previewStyles.closeBtn}
+            onPress={onClose}
+            activeOpacity={0.7}
+            accessibilityRole="button"
+          >
+            <View style={previewStyles.closeBtnInner}>
+              <Text style={previewStyles.closeBtnText}>✕</Text>
+            </View>
+          </TouchableOpacity>
+        )}
+      </Pressable>
+    </Modal>
+  );
+}
+
+const previewStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: Surface.lowest,
+  },
+  closeBtn: {
+    position: "absolute",
+    top: Spacing.xxl,
+    right: Spacing.md,
+  },
+  closeBtnInner: {
+    width: 44,
+    height: 44,
+    borderRadius: BorderRadius.full,
+    backgroundColor: "rgba(0,0,0,0.45)",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  closeBtnText: {
+    fontSize: 18,
+    fontWeight: "600",
+    color: "rgba(255,255,255,0.9)",
+    lineHeight: 20,
+    textAlign: "center",
+  },
+});
 
 const styles = StyleSheet.create({
   content: {

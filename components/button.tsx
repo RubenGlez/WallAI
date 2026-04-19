@@ -98,13 +98,47 @@ export function Button({
   );
 
   if (variant === "primary") {
+    if (isDisabled) {
+      return (
+        <TouchableOpacity
+          disabled
+          style={[
+            baseContainerStyle,
+            { backgroundColor: Surface.highest },
+            fullWidth ? { alignSelf: "stretch" } : {},
+            style,
+          ]}
+          accessibilityRole="button"
+          accessibilityLabel={accessibilityLabel}
+        >
+          {loading ? (
+            <ActivityIndicator size="small" color={Accent.onSurfaceMuted} />
+          ) : (
+            <>
+              {icon != null && <View style={styles.iconWrap}>{icon}</View>}
+              {children != null && (
+                <ThemedText
+                  style={{
+                    color: Accent.onSurfaceMuted,
+                    fontSize: cfg.fontSize,
+                    fontFamily: FontFamily.displaySemiBold,
+                  }}
+                  numberOfLines={1}
+                >
+                  {children}
+                </ThemedText>
+              )}
+            </>
+          )}
+        </TouchableOpacity>
+      );
+    }
     return (
       <TouchableOpacity
         onPress={onPress}
-        disabled={isDisabled}
+        disabled={false}
         style={[
           { borderRadius: BorderRadius.full, overflow: "hidden" },
-          isDisabled && { opacity: 0.4 },
           fullWidth ? { alignSelf: "stretch" } : {},
           style,
         ]}
@@ -137,7 +171,12 @@ export function Button({
     <TouchableOpacity
       onPress={onPress}
       disabled={isDisabled}
-      style={[baseContainerStyle, variantStyle, isDisabled && { opacity: 0.4 }, style]}
+      style={[
+        baseContainerStyle,
+        variantStyle,
+        isDisabled && { opacity: 0.35 },
+        style,
+      ]}
       accessibilityRole="button"
       accessibilityLabel={accessibilityLabel}
       activeOpacity={0.7}
