@@ -1,9 +1,8 @@
 import {
-  BottomSheetBackdrop,
   BottomSheetModal,
   BottomSheetScrollView,
 } from "@gorhom/bottom-sheet";
-import React, { forwardRef, useCallback, useMemo } from "react";
+import React, { forwardRef, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import {
   ScrollView,
@@ -16,9 +15,10 @@ import { FavoriteIcon } from "@/components/favorite-icon";
 import { ThemedText } from "@/components/themed-text";
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { Accent, BorderRadius, FontFamily, Spacing, Surface, Typography } from "@/constants/theme";
-
+import { useSheetBackdrop } from "@/hooks/use-sheet-backdrop";
 import { findClosestColors } from "@/lib/colorMatch";
 import { getColorDisplayName } from "@/lib/color";
+import { isVeryLightHex, swatchGhostBorder } from "@/lib/color-contrast";
 import {
   getAllSeriesWithCount,
   getColorsBySeriesId,
@@ -55,11 +55,8 @@ export function ColorDetailContent({
   onOpenColor,
 }: ContentProps) {
   const { t, i18n } = useTranslation();
-  
-  
-  const isLight =
-    color?.color.hex.toLowerCase() === "#ffffff" ||
-    color?.color.hex.toLowerCase().startsWith("#fff");
+
+  const isLight = color ? isVeryLightHex(color.color.hex) : false;
 
   const sameSeriesMatches = useMemo(() => {
     if (!color) return [];
@@ -99,7 +96,7 @@ export function ColorDetailContent({
           style={[
             styles.swatch,
             { backgroundColor: color.color.hex },
-            isLight && { borderWidth: 1, borderColor: `${Accent.outlineVariant}26` },
+            isLight && swatchGhostBorder(Accent.outlineVariant),
           ]}
         />
         <TouchableOpacity
@@ -196,9 +193,6 @@ function SimilarColorCard({
   similarity,
   onPress,
 }: SimilarColorCardProps) {
-  const isVeryLight =
-    color.hex.toLowerCase() === "#ffffff" ||
-    color.hex.toLowerCase().startsWith("#fff");
   return (
     <TouchableOpacity
       style={[styles.similarCard, { marginRight: Spacing.sm }]}
@@ -211,7 +205,7 @@ function SimilarColorCard({
         style={[
           styles.similarSwatch,
           { backgroundColor: color.hex },
-          isVeryLight && { borderWidth: 1, borderColor: `${Accent.outlineVariant}26` },
+          isVeryLightHex(color.hex) && swatchGhostBorder(Accent.outlineVariant),
         ]}
       />
       <ThemedText
@@ -322,20 +316,7 @@ export const ColorDetailBottomSheet = forwardRef<
   { color, isFavorite, onToggleFavorite, onOpenColor },
   ref,
 ) {
-  
-  
-
-  const renderBackdrop = useCallback(
-    (props: React.ComponentProps<typeof BottomSheetBackdrop>) => (
-      <BottomSheetBackdrop
-        {...props}
-        appearsOnIndex={0}
-        disappearsOnIndex={-1}
-        opacity={0.5}
-      />
-    ),
-    [],
-  );
+  const renderBackdrop = useSheetBackdrop();
 
   return (
     <BottomSheetModal

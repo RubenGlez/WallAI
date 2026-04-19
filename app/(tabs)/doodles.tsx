@@ -1,17 +1,17 @@
 import { useRouter } from "expo-router";
-import React, { useRef } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
-import { Alert, ScrollView, StyleSheet, View } from "react-native";
-import Swipeable from "react-native-gesture-handler/Swipeable";
+import { ScrollView, StyleSheet, View } from "react-native";
 
 import { DoodleCard } from "@/components/doodle-card";
 import { EmptyStateCard } from "@/components/empty-state-card";
 import { FloatingActionButton } from "@/components/floating-action-button";
 import { Screen } from "@/components/screen";
 import { ScreenHeader } from "@/components/screen-header";
-import { SwipeableDeleteAction } from "@/components/swipeable-delete-action";
+import { SwipeableRow } from "@/components/swipeable-row";
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { Accent, Spacing } from "@/constants/theme";
+import { confirmDelete } from "@/lib/confirm-delete";
 import { useDoodlesStore } from "@/stores/useDoodlesStore";
 import type { Doodle } from "@/types";
 
@@ -24,24 +24,10 @@ function SwipeableDoodleCard({
   onPress: () => void;
   onDelete: () => void;
 }) {
-  const swipeRef = useRef<Swipeable>(null);
-
   return (
-    <Swipeable
-      ref={swipeRef}
-      renderRightActions={() => (
-        <SwipeableDeleteAction
-          onDelete={() => {
-            swipeRef.current?.close();
-            onDelete();
-          }}
-        />
-      )}
-      rightThreshold={60}
-      overshootRight={false}
-    >
+    <SwipeableRow onDelete={onDelete}>
       <DoodleCard doodle={doodle} onPress={onPress} />
-    </Swipeable>
+    </SwipeableRow>
   );
 }
 
@@ -54,14 +40,13 @@ export default function DoodlesIndexScreen() {
   const handleNewDoodle = () => router.push("/doodles/create");
 
   const handleDelete = (doodle: Doodle) => {
-    Alert.alert(
-      t("doodles.deleteTitle", { name: doodle.name }),
-      t("doodles.deleteMessage"),
-      [
-        { text: t("common.cancel"), style: "cancel" },
-        { text: t("common.delete"), style: "destructive", onPress: () => removeDoodle(doodle.id) },
-      ],
-    );
+    confirmDelete({
+      title: t("doodles.deleteTitle", { name: doodle.name }),
+      message: t("doodles.deleteMessage"),
+      confirmLabel: t("common.delete"),
+      cancelLabel: t("common.cancel"),
+      onConfirm: () => removeDoodle(doodle.id),
+    });
   };
 
   return (

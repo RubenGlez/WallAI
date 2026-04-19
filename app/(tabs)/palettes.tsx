@@ -1,26 +1,25 @@
 import { useRouter } from "expo-router";
-import React, { useRef } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import {
   ActivityIndicator,
-  Alert,
   ScrollView,
   StyleSheet,
   TouchableOpacity,
   View,
 } from "react-native";
-import Swipeable from "react-native-gesture-handler/Swipeable";
 
 import { EmptyStateCard } from "@/components/empty-state-card";
 import { FloatingActionButton } from "@/components/floating-action-button";
 import { PaletteCard } from "@/components/palette-card";
 import { Screen } from "@/components/screen";
 import { ScreenHeader } from "@/components/screen-header";
-import { SwipeableDeleteAction } from "@/components/swipeable-delete-action";
+import { SwipeableRow } from "@/components/swipeable-row";
 import { ThemedText } from "@/components/themed-text";
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { Accent, BorderRadius, FontFamily, Spacing, Surface, Typography } from "@/constants/theme";
 import { useImagePicker } from "@/hooks/use-image-picker";
+import { confirmDelete } from "@/lib/confirm-delete";
 import { usePalettesStore } from "@/stores/usePalettesStore";
 import type { Palette } from "@/types";
 
@@ -33,22 +32,10 @@ function SwipeablePaletteCard({
   onPress: () => void;
   onDelete: () => void;
 }) {
-  const swipeRef = useRef<Swipeable>(null);
-
-  const handleDelete = () => {
-    swipeRef.current?.close();
-    onDelete();
-  };
-
   return (
-    <Swipeable
-      ref={swipeRef}
-      renderRightActions={() => <SwipeableDeleteAction onDelete={handleDelete} />}
-      rightThreshold={60}
-      overshootRight={false}
-    >
+    <SwipeableRow onDelete={onDelete}>
       <PaletteCard palette={palette} onPress={onPress} />
-    </Swipeable>
+    </SwipeableRow>
   );
 }
 
@@ -70,14 +57,13 @@ export default function PalettesIndexScreen() {
   };
 
   const handleDelete = (palette: Palette) => {
-    Alert.alert(
-      t("palettes.deleteTitle", { name: palette.name }),
-      t("palettes.deleteMessage"),
-      [
-        { text: t("common.cancel"), style: "cancel" },
-        { text: t("common.delete"), style: "destructive", onPress: () => removePalette(palette.id) },
-      ],
-    );
+    confirmDelete({
+      title: t("palettes.deleteTitle", { name: palette.name }),
+      message: t("palettes.deleteMessage"),
+      confirmLabel: t("common.delete"),
+      cancelLabel: t("common.cancel"),
+      onConfirm: () => removePalette(palette.id),
+    });
   };
 
   return (

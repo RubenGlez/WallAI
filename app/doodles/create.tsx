@@ -7,23 +7,11 @@ import React, {
   useState,
 } from "react";
 import { useTranslation } from "react-i18next";
-import { useKeepAwake } from "expo-keep-awake";
 import {
-  Alert,
   Image,
-  Modal,
-  Pressable,
   StyleSheet,
-  Text,
-  TouchableOpacity,
   View,
 } from "react-native";
-import { Gesture, GestureDetector } from "react-native-gesture-handler";
-import Animated, {
-  type SharedValue,
-  useAnimatedStyle,
-  useSharedValue,
-} from "react-native-reanimated";
 import { captureRef } from "react-native-view-shot";
 
 import { Button } from "@/components/button";
@@ -31,48 +19,26 @@ import {
   DoodleShareBottomSheet,
   type DoodleShareBottomSheetRef,
 } from "@/components/doodle-share-bottom-sheet";
+import { DoodlePlaceholderSlot } from "@/components/doodle-placeholder-slot";
+import { DoodlePreviewModal } from "@/components/doodle-preview-modal";
+import { TransformableLayer } from "@/components/doodle-transform-layer";
 import { HeaderBackButton } from "@/components/header-back-button";
 import { SaveNameModal } from "@/components/save-name-modal";
 import { Screen } from "@/components/screen";
 import { Tabs } from "@/components/tabs";
 import { ThemedText } from "@/components/themed-text";
 import { TransformToolbar } from "@/components/transform-toolbar";
-import { IconSymbol, type IconSymbolName } from "@/components/ui/icon-symbol";
+import { IconSymbol } from "@/components/ui/icon-symbol";
 import { Accent, BorderRadius, Spacing, Surface, Typography } from "@/constants/theme";
 import { useImagePicker } from "@/hooks/use-image-picker";
+import { useDoodleLayers } from "@/hooks/use-doodle-layers";
+import { confirmDelete } from "@/lib/confirm-delete";
 import { useDoodlesStore } from "@/stores/useDoodlesStore";
 
 const CONTENT_PADDING = Spacing.md;
-const DEFAULT_SKETCH_OPACITY = 0.85;
-const DEFAULT_WALL_OPACITY = 1;
 
 type ImageSlot = "wall" | "sketch";
 type TabId = "wall" | "sketch";
-
-/** Shape we persist for each layer (wall/sketch) — must match handleConfirmSave */
-type LayerTransformData = {
-  offsetX: number;
-  offsetY: number;
-  scale: number;
-  rotation: number;
-  flipX: number;
-  flipY: number;
-  opacity: number;
-};
-
-function isLayerTransformData(v: unknown): v is LayerTransformData {
-  return (
-    typeof v === "object" &&
-    v !== null &&
-    "offsetX" in v &&
-    "offsetY" in v &&
-    "scale" in v &&
-    "rotation" in v &&
-    "flipX" in v &&
-    "flipY" in v &&
-    "opacity" in v
-  );
-}
 
 export default function DoodlesCreateScreen() {
   const { t } = useTranslation();
@@ -94,10 +60,26 @@ export default function DoodlesCreateScreen() {
   const [loadingSlot, setLoadingSlot] = useState<ImageSlot | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [sharedImageUri, setSharedImageUri] = useState<string | null>(null);
+  const [toolbarView, setToolbarView] = useState<"icons" | "opacity">("icons");
+  const [isPreviewMode, setIsPreviewMode] = useState(false);
+  const [showNameModal, setShowNameModal] = useState(false);
+  const [doodleName, setDoodleName] = useState("");
+  const [pendingThumbnailUri, setPendingThumbnailUri] = useState<string | null>(null);
 
   const doodleId = params.doodleId ?? undefined;
   const montageRef = useRef<View>(null);
   const shareSheetRef = useRef<DoodleShareBottomSheetRef>(null);
+
+  const {
+    wall,
+    sketch,
+    wallOpacityAmount,
+    setWallOpacityAmount,
+    sketchOpacityAmount,
+    setSketchOpacityAmount,
+    resetTransform,
+    serializeTransforms,
+  } = useDoodleLayers(doodleId, getDoodle);
 
   useEffect(() => {
     if (!pickerLoading) setLoadingSlot(null);
@@ -147,160 +129,6 @@ export default function DoodlesCreateScreen() {
 
   const bothLoaded = Boolean(wallUri && sketchUri);
 
-  const wallOffsetX = useSharedValue(0);
-  const wallOffsetY = useSharedValue(0);
-  const wallSavedOffsetX = useSharedValue(0);
-  const wallSavedOffsetY = useSharedValue(0);
-  const wallScale = useSharedValue(1);
-  const wallSavedScale = useSharedValue(1);
-  const wallRotation = useSharedValue(0);
-  const wallSavedRotation = useSharedValue(0);
-  const wallFlipX = useSharedValue(1);
-  const wallFlipY = useSharedValue(1);
-  const wallOpacity = useSharedValue(DEFAULT_WALL_OPACITY);
-
-  const sketchOffsetX = useSharedValue(0);
-  const sketchOffsetY = useSharedValue(0);
-  const sketchSavedOffsetX = useSharedValue(0);
-  const sketchSavedOffsetY = useSharedValue(0);
-  const sketchScale = useSharedValue(1);
-  const sketchSavedScale = useSharedValue(1);
-  const sketchRotation = useSharedValue(0);
-  const sketchSavedRotation = useSharedValue(0);
-  const sketchFlipX = useSharedValue(1);
-  const sketchFlipY = useSharedValue(1);
-  const sketchOpacity = useSharedValue(DEFAULT_SKETCH_OPACITY);
-
-  const [wallOpacityAmount, setWallOpacityAmount] =
-    useState(DEFAULT_WALL_OPACITY);
-  const [sketchOpacityAmount, setSketchOpacityAmount] = useState(
-    DEFAULT_SKETCH_OPACITY,
-  );
-  const [toolbarView, setToolbarView] = useState<"icons" | "opacity">("icons");
-  const [isPreviewMode, setIsPreviewMode] = useState(false);
-  const [showNameModal, setShowNameModal] = useState(false);
-  const [doodleName, setDoodleName] = useState("");
-  const [pendingThumbnailUri, setPendingThumbnailUri] = useState<string | null>(null);
-
-  const resetTransform = useCallback(() => {
-    if (activeTab === "wall") {
-      wallOffsetX.value = 0;
-      wallOffsetY.value = 0;
-      wallSavedOffsetX.value = 0;
-      wallSavedOffsetY.value = 0;
-      wallScale.value = 1;
-      wallSavedScale.value = 1;
-      wallRotation.value = 0;
-      wallSavedRotation.value = 0;
-      wallFlipX.value = 1;
-      wallFlipY.value = 1;
-      wallOpacity.value = DEFAULT_WALL_OPACITY;
-      setWallOpacityAmount(DEFAULT_WALL_OPACITY);
-    } else {
-      sketchOffsetX.value = 0;
-      sketchOffsetY.value = 0;
-      sketchSavedOffsetX.value = 0;
-      sketchSavedOffsetY.value = 0;
-      sketchScale.value = 1;
-      sketchSavedScale.value = 1;
-      sketchRotation.value = 0;
-      sketchSavedRotation.value = 0;
-      sketchFlipX.value = 1;
-      sketchFlipY.value = 1;
-      sketchOpacity.value = DEFAULT_SKETCH_OPACITY;
-      setSketchOpacityAmount(DEFAULT_SKETCH_OPACITY);
-    }
-  }, [
-    activeTab,
-    wallOffsetX,
-    wallOffsetY,
-    wallSavedOffsetX,
-    wallSavedOffsetY,
-    wallScale,
-    wallSavedScale,
-    wallRotation,
-    wallSavedRotation,
-    wallFlipX,
-    wallFlipY,
-    wallOpacity,
-    sketchOffsetX,
-    sketchOffsetY,
-    sketchSavedOffsetX,
-    sketchSavedOffsetY,
-    sketchScale,
-    sketchSavedScale,
-    sketchRotation,
-    sketchSavedRotation,
-    sketchFlipX,
-    sketchFlipY,
-    sketchOpacity,
-  ]);
-
-  // Restore saved transform when editing an existing doodle
-  useEffect(() => {
-    if (!doodleId) return;
-    const doodle = getDoodle(doodleId);
-    const raw = doodle?.transformData as
-      | { wall?: unknown; sketch?: unknown }
-      | undefined;
-    if (!raw?.wall || !raw?.sketch) return;
-    if (!isLayerTransformData(raw.wall) || !isLayerTransformData(raw.sketch))
-      return;
-
-    const w = raw.wall;
-    wallOffsetX.value = w.offsetX;
-    wallOffsetY.value = w.offsetY;
-    wallSavedOffsetX.value = w.offsetX;
-    wallSavedOffsetY.value = w.offsetY;
-    wallScale.value = w.scale;
-    wallSavedScale.value = w.scale;
-    wallRotation.value = w.rotation;
-    wallSavedRotation.value = w.rotation;
-    wallFlipX.value = w.flipX;
-    wallFlipY.value = w.flipY;
-    wallOpacity.value = w.opacity;
-    setWallOpacityAmount(w.opacity);
-
-    const s = raw.sketch;
-    sketchOffsetX.value = s.offsetX;
-    sketchOffsetY.value = s.offsetY;
-    sketchSavedOffsetX.value = s.offsetX;
-    sketchSavedOffsetY.value = s.offsetY;
-    sketchScale.value = s.scale;
-    sketchSavedScale.value = s.scale;
-    sketchRotation.value = s.rotation;
-    sketchSavedRotation.value = s.rotation;
-    sketchFlipX.value = s.flipX;
-    sketchFlipY.value = s.flipY;
-    sketchOpacity.value = s.opacity;
-    setSketchOpacityAmount(s.opacity);
-  }, [
-    doodleId,
-    getDoodle,
-    wallOffsetX,
-    wallOffsetY,
-    wallSavedOffsetX,
-    wallSavedOffsetY,
-    wallScale,
-    wallSavedScale,
-    wallRotation,
-    wallSavedRotation,
-    wallFlipX,
-    wallFlipY,
-    wallOpacity,
-    sketchOffsetX,
-    sketchOffsetY,
-    sketchSavedOffsetX,
-    sketchSavedOffsetY,
-    sketchScale,
-    sketchSavedScale,
-    sketchRotation,
-    sketchSavedRotation,
-    sketchFlipX,
-    sketchFlipY,
-    sketchOpacity,
-  ]);
-
   const openSaveModal = useCallback(() => {
     if (!wallUri || !sketchUri) return;
     setDoodleName(doodleId ? (getDoodle(doodleId)?.name ?? "") : "");
@@ -314,62 +142,32 @@ export default function DoodlesCreateScreen() {
 
   const handleSharePress = useCallback(() => {
     if (!bothLoaded || !montageRef.current) return;
-    captureRef(montageRef, {
-      result: "tmpfile",
-      format: "png",
-      quality: 1,
-    })
+    captureRef(montageRef, { result: "tmpfile", format: "png", quality: 1 })
       .then((uri) => {
         setSharedImageUri(uri);
         shareSheetRef.current?.present();
       })
-      .catch(() => {
-        setError(t("doodles.shareError"));
-      });
+      .catch(() => setError(t("doodles.shareError")));
   }, [bothLoaded, t]);
 
   const handleDeleteDoodle = useCallback(() => {
     if (!doodleId) return;
-    Alert.alert(
-      t("doodles.deleteDoodleTitle"),
-      t("doodles.deleteDoodleMessage"),
-      [
-        { text: t("common.cancel"), style: "cancel" },
-        {
-          text: t("common.delete"),
-          style: "destructive",
-          onPress: () => {
-            removeDoodle(doodleId);
-            router.back();
-          },
-        },
-      ],
-    );
+    confirmDelete({
+      title: t("doodles.deleteDoodleTitle"),
+      message: t("doodles.deleteDoodleMessage"),
+      confirmLabel: t("common.delete"),
+      cancelLabel: t("common.cancel"),
+      onConfirm: () => {
+        removeDoodle(doodleId);
+        router.back();
+      },
+    });
   }, [doodleId, t, removeDoodle, router]);
 
   const handleConfirmSave = useCallback(() => {
     if (!wallUri || !sketchUri) return;
     const name = doodleName.trim() || t("doodles.defaultDoodleName");
-    const transformData = {
-      wall: {
-        offsetX: wallOffsetX.value,
-        offsetY: wallOffsetY.value,
-        scale: wallScale.value,
-        rotation: wallRotation.value,
-        flipX: wallFlipX.value,
-        flipY: wallFlipY.value,
-        opacity: wallOpacity.value,
-      },
-      sketch: {
-        offsetX: sketchOffsetX.value,
-        offsetY: sketchOffsetY.value,
-        scale: sketchScale.value,
-        rotation: sketchRotation.value,
-        flipX: sketchFlipX.value,
-        flipY: sketchFlipY.value,
-        opacity: sketchOpacity.value,
-      },
-    };
+    const transformData = serializeTransforms();
     const thumbnailUri = pendingThumbnailUri ?? undefined;
     if (doodleId) {
       updateDoodle(doodleId, {
@@ -392,70 +190,19 @@ export default function DoodlesCreateScreen() {
     setDoodleName("");
     setPendingThumbnailUri(null);
     router.back();
-  }, [
-    wallUri,
-    sketchUri,
-    doodleId,
-    doodleName,
-    pendingThumbnailUri,
-    t,
-    addDoodle,
-    updateDoodle,
-    router,
-    wallOffsetX,
-    wallOffsetY,
-    wallScale,
-    wallRotation,
-    wallFlipX,
-    wallFlipY,
-    wallOpacity,
-    sketchOffsetX,
-    sketchOffsetY,
-    sketchScale,
-    sketchRotation,
-    sketchFlipX,
-    sketchFlipY,
-    sketchOpacity,
-  ]);
+  }, [wallUri, sketchUri, doodleId, doodleName, pendingThumbnailUri, t, addDoodle, updateDoodle, router, serializeTransforms]);
+
+  const isWallActive = activeTab === "wall";
+  const activeLayer = isWallActive ? wall : sketch;
+  const activeOpacityAmount = isWallActive ? wallOpacityAmount : sketchOpacityAmount;
+  const setActiveOpacityAmount = isWallActive ? setWallOpacityAmount : setSketchOpacityAmount;
 
   const contentArea = (() => {
     if (bothLoaded) {
       return (
-        <View
-          ref={montageRef}
-          style={styles.superpositionWrap}
-          collapsable={false}
-        >
-          <TransformableLayer
-            imageUri={wallUri!}
-            offsetX={wallOffsetX}
-            offsetY={wallOffsetY}
-            savedOffsetX={wallSavedOffsetX}
-            savedOffsetY={wallSavedOffsetY}
-            scale={wallScale}
-            savedScale={wallSavedScale}
-            rotation={wallRotation}
-            savedRotation={wallSavedRotation}
-            flipX={wallFlipX}
-            flipY={wallFlipY}
-            opacity={wallOpacity}
-            isActive={activeTab === "wall"}
-          />
-          <TransformableLayer
-            imageUri={sketchUri!}
-            offsetX={sketchOffsetX}
-            offsetY={sketchOffsetY}
-            savedOffsetX={sketchSavedOffsetX}
-            savedOffsetY={sketchSavedOffsetY}
-            scale={sketchScale}
-            savedScale={sketchSavedScale}
-            rotation={sketchRotation}
-            savedRotation={sketchSavedRotation}
-            flipX={sketchFlipX}
-            flipY={sketchFlipY}
-            opacity={sketchOpacity}
-            isActive={activeTab === "sketch"}
-          />
+        <View ref={montageRef} style={styles.superpositionWrap} collapsable={false}>
+          <TransformableLayer imageUri={wallUri!} {...wall} isActive={activeTab === "wall"} />
+          <TransformableLayer imageUri={sketchUri!} {...sketch} isActive={activeTab === "sketch"} />
         </View>
       );
     }
@@ -463,23 +210,18 @@ export default function DoodlesCreateScreen() {
     if (activeTab === "wall") {
       if (!wallUri) {
         return (
-          <PlaceholderSlot
+          <DoodlePlaceholderSlot
             icon="photo.fill.on.rectangle.fill"
             label={t("doodles.wallImage")}
             onTakePhoto={() => takePhoto("wall")}
             onPickGallery={() => pickFromGallery("wall")}
             loading={loadingSlot === "wall"}
-            t={t}
           />
         );
       }
       return (
         <View style={styles.singleImageWrap}>
-          <Image
-            source={{ uri: wallUri }}
-            style={styles.singleImage}
-            resizeMode="contain"
-          />
+          <Image source={{ uri: wallUri }} style={styles.singleImage} resizeMode="contain" />
           <Button
             variant="outline"
             size="sm"
@@ -495,23 +237,18 @@ export default function DoodlesCreateScreen() {
     if (activeTab === "sketch") {
       if (!sketchUri) {
         return (
-          <PlaceholderSlot
+          <DoodlePlaceholderSlot
             icon="paintbrush"
             label={t("doodles.sketchImage")}
             onTakePhoto={() => takePhoto("sketch")}
             onPickGallery={() => pickFromGallery("sketch")}
             loading={loadingSlot === "sketch"}
-            t={t}
           />
         );
       }
       return (
         <View style={styles.singleImageWrap}>
-          <Image
-            source={{ uri: sketchUri }}
-            style={styles.singleImage}
-            resizeMode="contain"
-          />
+          <Image source={{ uri: sketchUri }} style={styles.singleImage} resizeMode="contain" />
           <Button
             variant="outline"
             size="sm"
@@ -527,17 +264,6 @@ export default function DoodlesCreateScreen() {
     return null;
   })();
 
-  const isWallActive = activeTab === "wall";
-  const activeFlipX = isWallActive ? wallFlipX : sketchFlipX;
-  const activeFlipY = isWallActive ? wallFlipY : sketchFlipY;
-  const activeOpacity = isWallActive ? wallOpacity : sketchOpacity;
-  const activeOpacityAmount = isWallActive
-    ? wallOpacityAmount
-    : sketchOpacityAmount;
-  const setActiveOpacityAmount = isWallActive
-    ? setWallOpacityAmount
-    : setSketchOpacityAmount;
-
   return (
     <Screen safeBottom>
       <View style={styles.header}>
@@ -552,9 +278,7 @@ export default function DoodlesCreateScreen() {
                     size="icon"
                     onPress={handleDeleteDoodle}
                     accessibilityLabel={t("doodles.deleteDoodle")}
-                    icon={
-                      <IconSymbol name="trash" size={24} color={Accent.error} />
-                    }
+                    icon={<IconSymbol name="trash" size={24} color={Accent.error} />}
                   />
                 ) : null}
                 {bothLoaded ? (
@@ -564,26 +288,14 @@ export default function DoodlesCreateScreen() {
                       size="icon"
                       onPress={() => setIsPreviewMode(true)}
                       accessibilityLabel={t("doodles.previewDoodle")}
-                      icon={
-                        <IconSymbol
-                          name="eye.fill"
-                          size={24}
-                          color={Accent.primary}
-                        />
-                      }
+                      icon={<IconSymbol name="eye.fill" size={24} color={Accent.primary} />}
                     />
                     <Button
                       variant="ghost"
                       size="icon"
                       onPress={handleSharePress}
                       accessibilityLabel={t("doodles.shareDoodle")}
-                      icon={
-                        <IconSymbol
-                          name="square.and.arrow.up"
-                          size={24}
-                          color={Accent.primary}
-                        />
-                      }
+                      icon={<IconSymbol name="square.and.arrow.up" size={24} color={Accent.primary} />}
                     />
                   </>
                 ) : null}
@@ -592,6 +304,7 @@ export default function DoodlesCreateScreen() {
           }
         />
       </View>
+
       <Tabs
         value={activeTab}
         onChange={(v) => setActiveTab(v as TabId)}
@@ -629,17 +342,13 @@ export default function DoodlesCreateScreen() {
               view={toolbarView}
               onViewChange={setToolbarView}
               onSave={openSaveModal}
-              onReset={resetTransform}
-              onFlipH={() => {
-                activeFlipX.value = -activeFlipX.value;
-              }}
-              onFlipV={() => {
-                activeFlipY.value = -activeFlipY.value;
-              }}
+              onReset={() => resetTransform(activeTab)}
+              onFlipH={() => { activeLayer.flipX.value = -activeLayer.flipX.value; }}
+              onFlipV={() => { activeLayer.flipY.value = -activeLayer.flipY.value; }}
               opacityValue={activeOpacityAmount}
               onOpacityChange={(v) => {
                 setActiveOpacityAmount(v);
-                activeOpacity.value = v;
+                activeLayer.opacity.value = v;
               }}
               bottom={Spacing.sm}
               labels={{
@@ -659,9 +368,7 @@ export default function DoodlesCreateScreen() {
 
       {error ? (
         <View style={styles.errorWrap}>
-          <ThemedText style={[styles.error, { color: Accent.error }]}>
-            {error}
-          </ThemedText>
+          <ThemedText style={[styles.error, { color: Accent.error }]}>{error}</ThemedText>
         </View>
       ) : null}
 
@@ -689,32 +396,8 @@ export default function DoodlesCreateScreen() {
         <DoodlePreviewModal
           wallUri={wallUri!}
           sketchUri={sketchUri!}
-          wallTransform={{
-            offsetX: wallOffsetX,
-            offsetY: wallOffsetY,
-            savedOffsetX: wallSavedOffsetX,
-            savedOffsetY: wallSavedOffsetY,
-            scale: wallScale,
-            savedScale: wallSavedScale,
-            rotation: wallRotation,
-            savedRotation: wallSavedRotation,
-            flipX: wallFlipX,
-            flipY: wallFlipY,
-            opacity: wallOpacity,
-          }}
-          sketchTransform={{
-            offsetX: sketchOffsetX,
-            offsetY: sketchOffsetY,
-            savedOffsetX: sketchSavedOffsetX,
-            savedOffsetY: sketchSavedOffsetY,
-            scale: sketchScale,
-            savedScale: sketchSavedScale,
-            rotation: sketchRotation,
-            savedRotation: sketchSavedRotation,
-            flipX: sketchFlipX,
-            flipY: sketchFlipY,
-            opacity: sketchOpacity,
-          }}
+          wallTransform={wall}
+          sketchTransform={sketch}
           onClose={() => setIsPreviewMode(false)}
         />
       )}
@@ -722,291 +405,11 @@ export default function DoodlesCreateScreen() {
   );
 }
 
-type TransformShared = {
-  offsetX: SharedValue<number>;
-  offsetY: SharedValue<number>;
-  savedOffsetX: SharedValue<number>;
-  savedOffsetY: SharedValue<number>;
-  scale: SharedValue<number>;
-  savedScale: SharedValue<number>;
-  rotation: SharedValue<number>;
-  savedRotation: SharedValue<number>;
-  flipX: SharedValue<number>;
-  flipY: SharedValue<number>;
-  opacity: SharedValue<number>;
-};
-
-function TransformableLayer({
-  imageUri,
-  offsetX,
-  offsetY,
-  savedOffsetX,
-  savedOffsetY,
-  scale,
-  savedScale,
-  rotation,
-  savedRotation,
-  flipX,
-  flipY,
-  opacity,
-  isActive,
-}: { imageUri: string; isActive: boolean } & TransformShared) {
-  const panGesture = useMemo(
-    () =>
-      Gesture.Pan()
-        .onUpdate((e) => {
-          offsetX.value = savedOffsetX.value + e.translationX;
-          offsetY.value = savedOffsetY.value + e.translationY;
-        })
-        .onEnd(() => {
-          savedOffsetX.value = offsetX.value;
-          savedOffsetY.value = offsetY.value;
-        }),
-    [offsetX, offsetY, savedOffsetX, savedOffsetY],
-  );
-
-  const pinchGesture = useMemo(
-    () =>
-      Gesture.Pinch()
-        .onChange((e) => {
-          scale.value = scale.value * e.scaleChange;
-        })
-        .onEnd(() => {
-          savedScale.value = scale.value;
-        }),
-    [scale, savedScale],
-  );
-
-  const rotationGesture = useMemo(
-    () =>
-      Gesture.Rotation()
-        .onChange((e) => {
-          rotation.value = rotation.value + e.rotationChange;
-        })
-        .onEnd(() => {
-          savedRotation.value = rotation.value;
-        }),
-    [rotation, savedRotation],
-  );
-
-  const composed = useMemo(
-    () => Gesture.Simultaneous(panGesture, pinchGesture, rotationGesture),
-    [panGesture, pinchGesture, rotationGesture],
-  );
-
-  const animatedStyle = useAnimatedStyle(() => ({
-    position: "absolute" as const,
-    width: "100%",
-    height: "100%",
-    opacity: opacity.value,
-    transform: [
-      { translateX: offsetX.value },
-      { translateY: offsetY.value },
-      { scale: scale.value },
-      { scaleX: flipX.value },
-      { scaleY: flipY.value },
-      { rotate: `${rotation.value}rad` },
-    ],
-  }));
-
-  const content = (
-    <Animated.View
-      style={[styles.superpositionLayer, animatedStyle]}
-      pointerEvents={isActive ? "box-none" : "none"}
-    >
-      <Image
-        source={{ uri: imageUri }}
-        style={StyleSheet.absoluteFillObject}
-        resizeMode="contain"
-      />
-    </Animated.View>
-  );
-
-  if (isActive) {
-    return <GestureDetector gesture={composed}>{content}</GestureDetector>;
-  }
-  return content;
-}
-
-function PlaceholderSlot({
-  icon,
-  label,
-  onTakePhoto,
-  onPickGallery,
-  loading,
-  t,
-}: {
-  icon: IconSymbolName;
-  label: string;
-  onTakePhoto: () => void;
-  onPickGallery: () => void;
-  loading: boolean;
-  t: (key: string) => string;
-}) {
-  return (
-    <View style={[styles.placeholderWrap, { backgroundColor: Surface.high }]}>
-      <IconSymbol name={icon} size={48} color={Accent.onSurfaceMuted} />
-      <ThemedText style={[styles.placeholderLabel, { color: Accent.onSurfaceMuted }]}>
-        {label}
-      </ThemedText>
-      <View style={styles.placeholderButtons}>
-        <Button
-          variant="secondary"
-          size="md"
-          icon={<IconSymbol name="camera.fill" size={24} color={Accent.primary} />}
-          style={styles.placeholderBtn}
-          onPress={onTakePhoto}
-          disabled={loading}
-          loading={loading}
-          accessibilityLabel={t("doodles.takePhoto")}
-        >
-          {t("doodles.takePhoto")}
-        </Button>
-        <Button
-          variant="secondary"
-          size="md"
-          icon={
-            <IconSymbol
-              name="photo.on.rectangle.angled"
-              size={24}
-              color={Accent.primary}
-            />
-          }
-          style={styles.placeholderBtn}
-          onPress={onPickGallery}
-          disabled={loading}
-          accessibilityLabel={t("doodles.pickFromGallery")}
-        >
-          {t("doodles.pickFromGallery")}
-        </Button>
-      </View>
-    </View>
-  );
-}
-
-type DoodlePreviewModalProps = {
-  wallUri: string;
-  sketchUri: string;
-  wallTransform: TransformShared;
-  sketchTransform: TransformShared;
-  onClose: () => void;
-};
-
-function DoodlePreviewModal({
-  wallUri,
-  sketchUri,
-  wallTransform,
-  sketchTransform,
-  onClose,
-}: DoodlePreviewModalProps) {
-  useKeepAwake();
-  const [showControls, setShowControls] = useState(true);
-  const hideTimer = useRef<ReturnType<typeof setTimeout>>();
-
-  const resetTimer = useCallback(() => {
-    if (hideTimer.current) clearTimeout(hideTimer.current);
-    setShowControls(true);
-    hideTimer.current = setTimeout(() => setShowControls(false), 3000);
-  }, []);
-
-  useEffect(() => {
-    resetTimer();
-    return () => {
-      if (hideTimer.current) clearTimeout(hideTimer.current);
-    };
-  }, [resetTimer]);
-
-  return (
-    <Modal
-      visible
-      animationType="fade"
-      statusBarTranslucent
-      onRequestClose={onClose}
-    >
-      <Pressable style={previewStyles.container} onPress={resetTimer}>
-        <TransformableLayer
-          imageUri={wallUri}
-          {...wallTransform}
-          isActive={false}
-        />
-        <TransformableLayer
-          imageUri={sketchUri}
-          {...sketchTransform}
-          isActive={false}
-        />
-        {showControls && (
-          <TouchableOpacity
-            style={previewStyles.closeBtn}
-            onPress={onClose}
-            activeOpacity={0.7}
-            accessibilityRole="button"
-          >
-            <View style={previewStyles.closeBtnInner}>
-              <Text style={previewStyles.closeBtnText}>✕</Text>
-            </View>
-          </TouchableOpacity>
-        )}
-      </Pressable>
-    </Modal>
-  );
-}
-
-const previewStyles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: Surface.lowest,
-  },
-  closeBtn: {
-    position: "absolute",
-    top: Spacing.xxl,
-    right: Spacing.md,
-  },
-  closeBtnInner: {
-    width: 44,
-    height: 44,
-    borderRadius: BorderRadius.full,
-    backgroundColor: "rgba(0,0,0,0.45)",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  closeBtnText: {
-    fontSize: 18,
-    fontWeight: "600",
-    color: "rgba(255,255,255,0.9)",
-    lineHeight: 20,
-    textAlign: "center",
-  },
-});
-
 const styles = StyleSheet.create({
   content: {
     flex: 1,
     padding: CONTENT_PADDING,
     minHeight: 0,
-  },
-  placeholderWrap: {
-    flex: 1,
-    borderRadius: BorderRadius.lg,
-    alignItems: "center",
-    justifyContent: "center",
-    padding: Spacing.lg,
-  },
-  placeholderLabel: {
-    fontSize: Typography.fontSize.sm,
-    marginTop: Spacing.sm,
-    marginBottom: Spacing.lg,
-  },
-  placeholderButtons: {
-    gap: Spacing.md,
-  },
-  placeholderBtn: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: Spacing.xs,
-    paddingVertical: Spacing.md,
-    paddingHorizontal: Spacing.lg,
-    minHeight: 48,
   },
   singleImageWrap: {
     flex: 1,
@@ -1029,11 +432,6 @@ const styles = StyleSheet.create({
     position: "relative",
     borderRadius: BorderRadius.md,
     overflow: "hidden",
-  },
-  superpositionLayer: {
-    ...StyleSheet.absoluteFillObject,
-    width: "100%",
-    height: "100%",
   },
   errorWrap: {
     padding: Spacing.md,

@@ -1,12 +1,5 @@
-import * as ImagePicker from "expo-image-picker";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import React, { useCallback, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   ActivityIndicator,
@@ -16,7 +9,6 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { getColors } from "react-native-image-colors";
 
 import { Button } from "@/components/button";
 import { HeaderBackButton } from "@/components/header-back-button";
@@ -28,208 +20,39 @@ import {
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { IconSymbol } from "@/components/ui/icon-symbol";
-import { Accent, BorderRadius, FontFamily, Spacing, Surface, Typography } from "@/constants/theme";
+import { Accent, BorderRadius, FontFamily, Spacing, Typography } from "@/constants/theme";
+import { useImportPaletteFromImage } from "@/hooks/use-import-palette-from-image";
 import { getColorDisplayName } from "@/lib/color";
-import { extractHexPalette, findClosestColors } from "@/lib/colorMatch";
-import {
-  getAllSeriesWithCount,
-  getColorsBySeriesId,
-} from "@/stores/useCatalogStore";
+import { isVeryLightHex, swatchGhostBorder } from "@/lib/color-contrast";
 import { usePalettesStore } from "@/stores/usePalettesStore";
-import type { Color } from "@/types";
 
 export default function ImportFromImageScreen() {
-  const { imageUri: imageUriParam } = useLocalSearchParams<{
-    imageUri?: string;
-  }>();
+  const { imageUri: imageUriParam } = useLocalSearchParams<{ imageUri?: string }>();
   const { t, i18n } = useTranslation();
   const router = useRouter();
   const addPalette = usePalettesStore((s) => s.addPalette);
 
-  const allSeries = useMemo(() => getAllSeriesWithCount(), []);
+  const {
+    imageUri,
+    extractedHexes,
+    loading,
+    error,
+    allSeries,
+    selectedSeriesIds,
+    selectedCatalogColorByHex,
+    similaritiesPerHex,
+    selectedColorsForPalette,
+    pickImage,
+    takePhoto,
+    toggleSeriesSelection,
+    handleSelectAllSeries,
+    handleClearSeries,
+    selectCatalogColorForHex,
+  } = useImportPaletteFromImage(imageUriParam);
 
-  const [imageUri, setImageUri] = useState<string | null>(null);
-  const [extractedHexes, setExtractedHexes] = useState<string[]>([]);
-  const [selectedSeriesIds, setSelectedSeriesIds] = useState<Set<string>>(
-    new Set(),
-  );
-  /** For each extracted hex, the catalog color id the user selected (optional). */
-  const [selectedCatalogColorByHex, setSelectedCatalogColorByHex] = useState<
-    Record<string, string>
-  >({});
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
   const [showNameModal, setShowNameModal] = useState(false);
   const [paletteName, setPaletteName] = useState("");
   const seriesFilterSheetRef = useRef<SeriesSelectBottomSheetRef>(null);
-  const hasInitializedSeriesSelection = useRef(false);
-  const hasProcessedParamImage = useRef(false);
-
-  /** Default: only the first series selected once catalog is available. */
-  useEffect(() => {
-    if (allSeries.length > 0 && !hasInitializedSeriesSelection.current) {
-      hasInitializedSeriesSelection.current = true;
-      setSelectedSeriesIds(new Set([allSeries[0].id]));
-    }
-  }, [allSeries]);
-
-  const processImageUri = useCallback(async (uri: string) => {
-    setImageUri(uri);
-    const colorsResult = await getColors(uri, { fallback: Surface.lowest });
-    const hexes = extractHexPalette(
-      colorsResult as unknown as Record<string, string>,
-    );
-    setExtractedHexes(hexes);
-    const series = getAllSeriesWithCount();
-    setSelectedSeriesIds(
-      new Set(series.length > 0 ? [series[0].id] : []),
-    );
-    setSelectedCatalogColorByHex({});
-  }, []);
-
-  /** When navigated with imageUri param (from FAB gallery/camera), process it and skip pick section. */
-  useEffect(() => {
-    if (!imageUriParam || hasProcessedParamImage.current) return;
-    hasProcessedParamImage.current = true;
-    setLoading(true);
-    setError(null);
-    processImageUri(imageUriParam).finally(() => setLoading(false));
-  }, [imageUriParam, processImageUri]);
-
-  const pickImage = useCallback(async () => {
-    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    if (status !== "granted") {
-      setError(t("palettes.permissionDenied"));
-      return;
-    }
-    setError(null);
-    setLoading(true);
-    try {
-      const result = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ["images"],
-        allowsEditing: false,
-        quality: 0.8,
-      });
-      if (result.canceled || !result.assets[0]) {
-        setLoading(false);
-        return;
-      }
-      await processImageUri(result.assets[0].uri);
-    } catch (e) {
-      setError(e instanceof Error ? e.message : t("common.error"));
-    } finally {
-      setLoading(false);
-    }
-  }, [t, processImageUri]);
-
-  const takePhoto = useCallback(async () => {
-    const { status } = await ImagePicker.requestCameraPermissionsAsync();
-    if (status !== "granted") {
-      setError(t("palettes.cameraPermissionDenied"));
-      return;
-    }
-    setError(null);
-    setLoading(true);
-    try {
-      const result = await ImagePicker.launchCameraAsync({
-        allowsEditing: false,
-        quality: 0.8,
-      });
-      if (result.canceled || !result.assets[0]) {
-        setLoading(false);
-        return;
-      }
-      await processImageUri(result.assets[0].uri);
-    } catch (e) {
-      setError(e instanceof Error ? e.message : t("common.error"));
-    } finally {
-      setLoading(false);
-    }
-  }, [t, processImageUri]);
-
-  const toggleSeriesSelection = useCallback((seriesId: string) => {
-    setSelectedSeriesIds((prev) => {
-      const next = new Set(prev);
-      if (next.has(seriesId)) next.delete(seriesId);
-      else next.add(seriesId);
-      return next;
-    });
-    setSelectedCatalogColorByHex({});
-  }, []);
-
-  const handleSelectAllSeries = useCallback(() => {
-    setSelectedSeriesIds(new Set(allSeries.map((s) => s.id)));
-    setSelectedCatalogColorByHex({});
-  }, [allSeries]);
-
-  const handleClearSeries = useCallback(() => {
-    setSelectedSeriesIds(new Set());
-    setSelectedCatalogColorByHex({});
-  }, []);
-
-  const selectCatalogColorForHex = useCallback(
-    (hex: string, catalogColorId: string | null) => {
-      setSelectedCatalogColorByHex((prev) => {
-        if (catalogColorId == null) {
-          const next = { ...prev };
-          delete next[hex];
-          return next;
-        }
-        const current = prev[hex];
-        if (current === catalogColorId) {
-          const next = { ...prev };
-          delete next[hex];
-          return next;
-        }
-        return { ...prev, [hex]: catalogColorId };
-      });
-    },
-    [],
-  );
-
-  const catalogColorsForMatch = useMemo(() => {
-    const seen = new Set<string>();
-    const out: Color[] = [];
-    for (const seriesId of selectedSeriesIds) {
-      const colors = getColorsBySeriesId(seriesId);
-      for (const c of colors) {
-        if (!seen.has(c.id)) {
-          seen.add(c.id);
-          out.push(c);
-        }
-      }
-    }
-    return out;
-  }, [selectedSeriesIds]);
-
-  const selectedSeriesWithNames = useMemo(
-    () => allSeries.filter((s) => selectedSeriesIds.has(s.id)),
-    [allSeries, selectedSeriesIds],
-  );
-
-  /** For each extracted hex, up to 3 similar colors per selected series. */
-  const similaritiesPerHex = useMemo(() => {
-    if (extractedHexes.length === 0 || selectedSeriesWithNames.length === 0)
-      return [];
-    return extractedHexes.map((hex) => ({
-      hex,
-      bySeries: selectedSeriesWithNames.map((series) => ({
-        seriesId: series.id,
-        seriesName: series.name,
-        matches: findClosestColors(hex, getColorsBySeriesId(series.id), 3),
-      })),
-    }));
-  }, [extractedHexes, selectedSeriesWithNames]);
-
-  const selectedColorsForPalette = useMemo(() => {
-    return extractedHexes
-      .map((hex) =>
-        catalogColorsForMatch.find(
-          (c) => c.id === selectedCatalogColorByHex[hex],
-        ),
-      )
-      .filter((c): c is Color => c != null);
-  }, [extractedHexes, catalogColorsForMatch, selectedCatalogColorByHex]);
 
   const handleSavePalette = useCallback(() => {
     if (selectedColorsForPalette.length === 0) return;
@@ -238,10 +61,7 @@ export default function ImportFromImageScreen() {
 
   const handleConfirmSave = useCallback(() => {
     const name = paletteName.trim() || t("palettes.defaultPaletteName");
-    addPalette({
-      name,
-      colors: selectedColorsForPalette,
-    });
+    addPalette({ name, colors: selectedColorsForPalette });
     setShowNameModal(false);
     setPaletteName("");
     router.replace("/(tabs)/palettes");
@@ -249,8 +69,7 @@ export default function ImportFromImageScreen() {
 
   const hasImage = imageUri != null && extractedHexes.length > 0;
   const hasSeriesSelected = selectedSeriesIds.size > 0;
-  const showEquivalents =
-    hasImage && hasSeriesSelected && similaritiesPerHex.length > 0;
+  const showEquivalents = hasImage && hasSeriesSelected && similaritiesPerHex.length > 0;
 
   return (
     <ThemedView style={styles.container} safeArea="top">
@@ -364,10 +183,7 @@ export default function ImportFromImageScreen() {
                     style={[
                       styles.miniSwatch,
                       { backgroundColor: hex },
-                      (hex === "#ffffff" || hex.startsWith("#fff")) && {
-                        borderWidth: 1,
-                        borderColor: `${Accent.outlineVariant}26`,
-                      },
+                      isVeryLightHex(hex) && swatchGhostBorder(Accent.outlineVariant),
                     ]}
                   />
                 ))}

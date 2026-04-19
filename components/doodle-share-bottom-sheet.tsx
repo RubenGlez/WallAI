@@ -1,5 +1,4 @@
 import {
-  BottomSheetBackdrop,
   BottomSheetModal,
   BottomSheetScrollView,
 } from "@gorhom/bottom-sheet";
@@ -12,6 +11,7 @@ import { Alert, StyleSheet, TouchableOpacity, View } from "react-native";
 import { ThemedText } from "@/components/themed-text";
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { Accent, BorderRadius, Spacing, Surface, Typography } from "@/constants/theme";
+import { useSheetBackdrop } from "@/hooks/use-sheet-backdrop";
 
 export type DoodleShareBottomSheetRef = BottomSheetModal;
 
@@ -29,18 +29,7 @@ export const DoodleShareBottomSheet = forwardRef<
   ref,
 ) {
   const { t } = useTranslation();
-
-  const renderBackdrop = useCallback(
-    (props: React.ComponentProps<typeof BottomSheetBackdrop>) => (
-      <BottomSheetBackdrop
-        {...props}
-        appearsOnIndex={0}
-        disappearsOnIndex={-1}
-        opacity={0.5}
-      />
-    ),
-    [],
-  );
+  const renderBackdrop = useSheetBackdrop();
 
   const handleSaveToPhotos = useCallback(async () => {
     if (!imageUri) return;

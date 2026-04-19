@@ -4,16 +4,8 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { FavoriteIcon } from "@/components/favorite-icon";
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { BorderRadius, FontFamily, Spacing, Typography } from "@/constants/theme";
+import { isLightHex } from "@/lib/color-contrast";
 import type { Color } from "@/types";
-
-function isLightBackground(hex: string): boolean {
-  const h = hex.replace(/^#/, "");
-  const r = parseInt(h.slice(0, 2), 16);
-  const g = parseInt(h.slice(2, 4), 16);
-  const b = parseInt(h.slice(4, 6), 16);
-  const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
-  return luminance > 0.5;
-}
 
 export type ColorGridCardProps = {
   color: Color;
@@ -38,7 +30,7 @@ export function ColorGridCard({
   cardWidth,
   swatchSize,
 }: ColorGridCardProps) {
-  const lightBg = isLightBackground(color.hex);
+  const lightBg = isLightHex(color.hex);
   const textColor = lightBg ? "rgba(0,0,0,0.85)" : "rgba(255,255,255,0.9)";
   const subTextColor = lightBg ? "rgba(0,0,0,0.55)" : "rgba(255,255,255,0.55)";
 

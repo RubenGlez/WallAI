@@ -1,9 +1,8 @@
 import {
-  BottomSheetBackdrop,
   BottomSheetModal,
   BottomSheetScrollView,
 } from "@gorhom/bottom-sheet";
-import React, { forwardRef, useCallback } from "react";
+import React, { forwardRef } from "react";
 import { useTranslation } from "react-i18next";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 
@@ -11,6 +10,7 @@ import { FavoriteIcon } from "@/components/favorite-icon";
 import { ThemedText } from "@/components/themed-text";
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { Accent, BorderRadius, Spacing, Surface, Typography } from "@/constants/theme";
+import { useSheetBackdrop } from "@/hooks/use-sheet-backdrop";
 import { useFavoritesStore } from "@/stores/useFavoritesStore";
 import type { SeriesWithCountAndBrand } from "@/types";
 
@@ -34,18 +34,7 @@ export const SeriesSelectBottomSheet = forwardRef<
   const { t } = useTranslation();
   const favoriteSeriesIds = useFavoritesStore((s) => s.favoriteSeriesIds);
   const toggleFavoriteSeries = useFavoritesStore((s) => s.toggleFavoriteSeries);
-
-  const renderBackdrop = useCallback(
-    (props: React.ComponentProps<typeof BottomSheetBackdrop>) => (
-      <BottomSheetBackdrop
-        {...props}
-        appearsOnIndex={0}
-        disappearsOnIndex={-1}
-        opacity={0.5}
-      />
-    ),
-    [],
-  );
+  const renderBackdrop = useSheetBackdrop();
 
   return (
     <BottomSheetModal

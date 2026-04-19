@@ -7,11 +7,12 @@ import React, {
   useState,
 } from "react";
 import { useTranslation } from "react-i18next";
-import { Alert, FlatList, StyleSheet, Switch, View } from "react-native";
+import { StyleSheet, Switch, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { Button } from "@/components/button";
 import { ColorGridCard } from "@/components/color-grid-card";
+import { ColorGridList } from "@/components/color-grid-list";
 import { HeaderBackButton } from "@/components/header-back-button";
 import { SaveNameModal } from "@/components/save-name-modal";
 import { SearchInput } from "@/components/search-input";
@@ -28,11 +29,11 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Accent, Spacing, Surface, Typography } from "@/constants/theme";
 import { useSeriesColorSelection } from "@/hooks/use-series-color-selection";
 import { filterColorsBySearch, getColorDisplayName } from "@/lib/color";
+import { confirmDelete } from "@/lib/confirm-delete";
 import { usePalettesStore } from "@/stores/usePalettesStore";
 import type { Color } from "@/types";
 
-const { NUM_COLUMNS, GAP, HORIZONTAL_PADDING, CARD_WIDTH, SWATCH_SIZE } =
-  COLOR_GRID;
+const { GAP, HORIZONTAL_PADDING } = COLOR_GRID;
 
 export default function CreatePaletteScreen() {
   const { paletteId, initialColorIds } = useLocalSearchParams<{
@@ -90,21 +91,16 @@ export default function CreatePaletteScreen() {
 
   const handleDeletePalette = useCallback(() => {
     if (!paletteId) return;
-    Alert.alert(
-      t("projects.removePaletteTitle"),
-      t("projects.removePaletteMessage"),
-      [
-        { text: t("common.cancel"), style: "cancel" },
-        {
-          text: t("projects.remove"),
-          style: "destructive",
-          onPress: () => {
-            removePalette(paletteId);
-            router.replace("/(tabs)/palettes");
-          },
-        },
-      ],
-    );
+    confirmDelete({
+      title: t("projects.removePaletteTitle"),
+      message: t("projects.removePaletteMessage"),
+      confirmLabel: t("projects.remove"),
+      cancelLabel: t("common.cancel"),
+      onConfirm: () => {
+        removePalette(paletteId);
+        router.replace("/(tabs)/palettes");
+      },
+    });
   }, [paletteId, removePalette, router, t]);
 
   const headerTitle = useMemo(() => {
@@ -175,24 +171,17 @@ export default function CreatePaletteScreen() {
     router,
   ]);
 
-  const renderItem = useCallback(
-    ({ item, index }: { item: Color; index: number }) => (
-      <View
-        style={{
-          width: CARD_WIDTH,
-          marginRight: index % NUM_COLUMNS === NUM_COLUMNS - 1 ? 0 : GAP,
-        }}
-      >
-        <ColorGridCard
-          color={item}
-          displayName={getColorDisplayName(item, i18n.language)}
-          onPress={() => toggleColorInPalette(item)}
-          isInPalette={selectedIds.has(item.id)}
-          selectionMode
-          cardWidth={CARD_WIDTH}
-          swatchSize={SWATCH_SIZE}
-        />
-      </View>
+  const renderCard = useCallback(
+    (item: Color) => (
+      <ColorGridCard
+        color={item}
+        displayName={getColorDisplayName(item, i18n.language)}
+        onPress={() => toggleColorInPalette(item)}
+        isInPalette={selectedIds.has(item.id)}
+        selectionMode
+        cardWidth={COLOR_GRID.CARD_WIDTH}
+        swatchSize={COLOR_GRID.SWATCH_SIZE}
+      />
     ),
     [i18n.language, selectedIds, toggleColorInPalette],
   );
@@ -246,14 +235,10 @@ export default function CreatePaletteScreen() {
         clearAccessibilityLabel={t("common.clear")}
       />
 
-      <FlatList
-        data={listData}
-        keyExtractor={(item) => item.id}
-        renderItem={renderItem}
-        numColumns={NUM_COLUMNS}
-        columnWrapperStyle={styles.row}
+      <ColorGridList
+        colors={listData}
+        renderCard={renderCard}
         contentContainerStyle={styles.listContent}
-        showsVerticalScrollIndicator={false}
       />
 
       <LinearGradient
@@ -318,10 +303,6 @@ const styles = StyleSheet.create({
   listContent: {
     paddingTop: GAP,
     paddingBottom: 160,
-  },
-  row: {
-    flexDirection: "row",
-    marginBottom: GAP,
   },
   footerGradient: {
     position: "absolute",

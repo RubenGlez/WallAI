@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { FlatList, ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
+import { ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
 
 import {
   ColorDetailBottomSheet,
@@ -8,6 +8,7 @@ import {
   type ColorDetailParams,
 } from "@/components/color-detail-bottom-sheet";
 import { ColorGridCard } from "@/components/color-grid-card";
+import { ColorGridList } from "@/components/color-grid-list";
 import { Screen } from "@/components/screen";
 import { ScreenHeader } from "@/components/screen-header";
 import { SearchInput } from "@/components/search-input";
@@ -21,11 +22,10 @@ import { COLOR_GRID } from "@/constants/color-grid";
 import { Accent, BorderRadius, FontFamily, Spacing, Surface, Typography } from "@/constants/theme";
 import { useSeriesColorSelection } from "@/hooks/use-series-color-selection";
 import { filterColorsBySearch, getColorDisplayName } from "@/lib/color";
-import { getBrandById, getBrandsWithCount, getSeriesById, getSeriesWithCountByBrandId } from "@/stores/useCatalogStore";
+import { buildColorDetailParams } from "@/lib/color-detail-params";
+import { getBrandsWithCount, getSeriesWithCountByBrandId } from "@/stores/useCatalogStore";
 import { useFavoritesStore } from "@/stores/useFavoritesStore";
 import type { Color } from "@/types";
-
-const { NUM_COLUMNS, GAP, CARD_WIDTH, SWATCH_SIZE } = COLOR_GRID;
 const ALL_BRAND_ID = "__all__";
 
 export default function CatalogScreen() {
@@ -69,37 +69,23 @@ export default function CatalogScreen() {
 
   const openDetailSheet = useCallback(
     (item: Color) => {
-      const s = getSeriesById(item.seriesId);
-      const brand = s ? getBrandById(s.brandId) : undefined;
-      setDetailParams({
-        color: item,
-        displayName: getColorDisplayName(item, i18n.language),
-        brandName: brand?.name ?? t("common.notAvailable"),
-        seriesName: s?.name ?? t("common.notAvailable"),
-      });
+      setDetailParams(buildColorDetailParams(item, i18n.language, t));
       detailSheetRef.current?.present();
     },
     [i18n.language, t],
   );
 
-  const renderItem = useCallback(
-    ({ item, index }: { item: Color; index: number }) => (
-      <View
-        style={{
-          width: CARD_WIDTH,
-          marginRight: index % NUM_COLUMNS === NUM_COLUMNS - 1 ? 0 : GAP,
-        }}
-      >
-        <ColorGridCard
-          color={item}
-          displayName={getColorDisplayName(item, i18n.language)}
-          onPress={() => openDetailSheet(item)}
-          isFavorite={favoriteColorIds.includes(item.id)}
-          onFavorite={() => handleFavorite(item)}
-          cardWidth={CARD_WIDTH}
-          swatchSize={SWATCH_SIZE}
-        />
-      </View>
+  const renderCard = useCallback(
+    (item: Color) => (
+      <ColorGridCard
+        color={item}
+        displayName={getColorDisplayName(item, i18n.language)}
+        onPress={() => openDetailSheet(item)}
+        isFavorite={favoriteColorIds.includes(item.id)}
+        onFavorite={() => handleFavorite(item)}
+        cardWidth={COLOR_GRID.CARD_WIDTH}
+        swatchSize={COLOR_GRID.SWATCH_SIZE}
+      />
     ),
     [i18n.language, favoriteColorIds, openDetailSheet, handleFavorite],
   );
@@ -168,15 +154,11 @@ export default function CatalogScreen() {
               </TouchableOpacity>
             }
           />
-          <FlatList
-            data={filteredColors}
-            keyExtractor={(item) => item.id}
-            renderItem={renderItem}
-            numColumns={NUM_COLUMNS}
-            columnWrapperStyle={styles.row}
-            contentContainerStyle={styles.listContent}
+          <ColorGridList
+            colors={filteredColors}
+            renderCard={renderCard}
             ListHeaderComponent={listHeader}
-            showsVerticalScrollIndicator={false}
+            contentContainerStyle={styles.listContent}
           />
         </View>
       </Screen>
@@ -264,8 +246,5 @@ const styles = StyleSheet.create({
   listContent: {
     paddingTop: GAP,
     paddingBottom: Spacing.sm,
-  },
-  row: {
-    marginBottom: Spacing.sm,
   },
 });
