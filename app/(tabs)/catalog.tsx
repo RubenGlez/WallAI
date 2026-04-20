@@ -26,6 +26,7 @@ import { filterColorsBySearch, getColorDisplayName } from "@/lib/color";
 import { buildColorDetailParams } from "@/lib/color-detail-params";
 import { getBrandsWithCount, getSeriesWithCountByBrandId } from "@/stores/useCatalogStore";
 import { useFavoritesStore } from "@/stores/useFavoritesStore";
+import { useAnalytics } from "@/hooks/use-analytics";
 import type { Color } from "@/types";
 const ALL_BRAND_ID = "__all__";
 
@@ -79,12 +80,15 @@ export default function CatalogScreen() {
 
   const handleFavorite = useCallback((color: Color) => toggleFavorite(color.id), [toggleFavorite]);
 
+  const { captureColorDetailOpened } = useAnalytics();
+
   const openDetailSheet = useCallback(
     (item: Color) => {
       setDetailParams(buildColorDetailParams(item, i18n.language, t));
       detailSheetRef.current?.present();
+      captureColorDetailOpened(item.seriesId);
     },
-    [i18n.language, t],
+    [i18n.language, t, captureColorDetailOpened],
   );
 
   const renderCard = useCallback(

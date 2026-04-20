@@ -12,6 +12,7 @@ import { ThemedText } from "@/components/themed-text";
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { Accent, BorderRadius, FontFamily, Spacing, Surface, Typography } from "@/constants/theme";
 import { useLanguageStore } from "@/stores/useLanguageStore";
+import { useAnalytics } from "@/hooks/use-analytics";
 import { useProfileStore } from "@/stores/useProfileStore";
 import type { LanguageCode } from "@/types";
 
@@ -57,9 +58,12 @@ export default function ProfileScreen() {
   const languageSheetRef = useRef<LanguageSelectBottomSheetRef>(null);
 
   const currentLang = language ?? i18n.language.split("-")[0];
+  const { captureLanguageChanged } = useAnalytics();
+
   const handleSelectLanguage = (code: LanguageCode) => {
     setLanguage(code);
     i18n.changeLanguage(code);
+    captureLanguageChanged(code);
     languageSheetRef.current?.dismiss();
   };
 

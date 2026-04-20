@@ -35,6 +35,7 @@ import { useDoodleLayers } from "@/hooks/use-doodle-layers";
 import { confirmDelete } from "@/lib/confirm-delete";
 import { useDoodlesStore } from "@/stores/useDoodlesStore";
 import { useReviewPrompt } from "@/hooks/use-review-prompt";
+import { useAnalytics } from "@/hooks/use-analytics";
 
 const CONTENT_PADDING = Spacing.md;
 
@@ -50,6 +51,7 @@ export default function DoodlesCreateScreen() {
   const updateDoodle = useDoodlesStore((s) => s.updateDoodle);
   const removeDoodle = useDoodlesStore((s) => s.removeDoodle);
   const requestReview = useReviewPrompt();
+  const { captureDoodleCreated, captureDoodleExported } = useAnalytics();
   const {
     pickFromGallery: pickFromGalleryFromHook,
     takePhoto: takePhotoFromHook,
@@ -187,12 +189,13 @@ export default function DoodlesCreateScreen() {
         transformData,
         ...(thumbnailUri && { thumbnailUri }),
       });
+      captureDoodleCreated();
     }
     setShowNameModal(false);
     setDoodleName("");
     setPendingThumbnailUri(null);
     router.back();
-  }, [wallUri, sketchUri, doodleId, doodleName, pendingThumbnailUri, t, addDoodle, updateDoodle, router, serializeTransforms]);
+  }, [wallUri, sketchUri, doodleId, doodleName, pendingThumbnailUri, t, addDoodle, updateDoodle, captureDoodleCreated, router, serializeTransforms]);
 
   const isWallActive = activeTab === "wall";
   const activeLayer = isWallActive ? wall : sketch;
@@ -390,8 +393,8 @@ export default function DoodlesCreateScreen() {
       <DoodleShareBottomSheet
         ref={shareSheetRef}
         imageUri={sharedImageUri}
-        onSaveToPhotos={() => { shareSheetRef.current?.dismiss(); requestReview(); }}
-        onShare={() => { shareSheetRef.current?.dismiss(); requestReview(); }}
+        onSaveToPhotos={() => { shareSheetRef.current?.dismiss(); captureDoodleExported(); requestReview(); }}
+        onShare={() => { shareSheetRef.current?.dismiss(); captureDoodleExported(); requestReview(); }}
       />
 
       {isPreviewMode && bothLoaded && (

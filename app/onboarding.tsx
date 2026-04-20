@@ -16,6 +16,7 @@ import {
   Typography,
 } from '@/constants/theme';
 import { useOnboardingStore } from '@/stores/useOnboardingStore';
+import { useAnalytics } from '@/hooks/use-analytics';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
@@ -47,10 +48,18 @@ export default function OnboardingScreen() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const completeOnboarding = useOnboardingStore((s) => s.completeOnboarding);
+  const { captureOnboardingCompleted, captureOnboardingSkipped } = useAnalytics();
   const [activeIndex, setActiveIndex] = useState(0);
 
   const finish = () => {
     completeOnboarding();
+    captureOnboardingCompleted();
+    router.replace('/(tabs)');
+  };
+
+  const skip = () => {
+    completeOnboarding();
+    captureOnboardingSkipped(activeIndex);
     router.replace('/(tabs)');
   };
 
@@ -70,7 +79,7 @@ export default function OnboardingScreen() {
       <View style={styles.topBar}>
         <ThemedText style={styles.appLabel}>SprayDeck</ThemedText>
         {!isLast && (
-          <TouchableOpacity onPress={finish} hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}>
+          <TouchableOpacity onPress={skip} hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}>
             <ThemedText style={styles.skip}>{t('onboarding.skip')}</ThemedText>
           </TouchableOpacity>
         )}

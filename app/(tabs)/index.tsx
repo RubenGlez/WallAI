@@ -22,6 +22,7 @@ import { useDoodlesStore } from "@/stores/useDoodlesStore";
 import { useFavoritesStore } from "@/stores/useFavoritesStore";
 import { usePalettesStore } from "@/stores/usePalettesStore";
 import { useProfileStore } from "@/stores/useProfileStore";
+import { useAnalytics } from "@/hooks/use-analytics";
 import type { SeriesWithCountAndBrand } from "@/types";
 
 const RECENT_PALETTES_COUNT = 4;
@@ -89,6 +90,7 @@ export default function HomeScreen() {
 
   const favoriteSeriesIds = useFavoritesStore((s) => s.favoriteSeriesIds);
   const toggleFavoriteSeries = useFavoritesStore((s) => s.toggleFavoriteSeries);
+  const { captureSeriesFavorited } = useAnalytics();
 
   const allSeries = useMemo(() => getAllSeriesWithCount(), []);
   const favoriteSeriesPreview = useMemo(
@@ -253,7 +255,11 @@ export default function HomeScreen() {
                   series={series}
                   isFavorite
                   onPress={() => router.push(`/color-grid/${series.id}`)}
-                  onFavorite={() => toggleFavoriteSeries(series.id)}
+                  onFavorite={() => {
+                    const isFav = favoriteSeriesIds.includes(series.id);
+                    toggleFavoriteSeries(series.id);
+                    if (!isFav) captureSeriesFavorited(series.id);
+                  }}
                 />
               ))}
             </View>

@@ -25,12 +25,15 @@ import { useImportPaletteFromImage } from "@/hooks/use-import-palette-from-image
 import { getColorDisplayName } from "@/lib/color";
 import { isVeryLightHex, swatchGhostBorder } from "@/lib/color-contrast";
 import { usePalettesStore } from "@/stores/usePalettesStore";
+import { useAnalytics } from "@/hooks/use-analytics";
 
 export default function ImportFromImageScreen() {
   const { imageUri: imageUriParam } = useLocalSearchParams<{ imageUri?: string }>();
   const { t, i18n } = useTranslation();
   const router = useRouter();
   const addPalette = usePalettesStore((s) => s.addPalette);
+  const { capturePaletteImported } = useAnalytics();
+
 
   const {
     imageUri,
@@ -62,10 +65,11 @@ export default function ImportFromImageScreen() {
   const handleConfirmSave = useCallback(() => {
     const name = paletteName.trim() || t("palettes.defaultPaletteName");
     addPalette({ name, colors: selectedColorsForPalette });
+    capturePaletteImported(selectedColorsForPalette.length);
     setShowNameModal(false);
     setPaletteName("");
     router.replace("/(tabs)/palettes");
-  }, [addPalette, paletteName, selectedColorsForPalette, t, router]);
+  }, [addPalette, capturePaletteImported, paletteName, selectedColorsForPalette, t, router]);
 
   const hasImage = imageUri != null && extractedHexes.length > 0;
   const hasSeriesSelected = selectedSeriesIds.size > 0;

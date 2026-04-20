@@ -1,4 +1,5 @@
 import { DarkTheme, ThemeProvider } from '@react-navigation/native';
+import { PostHogProvider } from 'posthog-react-native';
 import {
   SpaceGrotesk_400Regular,
   SpaceGrotesk_500Medium,
@@ -42,6 +43,10 @@ export default function RootLayout() {
   if (!fontsLoaded) return null;
 
   return (
+    <PostHogProvider
+      apiKey={process.env.EXPO_PUBLIC_POSTHOG_API_KEY ?? ''}
+      options={{ host: 'https://us.i.posthog.com' }}
+    >
     <GestureHandlerRootView style={{ flex: 1, backgroundColor: Surface.lowest }}>
       <SafeAreaProvider>
         <BottomSheetModalProvider>
@@ -59,5 +64,6 @@ export default function RootLayout() {
         </BottomSheetModalProvider>
       </SafeAreaProvider>
     </GestureHandlerRootView>
+    </PostHogProvider>
   );
 }
