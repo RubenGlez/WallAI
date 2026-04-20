@@ -18,7 +18,7 @@ export const useLanguageStore = create<LanguageState>()(
       setLanguage: (code) => set({ language: code }),
     }),
     {
-      name: 'wallai-language',
+      name: 'spraydeck-language',
       storage: createJSONStorage(() => AsyncStorage),
     }
   )

@@ -171,7 +171,7 @@
     "title": "Wand",
     "subtitle": "Überlagern Sie Ihre Skizze auf einem Wandfoto für präzise Positionierung",
     "loadingPermissions": "Kameraberechtigung wird geprüft…",
-    "cameraPermissionMessage": "WallAI benötigt Kamerazugriff, um die Live-Ansicht und Ihre Skizze auf der Wand anzuzeigen.",
+    "cameraPermissionMessage": "SprayDeck benötigt Kamerazugriff, um die Live-Ansicht und Ihre Skizze auf der Wand anzuzeigen.",
     "grantPermission": "Kamerazugriff erlauben",
     "noLayersTitle": "Ebenen hinzufügen",
     "noLayersSubtitle": "Fügen Sie ein Hintergrund- und/oder Skizzenbild hinzu. Sie können aus der Galerie wählen oder ein Foto für jede Ebene aufnehmen.",

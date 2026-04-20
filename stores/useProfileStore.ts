@@ -14,7 +14,7 @@ export const useProfileStore = create<ProfileState>()(
       setAka: (aka) => set({ aka: aka ?? '' }),
     }),
     {
-      name: 'wallai-profile',
+      name: 'spraydeck-profile',
       storage: createJSONStorage(() => AsyncStorage),
     }
   )

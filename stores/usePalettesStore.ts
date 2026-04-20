@@ -38,7 +38,7 @@ export const usePalettesStore = create<PalettesState>()(
       getPalette: (id) => get().palettes.find((p) => p.id === id),
     }),
     {
-      name: 'wallai-palettes',
+      name: 'spraydeck-palettes',
       storage: createJSONStorage(() => AsyncStorage),
     }
   )

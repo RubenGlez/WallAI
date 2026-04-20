@@ -77,7 +77,7 @@ export function ColorGridCard({
             hitSlop={{ top: 4, bottom: 4, left: 4, right: 4 }}
             accessibilityLabel={isFavorite ? "Remove from favorites" : "Add to favorites"}
           >
-            <FavoriteIcon isFavorite={isFavorite ?? false} size={16} color={textColor} />
+            <FavoriteIcon isFavorite={isFavorite ?? false} size={20} color={textColor} />
           </TouchableOpacity>
         )}
 

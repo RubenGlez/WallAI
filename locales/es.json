@@ -171,7 +171,7 @@
     "title": "Muro",
     "subtitle": "Superpone tu boceto en una foto de muro para un posicionamiento preciso",
     "loadingPermissions": "Comprobando permiso de cámara…",
-    "cameraPermissionMessage": "WallAI necesita acceso a la cámara para mostrar la vista en vivo y superponer tu boceto en el muro.",
+    "cameraPermissionMessage": "SprayDeck necesita acceso a la cámara para mostrar la vista en vivo y superponer tu boceto en el muro.",
     "grantPermission": "Dar acceso a la cámara",
     "noLayersTitle": "Añadir capas",
     "noLayersSubtitle": "Añade una imagen de fondo y/o boceto. Puedes elegir de la galería o hacer una foto para cada capa.",

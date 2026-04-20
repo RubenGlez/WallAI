@@ -171,7 +171,7 @@
     "title": "Mur",
     "subtitle": "Superposez votre esquisse sur une photo de mur pour un positionnement précis",
     "loadingPermissions": "Vérification de l'autorisation caméra…",
-    "cameraPermissionMessage": "WallAI a besoin d'accéder à la caméra pour afficher la vue en direct et superposer votre esquisse sur le mur.",
+    "cameraPermissionMessage": "SprayDeck a besoin d'accéder à la caméra pour afficher la vue en direct et superposer votre esquisse sur le mur.",
     "grantPermission": "Autoriser l'accès à la caméra",
     "noLayersTitle": "Ajouter des calques",
     "noLayersSubtitle": "Ajoutez une image de fond et/ou d'esquisse. Vous pouvez choisir dans la galerie ou prendre une photo pour chaque calque.",

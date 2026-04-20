@@ -16,7 +16,7 @@ export const useThemeStore = create<ThemeState>()(
       setColorSchemeOverride: (value) => set({ colorSchemeOverride: value }),
     }),
     {
-      name: 'wallai-theme',
+      name: 'spraydeck-theme',
       storage: createJSONStorage(() => AsyncStorage),
     }
   )

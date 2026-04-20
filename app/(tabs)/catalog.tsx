@@ -40,7 +40,6 @@ export default function CatalogScreen() {
   } = useSeriesColorSelection();
 
   const brands = useMemo(() => getBrandsWithCount(), []);
-  const [activeBrandId, setActiveBrandId] = useState<string>(ALL_BRAND_ID);
   const [searchQuery, setSearchQuery] = useState("");
   const [showOnlyFavorites, setShowOnlyFavorites] = useState(false);
   const [detailParams, setDetailParams] = useState<ColorDetailParams | null>(null);
@@ -50,8 +49,20 @@ export default function CatalogScreen() {
   const favoriteColorIds = useFavoritesStore((s) => s.favoriteColorIds);
   const toggleFavorite = useFavoritesStore((s) => s.toggleFavorite);
 
+  const activeBrandId = useMemo(() => {
+    if (selectedSeriesIds.size === allSeries.length && allSeries.length > 0) return ALL_BRAND_ID;
+    for (const brand of brands) {
+      const brandSeries = getSeriesWithCountByBrandId(brand.id);
+      if (
+        brandSeries.length > 0 &&
+        brandSeries.length === selectedSeriesIds.size &&
+        brandSeries.every((s) => selectedSeriesIds.has(s.id))
+      ) return brand.id;
+    }
+    return null;
+  }, [selectedSeriesIds, allSeries, brands]);
+
   const handleBrandChip = useCallback((brandId: string) => {
-    setActiveBrandId(brandId);
     if (brandId === ALL_BRAND_ID) {
       setSelectedSeriesIds(new Set(allSeries.map((s) => s.id)));
     } else {

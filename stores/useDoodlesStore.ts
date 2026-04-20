@@ -48,7 +48,7 @@ export const useDoodlesStore = create<DoodlesState>()(
       getDoodle: (id) => get().doodles.find((d) => d.id === id),
     }),
     {
-      name: 'wallai-doodles',
+      name: 'spraydeck-doodles',
       storage: createJSONStorage(() => AsyncStorage),
     }
   )

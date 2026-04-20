@@ -9,45 +9,42 @@ import Animated, {
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { Accent } from "@/constants/theme";
 
-const SPRING_CONFIG = { damping: 22, stiffness: 500 };
+const SPRING = { damping: 14, stiffness: 600, mass: 0.6 };
 
 export type FavoriteIconProps = {
   isFavorite: boolean;
   size?: number;
-  /** Color when not favorite. Defaults to theme.icon */
   color?: string;
-  /** Color when favorite. Defaults to theme.warning */
-  colorFavorite?: string;
 };
 
 /**
- * Star icon with a short bounce animation when isFavorite becomes true.
+ * Star icon with a pop + twist animation when isFavorite becomes true.
  * Use inside a TouchableOpacity; this component does not handle press.
  */
 export function FavoriteIcon({
   isFavorite,
   size = 22,
   color,
-  colorFavorite,
 }: FavoriteIconProps) {
-  const defaultColor = color ?? Accent.onSurfaceMuted;
-  const defaultColorFavorite = colorFavorite ?? Accent.primary;
+  const iconColor = color ?? Accent.onSurface;
 
   const scale = useSharedValue(1);
+  const rotate = useSharedValue(0);
   const wasFavorite = useRef(isFavorite);
 
   useEffect(() => {
     if (isFavorite && !wasFavorite.current) {
-      scale.value = withSequence(
-        withSpring(1.35, SPRING_CONFIG),
-        withSpring(1, SPRING_CONFIG),
-      );
+      scale.value = withSequence(withSpring(1.4, SPRING), withSpring(1, SPRING));
+      rotate.value = withSequence(withSpring(20, SPRING), withSpring(0, SPRING));
     }
     wasFavorite.current = isFavorite;
-  }, [isFavorite, scale]);
+  }, [isFavorite, scale, rotate]);
 
   const animatedStyle = useAnimatedStyle(() => ({
-    transform: [{ scale: scale.value }],
+    transform: [
+      { scale: scale.value },
+      { rotate: `${rotate.value}deg` },
+    ],
   }));
 
   return (
@@ -55,7 +52,7 @@ export function FavoriteIcon({
       <IconSymbol
         name={isFavorite ? "star.fill" : "star"}
         size={size}
-        color={isFavorite ? defaultColorFavorite : defaultColor}
+        color={iconColor}
       />
     </Animated.View>
   );

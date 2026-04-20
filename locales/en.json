@@ -171,7 +171,7 @@
     "title": "Wall",
     "subtitle": "Overlay your sketch on a wall photo for precise positioning",
     "loadingPermissions": "Checking camera permission…",
-    "cameraPermissionMessage": "WallAI needs camera access to show the live view and overlay your sketch on the wall.",
+    "cameraPermissionMessage": "SprayDeck needs camera access to show the live view and overlay your sketch on the wall.",
     "grantPermission": "Grant camera access",
     "noLayersTitle": "Add layers",
     "noLayersSubtitle": "Add a background and/or sketch image. You can pick from gallery or take a photo for each layer.",

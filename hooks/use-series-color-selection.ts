@@ -13,7 +13,7 @@ export function useSeriesColorSelection() {
   useEffect(() => {
     if (allSeries.length > 0 && !hasInitializedRef.current) {
       hasInitializedRef.current = true;
-      setSelectedSeriesIds(new Set([allSeries[0].id]));
+      setSelectedSeriesIds(new Set(allSeries.map((s) => s.id)));
     }
   }, [allSeries]);
 

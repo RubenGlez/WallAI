@@ -51,7 +51,7 @@ export const useFavoritesStore = create<FavoritesState>()(
         get().favoriteSeriesIds.includes(seriesId),
     }),
     {
-      name: 'wallai-favorites',
+      name: 'spraydeck-favorites',
       storage: createJSONStorage(() => AsyncStorage),
     }
   )

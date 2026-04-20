@@ -121,7 +121,7 @@ export default function ProfileScreen() {
           </View>
         </View>
 
-        <ThemedText style={styles.version}>WallAI · For the streets</ThemedText>
+        <ThemedText style={styles.version}>SprayDeck · For the streets</ThemedText>
       </ScrollView>
     </Screen>
   );

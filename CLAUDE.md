@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this app is
 
-WallAI is a React Native/Expo mobile app for street artists and graffiti writers. It provides a spray paint color catalog, palette builder, and a doodle/wall simulator for planning pieces.
+SprayDeck is a React Native/Expo mobile app for street artists and graffiti writers. It provides a spray paint color catalog, palette builder, and a doodle/wall simulator for planning pieces.
 
 ## Commands
 
