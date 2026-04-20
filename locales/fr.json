@@ -34,7 +34,26 @@
     "createPalette": "Créer une palette",
     "newDoodle": "Nouveau doodle",
     "continueLastDoodle": "Continuer le dernier doodle",
-    "recentPalettes": "Palettes récentes"
+    "recentPalettes": "Palettes récentes",
+    "setTagNudge": "Définis ton tag d'artiste",
+    "setTagNudgeSubtitle": "Personnalise ton expérience avec ton pseudo"
+  },
+  "onboarding": {
+    "skip": "Passer",
+    "next": "Suivant",
+    "getStarted": "Commencer",
+    "slide1": {
+      "title": "Plus de 1 000 couleurs",
+      "subtitle": "Parcours Montana, Molotow et AKA Colors. Trouve des équivalences entre marques avec la science des couleurs LAB."
+    },
+    "slide2": {
+      "title": "Construis ta palette",
+      "subtitle": "Choisis des couleurs manuellement dans le catalogue, ou importe une photo et laisse SprayDeck associer les teintes automatiquement."
+    },
+    "slide3": {
+      "title": "Planifie ta pièce",
+      "subtitle": "Charge une photo de mur, superpose ton esquisse, ajuste l'échelle et l'opacité — puis exporte en PNG."
+    }
   },
   "catalog": {
     "overviewTitle": "Catalogue",

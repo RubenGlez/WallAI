@@ -34,7 +34,26 @@
     "createPalette": "Create palette",
     "newDoodle": "New doodle",
     "continueLastDoodle": "Continue last doodle",
-    "recentPalettes": "Recent palettes"
+    "recentPalettes": "Recent palettes",
+    "setTagNudge": "Set your artist tag",
+    "setTagNudgeSubtitle": "Personalize your experience with your aka"
+  },
+  "onboarding": {
+    "skip": "Skip",
+    "next": "Next",
+    "getStarted": "Get started",
+    "slide1": {
+      "title": "1,000+ spray colors",
+      "subtitle": "Browse Montana, Molotow and AKA Colors. Find cross-brand matches using LAB color science."
+    },
+    "slide2": {
+      "title": "Build your palette",
+      "subtitle": "Pick colors manually from the catalog, or import a photo and let SprayDeck match the shades automatically."
+    },
+    "slide3": {
+      "title": "Plan your piece",
+      "subtitle": "Load a wall photo, overlay your sketch, adjust scale and opacity — then export as PNG."
+    }
   },
   "catalog": {
     "overviewTitle": "Catalog",

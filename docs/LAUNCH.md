@@ -1,6 +1,6 @@
 # Launch
 
-> Pre-launch work before publishing WallAI to Google Play.
+> Pre-launch work before publishing SprayDeck to Google Play.
 > Solo dev / spare time project — Android only, free app, no backend, no paid services.
 
 ---

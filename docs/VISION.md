@@ -1,8 +1,8 @@
 # Vision
 
-## What WallAI is
+## What SprayDeck is
 
-WallAI is a digital workbench for street artists and graffiti writers. It puts a professional spray paint color catalog, a palette builder, and a wall simulation tool in one offline-first mobile app.
+SprayDeck is a digital workbench for street artists and graffiti writers. It puts a professional spray paint color catalog, a palette builder, and a wall simulation tool in one offline-first mobile app.
 
 The app is built by a solo developer in spare time and will always be free. There is no backend, no accounts, no subscriptions.
 

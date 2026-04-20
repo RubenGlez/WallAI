@@ -47,6 +47,8 @@ export default function RootLayout() {
         <BottomSheetModalProvider>
           <ThemeProvider value={DarkTheme}>
             <Stack>
+              <Stack.Screen name="index" options={{ headerShown: false }} />
+              <Stack.Screen name="onboarding" options={{ headerShown: false, animation: 'fade' }} />
               <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
               <Stack.Screen name="palettes" options={{ headerShown: false }} />
               <Stack.Screen name="doodles" options={{ headerShown: false }} />

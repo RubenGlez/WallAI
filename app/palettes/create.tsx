@@ -31,6 +31,7 @@ import { useSeriesColorSelection } from "@/hooks/use-series-color-selection";
 import { filterColorsBySearch, getColorDisplayName } from "@/lib/color";
 import { confirmDelete } from "@/lib/confirm-delete";
 import { usePalettesStore } from "@/stores/usePalettesStore";
+import { useReviewPrompt } from "@/hooks/use-review-prompt";
 import type { Color } from "@/types";
 
 const { GAP, HORIZONTAL_PADDING } = COLOR_GRID;
@@ -55,6 +56,8 @@ export default function CreatePaletteScreen() {
   const updatePalette = usePalettesStore((s) => s.updatePalette);
   const getPalette = usePalettesStore((s) => s.getPalette);
   const removePalette = usePalettesStore((s) => s.removePalette);
+  const palettes = usePalettesStore((s) => s.palettes);
+  const requestReview = useReviewPrompt();
 
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedColors, setSelectedColors] = useState<Color[]>([]);
@@ -157,6 +160,7 @@ export default function CreatePaletteScreen() {
       updatePalette(paletteId, { name, colors: selectedColors });
     } else {
       addPalette({ name, colors: selectedColors });
+      if (palettes.length + 1 === 2) requestReview();
     }
     setShowNameModal(false);
     setPaletteName("");
@@ -167,6 +171,8 @@ export default function CreatePaletteScreen() {
     paletteId,
     paletteName,
     selectedColors,
+    palettes.length,
+    requestReview,
     t,
     router,
   ]);
