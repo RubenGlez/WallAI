@@ -1,5 +1,5 @@
 /**
- * WallAI Design System — "High-Utility Obsidian"
+ * SprayDeck Design System — "High-Utility Obsidian"
  * Creative North Star: "The Neon Architect"
  */
 
