@@ -142,7 +142,7 @@ Doodles export as PNG but palettes can't be shared. Artists show color plans to 
 | 8 | In-app review prompt | High | ✅ Done |
 | 9 | About & Support section — Profile (Ko-fi) | Medium | ✅ Done |
 | 10 | Analytics — PostHog | Medium | ✅ Done |
-| 11 | Crash reporting — Sentry (or PostHog) | Medium | ⬜ Not started |
+| 11 | Crash reporting — Sentry (or PostHog) | Medium | ✅ Done (PostHog global error handler) |
 | 12 | Palette sharing / export | Medium | ⬜ Not started |
 | 13 | Accessibility pass | Medium | ⬜ Partial (incomplete coverage) |
 | 14 | Ironlak brand — add to PRODUCT.md, verify catalog wiring | Low | ⬜ Not started |

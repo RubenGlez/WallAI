@@ -289,6 +289,7 @@
     "editManually": "Editar manualmente",
     "color": "color",
     "colors": "colores",
-    "searchPlaceholder": "Buscar paletas..."
+    "searchPlaceholder": "Buscar paletas...",
+    "share": "Compartir paleta"
   }
 }
