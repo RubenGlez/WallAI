@@ -160,7 +160,13 @@
     "lang_en": "English",
     "lang_de": "German",
     "lang_fr": "French",
-    "lang_pt": "Portuguese"
+    "lang_pt": "Portuguese",
+    "supportSection": "Support the project",
+    "supportTitle": "Made with love for the streets",
+    "supportBody": "I built SprayDeck in my spare time because I genuinely love graffiti culture. If it helped you plan a piece or discover a color, consider buying me a coffee — it keeps the app alive and helps fund things like the Apple Store fee or features that need real investment.",
+    "supportButton": "Buy me a coffee on Ko-fi",
+    "feedbackSection": "Feedback",
+    "reportIssue": "Report a bug or request a feature"
   },
   "filters": {
     "title": "Filters",

@@ -33,5 +33,8 @@ export function useAnalytics() {
 
     captureSupportLinkTapped: () =>
       posthog?.capture('support_link_tapped'),
+
+    captureIssueReportTapped: () =>
+      posthog?.capture('issue_report_tapped'),
   };
 }

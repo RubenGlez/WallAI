@@ -132,16 +132,17 @@ Doodles export as PNG but palettes can't be shared. Artists show color plans to 
 
 | # | Area | Priority | Status |
 |---|---|---|---|
-| 1 | Loop Colors — fix or remove empty brand | Blocker | ✅ Done (200 colors) |
-| 2 | Montana Vice completeness audit | Blocker | ⬜ Not started |
-| 3 | App icon / splash screen | Blocker | ⬜ Not started |
-| 4 | Privacy policy (hosted URL) | Blocker | ⬜ Not started |
+| 1 | Loop Colors — fix or remove empty brand | Blocker | ✅ Done (200 colors, series wired up) |
+| 2 | Montana Vice completeness audit | Blocker | ✅ Done (50 colors is the full range) |
+| 3 | App icon / splash screen | Blocker | ✅ Done (adaptive icon + splash configured in app.json) |
+| 4 | Privacy policy (hosted URL) | Blocker | ✅ Done (https://rubenglez.github.io/spraydeck-privacy/) |
 | 5 | Store metadata + screenshots | Blocker | ⬜ Not started |
-| 6 | Onboarding flow (first-run) | High | ⬜ Not started |
-| 7 | Artist tag prompt (first-launch nudge) | High | ⬜ Not started |
-| 8 | In-app review prompt | High | ⬜ Not started |
-| 9 | About & Support section — Profile (Ko-fi) | Medium | ⬜ Not started |
-| 10 | Analytics — PostHog | Medium | ⬜ Not started |
+| 6 | Onboarding flow (first-run) | High | ✅ Done |
+| 7 | Artist tag prompt (first-launch nudge) | High | ✅ Done |
+| 8 | In-app review prompt | High | ✅ Done |
+| 9 | About & Support section — Profile (Ko-fi) | Medium | ✅ Done |
+| 10 | Analytics — PostHog | Medium | ✅ Done |
 | 11 | Crash reporting — Sentry (or PostHog) | Medium | ⬜ Not started |
 | 12 | Palette sharing / export | Medium | ⬜ Not started |
-| 13 | Accessibility pass | Medium | ⬜ Not started |
+| 13 | Accessibility pass | Medium | ⬜ Partial (incomplete coverage) |
+| 14 | Ironlak brand — add to PRODUCT.md, verify catalog wiring | Low | ⬜ Not started |

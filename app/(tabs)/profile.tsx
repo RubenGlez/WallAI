@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { useTranslation } from "react-i18next";
-import { Pressable, ScrollView, StyleSheet, TextInput, View } from "react-native";
+import { Linking, Pressable, ScrollView, StyleSheet, TextInput, View } from "react-native";
 
 import {
   LanguageSelectBottomSheet,
@@ -11,6 +11,7 @@ import { ScreenHeader } from "@/components/screen-header";
 import { ThemedText } from "@/components/themed-text";
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { Accent, BorderRadius, FontFamily, Spacing, Surface, Typography } from "@/constants/theme";
+import { Links } from "@/constants/links";
 import { useLanguageStore } from "@/stores/useLanguageStore";
 import { useAnalytics } from "@/hooks/use-analytics";
 import { useProfileStore } from "@/stores/useProfileStore";
@@ -58,7 +59,7 @@ export default function ProfileScreen() {
   const languageSheetRef = useRef<LanguageSelectBottomSheetRef>(null);
 
   const currentLang = language ?? i18n.language.split("-")[0];
-  const { captureLanguageChanged } = useAnalytics();
+  const { captureLanguageChanged, captureSupportLinkTapped, captureIssueReportTapped } = useAnalytics();
 
   const handleSelectLanguage = (code: LanguageCode) => {
     setLanguage(code);
@@ -121,6 +122,41 @@ export default function ProfileScreen() {
               right={
                 <View style={styles.themeDot} />
               }
+            />
+          </View>
+        </View>
+
+        {/* Support */}
+        <View style={styles.section}>
+          <SectionHeader label={t("profile.supportSection")} />
+          <Pressable
+            style={({ pressed }) => [styles.supportCard, { opacity: pressed ? 0.85 : 1 }]}
+            onPress={() => {
+              captureSupportLinkTapped();
+              Linking.openURL(Links.kofi);
+            }}
+            accessibilityLabel={t("profile.supportButton")}
+            accessibilityRole="button"
+          >
+            <View style={styles.supportGlow} />
+            <ThemedText style={styles.supportTitle}>{t("profile.supportTitle")}</ThemedText>
+            <ThemedText style={styles.supportBody}>{t("profile.supportBody")}</ThemedText>
+            <View style={styles.supportButton}>
+              <ThemedText style={styles.supportButtonText}>{t("profile.supportButton")}</ThemedText>
+            </View>
+          </Pressable>
+        </View>
+
+        {/* Feedback */}
+        <View style={styles.section}>
+          <SectionHeader label={t("profile.feedbackSection")} />
+          <View style={styles.card}>
+            <SettingsRow
+              label={t("profile.reportIssue")}
+              onPress={() => {
+                captureIssueReportTapped();
+                Linking.openURL(Links.githubIssues);
+              }}
             />
           </View>
         </View>
@@ -197,5 +233,46 @@ const styles = StyleSheet.create({
     color: Accent.onSurfaceMuted,
     textAlign: "center",
     paddingTop: Spacing.md,
+  },
+  supportCard: {
+    backgroundColor: Surface.high,
+    borderRadius: BorderRadius.lg,
+    padding: Spacing.md,
+    gap: Spacing.sm,
+    borderWidth: 1,
+    borderColor: `${Accent.primary}30`,
+    overflow: "hidden",
+  },
+  supportGlow: {
+    position: "absolute",
+    top: -40,
+    right: -40,
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+    backgroundColor: `${Accent.primary}12`,
+  },
+  supportTitle: {
+    fontSize: Typography.fontSize.lg,
+    fontFamily: FontFamily.displayBold,
+    color: Accent.primary,
+  },
+  supportBody: {
+    fontSize: Typography.fontSize.sm,
+    color: Accent.onSurfaceMuted,
+    lineHeight: Typography.fontSize.sm * Typography.lineHeight.relaxed,
+  },
+  supportButton: {
+    marginTop: Spacing.xs,
+    backgroundColor: Accent.primary,
+    borderRadius: BorderRadius.full,
+    paddingVertical: Spacing.sm + 2,
+    paddingHorizontal: Spacing.md,
+    alignItems: "center",
+  },
+  supportButtonText: {
+    fontSize: Typography.fontSize.md,
+    fontFamily: FontFamily.displaySemiBold,
+    color: Accent.onPrimary,
   },
 });
