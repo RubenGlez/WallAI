@@ -18,3 +18,10 @@ jobs:
     params:
       platform: android
       profile: internal
+
+  ota_update:
+    type: update
+    needs: [build_android]
+    params:
+      channel: production
+      message: "Production release from main"
