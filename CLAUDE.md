@@ -19,10 +19,64 @@ npm run prebuild        # Expo prebuild (clean)
 npm run clean           # Full clean (node_modules, .expo, ios, android)
 npm run build:preview   # EAS build — Android APK for device testing
 npm run build:production # EAS build — Android AAB for Play Store
-npm run submit:production # EAS submit — upload AAB to Google Play
+npm run submit:internal  # EAS submit — upload to Play Store internal track
+npm run submit:production # EAS submit — upload to Play Store production track
 ```
 
 No test framework is configured.
+
+## CI/CD and Deployments
+
+### Branch strategy
+
+```
+feature/* → dev → main
+```
+
+- Work happens on `dev` or feature branches
+- `dev` merges into `main` when ready to ship
+- Only `main` triggers production deployments
+
+### Automated pipelines
+
+**On every push and PR** (`.github/workflows/ci.yml` via GitHub Actions):
+- Runs `npm run check` (TypeScript + ESLint)
+- Blocks merges if checks fail
+
+**On push to `dev`** (`.eas/workflows/preview.yml` via EAS):
+- Builds a preview APK (internal distribution)
+- Downloadable from expo.dev — useful for device testing without going through Play Store
+
+**On merge to `main`** (`.eas/workflows/create-production-builds.yml` via EAS):
+1. Builds production AAB (`app-bundle`) with auto-incremented `versionCode`
+2. Submits to Play Store **internal testing track** (available to testers within minutes)
+3. Pushes an OTA update to the `production` channel for existing users
+
+### Releasing to the public
+
+Builds are never pushed directly to the production track automatically. To release publicly:
+
+1. Go to **Google Play Console → Testing → Internal testing**
+2. Find the latest build
+3. Click **Promote to Production**
+
+This ensures every public release has been on the internal track first.
+
+### OTA updates (expo-updates)
+
+JS-only changes (UI, logic, localization) are delivered instantly to existing users via EAS Update without requiring a new store submission. The `runtimeVersion` policy is `appVersion` — OTA updates only apply to users running the same app version. Native changes (new packages, config modifications) always require a full build + store submission.
+
+### Notifications
+
+Build success/failure notifications are configured in **expo.dev → project → Notifications** (Slack or email). Not in code.
+
+### Manual ad-hoc commands
+
+```bash
+npm run build:preview    # Trigger a preview APK build manually
+npm run submit:internal  # Submit an existing EAS build to the internal track
+npm run submit:production # Submit an existing EAS build to the production track
+```
 
 ## Architecture
 
