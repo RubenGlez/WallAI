@@ -17,7 +17,7 @@
     "build:production": "eas build --platform android --profile production",
     "submit:production": "eas submit --platform android --profile production",
     "submit:internal": "eas submit --platform android --profile internal",
-    "update": "eas update --channel production"
+    "update": "eas update --channel production --auto"
   },
   "dependencies": {
     "@expo-google-fonts/space-grotesk": "^0.4.1",
