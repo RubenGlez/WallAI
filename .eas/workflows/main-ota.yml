@@ -1,0 +1,13 @@
+name: Main OTA Update
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  ota_update:
+    type: update
+    params:
+      channel: production
+      message: "OTA update from main"

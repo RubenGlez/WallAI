@@ -39,22 +39,29 @@ feature/* → dev → main
 
 ### Automated pipelines
 
+```
+push/PR to any branch  →  CI: lint + type check
+push to main           →  OTA update → production channel
+v* tag on main         →  build AAB → submit to internal track → OTA → production channel
+```
+
 **On every push and PR** (`.github/workflows/ci.yml` via GitHub Actions):
 - Runs `npm run check` (TypeScript + ESLint)
 - Blocks merges if checks fail
 
-**On push to `dev`** (`.eas/workflows/preview.yml` via EAS):
-- Builds a preview APK (internal distribution)
-- Downloadable from expo.dev — useful for device testing without going through Play Store
+**On push to `main`** (`.eas/workflows/main-ota.yml` via EAS):
+- Pushes an OTA update to the `production` channel
+- Delivers JS-only changes (UI, logic, localization) instantly to existing users
+- No-op for users on a different native fingerprint
 
-**On merge to `main`** (`.eas/workflows/create-production-builds.yml` via EAS):
-1. Builds production AAB (`app-bundle`) with auto-incremented `versionCode`
-2. Submits to Play Store **internal testing track** (available to testers within minutes)
-3. Pushes an OTA update to the `production` channel for existing users
+**On `v*` tag** (`.eas/workflows/create-production-builds.yml` via EAS):
+- Checks if a build already exists for the current native fingerprint
+- **If fingerprint matches an existing build** → OTA update only (no rebuild needed)
+- **If native code changed** → full AAB build → submit to Play Store **internal testing track** → OTA update
 
 ### Releasing to the public
 
-Builds are never pushed directly to the production track automatically. To release publicly:
+Builds are never submitted to the production track automatically. To release publicly:
 
 1. Go to **Google Play Console → Testing → Internal testing**
 2. Find the latest build
@@ -64,7 +71,14 @@ This ensures every public release has been on the internal track first.
 
 ### OTA updates (expo-updates)
 
-JS-only changes (UI, logic, localization) are delivered instantly to existing users via EAS Update without requiring a new store submission. The `runtimeVersion` policy is `appVersion` — OTA updates only apply to users running the same app version. Native changes (new packages, config modifications) always require a full build + store submission.
+JS-only changes (UI, logic, localization) are delivered instantly to existing users via EAS Update without requiring a new store submission. The `runtimeVersion` policy is `fingerprint` — OTA updates only apply to users whose installed native build matches the current fingerprint. Native changes (new packages, config modifications) always require a full build + store submission.
+
+### Submit profiles (`eas.json`)
+
+| Profile | Track | When used |
+|---|---|---|
+| `internal` | Play Store internal testing | Automated CI/CD (all automated submits go here) |
+| `production` | Play Store production | Manual only — `npm run submit:production` |
 
 ### Notifications
 
