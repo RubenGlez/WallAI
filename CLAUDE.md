@@ -9,19 +9,21 @@ SprayDeck is a React Native/Expo mobile app for street artists and graffiti writ
 ## Commands
 
 ```bash
-npm start               # Expo dev server
-npm run ios             # iOS simulator
-npm run android         # Android emulator
-npm run lint            # ESLint
-npm run type-check      # TypeScript check
-npm run check           # Both type-check and lint (run before committing)
-npm run prebuild        # Expo prebuild (clean)
-npm run clean           # Full clean (node_modules, .expo, ios, android)
-npm run build:preview   # EAS build — Android APK for device testing
-npm run build:production # EAS build — Android AAB for Play Store
-npm run submit:internal  # EAS submit — upload to Play Store internal track
+npm start                 # Expo dev server
+npm run ios               # iOS simulator
+npm run android           # Android emulator
+npm run web               # Expo dev server (web)
+npm run lint              # ESLint
+npm run type-check        # TypeScript check
+npm run check             # Both type-check and lint (run before committing)
+npm run prebuild          # Expo prebuild (clean)
+npm run clean             # Full clean (node_modules, .expo, ios, android)
+npm run catalog:fetch     # Fetch/refresh catalog data via scripts/fetch-catalog.cjs
+npm run build:preview     # EAS build — Android APK for device testing
+npm run build:production  # EAS build — Android AAB for Play Store
+npm run submit:internal   # EAS submit — upload to Play Store internal track
 npm run submit:production # EAS submit — upload to Play Store production track (manual escape hatch)
-npm run update           # EAS OTA update — push JS changes to production channel immediately
+npm run update            # EAS OTA update — push JS changes to production channel immediately
 ```
 
 No test framework is configured.
