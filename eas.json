@@ -23,14 +23,14 @@
     }
   },
   "submit": {
-    "production": {
-      "android": {
-        "track": "production"
-      }
-    },
     "internal": {
       "android": {
         "track": "internal"
+      }
+    },
+    "production": {
+      "android": {
+        "track": "production"
       }
     }
   }

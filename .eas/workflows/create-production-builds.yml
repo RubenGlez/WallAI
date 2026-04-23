@@ -32,7 +32,7 @@ jobs:
     params:
       build_id: ${{ needs.build_android.outputs.build_id }}
       platform: android
-      profile: production
+      profile: internal
 
   ota_update_existing_build:
     needs: [get_android_build]
