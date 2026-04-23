@@ -12,7 +12,7 @@
       "url": "https://u.expo.dev/42297cdd-afc4-4de5-9066-2ee1db68f5b0"
     },
     "runtimeVersion": {
-      "policy": "appVersion"
+      "policy": "fingerprint"
     },
     "ios": {
       "supportsTablet": true,

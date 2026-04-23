@@ -1,27 +1,51 @@
-name: Production Build and Submit
+name: Android Production Release
 
 on:
   push:
-    branches:
-      - main
+    tags:
+      - v*
+  workflow_dispatch:
 
 jobs:
+  fingerprint:
+    type: fingerprint
+    environment: production
+
+  get_android_build:
+    needs: [fingerprint]
+    type: get-build
+    params:
+      fingerprint_hash: ${{ needs.fingerprint.outputs.android_fingerprint_hash }}
+      profile: production
   build_android:
+    needs: [get_android_build]
+    if: ${{ !needs.get_android_build.outputs.build_id }}
     type: build
     params:
       platform: android
       profile: production
 
   submit_android:
+    needs: [build_android, get_android_build]
+    if: ${{ !needs.get_android_build.outputs.build_id }}
     type: submit
-    needs: [build_android]
     params:
+      build_id: ${{ needs.build_android.outputs.build_id }}
       platform: android
-      profile: internal
+      profile: production
 
-  ota_update:
+  ota_update_existing_build:
+    needs: [get_android_build]
+    if: ${{ needs.get_android_build.outputs.build_id }}
     type: update
-    needs: [build_android]
     params:
       channel: production
-      message: "Production release from main"
+      message: "Production OTA from existing native build"
+
+  ota_update_after_submit:
+    needs: [submit_android, get_android_build]
+    if: ${{ !needs.get_android_build.outputs.build_id }}
+    type: update
+    params:
+      channel: production
+      message: "Production OTA after successful submit"

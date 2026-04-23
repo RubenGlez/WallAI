@@ -1,0 +1,13 @@
+name: Main Preview OTA
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  update_preview:
+    type: update
+    params:
+      channel: preview
+      message: "Preview OTA from main"
